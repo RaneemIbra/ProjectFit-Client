@@ -26,14 +26,15 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build --no-daemon
 
-    - name: Start Emulator
+    - name: Install required packages
+      run: sudo apt-get update && sudo apt-get install -y qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
+
+    - name: Set up AVD (Android Virtual Device)
+      env:
+        AVD_NAME: test
       run: |
-        sudo apt-get update
-        sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils ia32-libs-multiarch
-        echo "hw.ramSize=2048" >> ~/.android/advancedFeatures.ini
-        echo "hw.cpu.ncore=4" >> ~/.android/advancedFeatures.ini
-        echo "hw.gpu.enabled=false" >> ~/.android/advancedFeatures.ini
-        echo "showDeviceFrame = no" >> ~/.android/advancedFeatures.ini
+        sudo $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-30;default;x86_64"
+        echo "no" | sudo $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/avdmanager create avd -n $AVD_NAME -k "system-images;android-30;default;x86_64" --device "pixel"
         $ANDROID_SDK_ROOT/emulator/emulator -avd $AVD_NAME -no-window -no-audio -no-boot-anim -gpu off -writable-system -no-snapshot > /dev/null 2>&1 &
 
     - name: Wait for Emulator to start

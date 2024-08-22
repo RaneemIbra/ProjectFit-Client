@@ -11,7 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    Button nav;
+    Button nav2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        nav = findViewById(R.id.button);
-        nav.setOnClickListener(view -> {
+        nav2 = findViewById(R.id.button);
+        nav2.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, SecondaryActivity.class);
             startActivity(intent);
         });

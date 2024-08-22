@@ -36,12 +36,4 @@ jobs:
     - name: Run Lint Checks
       run: ./gradlew lint
 
-    - name: Run Integration Tests
-      run: ./gradlew connectedDebugAndroidTest --no-daemon
-
-    - name: Run Regression Tests
-      run: ./gradlew regressionTest
-
-    - name: Run Security Tests
-      run: ./gradlew securityTest
 

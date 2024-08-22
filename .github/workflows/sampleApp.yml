@@ -11,10 +11,8 @@ jobs:
       - name: set up JDK
         uses: actions/setup-java@v3.11.0
         with:
-          distribution: 'temurin'
-          java-version: 21
-      - name: Compute build cache
-        run: ./scripts/checksum-android.sh checksum-android.txt
+          distribution: 'adopt'
+          java-version: 17
       - uses: actions/cache@v3.3.1
         with:
           path: |

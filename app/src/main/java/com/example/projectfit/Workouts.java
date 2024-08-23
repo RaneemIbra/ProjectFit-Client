@@ -1,37 +1,30 @@
 package com.example.projectfit;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.bumptech.glide.Glide;
 
-public class MainActivity extends AppCompatActivity {
-    Button nav, nav2;
+public class Workouts extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_workouts);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        nav = findViewById(R.id.button);
-        nav2 = findViewById(R.id.button3);
-        nav.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, Workouts.class);
-            startActivity(intent);
-        });
-        nav2.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, WorkoutsListActivity.class);
-            startActivity(intent);
-        });
+        ImageView imageView = findViewById(R.id.r8inzqqd4qih);
+        Glide.with(this)
+                .load("https://i.imgur.com/1tMFzp8.png")
+                .into(imageView);
     }
 }

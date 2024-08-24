@@ -26,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
         nav = findViewById(R.id.button);
         nav2 = findViewById(R.id.button3);
         nav.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, WorkoutsActivity.class);
+            Intent intent = new Intent(MainActivity.this, WorkoutsListActivity.class);
             startActivity(intent);
         });
         nav2.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, Workouts.class);
+            Intent intent = new Intent(MainActivity.this, WorkoutActivity.class);
             startActivity(intent);
         });
     }

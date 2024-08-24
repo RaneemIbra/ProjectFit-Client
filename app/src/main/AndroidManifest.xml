@@ -18,13 +18,10 @@
         android:theme="@style/Theme.ProjectFit"
         tools:targetApi="31">
         <activity
-            android:name=".WorkoutsActivity"
+            android:name=".WorkoutActivity"
             android:exported="false" />
         <activity
             android:name=".WorkoutsListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Workouts"
             android:exported="false" />
         <activity
             android:name=".SecondaryActivity"

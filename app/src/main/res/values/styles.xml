@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<style name="cr20">
-		<item name="cornerSize">20dp</item>
+		<item name="cornerSize">30dp</item>
 	</style>
 </resources>

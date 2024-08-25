@@ -18,6 +18,9 @@
         android:theme="@style/Theme.ProjectFit"
         tools:targetApi="31">
         <activity
+            android:name=".WorkoutsFilterActivity"
+            android:exported="false" />
+        <activity
             android:name=".WorkoutActivity"
             android:exported="false" />
         <activity

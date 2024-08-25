@@ -11,7 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    Button nav, nav2;
+    Button nav, nav2, nav3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +25,17 @@ public class MainActivity extends AppCompatActivity {
         });
         nav = findViewById(R.id.button);
         nav2 = findViewById(R.id.button3);
+        nav3 = findViewById(R.id.nav3);
         nav.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, WorkoutsListActivity.class);
             startActivity(intent);
         });
         nav2.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, WorkoutActivity.class);
+            startActivity(intent);
+        });
+        nav3.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, WorkoutsFilterActivity.class);
             startActivity(intent);
         });
     }

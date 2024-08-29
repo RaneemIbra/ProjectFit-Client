@@ -2,166 +2,165 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#000"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
+    android:background="#FFFFFF"
     android:id="@+id/main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ScrollView
         android:clipToPadding="false"
-        android:id="@+id/rcpx15fy7k0l"
+        android:id="@+id/rhe1iuv1uvi"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@drawable/cr20b000000"
-        android:paddingTop="28dp">
+        android:background="@drawable/sffffffsw1cr20bd9d9d9"
+        android:paddingTop="23dp"
+        android:paddingBottom="-52dp">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:divider="?android:attr/dividerHorizontal"
-            android:showDividers="middle"
-            android:layout_marginBottom="16dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/rtaly5bnlpv"
+                android:id="@+id/r2vtl65tp5h5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="14dp"
-                android:layout_marginHorizontal="18dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="12dp"
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button_home"
-                    android:layout_width="0dp"
+                    android:id="@+id/homePageBtn"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:text="HOME"
+                    android:gravity="center"
+                    android:background="@drawable/custom_button_white"
                     android:paddingVertical="11dp"
-                    android:backgroundTint="#FF9A01"
-                    android:text="Home"
-                    android:textColor="#131313"
-                    android:textSize="17sp"/>
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:elevation="0dp"
+                    android:stateListAnimator="@null" />
 
                 <View
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
 
                 <Button
-                    android:id="@+id/button_plan"
-                    android:layout_width="0dp"
+                    android:id="@+id/rji5znqyk5h"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_width="104dp"
+                    android:text="PLAN"
+                    android:gravity="center"
+                    android:background="@drawable/s000000sw1cr38bff9a01"
                     android:paddingVertical="11dp"
-                    android:backgroundTint="#FF9A01"
-                    android:text="Plan"
-                    android:textColor="#131313"
-                    android:textSize="17sp"/>
+                    android:elevation="4dp" />
 
                 <View
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
 
                 <Button
-                    android:id="@+id/button_profile"
-                    android:layout_width="0dp"
+                    android:id="@+id/rjh8jdahq3jo"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingVertical="11dp"
-                    android:backgroundTint="#FF9A01"
-                    android:text="Profile"
-                    android:textColor="#131313"
-                    android:textSize="17sp"/>
+                    android:layout_width="wrap_content"
+                    android:text="PROFILE"
+                    android:gravity="center"
+                    android:background="@drawable/s000000sw1cr38bffffff"
+                    android:paddingVertical="11dp" />
+
             </LinearLayout>
-            <ImageView
-                android:id="@+id/rgscr6nt2rj7"
+
+            <LinearLayout
+                android:id="@+id/rsumx2xn2gl"
                 android:layout_width="match_parent"
-                android:layout_height="463dp"
-                android:layout_marginBottom="17dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="30dp"
+                android:layout_marginHorizontal="7dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/rkhm7whceym"
+                    android:textColor="#131313"
+                    android:textSize="17sp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="167dp"
+                    android:text="Build My Plan"
+                    android:gravity="center"
+                    android:background="@drawable/s000000sw1cr38bffffff"
+                    android:paddingVertical="13dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/rjlc7t4pd5m"
+                    android:textColor="#131313"
+                    android:textSize="17sp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="167dp"
+                    android:text="Workouts"
+                    android:gravity="center"
+                    android:background="@drawable/s000000sw1cr38bff9a01"
+                    android:paddingVertical="13dp"
+                    android:elevation="4dp" />
+
+            </LinearLayout>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/rfe6q4utew2b"
+                app:shapeAppearanceOverlay="@style/cr20"
+                android:layout_width="match_parent"
+                android:layout_height="407dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginHorizontal="1dp"
                 android:src="@mipmap/ic_launcher"
-                android:scaleType="fitXY"
-                />
+                android:scaleType="fitXY"/>
+
             <TextView
-                android:id="@+id/rq0oqjpevurb"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"
-                android:layout_marginBottom="29dp"
-                android:layout_marginHorizontal="44dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:id="@+id/rr7stgucrrs"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="28dp"
+                android:layout_marginBottom="17dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="Consistency Is \nthe Key To progress.\nDon't Give Up!"
-                />
+                android:textColor="#000000"
+                android:textSize="30sp" />
+
             <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/rdfpvcruefz"
+                android:id="@+id/r492qk93xeya"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/s000000sw1cr20bff9a01"
-                android:paddingVertical="53dp"
-                android:gravity="center_horizontal"
-                android:paddingHorizontal="6dp"
+                android:paddingTop="33dp"
+                android:paddingBottom="66dp"
+                android:paddingHorizontal="4dp"
                 android:orientation="vertical">
+
                 <TextView
-                    android:id="@+id/r7ktwfd8kzzc"
+                    android:id="@+id/rjn9ctdzf91r"
                     android:textColor="#000000"
                     android:textSize="24sp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:layout_width="match_parent"
                     android:layout_weight="1"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-                    />
-            </LinearLayout>
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/rdfpvcruefza"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/s000000sw1cr20bff9a01"
-                android:paddingVertical="53dp"
-                android:gravity="center_horizontal"
-                android:paddingHorizontal="6dp"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/r7ktwfd8kzzca"
-                    android:textColor="#000000"
-                    android:textSize="24sp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-                    />
-            </LinearLayout>
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/rdfpvcruefzs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/s000000sw1cr20bff9a01"
-                android:paddingVertical="53dp"
-                android:gravity="center_horizontal"
-                android:paddingHorizontal="6dp"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/r7ktwfd8kzzcs"
-                    android:textColor="#000000"
-                    android:textSize="24sp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-                    />
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

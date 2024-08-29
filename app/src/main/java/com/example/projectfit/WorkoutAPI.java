@@ -21,4 +21,6 @@ public interface WorkoutAPI {
     Call<List<Workout>> findWorkoutByDuration(@Query("duration") int duration, @Query("id") Long id);
     @GET("workout/search")
     Call<List<Workout>> findWorkoutByMuscle(@Query("muscles") List<String> muscles, @Query("id") Long id);
+    @GET("workout/search")
+    Call<List<Workout>> findWorkoutByDifficulty(@Query("difficulty") int difficulty, @Query("id") Long id);
 }

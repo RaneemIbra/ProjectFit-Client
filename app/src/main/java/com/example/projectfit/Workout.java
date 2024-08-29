@@ -14,10 +14,11 @@ public class Workout {
     private byte[] profileIcon;
     private byte[] workoutAnimation;
     List<Integer> sets_reps;
+    int difficulty;
 
     public Workout(Long id, String workoutName, int durationInMinutes, String workoutType,
                    String workoutDescription, List<String> muscles, int calories, byte[] workoutImage,
-                   byte[] profileIcon, byte[] workoutAnimation, List<Integer> sets_reps) {
+                   byte[] profileIcon, byte[] workoutAnimation, List<Integer> sets_reps, int difficulty) {
         this.id = id;
         this.workoutName = workoutName;
         this.durationInMinutes = durationInMinutes;
@@ -29,10 +30,19 @@ public class Workout {
         this.profileIcon = profileIcon;
         this.workoutAnimation = workoutAnimation;
         this.sets_reps = sets_reps;
+        this.difficulty = difficulty;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
     }
 
     public void setId(Long id) {

@@ -1,6 +1,8 @@
 package com.example.projectfit;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
@@ -23,7 +25,12 @@ public class WorkoutActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ImageView imageView = findViewById(R.id.rgscr6nt2rj7);
+        Button homePageBtn = findViewById(R.id.homePageBtn);
+        homePageBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(WorkoutActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
+        ImageView imageView = findViewById(R.id.rfe6q4utew2b);
         Glide.with(this)
                 .load("https://i.imgur.com/kyjOOcy.jpeg")
                 .into(imageView);

@@ -2,506 +2,545 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#131313"
+    android:background="#FFFFFF"
     android:id="@+id/main"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <ScrollView
-        android:id="@+id/ryjtey1vfj1b"
+        android:clipToPadding="false"
+        android:id="@+id/rb9ktyhv01e4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:paddingHorizontal="24dp">
-
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/sffffffsw1cr20bd9d9d9"
+        android:paddingTop="18dp"
+        android:paddingBottom="36dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:divider="?android:attr/dividerHorizontal"
-            android:showDividers="middle"
-            android:layout_marginBottom="16dp">
-
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <LinearLayout
-                android:id="@+id/rtaly5bnlpv"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/r2tgxsisf2kk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="14dp"
-                android:layout_marginHorizontal="18dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button_home"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingVertical="11dp"
-                    android:backgroundTint="#FF9A01"
-                    android:text="Home"
-                    android:textColor="#131313"
-                    android:textSize="17sp"/>
-
-                <View
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:id="@+id/button_plan"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingVertical="11dp"
-                    android:backgroundTint="#FF9A01"
-                    android:text="Plan"
-                    android:textColor="#131313"
-                    android:textSize="17sp"/>
-
-                <View
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:id="@+id/button_profile"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingVertical="11dp"
-                    android:backgroundTint="#FF9A01"
-                    android:text="Profile"
-                    android:textColor="#131313"
-                    android:textSize="17sp"/>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/row_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:text="Dynamic workouts list"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <!-- Upper Body Workout Layout -->
-            <LinearLayout
-                android:id="@+id/r1tdfxvfyed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:background="@drawable/cr20bffffff"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="11dp"
                 android:orientation="horizontal">
                 <LinearLayout
-                    android:id="@+id/rbrfzodsn7ad"
-                    android:layout_width="0dp"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/rmp3d3b2tfor"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/s000000sw1cr38bffffff"
+                    android:paddingVertical="11dp"
+                    android:elevation="4dp"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/ry0l83vjoxh"
+                        android:id="@+id/r8bpgtz0hdd2"
+                        android:textColor="#000000"
+                        android:textSize="17sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="HOME"
+                        />
+                </LinearLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/r7ew93nfg9bk"
+                    android:layout_width="104dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/s000000sw1cr38bff9a01"
+                    android:paddingVertical="11dp"
+                    android:elevation="4dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/rgbm54yfzrlb"
+                        android:textColor="#000000"
+                        android:textSize="17sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="PLAN"
+                        />
+                </LinearLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/rxthad36f40l"
+                    android:layout_width="104dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/s000000sw1cr38bffffff"
+                    android:paddingVertical="11dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/rab5rhubdu7a"
+                        android:textColor="#000000"
+                        android:textSize="17sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="PROFILE"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/rdhvrvygcei"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="74dp"
+                android:layout_marginHorizontal="2dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/rv8ksfven5f"
+                    android:layout_width="167dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/s000000sw1cr38bffffff"
+                    android:paddingVertical="13dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/ry4fooz19dy9"
+                        android:textColor="#131313"
+                        android:textSize="17sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Bulid My Plan"
+                        />
+                </LinearLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/r2spugzgzcel"
+                    android:layout_width="167dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/s000000sw1cr38bff9a01"
+                    android:paddingVertical="13dp"
+                    android:elevation="4dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/r6n1e65krhbd"
+                        android:textColor="#131313"
+                        android:textSize="17sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Workouts"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/rngo3xykgivo"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:layout_marginBottom="61dp"
+                android:layout_marginStart="80dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Dynamic Workout List"
+                />
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/r37hj8v4g4ek"
+                android:layout_width="385dp"
+                android:layout_height="110dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/cr20bffffff"
+                android:paddingLeft="20dp"
+                android:layout_marginBottom="19dp"
+                android:layout_marginHorizontal="11dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/rmwe4i1nyra"
+                    android:layout_width="131dp"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="1dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/rmvf75dqqaei"
                         android:textColor="#212020"
                         android:textSize="16sp"
                         android:layout_marginBottom="8dp"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="Upper Body"/>
+                        android:text="upper body"
+                        />
                     <LinearLayout
-                        android:id="@+id/r96tbta9vncj"
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/r0ovfpw7w7g9k"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:layout_marginBottom="3dp"
                         android:orientation="horizontal">
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/image3"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                        <ImageView
+                            android:id="@+id/rz554ny1bxt"
+                            android:layout_width="9dp"
+                            android:layout_height="9dp"
                             android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/cr20"/>
+                            android:scaleType="fitXY"
+                            />
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            />
                         <TextView
-                            android:id="@+id/r69gw9056hkt"
+                            android:id="@+id/raqzd7a0m0no"
                             android:textColor="#212020"
                             android:textSize="12sp"
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="60 Minutes"/>
+                            android:layout_width="wrap_content"
+                            android:text="60 Minutes"
+                            />
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            />
+                        <ImageView
+                            android:id="@+id/r6zn4qcv0vrv"
+                            android:layout_width="7dp"
+                            android:layout_height="9dp"
+                            android:src="@mipmap/ic_launcher"
+                            android:scaleType="fitXY"
+                            />
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            />
+                        <TextView
+                            android:id="@+id/r0qo1alu78znn"
+                            android:textColor="#212020"
+                            android:textSize="12sp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="1320 Kcal"
+                            />
                     </LinearLayout>
                     <LinearLayout
-                        android:id="@+id/r64wee2vpf0o"
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/rqm8nammw5rt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/image4"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                        <ImageView
+                            android:id="@+id/r46188i0ab1"
+                            android:layout_width="7dp"
+                            android:layout_height="8dp"
+                            android:layout_marginEnd="6dp"
                             android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/cr20"/>
+                            android:scaleType="fitXY"
+                            />
                         <TextView
-                            android:id="@+id/r3q1eo5h8djz"
+                            android:id="@+id/run7v5lopoxn"
                             android:textColor="#212020"
                             android:textSize="12sp"
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="5 exercises"/>
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="5 exercises"
+                            />
                     </LinearLayout>
                 </LinearLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image5"
+                    android:id="@+id/image1"
+                    app:shapeAppearanceOverlay="@style/cr20"
                     android:layout_width="148dp"
                     android:layout_height="110dp"
                     android:src="@mipmap/ic_launcher"
                     android:scaleType="fitXY"
-                    app:shapeAppearanceOverlay="@style/cr20"/>
+                    />
             </LinearLayout>
-
-            <!-- Boost Energy Layout -->
             <LinearLayout
-                android:id="@+id/re2cltrp5f0a"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/rqb21yrcmn38"
+                android:layout_width="385dp"
+                android:layout_height="110dp"
                 android:gravity="center_vertical"
                 android:background="@drawable/cr20bffffff"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp"
+                android:paddingLeft="20dp"
+                android:layout_marginBottom="19dp"
+                android:layout_marginHorizontal="11dp"
                 android:orientation="horizontal">
                 <LinearLayout
-                    android:id="@+id/r7ckwzup11o2"
-                    android:layout_width="0dp"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/r8ogeoqtn47s"
+                    android:layout_width="117dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/rfjeommxlil"
+                        android:id="@+id/r18trmiua79vj"
                         android:textColor="#232222"
                         android:textSize="16sp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="12dp"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="Boost Energy and Vitality"/>
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="Boost Energy and Vitality"
+                        />
                     <TextView
-                        android:id="@+id/r446200b5zpd"
+                        android:id="@+id/rkhoqbp54cla"
                         android:textColor="#232222"
                         android:textSize="13sp"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="Incorporating physical exercise into your daily routine can boost..."/>
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="Incorporating physical exercise into your daily routine can boost..."
+                        />
                 </LinearLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image6"
+                    android:id="@+id/image2"
+                    app:shapeAppearanceOverlay="@style/cr20"
                     android:layout_width="148dp"
                     android:layout_height="110dp"
                     android:src="@mipmap/ic_launcher"
                     android:scaleType="fitXY"
-                    app:shapeAppearanceOverlay="@style/cr20"/>
+                    />
             </LinearLayout>
-
-            <!-- Lower Body Blast Layout -->
             <LinearLayout
-                android:id="@+id/rk1wdntrkgk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/r2k1xto41h94"
+                android:layout_width="385dp"
+                android:layout_height="110dp"
                 android:background="@drawable/cr20bffffff"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp"
+                android:paddingLeft="20dp"
+                android:layout_marginBottom="19dp"
+                android:layout_marginHorizontal="11dp"
                 android:orientation="horizontal">
                 <LinearLayout
-                    android:id="@+id/rm3f5dc8oyd"
-                    android:layout_width="0dp"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/r9vu2heh0e94"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:paddingHorizontal="1dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="8dp"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/rqmgw68sra6"
+                        android:id="@+id/rde55jsbqssf"
                         android:textColor="#212020"
                         android:textSize="16sp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="12dp"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="Pull Out"/>
+                        android:text="Pull Out"
+                        />
                     <LinearLayout
-                        android:id="@+id/r525das49h56"
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/r1b2qtr54o7g"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="4dp"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/r9yb02wwch2p"
+                            android:layout_width="9dp"
+                            android:layout_height="9dp"
+                            android:src="@mipmap/ic_launcher"
+                            android:scaleType="fitXY"
+                            />
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            />
+                        <TextView
+                            android:id="@+id/r5y8illztnn9"
+                            android:textColor="#212020"
+                            android:textSize="12sp"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="30 Minutes"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/r5pxlma9caog"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/image7"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                        <ImageView
+                            android:id="@+id/rp4vrvier3x"
+                            android:layout_width="7dp"
+                            android:layout_height="8dp"
                             android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/cr20"/>
+                            android:scaleType="fitXY"
+                            />
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            />
                         <TextView
-                            android:id="@+id/rifqutx1x3fh"
+                            android:id="@+id/rauxdkt9qurt"
                             android:textColor="#212020"
                             android:textSize="12sp"
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="30 Minutes"/>
+                            android:layout_width="wrap_content"
+                            android:text="10 exercises"
+                            />
                     </LinearLayout>
                 </LinearLayout>
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image8"
-                    android:layout_width="148dp"
-                    android:layout_height="110dp"
+                <ImageView
+                    android:id="@+id/r2ln85zuwr92"
+                    android:layout_width="7dp"
+                    android:layout_height="9dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginEnd="3dp"
                     android:src="@mipmap/ic_launcher"
                     android:scaleType="fitXY"
-                    app:shapeAppearanceOverlay="@style/cr20"/>
-            </LinearLayout>
-
-            <!-- Lower Body Blast Layout -->
-            <LinearLayout
-                android:id="@+id/r1lo5jenay9ss"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:background="@drawable/cr20bffffff"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:id="@+id/rxig8mel0epii"
-                    android:layout_width="0dp"
+                    />
+                <TextView
+                    android:id="@+id/raffhz967ha"
+                    android:textColor="#212020"
+                    android:textSize="12sp"
+                    android:layout_marginTop="61dp"
                     android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="1210 Kcal"
+                    />
+                <LinearLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/r9z9qrb6w9zv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/r137dedh37njs"
-                        android:textColor="#212020"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="Avocado and egg toast"/>
-                    <LinearLayout
-                        android:id="@+id/rnqbi8z70t7s"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/image18"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/cr20"/>
-                        <TextView
-                            android:id="@+id/r4hv10gy5psrs"
-                            android:textColor="#212020"
-                            android:textSize="12sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="15 Minutes"/>
-                        <TextView
-                            android:id="@+id/rz2wb6t2pi4ms"
-                            android:textColor="#212020"
-                            android:textSize="12sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="150 Cal"/>
-                    </LinearLayout>
                 </LinearLayout>
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image19"
+                    android:id="@+id/image3"
+                    app:shapeAppearanceOverlay="@style/cr20"
                     android:layout_width="148dp"
                     android:layout_height="110dp"
                     android:src="@mipmap/ic_launcher"
                     android:scaleType="fitXY"
-                    app:shapeAppearanceOverlay="@style/cr20"/>
+                    />
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/r1lo5jenay9sa"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/rdgpu5u2em3u"
+                android:layout_width="385dp"
+                android:layout_height="110dp"
                 android:gravity="center_vertical"
-                android:background="@drawable/cr20bffffff"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp"
+                android:background="@drawable/sffffffsw1cr20bffffff"
+                android:paddingLeft="19dp"
+                android:layout_marginHorizontal="11dp"
                 android:orientation="horizontal">
                 <LinearLayout
-                    android:id="@+id/rxig8mel0epia"
-                    android:layout_width="0dp"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/redcb2imf1ua"
+                    android:layout_width="117dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/r137dedh37nja"
-                        android:textColor="#212020"
+                        android:id="@+id/rg9a2voq2baf"
+                        android:textColor="#232222"
                         android:textSize="16sp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="11dp"
+                        android:layout_marginHorizontal="2dp"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="Avocado and egg toast"/>
-                    <LinearLayout
-                        android:id="@+id/rnqbi8z70t7a"
                         android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="Lower Body Blast"
+                        />
+                    <TextView
+                        android:id="@+id/rje3rkh7piz"
+                        android:textColor="#232222"
+                        android:textSize="13sp"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/image20"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/cr20"/>
-                        <TextView
-                            android:id="@+id/r4hv10gy5psra"
-                            android:textColor="#212020"
-                            android:textSize="12sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="15 Minutes"/>
-                        <TextView
-                            android:id="@+id/rz2wb6t2pi4ma"
-                            android:textColor="#212020"
-                            android:textSize="12sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="150 Cal"/>
-                    </LinearLayout>
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="A lower body blast is a high-intensity workout focused on targeting..."
+                        />
                 </LinearLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image21"
+                    android:id="@+id/image4"
+                    app:shapeAppearanceOverlay="@style/cr20"
                     android:layout_width="148dp"
                     android:layout_height="110dp"
                     android:src="@mipmap/ic_launcher"
                     android:scaleType="fitXY"
-                    app:shapeAppearanceOverlay="@style/cr20"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/r1lo5jenay9sd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:background="@drawable/cr20bffffff"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:id="@+id/rxig8mel0epid"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/r137dedh37njd"
-                        android:textColor="#212020"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="Avocado and egg toast"/>
-                    <LinearLayout
-                        android:id="@+id/rnqbi8z70t7d"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/image22"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/cr20"/>
-                        <TextView
-                            android:id="@+id/r4hv10gy5psrd"
-                            android:textColor="#212020"
-                            android:textSize="12sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="15 Minutes"/>
-                        <TextView
-                            android:id="@+id/rz2wb6t2pi4md"
-                            android:textColor="#212020"
-                            android:textSize="12sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="150 Cal"/>
-                    </LinearLayout>
-                </LinearLayout>
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image23"
-                    android:layout_width="148dp"
-                    android:layout_height="110dp"
-                    android:src="@mipmap/ic_launcher"
-                    android:scaleType="fitXY"
-                    app:shapeAppearanceOverlay="@style/cr20"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/r1lo5jenay9sq"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:background="@drawable/cr20bffffff"
-                android:padding="16dp"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:id="@+id/rxig8mel0epiq"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/r137dedh37nj"
-                        android:textColor="#212020"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="Avocado and egg toast"/>
-                    <LinearLayout
-                        android:id="@+id/rnqbi8z70t7"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/image24"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/cr20"/>
-                        <TextView
-                            android:id="@+id/r4hv10gy5psr"
-                            android:textColor="#212020"
-                            android:textSize="12sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="15 Minutes"/>
-                        <TextView
-                            android:id="@+id/rz2wb6t2pi4m"
-                            android:textColor="#212020"
-                            android:textSize="12sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="150 Cal"/>
-                    </LinearLayout>
-                </LinearLayout>
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image25"
-                    android:layout_width="148dp"
-                    android:layout_height="110dp"
-                    android:src="@mipmap/ic_launcher"
-                    android:scaleType="fitXY"
-                    app:shapeAppearanceOverlay="@style/cr20"/>
+                    />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

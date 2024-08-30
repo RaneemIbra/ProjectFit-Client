@@ -7,12 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import android.widget.ImageView;
-import com.bumptech.glide.Glide;
 
-
-import com.example.projectfit.R;
 import com.google.android.material.imageview.ShapeableImageView;
+
+
 
 public class WorkoutsFilterActivity extends AppCompatActivity {
 

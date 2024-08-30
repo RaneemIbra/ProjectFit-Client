@@ -1,4 +1,4 @@
-package com.example.projectfit;
+package com.example.projectfit.Utils;
 
 import android.os.Build;
 

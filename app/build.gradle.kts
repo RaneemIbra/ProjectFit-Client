@@ -36,6 +36,9 @@ android {
         abortOnError = false
         disable.add("NotificationPermission")
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -43,7 +46,11 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+    implementation("androidx.room:room-runtime:2.5.2")
+    annotationProcessor("androidx.room:room-compiler:2.5.2")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

@@ -1,8 +1,6 @@
-package com.example.projectfit;
+package com.example.projectfit.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +9,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.projectfit.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
 public class WorkoutsListActivity extends AppCompatActivity {

@@ -2,309 +2,594 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#131313"
-    android:orientation="vertical"
+    android:background="#FFFFFF"
     android:id="@+id/main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ScrollView
         android:clipToPadding="false"
-        android:id="@+id/rsk9j6nftt2"
+        android:id="@+id/r7ny1pwa96se"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingTop="29dp"
-        android:gravity="center"
-        android:paddingBottom="59dp">
+        android:paddingTop="18dp"
+        android:paddingBottom="29dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- Row for Home, Plan, Profile -->
+            <!-- Top Menu Section -->
             <LinearLayout
-                android:id="@+id/rtaly5bnlpv"
+                android:id="@+id/rlol35lgf97"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="14dp"
-                android:layout_marginHorizontal="18dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="12dp"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/button_home"
-                    android:layout_width="0dp"
+                <!-- Home Button -->
+                <LinearLayout
+                    android:id="@+id/r393ruhu3ipc"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FF9A01"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/s000000sw1cr38bffffff"
                     android:paddingVertical="11dp"
-                    android:text="Home"
-                    android:textColor="#131313"
-                    android:textSize="17sp"/>
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/rkeim7fuqpx"
+                        android:textColor="#000000"
+                        android:textSize="17sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="HOME" />
+                </LinearLayout>
 
                 <View
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:id="@+id/button_plan"
                     android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <!-- Plan Button -->
+                <LinearLayout
+                    android:id="@+id/r1vjetzf7c5w"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FF9A01"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/s000000sw1cr38bff9a01"
                     android:paddingVertical="11dp"
-                    android:text="Plan"
-                    android:textColor="#131313"
-                    android:textSize="17sp"/>
+                    android:elevation="4dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/r7v0w1f0zae7"
+                        android:textColor="#000000"
+                        android:textSize="17sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="PLAN" />
+                </LinearLayout>
 
                 <View
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:id="@+id/button_profile"
                     android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <!-- Profile Button -->
+                <LinearLayout
+                    android:id="@+id/r8ulawbthvhh"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FF9A01"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/s000000sw1cr38bffffff"
                     android:paddingVertical="11dp"
-                    android:text="Profile"
-                    android:textColor="#131313"
-                    android:textSize="17sp"/>
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/r7ry6uxfh4hb"
+                        android:textColor="#000000"
+                        android:textSize="17sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="PROFILE" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Row for Build My Plan, Workouts -->
+            <!-- "Build My Plan" and "Workouts" Buttons Section -->
             <LinearLayout
-                android:id="@+id/rh7vy2rivfgh"
+                android:id="@+id/rnvlzosm3gi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="46dp"
                 android:layout_marginHorizontal="7dp"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/button_build_my_plan"
-                    android:layout_width="0dp"
+                <!-- Build My Plan Button -->
+                <LinearLayout
+                    android:id="@+id/r3fb8m4akb8h"
+                    android:layout_width="167dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FF9A01"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/s000000sw1cr38bffffff"
                     android:paddingVertical="13dp"
-                    android:text="Build My Plan"
-                    android:textColor="#131313"
-                    android:textSize="17sp"/>
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/rf3rhcfohjgh"
+                        android:textColor="#131313"
+                        android:textSize="17sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Build My Plan" />
+                </LinearLayout>
 
                 <View
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:id="@+id/button_workouts"
                     android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <!-- Workouts Button -->
+                <LinearLayout
+                    android:id="@+id/rigtrdtghbu"
+                    android:layout_width="167dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#C1C0B7"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/s000000sw1cr38bff9a01"
                     android:paddingVertical="13dp"
-                    android:text="Workouts"
-                    android:textColor="#131313"
-                    android:textSize="17sp"/>
+                    android:elevation="4dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/rn0v38d9s0v"
+                        android:textColor="#131313"
+                        android:textSize="17sp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Workouts" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Filter By Section -->
+            <!-- Filter By TextView -->
             <TextView
-                android:id="@+id/rvphm7dat9s"
-                android:textColor="#C1C0B7"
+                android:id="@+id/rus7097uszch"
+                android:textColor="#000000"
                 android:textSize="20sp"
-                android:gravity="center"
-                android:layout_marginBottom="29dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:text="Filter By:"/>
+                android:layout_width="wrap_content"
+                android:text="Filter By:" />
 
-            <!-- Filter By Type -->
-            <TextView
-                android:id="@+id/ruzpxnhk9ju"
-                android:textColor="#C1C0B7"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:layout_marginBottom="42dp"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:text="By Type"/>
-
+            <!-- Combined Categories Layout -->
             <LinearLayout
-                android:id="@+id/rve8oh7d12cba"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button_bodyBuilding"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FF9A01"
-                    android:paddingVertical="45dp"
-                    android:text="Bodybuilding"
-                    android:textColor="#131313"
-                    android:textSize="13sp"/>
-
-                <View
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:id="@+id/button_Mobility"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FF9A01"
-                    android:paddingVertical="45dp"
-                    android:text="Mobility"
-                    android:textColor="#131313"
-                    android:textSize="13sp"/>
-
-                <View
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:id="@+id/calisthenics"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FF9A01"
-                    android:paddingVertical="45dp"
-                    android:text="calisthenics"
-                    android:textColor="#131313"
-                    android:textSize="13sp"/>
-            </LinearLayout>
-
-            <!-- Filter By Duration -->
-            <TextView
-                android:id="@+id/rtllvs8vputk"
-                android:textColor="#C1C0B7"
-                android:textSize="20sp"
-                android:layout_marginBottom="33dp"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:text="By Duration"/>
-
-            <LinearLayout
-                android:id="@+id/r7v80ufi7nnj"
+                android:id="@+id/combined_categories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="41dp"
-                android:layout_marginHorizontal="5dp"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@drawable/s000000sw1cr20">
 
-                <Button
-                    android:id="@+id/button_30_minutes"
-                    android:layout_width="0dp"
+                <!-- Filter Section: By Type -->
+                <LinearLayout
+                    android:id="@+id/rxqx9un0g0gh"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FF9A01"
-                    android:paddingVertical="45dp"
-                    android:text="30 Minutes"
-                    android:textColor="#131313"
-                    android:textSize="13sp"/>
+                    android:layout_marginBottom="20dp"
+                    android:background="@android:color/transparent"
+                    android:elevation="4dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="4dp">
 
-                <View
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
+                    <!-- Body Building Option -->
+                    <LinearLayout
+                        android:id="@+id/r7kmbxwvlz6o"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s000000sw1cr20"
+                        android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/button_60_minutes"
-                    android:layout_width="0dp"
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/body_building_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_launcher"
+                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                        <TextView
+                            android:id="@+id/rhumsrplphj"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="11dp"
+                            android:text="Body Building"
+                            android:textColor="#131313"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <!-- Mobility Option -->
+                    <LinearLayout
+                        android:id="@+id/rcdhqfptnugj"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s000000sw1cr20"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/mobility_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_launcher"
+                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                        <TextView
+                            android:id="@+id/rhjojmrl3syo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="27dp"
+                            android:text="Mobility"
+                            android:textColor="#131313"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <!-- Calisthenics Option -->
+                    <LinearLayout
+                        android:id="@+id/r17jd3ea8ta1"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s000000sw1cr20"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/calisthenics_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_launcher"
+                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                        <TextView
+                            android:id="@+id/raoi6ipqlsc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="18dp"
+                            android:text="Calisthenics"
+                            android:textColor="#131313"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Filter Section: By Duration -->
+                <LinearLayout
+                    android:id="@+id/rn3zl394c5o"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FF9A01"
-                    android:paddingVertical="45dp"
-                    android:text="60 Minutes"
-                    android:textColor="#131313"
-                    android:textSize="13sp"/>
+                    android:layout_marginBottom="20dp"
+                    android:background="@android:color/transparent"
+                    android:elevation="4dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingVertical="15dp">
 
-                <View
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
+                    <!-- 30 Minutes Option -->
+                    <LinearLayout
+                        android:id="@+id/rvg9e9e3fjjq"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s000000sw1cr20"
+                        android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/button_90_minutes"
-                    android:layout_width="0dp"
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/thirty_minutes_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_launcher"
+                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                        <TextView
+                            android:id="@+id/r0mhato0cj0ac"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="19dp"
+                            android:text="30 minutes"
+                            android:textColor="#131313"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <!-- 60 Minutes Option -->
+                    <LinearLayout
+                        android:id="@+id/ro2x0y9luguo"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s000000sw1cr20"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/sixty_minutes_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_launcher"
+                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                        <TextView
+                            android:id="@+id/rrjg4mv5j1y"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="19dp"
+                            android:text="60 minutes"
+                            android:textColor="#131313"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <!-- 90 Minutes Option -->
+                    <LinearLayout
+                        android:id="@+id/rzxm2hmf0u7"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s000000sw1cr20"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ninety_minutes_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_launcher"
+                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                        <TextView
+                            android:id="@+id/r0b0h2doesjep"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="19dp"
+                            android:text="90 minutes"
+                            android:textColor="#131313"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Filter Section: By Body Part -->
+                <LinearLayout
+                    android:id="@+id/r3ftjjgx1zjh"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FF9A01"
-                    android:paddingVertical="45dp"
-                    android:text="90 Minutes"
-                    android:textColor="#131313"
-                    android:textSize="13sp"/>
-            </LinearLayout>
+                    android:background="@android:color/transparent"
+                    android:elevation="4dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingVertical="16dp">
 
-            <!-- Filter By Body Part -->
-            <TextView
-                android:id="@+id/rh9sec0zskss"
-                android:textColor="#C1C0B7"
-                android:textSize="20sp"
-                android:layout_marginBottom="26dp"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:text="By Body Part:"/>
+                    <!-- Chest Option -->
+                    <LinearLayout
+                        android:id="@+id/body_part_chest"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s000000sw1cr20"
+                        android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/rve8oh7d12cb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginHorizontal="5dp"
-                android:orientation="horizontal">
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/chest_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_launcher"
+                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
-                <Button
-                    android:id="@+id/button_chest"
-                    android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/rdwjva5nmrk7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="34dp"
+                            android:text="Chest"
+                            android:textColor="#131313"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <!-- Back Option -->
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <LinearLayout
+                        android:id="@+id/body_part_back"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s000000sw1cr20"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/back_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_launcher"
+                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                        <TextView
+                            android:id="@+id/r6e55w6czqj"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="38dp"
+                            android:text="Back"
+                            android:textColor="#131313"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <!-- Legs Option -->
+                    <LinearLayout
+                        android:id="@+id/body_part_legs"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s000000sw1cr20"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/legs_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_launcher"
+                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                        <TextView
+                            android:id="@+id/raulzubiux9u"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="38dp"
+                            android:text="Legs"
+                            android:textColor="#131313"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Filter Section: By Difficulty Level -->
+                <LinearLayout
+                    android:id="@+id/difficulty_level_section"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FF9A01"
-                    android:paddingVertical="45dp"
-                    android:text="Chest"
-                    android:textColor="#131313"
-                    android:textSize="13sp"/>
+                    android:layout_marginBottom="20dp"
+                    android:background="@android:color/transparent"
+                    android:elevation="4dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingVertical="15dp">
 
-                <View
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
+                    <!-- Beginner Option -->
+                    <LinearLayout
+                        android:id="@+id/beginner_level"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s000000sw1cr20"
+                        android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/button_back"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FF9A01"
-                    android:paddingVertical="45dp"
-                    android:text="Back"
-                    android:textColor="#131313"
-                    android:textSize="13sp"/>
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/beginner_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_launcher"
+                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
-                <View
-                    android:layout_width="8dp"
-                    android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/beginner_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="19dp"
+                            android:text="Beginner"
+                            android:textColor="#131313"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
-                <Button
-                    android:id="@+id/button_legs"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FF9A01"
-                    android:paddingVertical="45dp"
-                    android:text="Legs"
-                    android:textColor="#131313"
-                    android:textSize="13sp"/>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <!-- Intermediate Option -->
+                    <LinearLayout
+                        android:id="@+id/intermediate_level"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s000000sw1cr20"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/intermediate_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_launcher"
+                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                        <TextView
+                            android:id="@+id/intermediate_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="19dp"
+                            android:text="Intermediate"
+                            android:textColor="#131313"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <!-- Advanced Option -->
+                    <LinearLayout
+                        android:id="@+id/advanced_level"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/s000000sw1cr20"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/advanced_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_launcher"
+                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                        <TextView
+                            android:id="@+id/advanced_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="19dp"
+                            android:text="Advanced"
+                            android:textColor="#131313"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

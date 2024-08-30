@@ -1,4 +1,4 @@
-package com.example.projectfit;
+package com.example.projectfit.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.projectfit.R;
 
 public class WorkoutActivity extends AppCompatActivity {
 

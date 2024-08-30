@@ -18,19 +18,25 @@
         android:theme="@style/Theme.ProjectFit"
         tools:targetApi="31">
         <activity
-            android:name=".WorkoutsFilterActivity"
+            android:name=".Activities.PlanQuestionsActivity"
             android:exported="false" />
         <activity
-            android:name=".WorkoutActivity"
+            android:name=".Activities.MyPlanActivity"
             android:exported="false" />
         <activity
-            android:name=".WorkoutsListActivity"
+            android:name=".Activities.HomePageActivity"
             android:exported="false" />
         <activity
-            android:name=".SecondaryActivity"
+            android:name=".Activities.WorkoutsFilterActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.WorkoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.WorkoutsListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

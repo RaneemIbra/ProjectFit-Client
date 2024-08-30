@@ -1,4 +1,6 @@
-package com.example.projectfit;
+package com.example.projectfit.API;
+
+import com.example.projectfit.Models.Workout;
 
 import java.util.List;
 

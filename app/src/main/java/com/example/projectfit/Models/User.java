@@ -1,4 +1,4 @@
-package com.example.projectfit;
+package com.example.projectfit.Models;
 
 import java.time.LocalDate;
 import java.util.List;

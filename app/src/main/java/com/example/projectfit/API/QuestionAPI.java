@@ -1,11 +1,11 @@
-package com.example.projectfit;
+package com.example.projectfit.API;
+
+import com.example.projectfit.Models.Question;
 
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 
 public interface QuestionAPI {
     @GET("question")

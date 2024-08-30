@@ -1,4 +1,6 @@
-package com.example.projectfit;
+package com.example.projectfit.API;
+
+import com.example.projectfit.Models.User;
 
 import java.util.List;
 
@@ -8,7 +10,6 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface UserAPI {
     @GET("users")

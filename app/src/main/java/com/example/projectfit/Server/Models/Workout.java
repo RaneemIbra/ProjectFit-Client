@@ -1,4 +1,4 @@
-package com.example.projectfit.Models;
+package com.example.projectfit.Server.Models;
 
 import java.util.List;
 

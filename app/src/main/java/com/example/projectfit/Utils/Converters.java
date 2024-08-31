@@ -4,7 +4,7 @@ import android.os.Build;
 
 import androidx.room.TypeConverter;
 
-import com.example.projectfit.Models.Workout;
+import com.example.projectfit.Server.Models.Workout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

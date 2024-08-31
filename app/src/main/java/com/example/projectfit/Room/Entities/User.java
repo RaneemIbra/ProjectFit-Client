@@ -3,7 +3,7 @@ package com.example.projectfit.Room.Entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.projectfit.Models.Workout;
+import com.example.projectfit.Server.Models.Workout;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,7 +25,7 @@ public class User {
     String answer;
     private byte[] profilePicture;
     List<Boolean> achievements;
-    private Map<Integer, com.example.projectfit.Models.Workout> plan;
+    private Map<Integer, Workout> plan;
     private Map<Integer, Workout> workoutHistory;
     private Map<LocalDate, Integer> stepsHistory;
     private Map<LocalDate, Integer> waterHistory;

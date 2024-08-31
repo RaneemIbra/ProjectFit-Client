@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             l1 = LocalDate.ofYearDay(2024,1);
         }
+
+        //Testing the backend
         User user1 = new User(1L,"Temp1",5L,"Temp1","Temp1",l1,
         1.9,80,true,"Temp1","Temp1",null,null,null,null,null,null);
         userServerRepository.addUserInServer(user1);

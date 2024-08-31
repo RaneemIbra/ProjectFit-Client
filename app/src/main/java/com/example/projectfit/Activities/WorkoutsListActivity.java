@@ -24,11 +24,6 @@ public class WorkoutsListActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;  
         });
-//        Button homePageBtn = findViewById(R.id.homePageBtn);
-//        homePageBtn.setOnClickListener(view -> {
-//            Intent intent = new Intent(WorkoutsListActivity.this, MainActivity.class);
-//            startActivity(intent);
-//        });
         Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image1));
         Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image2));
         Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image3));

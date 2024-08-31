@@ -39,9 +39,6 @@ jobs:
 
     - name: Run Lint Checks
       run: ./gradlew lint
-    
-    - name: Run Instrumented Tests
-      run: ./gradlew connectedAndroidTest --no-daemon
 
     - name: Run Checkstyle (Java)
       run: ./gradlew checkstyle

@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.example.projectfit.Room.DAOS.UserDAO;
-import com.example.projectfit.Room.Entities.User;
+import com.example.projectfit.Models.User;
 import com.example.projectfit.Utils.Converters;
 
 @Database(entities = {User.class}, version = 1)

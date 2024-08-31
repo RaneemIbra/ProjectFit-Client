@@ -7,7 +7,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 
-import com.example.projectfit.Room.Entities.Workout;
+import com.example.projectfit.Models.Workout;
 
 import java.util.List;
 

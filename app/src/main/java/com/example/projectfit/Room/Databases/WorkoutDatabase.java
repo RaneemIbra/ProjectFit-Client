@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.example.projectfit.Room.DAOS.WorkoutDAO;
-import com.example.projectfit.Room.Entities.Workout;
+import com.example.projectfit.Models.Workout;
 import com.example.projectfit.Utils.Converters;
 
 @Database(entities = {Workout.class}, version = 1)

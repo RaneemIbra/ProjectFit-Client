@@ -1,4 +1,4 @@
 package com.example.projectfit.Room.Repositories;
 
-public class WorkoutRepository {
+public class WorkoutRoomRepository {
 }

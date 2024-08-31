@@ -1,4 +1,4 @@
-package com.example.projectfit.Room.Entities;
+package com.example.projectfit.Models;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 

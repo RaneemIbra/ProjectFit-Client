@@ -1,4 +1,4 @@
-package com.example.projectfit.API;
+package com.example.projectfit.Server.API;
 
 import com.example.projectfit.Utils.GsonProvider;
 import com.google.gson.Gson;

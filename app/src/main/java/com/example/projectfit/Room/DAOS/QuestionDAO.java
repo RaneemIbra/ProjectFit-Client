@@ -2,12 +2,11 @@ package com.example.projectfit.Room.DAOS;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.projectfit.Room.Entities.Question;
+import com.example.projectfit.Models.Question;
 
 import java.util.List;
 

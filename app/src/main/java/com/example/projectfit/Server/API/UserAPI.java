@@ -1,6 +1,6 @@
 package com.example.projectfit.Server.API;
 
-import com.example.projectfit.Server.Models.User;
+import com.example.projectfit.Models.User;
 
 import java.util.List;
 

@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.projectfit.Room.Entities.User;
+import com.example.projectfit.Models.User;
 
 import java.util.List;
 

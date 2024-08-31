@@ -3,11 +3,6 @@ package com.example.projectfit.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Toast;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +10,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.projectfit.Server.API.AppAPI;
-import com.example.projectfit.Server.API.UserAPI;
+import com.example.projectfit.Room.Repositories.UserRoomRepository;
 import com.example.projectfit.R;
-import com.example.projectfit.Server.Models.User;
+import com.example.projectfit.Models.User;
 import com.example.projectfit.Server.Repositories.UserServerRepository;
 
 import java.time.LocalDate;
@@ -26,6 +20,7 @@ import java.time.LocalDate;
 public class MainActivity extends AppCompatActivity {
     Button nav, nav2, nav3, nav4, nav5, nav6;
     private UserServerRepository userServerRepository;
+    private UserRoomRepository userRoomRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         userServerRepository = new UserServerRepository();
+        userRoomRepository = new UserRoomRepository(this);
         nav = findViewById(R.id.HomePageBTN);
         nav2 = findViewById(R.id.MyPlanBTN);
         nav3 = findViewById(R.id.PlanQuestionsBTN);
@@ -50,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         }
         User user1 = new User(1L,"Temp1",5L,"Temp1","Temp1",l1,
         1.9,80,true,"Temp1","Temp1",null,null,null,null,null,null);
-        userServerRepository.addUser(user1);
+        userServerRepository.addUserInServer(user1);
+        userRoomRepository.addUserLocally(user1);
         setupNavigation();
     }
     private void setupNavigation() {

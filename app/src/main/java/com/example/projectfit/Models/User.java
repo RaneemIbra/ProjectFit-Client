@@ -1,9 +1,9 @@
-package com.example.projectfit.Room.Entities;
+package com.example.projectfit.Models;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.projectfit.Server.Models.Workout;
+import com.example.projectfit.Models.Workout;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,11 +30,12 @@ public class User {
     private Map<LocalDate, Integer> stepsHistory;
     private Map<LocalDate, Integer> waterHistory;
 
-    public User(String fullName, Long phoneNum, String emailAddress, String password, LocalDate birthday,
+    public User(Long id, String fullName, Long phoneNum, String emailAddress, String password, LocalDate birthday,
                 double height, double weight, boolean gender, String securityQuestion, String answer,
                 byte[] profilePicture, List<Boolean> achievements, Map<Integer, Workout> plan,
                 Map<Integer, Workout> workoutHistory, Map<LocalDate, Integer> stepsHistory,
                 Map<LocalDate, Integer> waterHistory) {
+        this.id = id;
         this.fullName = fullName;
         this.phoneNum = phoneNum;
         this.emailAddress = emailAddress;

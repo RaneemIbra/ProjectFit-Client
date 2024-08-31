@@ -2,7 +2,7 @@ package com.example.projectfit.Server.Repositories;
 
 import com.example.projectfit.Server.API.AppAPI;
 import com.example.projectfit.Server.API.UserAPI;
-import com.example.projectfit.Server.Models.User;
+import com.example.projectfit.Models.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -13,7 +13,7 @@ public class UserServerRepository {
     public UserServerRepository() {
         userAPI = AppAPI.getClient().create(UserAPI.class);
     }
-    public void addUser(User user) {
+    public void addUserInServer(User user) {
         Call<User> call = userAPI.createUser(user);
         call.enqueue(new Callback<User>() {
             @Override

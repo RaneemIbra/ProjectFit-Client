@@ -10,9 +10,11 @@ import retrofit2.Response;
 
 public class UserServerRepository {
     private UserAPI userAPI;
+
     public UserServerRepository() {
         userAPI = AppAPI.getClient().create(UserAPI.class);
     }
+
     public void addUserInServer(User user) {
         Call<User> call = userAPI.createUser(user);
         call.enqueue(new Callback<User>() {
@@ -24,7 +26,6 @@ public class UserServerRepository {
                     System.out.println("User wasn't submitted successfully");
                 }
             }
-
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 System.out.println("Error: " + t.getMessage());

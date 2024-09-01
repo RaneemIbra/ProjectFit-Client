@@ -18,7 +18,7 @@ import com.example.projectfit.Server.Repositories.UserServerRepository;
 import java.time.LocalDate;
 
 public class MainActivity extends AppCompatActivity {
-    Button nav, nav2, nav3, nav4, nav5, nav6;
+    Button nav, nav2, nav3, nav4, nav5, nav6, nav7, nav8, nav9, nav10, nav11;
     private UserServerRepository userServerRepository;
     private UserRoomRepository userRoomRepository;
 
@@ -40,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
         nav4 = findViewById(R.id.WorkoutBTN);
         nav5 = findViewById(R.id.WorkoutFilterBTN);
         nav6 = findViewById(R.id.ListBTN);
+        nav7 = findViewById(R.id.resetPasswordPageBTN);
+        nav8 = findViewById(R.id.ProfilePageBTN);
+        nav9 = findViewById(R.id.LoginPageBTN);
+        nav10 = findViewById(R.id.RegisterPageBTN);
+        nav11 = findViewById(R.id.LoadingScreenBTN);
         LocalDate l1 = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             l1 = LocalDate.ofYearDay(2024,1);
@@ -75,6 +80,26 @@ public class MainActivity extends AppCompatActivity {
         });
         nav6.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, WorkoutsListActivity.class);
+            startActivity(intent);
+        });
+        nav7.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ResetPasswordActivity.class);
+            startActivity(intent);
+        });
+        nav8.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        });
+        nav9.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
+        nav10.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
+        nav11.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, LoadingScreenActivity.class);
             startActivity(intent);
         });
     }

@@ -1,6 +1,9 @@
 package com.example.projectfit.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +16,8 @@ import com.example.projectfit.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
 public class WorkoutsListActivity extends AppCompatActivity {
+    Button button_home, button_profile, button_build_plan;
+    LinearLayout layout1,layout2,layout3,layout4,layout5,layout6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,5 +33,56 @@ public class WorkoutsListActivity extends AppCompatActivity {
         Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image2));
         Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image3));
         Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image4));
+        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image4a));
+        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image4s));
+
+        button_home = findViewById(R.id.button_home_list);
+        button_profile = findViewById(R.id.button_profile_list);
+        button_build_plan = findViewById(R.id.button_build_plan_list);
+        layout1 = findViewById(R.id.r37hj8v4g4ek);
+        layout2 = findViewById(R.id.rqb21yrcmn38);
+        layout3 = findViewById(R.id.r2k1xto41h94);
+        layout4 = findViewById(R.id.rdgpu5u2em3u);
+        layout5 = findViewById(R.id.rdgpu5u2em3ua);
+        layout6 = findViewById(R.id.rdgpu5u2em3us);
+        setupNavigation();
+    }
+    private void setupNavigation() {
+        button_home.setOnClickListener(view -> {
+            Intent intent = new Intent(WorkoutsListActivity.this, HomePageActivity.class);
+            startActivity(intent);
+        });
+        button_profile.setOnClickListener(view -> {
+            Intent intent = new Intent(WorkoutsListActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        });
+        button_build_plan.setOnClickListener(view -> {
+            Intent intent = new Intent(WorkoutsListActivity.this, PlanQuestionsActivity.class);
+            startActivity(intent);
+        });
+        layout1.setOnClickListener(view -> {
+            Intent intent = new Intent(WorkoutsListActivity.this, WorkoutActivity.class);
+            startActivity(intent);
+        });
+        layout2.setOnClickListener(view -> {
+            Intent intent = new Intent(WorkoutsListActivity.this, WorkoutActivity.class);
+            startActivity(intent);
+        });
+        layout3.setOnClickListener(view -> {
+            Intent intent = new Intent(WorkoutsListActivity.this, WorkoutActivity.class);
+            startActivity(intent);
+        });
+        layout4.setOnClickListener(view -> {
+            Intent intent = new Intent(WorkoutsListActivity.this, WorkoutActivity.class);
+            startActivity(intent);
+        });
+        layout5.setOnClickListener(view -> {
+            Intent intent = new Intent(WorkoutsListActivity.this, WorkoutActivity.class);
+            startActivity(intent);
+        });
+        layout6.setOnClickListener(view -> {
+            Intent intent = new Intent(WorkoutsListActivity.this, WorkoutActivity.class);
+            startActivity(intent);
+        });
     }
 }

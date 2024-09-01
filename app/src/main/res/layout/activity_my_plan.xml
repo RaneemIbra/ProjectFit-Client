@@ -258,7 +258,7 @@
 
                 <!-- Training Details -->
                 <LinearLayout
-                    android:id="@+id/rg9p9w8v8x1"
+                    android:id="@+id/Layout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -373,96 +373,24 @@
                         android:textColor="#131313"
                         android:textSize="7sp" />
 
-                    <LinearLayout
-                        android:id="@+id/r61cf2z0plhj"
+
+                    <ProgressBar
+                        android:id="@+id/training_progress_bar"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginHorizontal="30dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:layout_height="16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:max="100"
+                        android:progress="0"
+                        android:indeterminate="false"
+                        android:progressDrawable="@drawable/progress_bar_custom"
+                        style="?android:attr/progressBarStyleHorizontal" />
 
-                        <LinearLayout
-                            android:id="@+id/rj25209qvn5"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8lr27017b7d90c6173"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/rlqapl44hff8"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/r0o7tmajtvlxr"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/rhn31hy4wl9p"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/ra2cnphuxlr"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/rcipk3d9zhof"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/rhco0ua2tu3f"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="33dp"
-                        android:text="1/6"
-                        android:textColor="#131313"
-                        android:textSize="7sp" />
                 </LinearLayout>
 
                 <!-- Second Training Section -->
                 <LinearLayout
-                    android:id="@+id/rnsq2wncm4ym"
+                    android:id="@+id/Layout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
@@ -567,106 +495,22 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/rt6c7wb4k4de"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginStart="42dp"
-                        android:text="when a set is completed tap on the progress bar"
-                        android:textColor="#131313"
-                        android:textSize="7sp" />
-
-                    <LinearLayout
-                        android:id="@+id/rjdrvhlt7m5d"
+                    <ProgressBar
+                        android:id="@+id/training_progress_bar2"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginHorizontal="30dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:id="@+id/rdel82c0vjha"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8lr27017b7d90c6173"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/rgxejhmzos3p"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8lr27017b7d90c6173"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/repit2vyyusl"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/rzjwyo8wt8ws"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/rvnaatgr9if"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/r24cvffn499g"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/roq3vnimezy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="31dp"
-                        android:text="2/6"
-                        android:textColor="#131313"
-                        android:textSize="7sp" />
+                        android:layout_height="16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:max="100"
+                        android:progress="0"
+                        android:indeterminate="false"
+                        android:progressDrawable="@drawable/progress_bar_custom"
+                        style="?android:attr/progressBarStyleHorizontal" />
                 </LinearLayout>
 
                 <!-- Third Training Section -->
                 <LinearLayout
-                    android:id="@+id/rx8kvxyzaiqd"
+                    android:id="@+id/Layout3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
@@ -780,91 +624,18 @@
                         android:textColor="#131313"
                         android:textSize="7sp" />
 
-                    <LinearLayout
-                        android:id="@+id/rtbv6x3dxb3"
+
+                    <ProgressBar
+                        android:id="@+id/training_progress_bar3"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginHorizontal="30dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:id="@+id/r9qqqzrf9gia"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8lr27017b7d90c6173"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/r8t7tq7dt9ie"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8lr27017b7d90c6173"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/rpdqzeyynmxo"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/r0wwttfzqcyaa"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/rob1l3lzucze"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <LinearLayout
-                            android:id="@+id/rn8rbxcomt8"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/rayq10fpjc9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="31dp"
-                        android:text="2/6"
-                        android:textColor="#131313"
-                        android:textSize="7sp" />
+                        android:layout_height="16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:max="100"
+                        android:progress="0"
+                        android:indeterminate="false"
+                        android:progressDrawable="@drawable/progress_bar_custom"
+                        style="?android:attr/progressBarStyleHorizontal" />
                 </LinearLayout>
             </LinearLayout>
 

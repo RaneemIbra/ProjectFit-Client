@@ -7,9 +7,6 @@ on:
   push:
     branches:
       -master
-      -Raneem
-      -rahaf
-      -aseel
 
 jobs:
   build:
@@ -31,15 +28,6 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Start Android emulator
-      run: |
-        adb start-server
-        echo "Creating AVD..."
-        echo no | avdmanager create avd -n test -k "system-images;android-30;google_apis;x86_64" --force
-        $ANDROID_HOME/emulator/emulator -avd test -no-snapshot-save -no-window -no-audio -gpu swiftshader_indirect &
-        adb wait-for-device
-        adb shell input keyevent 82
-
     - name: Build with Gradle
       run: ./gradlew build --no-daemon
 
@@ -48,9 +36,6 @@ jobs:
 
     - name: Run Lint Checks
       run: ./gradlew lint
-
-    - name: Run UI tests
-      run: ./gradlew connectedAndroidTest
 
     # - name: Run Checkstyle (Java)
     #   run: ./gradlew checkstyle

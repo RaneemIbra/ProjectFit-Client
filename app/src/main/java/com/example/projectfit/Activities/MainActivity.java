@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Testing the backend
-        User user1 = new User(1L,"Temp1",5L,"Temp1","Temp1",l1,
+        User user1 = new User(null,"Temp1",5L,"Temp1","Temp1",l1,
         1.9,80,true,"Temp1","Temp1",null,null,null,null,null,null);
         userServerRepository.addUserInServer(user1);
         userRoomRepository.addUserLocally(user1);

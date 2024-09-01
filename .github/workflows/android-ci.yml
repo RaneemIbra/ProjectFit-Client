@@ -40,6 +40,9 @@ jobs:
     - name: Run Lint Checks
       run: ./gradlew lint
 
+    - name: Run UI tests
+      run: ./gradlew connectedAndroidTest
+
     # - name: Run Checkstyle (Java)
     #   run: ./gradlew checkstyle
 

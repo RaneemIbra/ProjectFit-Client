@@ -9,17 +9,16 @@
     android:layout_height="match_parent">
 
     <ScrollView
-        android:clipToPadding="false"
         android:id="@+id/r7ny1pwa96se"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:paddingTop="18dp"
         android:paddingBottom="29dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <!-- Top Menu Section -->
@@ -27,9 +26,9 @@
                 android:id="@+id/rlol35lgf97"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="20dp"
                 android:layout_marginHorizontal="12dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <!-- Home Button -->
@@ -37,22 +36,22 @@
                     android:id="@+id/r393ruhu3ipc"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr38bffffff"
-                    android:paddingVertical="11dp"
-                    android:orientation="vertical">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingVertical="11dp">
 
                     <TextView
                         android:id="@+id/rkeim7fuqpx"
-                        android:textColor="#000000"
-                        android:textSize="17sp"
-                        android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="HOME" />
+                        android:layout_height="wrap_content"
+                        android:text="HOME"
+                        android:textColor="#000000"
+                        android:textSize="17sp" />
                 </LinearLayout>
 
                 <View
-                    android:layout_width="0dp"
+                    android:layout_width="10dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
@@ -61,19 +60,19 @@
                     android:id="@+id/r1vjetzf7c5w"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr38bff9a01"
-                    android:paddingVertical="11dp"
                     android:elevation="4dp"
-                    android:orientation="vertical">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingVertical="11dp">
 
                     <TextView
                         android:id="@+id/r7v0w1f0zae7"
-                        android:textColor="#000000"
-                        android:textSize="17sp"
-                        android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="PLAN" />
+                        android:layout_height="wrap_content"
+                        android:text="PLAN"
+                        android:textColor="#000000"
+                        android:textSize="17sp" />
                 </LinearLayout>
 
                 <View
@@ -86,18 +85,18 @@
                     android:id="@+id/r8ulawbthvhh"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr38bffffff"
-                    android:paddingVertical="11dp"
-                    android:orientation="vertical">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingVertical="11dp">
 
                     <TextView
                         android:id="@+id/r7ry6uxfh4hb"
-                        android:textColor="#000000"
-                        android:textSize="17sp"
-                        android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="PROFILE" />
+                        android:layout_height="wrap_content"
+                        android:text="PROFILE"
+                        android:textColor="#000000"
+                        android:textSize="17sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -106,9 +105,9 @@
                 android:id="@+id/rnvlzosm3gi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="46dp"
                 android:layout_marginHorizontal="7dp"
+                android:layout_marginBottom="46dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <!-- Build My Plan Button -->
@@ -116,18 +115,18 @@
                     android:id="@+id/r3fb8m4akb8h"
                     android:layout_width="167dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr38bffffff"
-                    android:paddingVertical="13dp"
-                    android:orientation="vertical">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingVertical="13dp">
 
                     <TextView
                         android:id="@+id/rf3rhcfohjgh"
-                        android:textColor="#131313"
-                        android:textSize="17sp"
-                        android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="Build My Plan" />
+                        android:layout_height="wrap_content"
+                        android:text="Build My Plan"
+                        android:textColor="#131313"
+                        android:textSize="17sp" />
                 </LinearLayout>
 
                 <View
@@ -140,456 +139,666 @@
                     android:id="@+id/rigtrdtghbu"
                     android:layout_width="167dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr38bff9a01"
-                    android:paddingVertical="13dp"
                     android:elevation="4dp"
-                    android:orientation="vertical">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingVertical="13dp">
 
                     <TextView
                         android:id="@+id/rn0v38d9s0v"
-                        android:textColor="#131313"
-                        android:textSize="17sp"
-                        android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="Workouts" />
+                        android:layout_height="wrap_content"
+                        android:text="Workouts"
+                        android:textColor="#131313"
+                        android:textSize="17sp" />
                 </LinearLayout>
             </LinearLayout>
 
             <!-- Filter By TextView -->
             <TextView
                 android:id="@+id/rus7097uszch"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Filter By:" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="Filter By:"
+                android:textColor="#000000"
+                android:textSize="20sp" />
 
             <!-- Combined Categories Layout -->
             <LinearLayout
                 android:id="@+id/combined_categories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:orientation="vertical"
-                android:padding="16dp"
-                android:background="@drawable/s000000sw1cr20">
+                android:padding="5dp">
 
                 <!-- Filter Section: By Type -->
-                <LinearLayout
-                    android:id="@+id/rxqx9un0g0gh"
+                <TextView
+                    android:id="@+id/textView1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:background="@android:color/transparent"
-                    android:elevation="4dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="4dp">
+                    android:text="Filter by type: " />
 
-                    <!-- Body Building Option -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                     <LinearLayout
-                        android:id="@+id/r7kmbxwvlz6o"
-                        android:layout_width="110dp"
+                        android:id="@+id/rxqx9un0g0gh"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr20"
-                        android:orientation="vertical">
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@android:color/transparent"
+                        android:elevation="4dp"
+                        android:gravity="center|start"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="4dp">
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/body_building_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_marginTop="3dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
-
-                        <TextView
-                            android:id="@+id/rhumsrplphj"
-                            android:layout_width="wrap_content"
+                        <!-- Body Building Option -->
+                        <LinearLayout
+                            android:id="@+id/r7kmbxwvlz6o"
+                            android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="11dp"
-                            android:text="Body Building"
-                            android:textColor="#131313"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/body_building_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
-                    <!-- Mobility Option -->
-                    <LinearLayout
-                        android:id="@+id/rcdhqfptnugj"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr20"
-                        android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/rhumsrplphj"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="11dp"
+                                android:text="Body Building"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/mobility_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_marginTop="3dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+                        <View
+                            android:layout_width="45dp"
+                            android:layout_height="2dp"
+                            android:layout_weight="0" />
 
-                        <TextView
-                            android:id="@+id/rhjojmrl3syo"
-                            android:layout_width="wrap_content"
+                        <!-- Mobility Option -->
+                        <LinearLayout
+                            android:id="@+id/rcdhqfptnugj"
+                            android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="27dp"
-                            android:text="Mobility"
-                            android:textColor="#131313"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/mobility_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
-                    <!-- Calisthenics Option -->
-                    <LinearLayout
-                        android:id="@+id/r17jd3ea8ta1"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr20"
-                        android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/rhjojmrl3syo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="27dp"
+                                android:text="Mobility"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/calisthenics_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_marginTop="3dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+                        <View
+                            android:layout_width="45dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="0" />
 
-                        <TextView
-                            android:id="@+id/raoi6ipqlsc"
-                            android:layout_width="wrap_content"
+                        <!-- Calisthenics Option -->
+                        <LinearLayout
+                            android:id="@+id/r17jd3ea8ta1"
+                            android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="18dp"
-                            android:text="Calisthenics"
-                            android:textColor="#131313"
-                            android:textSize="14sp" />
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/calisthenics_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                            <TextView
+                                android:id="@+id/raoi6ipqlsc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="18dp"
+                                android:text="Calisthenics"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
+                </HorizontalScrollView>
 
                 <!-- Filter Section: By Duration -->
-                <LinearLayout
-                    android:id="@+id/rn3zl394c5o"
+                <TextView
+                    android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:background="@android:color/transparent"
-                    android:elevation="4dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingVertical="15dp">
+                    android:text="Filter by duration: " />
 
-                    <!-- 30 Minutes Option -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                     <LinearLayout
-                        android:id="@+id/rvg9e9e3fjjq"
-                        android:layout_width="110dp"
+                        android:id="@+id/rn3zl394c5o"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr20"
-                        android:orientation="vertical">
+                        android:layout_marginBottom="20dp"
+                        android:background="@android:color/transparent"
+                        android:elevation="4dp"
+                        android:gravity="center|start"
+                        android:orientation="horizontal"
+                        android:paddingVertical="15dp">
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/thirty_minutes_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_marginTop="3dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
-
-                        <TextView
-                            android:id="@+id/r0mhato0cj0ac"
-                            android:layout_width="wrap_content"
+                        <!-- 30 Minutes Option -->
+                        <LinearLayout
+                            android:id="@+id/rvg9e9e3fjjq"
+                            android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="19dp"
-                            android:text="30 minutes"
-                            android:textColor="#131313"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/thirty_minutes_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
-                    <!-- 60 Minutes Option -->
-                    <LinearLayout
-                        android:id="@+id/ro2x0y9luguo"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr20"
-                        android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/r0mhato0cj0ac"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="19dp"
+                                android:text="30 minutes"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/sixty_minutes_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_marginTop="3dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+                        <View
+                            android:layout_width="45dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="0" />
 
-                        <TextView
-                            android:id="@+id/rrjg4mv5j1y"
-                            android:layout_width="wrap_content"
+                        <!-- 60 Minutes Option -->
+                        <LinearLayout
+                            android:id="@+id/ro2x0y9luguo"
+                            android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="19dp"
-                            android:text="60 minutes"
-                            android:textColor="#131313"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/sixty_minutes_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
-                    <!-- 90 Minutes Option -->
-                    <LinearLayout
-                        android:id="@+id/rzxm2hmf0u7"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr20"
-                        android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/rrjg4mv5j1y"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="19dp"
+                                android:text="60 minutes"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/ninety_minutes_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_marginTop="3dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+                        <View
+                            android:layout_width="45dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="0" />
 
-                        <TextView
-                            android:id="@+id/r0b0h2doesjep"
-                            android:layout_width="wrap_content"
+                        <!-- 90 Minutes Option -->
+                        <LinearLayout
+                            android:id="@+id/rzxm2hmf0u7"
+                            android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="19dp"
-                            android:text="90 minutes"
-                            android:textColor="#131313"
-                            android:textSize="14sp" />
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ninety_minutes_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                            <TextView
+                                android:id="@+id/r0b0h2doesjep"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="19dp"
+                                android:text="90 minutes"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
+                </HorizontalScrollView>
 
                 <!-- Filter Section: By Body Part -->
-                <LinearLayout
-                    android:id="@+id/r3ftjjgx1zjh"
+                <TextView
+                    android:id="@+id/textView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:elevation="4dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingVertical="16dp">
+                    android:text="Filter by body part: " />
 
-                    <!-- Chest Option -->
-                    <LinearLayout
-                        android:id="@+id/body_part_chest"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr20"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/chest_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_marginTop="3dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
-
-                        <TextView
-                            android:id="@+id/rdwjva5nmrk7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="34dp"
-                            android:text="Chest"
-                            android:textColor="#131313"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <!-- Back Option -->
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:id="@+id/body_part_back"
-                        android:layout_width="110dp"
+                        android:id="@+id/r3ftjjgx1zjh"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr20"
-                        android:orientation="vertical">
+                        android:layout_marginRight="0dp"
+                        android:background="@android:color/transparent"
+                        android:elevation="4dp"
+                        android:gravity="center|start"
+                        android:orientation="horizontal"
+                        android:paddingVertical="16dp">
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/back_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_marginTop="3dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
-
-                        <TextView
-                            android:id="@+id/r6e55w6czqj"
-                            android:layout_width="wrap_content"
+                        <!-- Chest Option -->
+                        <LinearLayout
+                            android:id="@+id/body_part_chest"
+                            android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="38dp"
-                            android:text="Back"
-                            android:textColor="#131313"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/chest_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
-                    <!-- Legs Option -->
-                    <LinearLayout
-                        android:id="@+id/body_part_legs"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr20"
-                        android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/rdwjva5nmrk7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="34dp"
+                                android:text="Chest"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/legs_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_marginTop="3dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+                        <!-- Back Option -->
+                        <View
+                            android:layout_width="45dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="0" />
 
-                        <TextView
-                            android:id="@+id/raulzubiux9u"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/body_part_back"
+                            android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="38dp"
-                            android:text="Legs"
-                            android:textColor="#131313"
-                            android:textSize="14sp" />
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/back_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                            <TextView
+                                android:id="@+id/r6e55w6czqj"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="38dp"
+                                android:text="Back"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="45dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="0" />
+
+                        <!-- Legs Option -->
+                        <LinearLayout
+                            android:id="@+id/body_part_legs"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/legs_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                            <TextView
+                                android:id="@+id/raulzubiux9u"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="38dp"
+                                android:text="Legs"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <!-- Abs Option -->
+                        <View
+                            android:layout_width="45dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="0" />
+
+                        <LinearLayout
+                            android:id="@+id/body_part_abs"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/abs_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                            <TextView
+                                android:id="@+id/abs_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="38dp"
+                                android:text="Abs"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <!-- Core Option -->
+                        <View
+                            android:layout_width="45dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="0" />
+
+                        <LinearLayout
+                            android:id="@+id/body_part_core"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/core_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                            <TextView
+                                android:id="@+id/core_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="38dp"
+                                android:text="Core"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <!-- Biceps Option -->
+                        <View
+                            android:layout_width="45dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="0" />
+
+                        <LinearLayout
+                            android:id="@+id/body_part_biceps"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/biceps_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                            <TextView
+                                android:id="@+id/biceps_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="30dp"
+                                android:text="Biceps"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <!-- Shoulders Option -->
+                        <View
+                            android:layout_width="45dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="0" />
+
+                        <LinearLayout
+                            android:id="@+id/body_part_shoulders"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/shoulders_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                            <TextView
+                                android:id="@+id/shoulders_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="24dp"
+                                android:text="Shoulders"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <!-- Triceps Option -->
+                        <View
+                            android:layout_width="45dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="0" />
+
+                        <LinearLayout
+                            android:id="@+id/body_part_triceps"
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/triceps_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                            <TextView
+                                android:id="@+id/triceps_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="27dp"
+                                android:text="Triceps"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
+                </HorizontalScrollView>
 
                 <!-- Filter Section: By Difficulty Level -->
-                <LinearLayout
-                    android:id="@+id/difficulty_level_section"
+                <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:background="@android:color/transparent"
-                    android:elevation="4dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingVertical="15dp">
+                    android:text="Filter by difficulty level : " />
 
-                    <!-- Beginner Option -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                     <LinearLayout
-                        android:id="@+id/beginner_level"
-                        android:layout_width="110dp"
+                        android:id="@+id/difficulty_level_section"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr20"
-                        android:orientation="vertical">
+                        android:layout_marginBottom="20dp"
+                        android:background="@android:color/transparent"
+                        android:elevation="4dp"
+                        android:gravity="center|start"
+                        android:orientation="horizontal"
+                        android:paddingVertical="15dp">
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/beginner_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_marginTop="3dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
-
-                        <TextView
-                            android:id="@+id/beginner_text"
-                            android:layout_width="wrap_content"
+                        <!-- Beginner Option -->
+                        <LinearLayout
+                            android:id="@+id/beginner_level"
+                            android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="19dp"
-                            android:text="Beginner"
-                            android:textColor="#131313"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/beginner_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
-                    <!-- Intermediate Option -->
-                    <LinearLayout
-                        android:id="@+id/intermediate_level"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr20"
-                        android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/beginner_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="22dp"
+                                android:text="Beginner"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/intermediate_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_marginTop="3dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+                        <View
+                            android:layout_width="45dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="0" />
 
-                        <TextView
-                            android:id="@+id/intermediate_text"
-                            android:layout_width="wrap_content"
+                        <!-- Intermediate Option -->
+                        <LinearLayout
+                            android:id="@+id/intermediate_level"
+                            android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="19dp"
-                            android:text="Intermediate"
-                            android:textColor="#131313"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/intermediate_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
-                    <!-- Advanced Option -->
-                    <LinearLayout
-                        android:id="@+id/advanced_level"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr20"
-                        android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/intermediate_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="19dp"
+                                android:text="Intermediate"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/advanced_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_marginTop="3dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher"
-                            app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+                        <View
+                            android:layout_width="45dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="0" />
 
-                        <TextView
-                            android:id="@+id/advanced_text"
-                            android:layout_width="wrap_content"
+                        <!-- Advanced Option -->
+                        <LinearLayout
+                            android:id="@+id/advanced_level"
+                            android:layout_width="110dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="19dp"
-                            android:text="Advanced"
-                            android:textColor="#131313"
-                            android:textSize="14sp" />
+                            android:background="@drawable/s000000sw1cr20"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/advanced_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                android:layout_marginTop="3dp"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
+
+                            <TextView
+                                android:id="@+id/advanced_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="19dp"
+                                android:text="Advanced"
+                                android:textColor="#131313"
+                                android:textSize="14sp" />
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
+                </HorizontalScrollView>
+
+                <Space
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

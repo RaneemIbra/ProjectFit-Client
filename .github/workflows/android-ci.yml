@@ -7,9 +7,6 @@ on:
   push:
     branches:
       -master
-      -Raneem
-      -rahaf
-      -aseel
 
 jobs:
   build:

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,9 @@ public class MyPlanActivity extends AppCompatActivity {
     Button button_homePage, button_profilePage, button_workoutPage;
     Button button_sunday, button_monday, button_tuesday, button_wednesday, button_thursday, button_friday, button_saturday;
     Button selectedDayButton;
+    ProgressBar trainingProgressBar1, trainingProgressBar2, trainingProgressBar3;
+    LinearLayout trainingLayout1, trainingLayout2, trainingLayout3;
+    int progressStatus1 = 0, progressStatus2 = 0, progressStatus3 = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +55,37 @@ public class MyPlanActivity extends AppCompatActivity {
         button_thursday = findViewById(R.id.thursday);
         button_friday = findViewById(R.id.friday);
         button_saturday = findViewById(R.id.saturday);
+        trainingProgressBar1 = findViewById(R.id.training_progress_bar);
+        trainingProgressBar2 = findViewById(R.id.training_progress_bar2);
+        trainingProgressBar3 = findViewById(R.id.training_progress_bar3);
+        trainingLayout1 = findViewById(R.id.Layout1);
+        trainingLayout2 = findViewById(R.id.Layout2);
+        trainingLayout3 = findViewById(R.id.Layout3);
 
         selectedDayButton = button_sunday;
         setupNavigation();
         setupDayButtons();
+        setupProgressBars();
+    }
+    private void setupProgressBars(){
+        trainingLayout1.setOnClickListener(view -> {
+            if (progressStatus1 < 100) {
+                progressStatus1 += 10;
+                trainingProgressBar1.setProgress(progressStatus1);
+            }
+        });
+        trainingLayout2.setOnClickListener(view -> {
+            if (progressStatus2 < 100) {
+                progressStatus2 += 10;
+                trainingProgressBar2.setProgress(progressStatus2);
+            }
+        });
+        trainingLayout3.setOnClickListener(view -> {
+            if (progressStatus3 < 100) {
+                progressStatus3 += 10;
+                trainingProgressBar3.setProgress(progressStatus3);
+            }
+        });
     }
     private void setupNavigation() {
         button_homePage.setOnClickListener(view -> {

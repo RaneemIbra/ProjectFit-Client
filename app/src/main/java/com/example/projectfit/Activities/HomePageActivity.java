@@ -10,9 +10,17 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.projectfit.R;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.google.android.material.imageview.ShapeableImageView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomePageActivity extends AppCompatActivity {
+    BarChart stepChart, waterChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,5 +44,22 @@ public class HomePageActivity extends AppCompatActivity {
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rei0kw491b7u));
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.r1ya0vac26d6));
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.image3));
+        stepChart = findViewById(R.id.stepChart);
+        waterChart = findViewById(R.id.WaterChart);
+
+        List<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(0f, 1f));
+        entries.add(new BarEntry(1f, 2f));
+        entries.add(new BarEntry(2f, 3f));
+        entries.add(new BarEntry(3f, 4f));
+        entries.add(new BarEntry(4f, 5f));
+
+        BarDataSet dataSet = new BarDataSet(entries, "Sample Data");
+        BarData barData = new BarData(dataSet);
+
+        stepChart.setData(barData);
+        waterChart.setData(barData);
+        stepChart.invalidate();
+        waterChart.invalidate();
     }
 }

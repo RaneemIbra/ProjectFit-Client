@@ -204,8 +204,8 @@
 
                 <RelativeLayout
                     android:id="@+id/rpni41slxggc"
-                    android:layout_width="52dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="110dp"
                     android:clipChildren="false"
                     android:clipToPadding="false">
 
@@ -217,87 +217,26 @@
                         android:orientation="vertical">
 
                         <RelativeLayout
-                            android:id="@+id/r43406bkwdla"
-                            android:layout_width="match_parent"
-                            android:layout_height="94dp"
+                            android:id="@+id/progressBarLayout"
+                            android:layout_width="100dp"
+                            android:layout_height="110dp"
                             android:gravity="center">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_width="100dp"
+                                android:layout_height="110dp"
                                 android:orientation="horizontal">
 
-                                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                                    xmlns:tools="http://schemas.android.com/tools"
-                                    android:id="@+id/rkdwlqrafuz"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:orientation="vertical">
-
-                                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                                        xmlns:tools="http://schemas.android.com/tools"
-                                        android:id="@+id/r64ncqjb5hfr"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="78dp"
-                                        android:gravity="center_vertical"
-                                        android:orientation="horizontal">
-
-                                        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                                            xmlns:tools="http://schemas.android.com/tools"
-                                            android:id="@+id/rrycqv45r4jp"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="1"
-                                            android:orientation="vertical">
-
-                                            <com.google.android.material.imageview.ShapeableImageView
-                                                android:id="@+id/r4nmnnagzvip"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="6dp"
-                                                android:scaleType="fitXY"
-                                                android:src="@mipmap/ic_launcher" />
-
-                                            <com.google.android.material.imageview.ShapeableImageView
-                                                android:id="@+id/raju1mwklbia"
-                                                android:layout_width="26dp"
-                                                android:layout_height="71dp"
-                                                android:scaleType="fitXY"
-                                                android:src="@mipmap/ic_launcher" />
-                                        </LinearLayout>
-                                    </LinearLayout>
-                                </LinearLayout>
-
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rtejx37ax1fg"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="94dp"
-                                    android:scaleType="fitXY"
-                                    android:src="@mipmap/ic_launcher" />
+                                <com.github.lzyzsd.circleprogress.CircleProgress
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
+                                    android:id="@+id/waterCupProgress"
+                                    app:circle_progress="25" />
                             </LinearLayout>
 
-                            <com.google.android.material.imageview.ShapeableImageView
-                                android:id="@+id/rkfm73wy97fr"
-                                android:layout_width="8dp"
-                                android:layout_height="70dp"
-                                android:layout_marginStart="0dp"
-                                android:layout_marginTop="9dp"
-                                android:scaleType="fitXY"
-                                android:src="@mipmap/ic_launcher" />
                         </RelativeLayout>
                     </LinearLayout>
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/rr72cr43mxo9"
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="-4dp"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/ic_launcher" />
                 </RelativeLayout>
 
                 <View
@@ -305,9 +244,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    xmlns:tools="http://schemas.android.com/tools"
+                <LinearLayout
                     android:id="@+id/r04ysmm44lgo5"
                     android:layout_width="114dp"
                     android:layout_height="wrap_content"
@@ -316,10 +253,12 @@
                     android:clipChildren="false"
                     android:clipToPadding="false"
                     android:elevation="4dp"
-                    android:gravity="center_horizontal"
+                    android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingTop="32dp"
-                    android:paddingBottom="21dp">
+                    android:paddingTop="21dp"
+                    android:paddingBottom="21dp"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <TextView
                         android:id="@+id/rxonex7ufaxa"

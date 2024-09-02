@@ -1,7 +1,15 @@
 package com.example.projectfit.Activities;
 
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,11 +25,21 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.google.android.material.imageview.ShapeableImageView;
 
+import android.os.Handler;
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePageActivity extends AppCompatActivity {
+public class HomePageActivity extends AppCompatActivity implements SensorEventListener {
     BarChart stepChart, waterChart;
+    private SensorManager sensorManager;
+    private Sensor stepCounterSensor;
+    ProgressBar circularProgressBar;
+    private TextView stepCountTextView;
+    private ImageView runningImageView;
+    private RelativeLayout progressBarContainer;
+    private int stepCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +51,10 @@ public class HomePageActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ProgressBar circularProgressBar = findViewById(R.id.r13x7x0kfrgcc);
-        circularProgressBar.setIndeterminate(false);
-        circularProgressBar.setProgress(75);
+        circularProgressBar = findViewById(R.id.r13x7x0kfrgcc);
+        stepCountTextView = findViewById(R.id.step_count_text_view);
+        runningImageView = findViewById(R.id.running_image);
+        progressBarContainer = findViewById(R.id.progressBarContainer);
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rtejx37ax1fg));
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.r4nmnnagzvip));
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.raju1mwklbia));
@@ -64,5 +83,86 @@ public class HomePageActivity extends AppCompatActivity {
         waterChart.setData(barData);
         stepChart.invalidate();
         waterChart.invalidate();
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+
+        if (stepCounterSensor != null) {
+            sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        } else {
+            System.out.println("Sensor couldn't be found");
+        }
+
+        progressBarContainer.setOnClickListener(view -> {
+            runningImageView.animate()
+                    .alpha(0f)
+                    .setDuration(500)
+                    .withEndAction(() -> {
+                        runningImageView.setVisibility(View.GONE);
+                        stepCountTextView.setAlpha(0f);
+                        stepCountTextView.setVisibility(View.VISIBLE);
+
+                        stepCountTextView.animate()
+                                .alpha(1f)
+                                .setDuration(500)
+                                .withEndAction(() -> {
+                                    new Handler().postDelayed(() -> {
+                                        stepCountTextView.animate()
+                                                .alpha(0f)
+                                                .setDuration(500)
+                                                .withEndAction(() -> {
+                                                    stepCountTextView.setVisibility(View.GONE);
+                                                    runningImageView.setAlpha(0f);
+                                                    runningImageView.setVisibility(View.VISIBLE);
+
+                                                    // Fade in the ImageView
+                                                    runningImageView.animate()
+                                                            .alpha(1f)
+                                                            .setDuration(500)
+                                                            .start();
+                                                })
+                                                .start();
+                                    }, 3000);
+                                })
+                                .start();
+                    })
+                    .start();
+        });
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+            stepCount = (int) event.values[0];
+            updateProgressBar(stepCount);
+        }
+    }
+
+    private void updateProgressBar(int steps) {
+        int maxSteps = 10000;
+        circularProgressBar.setMax(maxSteps);
+        circularProgressBar.setProgress(steps);
+
+        if (stepCountTextView != null) {
+            stepCountTextView.setText("Steps: " + steps);
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (stepCounterSensor != null) {
+            sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        }
     }
 }

@@ -203,6 +203,6 @@ public class PlanQuestionsActivity extends AppCompatActivity {
             progressBar.setProgress(currentQuestionIndex * progressStep);  // Update progress bar
         }
         else
-            finish();
+            finish();//j
     }
 }

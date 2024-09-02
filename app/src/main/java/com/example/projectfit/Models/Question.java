@@ -13,6 +13,8 @@ public class Question {
     String answerNo4;
     int choseAnswer;
 
+
+
     public Question(String questionText, String answerNo1, String answerNo2, String answerNo3, String answerNo4,int choseAnswer) {
         this.questionText = questionText;
         this.answerNo1 = answerNo1;
@@ -77,4 +79,5 @@ public class Question {
     public void setChoseAnswer(int choseAnswer) {
         this.choseAnswer = choseAnswer;
     }
+
 }

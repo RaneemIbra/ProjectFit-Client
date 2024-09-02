@@ -2,17 +2,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:background="@drawable/dialog_background">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enter Cup Size"
-        android:textSize="18sp" />
+        android:textSize="20sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center" />
 
     <EditText
         android:id="@+id/cup_size_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Cup Size" />
+        android:hint="Enter Cup Size"
+        android:background="@drawable/input_background"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp" />
 </LinearLayout>

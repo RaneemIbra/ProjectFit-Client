@@ -4,13 +4,6 @@ on:
   pull_request:
     branches:
       - master
-  push:
-    branches:
-      - master
-      - Raneem
-      - aseel
-      - bothyna
-      - rahaf
 
 jobs:
   build:

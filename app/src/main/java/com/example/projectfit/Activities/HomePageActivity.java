@@ -1,12 +1,18 @@
 package com.example.projectfit.Activities;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -32,6 +38,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 
 import android.os.Handler;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,14 +47,15 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     BarChart stepChart, waterChart;
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
-    LinearLayout addCupSizeButton;
+    LinearLayout addCupSizeButton, circularContainer;
     ProgressBar circularProgressBar;
-    private TextView stepCountTextView;
-    private ImageView runningImageView;
-    private RelativeLayout progressBarContainer;
-    private int stepCount = 0;
+    TextView stepCountTextView, waterProgressTextView;
+    ImageView runningImageView;
+    RelativeLayout progressBarContainer;
+    int stepCount = 0;
     CircleProgress waterCupProgress;
     RelativeLayout progressBarLayout;
+    Button planPage, ProfilePage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,15 +73,18 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         progressBarContainer = findViewById(R.id.progressBarContainer);
         addCupSizeButton = findViewById(R.id.r04ysmm44lgo5);
         waterCupProgress = findViewById(R.id.waterCupProgress);
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rks7n0a9hm5l));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rrif4xi0ks2s));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rt6mp0emoe48));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rei0kw491b7u));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.r1ya0vac26d6));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.image3));
+        waterProgressTextView = findViewById(R.id.water_progress_text_view);
+        circularContainer = findViewById(R.id.circularContainer);
         stepChart = findViewById(R.id.stepChart);
         waterChart = findViewById(R.id.WaterChart);
         progressBarLayout = findViewById(R.id.progressBarLayout);
+        planPage = findViewById(R.id.button_plan_home);
+        ProfilePage = findViewById(R.id.button_profile_home);
+
+        addCupSizeLayout(100);
+        addCupSizeLayout(250);
+        addCupSizeLayout(500);
+        waterCupProgress.setMax(2000);
 
         List<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0f, 1f));
@@ -90,11 +101,6 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         stepChart.invalidate();
         waterChart.invalidate();
 
-        addCupSizeButton.setOnClickListener(view -> showAddCupSizeDialog());
-        progressBarLayout.setOnClickListener(view -> {
-            increaseWaterCupProgress();
-        });
-
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
@@ -103,42 +109,78 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         } else {
             System.out.println("Sensor couldn't be found");
         }
-
+        initClickListeners();
+    }
+    private void initClickListeners(){
+        ProfilePage.setOnClickListener(view -> {
+            Intent intent = new Intent(HomePageActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        });
+        planPage.setOnClickListener(view -> {
+            Intent intent = new Intent(HomePageActivity.this, MyPlanActivity.class);
+            startActivity(intent);
+        });
         progressBarContainer.setOnClickListener(view -> {
-            runningImageView.animate()
-                    .alpha(0f)
-                    .setDuration(500)
-                    .withEndAction(() -> {
-                        runningImageView.setVisibility(View.GONE);
-                        stepCountTextView.setAlpha(0f);
-                        stepCountTextView.setVisibility(View.VISIBLE);
-
-                        stepCountTextView.animate()
-                                .alpha(1f)
-                                .setDuration(500)
-                                .withEndAction(() -> {
-                                    new Handler().postDelayed(() -> {
-                                        stepCountTextView.animate()
-                                                .alpha(0f)
-                                                .setDuration(500)
-                                                .withEndAction(() -> {
-                                                    stepCountTextView.setVisibility(View.GONE);
-                                                    runningImageView.setAlpha(0f);
-                                                    runningImageView.setVisibility(View.VISIBLE);
-                                                    runningImageView.animate()
-                                                            .alpha(1f)
-                                                            .setDuration(500)
-                                                            .start();
-                                                })
-                                                .start();
-                                    }, 3000);
-                                })
-                                .start();
-                    })
-                    .start();
+            animatedProgressBarStepCount();
+        });
+        waterCupProgress.setOnClickListener(view -> {
+            animatedProgressBarWaterTracker();
+        });
+        addCupSizeButton.setOnClickListener(view -> showAddCupSizeDialog());
+        progressBarLayout.setOnClickListener(view -> {
+            increaseWaterCupProgress(0);
         });
     }
+    private void animatedProgressBarWaterTracker() {
+        int currentProgress = waterCupProgress.getProgress();
+        waterProgressTextView.setText("Water Progress: " + currentProgress + "ml");
 
+        waterProgressTextView.setVisibility(View.VISIBLE);
+        waterProgressTextView.animate()
+                .alpha(1f)
+                .setDuration(300)
+                .withEndAction(() -> new Handler().postDelayed(() -> {
+                    waterProgressTextView.animate()
+                            .alpha(0f)
+                            .setDuration(300)
+                            .withEndAction(() -> waterProgressTextView.setVisibility(View.GONE))
+                            .start();
+                }, 2000))
+                .start();
+    }
+    private void animatedProgressBarStepCount() {
+        runningImageView.animate()
+                .alpha(0f)
+                .setDuration(500)
+                .withEndAction(() -> {
+                    runningImageView.setVisibility(View.GONE);
+                    stepCountTextView.setAlpha(0f);
+                    stepCountTextView.setVisibility(View.VISIBLE);
+
+                    stepCountTextView.animate()
+                            .alpha(1f)
+                            .setDuration(500)
+                            .withEndAction(() -> {
+                                new Handler().postDelayed(() -> {
+                                    stepCountTextView.animate()
+                                            .alpha(0f)
+                                            .setDuration(500)
+                                            .withEndAction(() -> {
+                                                stepCountTextView.setVisibility(View.GONE);
+                                                runningImageView.setAlpha(0f);
+                                                runningImageView.setVisibility(View.VISIBLE);
+                                                runningImageView.animate()
+                                                        .alpha(1f)
+                                                        .setDuration(500)
+                                                        .start();
+                                            })
+                                            .start();
+                                }, 3000);
+                            })
+                            .start();
+                })
+                .start();
+    }
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
@@ -182,20 +224,65 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         View dialogView = inflater.inflate(R.layout.dialog_add_cup_size, null);
         builder.setView(dialogView);
 
-        builder.setPositiveButton("Add", (dialog, which) -> {
-        });
+        EditText cupSizeInput = dialogView.findViewById(R.id.cup_size_input);
+
+        builder.setPositiveButton("Add", null);
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+            String cupSizeStr = cupSizeInput.getText().toString().trim();
+
+            if (!cupSizeStr.isEmpty() && cupSizeStr.matches("\\d+")) {
+                int cupSize = Integer.parseInt(cupSizeStr);
+                addCupSizeLayout(cupSize);
+                dialog.dismiss();
+            } else {
+                Toast.makeText(this, "Please enter a valid integer for cup size", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
-    private void increaseWaterCupProgress() {
+
+    private void increaseWaterCupProgress(int cupSize) {
         int currentProgress = waterCupProgress.getProgress();
+        int newProgress = currentProgress + cupSize;
         int maxProgress = waterCupProgress.getMax();
-        int newProgress = currentProgress + (maxProgress / 20);
         if (newProgress > maxProgress) {
             newProgress = maxProgress;
         }
         waterCupProgress.setProgress(newProgress);
+    }
+
+    private void addCupSizeLayout(int cupSize) {
+        int size = 100;
+
+        LinearLayout circleLayout = new LinearLayout(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
+        params.setMargins(10, 0, 10, 0);
+
+        circleLayout.setLayoutParams(params);
+        circleLayout.setGravity(Gravity.CENTER);
+        circleLayout.setOrientation(LinearLayout.VERTICAL);
+        circleLayout.setPadding(20, 20, 20, 20);
+
+        GradientDrawable circleDrawable = new GradientDrawable();
+        circleDrawable.setShape(GradientDrawable.OVAL);
+        circleDrawable.setColor(getResources().getColor(android.R.color.holo_blue_light));
+        circleLayout.setBackground(circleDrawable);
+
+        TextView cupSizeText = new TextView(this);
+        cupSizeText.setText(Integer.toString(cupSize));
+        cupSizeText.setTextColor(getResources().getColor(android.R.color.white));
+        cupSizeText.setTextSize(12);
+        cupSizeText.setGravity(Gravity.CENTER);
+
+        circleLayout.addView(cupSizeText);
+
+        circleLayout.setOnClickListener(view -> {
+            increaseWaterCupProgress(cupSize);
+        });
+        circularContainer.addView(circleLayout);
     }
 }

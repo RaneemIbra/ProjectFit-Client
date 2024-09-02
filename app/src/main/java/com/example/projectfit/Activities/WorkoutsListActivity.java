@@ -33,18 +33,18 @@ public class WorkoutsListActivity extends AppCompatActivity {
         Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image2));
         Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image3));
         Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image4));
-        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image4a));
-        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image4s));
+        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image5));
+        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image6));
 
         button_home = findViewById(R.id.button_home_list);
         button_profile = findViewById(R.id.button_profile_list);
         button_build_plan = findViewById(R.id.button_build_plan_list);
-        layout1 = findViewById(R.id.r37hj8v4g4ek);
-        layout2 = findViewById(R.id.rqb21yrcmn38);
-        layout3 = findViewById(R.id.r2k1xto41h94);
-        layout4 = findViewById(R.id.rdgpu5u2em3u);
-        layout5 = findViewById(R.id.rdgpu5u2em3ua);
-        layout6 = findViewById(R.id.rdgpu5u2em3us);
+        layout1 = findViewById(R.id.layout1);
+        layout2 = findViewById(R.id.layout2);
+        layout3 = findViewById(R.id.layout3);
+        layout4 = findViewById(R.id.layout4);
+        layout5 = findViewById(R.id.layout5);
+        layout6 = findViewById(R.id.layout6);
         setupNavigation();
     }
     private void setupNavigation() {

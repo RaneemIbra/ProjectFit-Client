@@ -1,6 +1,7 @@
 package com.example.projectfit.Activities;
 
 import android.os.Bundle;
+import android.widget.ProgressBar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +33,9 @@ public class HomePageActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.r13x7x0kfrgcc));
+        ProgressBar circularProgressBar = findViewById(R.id.r13x7x0kfrgcc);
+        circularProgressBar.setIndeterminate(false);
+        circularProgressBar.setProgress(75);
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rtejx37ax1fg));
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.r4nmnnagzvip));
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.raju1mwklbia));

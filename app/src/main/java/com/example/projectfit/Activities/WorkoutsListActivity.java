@@ -29,13 +29,25 @@ public class WorkoutsListActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;  
         });
-        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image1));
-        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image2));
-        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image3));
-        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image4));
-        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image5));
-        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image6));
+        initViews();
+        initClickListeners();
+    }
 
+    private void navigateTo(Class<?> targetActivity) {
+        startActivity(new Intent(WorkoutsListActivity.this, targetActivity));
+    }
+    private void initClickListeners() {
+        button_home.setOnClickListener(v -> navigateTo(HomePageActivity.class));
+        button_profile.setOnClickListener(v -> navigateTo(ProfileActivity.class));
+        button_build_plan.setOnClickListener(v -> navigateTo(PlanQuestionsActivity.class));
+        layout1.setOnClickListener(v -> navigateTo(WorkoutActivity.class));
+        layout2.setOnClickListener(v -> navigateTo(WorkoutActivity.class));
+        layout3.setOnClickListener(v -> navigateTo(WorkoutActivity.class));
+        layout4.setOnClickListener(v -> navigateTo(WorkoutActivity.class));
+        layout5.setOnClickListener(v -> navigateTo(WorkoutActivity.class));
+        layout6.setOnClickListener(v -> navigateTo(WorkoutActivity.class));
+    }
+    private void initViews() {
         button_home = findViewById(R.id.button_home_list);
         button_profile = findViewById(R.id.button_profile_list);
         button_build_plan = findViewById(R.id.button_build_plan_list);
@@ -45,44 +57,11 @@ public class WorkoutsListActivity extends AppCompatActivity {
         layout4 = findViewById(R.id.layout4);
         layout5 = findViewById(R.id.layout5);
         layout6 = findViewById(R.id.layout6);
-        setupNavigation();
-    }
-    private void setupNavigation() {
-        button_home.setOnClickListener(view -> {
-            Intent intent = new Intent(WorkoutsListActivity.this, HomePageActivity.class);
-            startActivity(intent);
-        });
-        button_profile.setOnClickListener(view -> {
-            Intent intent = new Intent(WorkoutsListActivity.this, ProfileActivity.class);
-            startActivity(intent);
-        });
-        button_build_plan.setOnClickListener(view -> {
-            Intent intent = new Intent(WorkoutsListActivity.this, PlanQuestionsActivity.class);
-            startActivity(intent);
-        });
-        layout1.setOnClickListener(view -> {
-            Intent intent = new Intent(WorkoutsListActivity.this, WorkoutActivity.class);
-            startActivity(intent);
-        });
-        layout2.setOnClickListener(view -> {
-            Intent intent = new Intent(WorkoutsListActivity.this, WorkoutActivity.class);
-            startActivity(intent);
-        });
-        layout3.setOnClickListener(view -> {
-            Intent intent = new Intent(WorkoutsListActivity.this, WorkoutActivity.class);
-            startActivity(intent);
-        });
-        layout4.setOnClickListener(view -> {
-            Intent intent = new Intent(WorkoutsListActivity.this, WorkoutActivity.class);
-            startActivity(intent);
-        });
-        layout5.setOnClickListener(view -> {
-            Intent intent = new Intent(WorkoutsListActivity.this, WorkoutActivity.class);
-            startActivity(intent);
-        });
-        layout6.setOnClickListener(view -> {
-            Intent intent = new Intent(WorkoutsListActivity.this, WorkoutActivity.class);
-            startActivity(intent);
-        });
+        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image1));
+        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image2));
+        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image3));
+        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image4));
+        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image5));
+        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image6));
     }
 }

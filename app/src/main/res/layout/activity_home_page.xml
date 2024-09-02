@@ -110,7 +110,7 @@
                     android:id="@+id/progressBarContainer">
 
                     <ProgressBar
-                        android:id="@+id/r13x7x0kfrgcc"
+                        android:id="@+id/circularProgressBar"
                         android:layout_width="111dp"
                         android:layout_height="111dp"
                         android:layout_gravity="center"
@@ -229,7 +229,7 @@
                     android:layout_weight="1" />
 
                 <LinearLayout
-                    android:id="@+id/r04ysmm44lgo5"
+                    android:id="@+id/addCupSizeButton"
                     android:layout_width="114dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="23dp"

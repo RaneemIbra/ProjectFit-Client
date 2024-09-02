@@ -28,84 +28,58 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/rvaea7yrh8jp"
+                android:id="@+id/r2tgxsisf2kk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="25dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="11dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    android:id="@+id/r8ppzzkrpf1a"
+                <Button
+                    android:id="@+id/button_home_home"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/s000000sw1cr38bff9a01"
+                    android:paddingVertical="11dp"
                     android:elevation="4dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:paddingVertical="11dp">
-
-                    <TextView
-                        android:id="@+id/r3ngk8i1c1p6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="HOME"
-                        android:textColor="#000000"
-                        android:textSize="17sp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="10dp"
-                    android:layout_weight="1" />
-
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    android:id="@+id/rxp72x8fy7kb"
-                    android:layout_width="104dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/cr38bffffff"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:paddingVertical="11dp">
-
-                    <TextView
-                        android:id="@+id/r18zzkquqtzl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PLAN"
-                        android:textColor="#000000"
-                        android:textSize="17sp" />
-                </LinearLayout>
+                    android:text="HOME"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
+                    android:gravity="center_horizontal" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    android:id="@+id/rl5bujm1zawg"
+                <Button
+                    android:id="@+id/button_plan_home"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/cr38bffffff"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:paddingVertical="11dp">
+                    android:background="@drawable/s000000sw1cr38bffffff"                    android:paddingVertical="11dp"
+                    android:elevation="4dp"
+                    android:text="PLAN"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
+                    android:gravity="center_horizontal" />
 
-                    <TextView
-                        android:id="@+id/rmktpz8gfie9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PROFILE"
-                        android:textColor="#000000"
-                        android:textSize="17sp" />
-                </LinearLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button_profile_home"
+                    android:layout_width="104dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/s000000sw1cr38bffffff"
+                    android:paddingVertical="11dp"
+                    android:text="PROFILE"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
+                    android:gravity="center_horizontal" />
+
             </LinearLayout>
 
             <TextView
@@ -231,9 +205,19 @@
                                     android:layout_width="100dp"
                                     android:layout_height="100dp"
                                     android:id="@+id/waterCupProgress"
-                                    app:circle_progress="25" />
+                                    app:circle_text_size="0dp"
+                                    app:circle_progress="0" />
                             </LinearLayout>
-
+                            <TextView
+                                android:id="@+id/water_progress_text_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="Water Progress: 0"
+                                android:textColor="#000"
+                                android:gravity="center"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
                         </RelativeLayout>
                     </LinearLayout>
 
@@ -270,12 +254,10 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+            <LinearLayout
                 android:id="@+id/r9yjciswgvg"
-                android:layout_width="128dp"
-                android:layout_height="32dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="21dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/cr20lr270000000d8d7d7"
@@ -286,48 +268,21 @@
                 android:paddingHorizontal="5dp"
                 android:paddingVertical="2dp">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/rks7n0a9hm5l"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/ic_launcher" />
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true"
+                    android:scrollbars="none">
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    <LinearLayout
+                        android:id="@+id/circularContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/rrif4xi0ks2s"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/ic_launcher" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/rt6mp0emoe48"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/ic_launcher" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/rei0kw491b7u"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/ic_launcher" />
+                    </LinearLayout>
+                </HorizontalScrollView>
             </LinearLayout>
 
             <TextView
@@ -353,18 +308,6 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/r1ya0vac26d6"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/ic_launcher" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/WaterChart"
                     android:layout_width="260dp"
@@ -375,18 +318,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.853" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image3"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@mipmap/ic_launcher"
-                    app:shapeAppearanceOverlay="@style/cr20" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

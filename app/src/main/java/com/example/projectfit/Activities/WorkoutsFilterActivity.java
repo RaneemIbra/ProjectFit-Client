@@ -53,7 +53,5 @@ public class WorkoutsFilterActivity extends AppCompatActivity {
         imageView14.setImageResource(R.drawable.abs);
         ShapeableImageView imageView15 = findViewById(R.id.advanced_image);
         imageView15.setImageResource(R.drawable.bodybuilding);
-
-
     }
 }

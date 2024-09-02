@@ -2,6 +2,8 @@ package com.example.projectfit.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -26,14 +28,31 @@ public class WorkoutActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        WebView webView = findViewById(R.id.webview);
+        String video = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/SCVCLChPQFY?si=7pouIAZ4ioc2cCan\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>";
+        webView.loadData(video, "text/html", "utf-8");
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebChromeClient(new WebChromeClient());
+
         Button homePageBtn = findViewById(R.id.homePageBtn);
         homePageBtn.setOnClickListener(view -> {
             Intent intent = new Intent(WorkoutActivity.this, MainActivity.class);
             startActivity(intent);
         });
-        ImageView imageView = findViewById(R.id.rfe6q4utew2b);
-        Glide.with(this)
-                .load("https://i.imgur.com/kyjOOcy.jpeg")
-                .into(imageView);
+        Button planBtn = findViewById(R.id.plan);
+        planBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(WorkoutActivity.this, MyPlanActivity.class);
+            startActivity(intent);
+        });
+        Button profileBtn = findViewById(R.id.profile);
+        profileBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(WorkoutActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        });
+        Button workoutsBtn = findViewById(R.id.workouts);
+        workoutsBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(WorkoutActivity.this, WorkoutsFilterActivity.class);
+            startActivity(intent);
+        });
     }
 }

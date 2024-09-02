@@ -144,7 +144,7 @@
                 android:layout_height="20dp"/>
 
             <LinearLayout
-                android:id="@+id/r37hj8v4g4ek"
+                android:id="@+id/layout1"
                 android:layout_width="385dp"
                 android:layout_height="110dp"
                 android:layout_marginBottom="19dp"
@@ -274,7 +274,7 @@
                 android:layout_height="20dp"/>
 
             <LinearLayout
-                android:id="@+id/rqb21yrcmn38"
+                android:id="@+id/layout2"
                 android:layout_width="385dp"
                 android:layout_height="110dp"
                 android:layout_marginBottom="19dp"
@@ -332,7 +332,7 @@
                 android:layout_height="20dp"/>
 
             <LinearLayout
-                android:id="@+id/r2k1xto41h94"
+                android:id="@+id/layout3"
                 android:layout_width="385dp"
                 android:layout_height="110dp"
                 android:layout_marginBottom="19dp"
@@ -462,7 +462,7 @@
                 android:layout_height="20dp"/>
 
             <LinearLayout
-                android:id="@+id/rdgpu5u2em3u"
+                android:id="@+id/layout4"
                 android:layout_width="385dp"
                 android:layout_height="110dp"
                 android:layout_marginHorizontal="11dp"
@@ -520,7 +520,7 @@
                 android:layout_height="20dp"/>
 
             <LinearLayout
-                android:id="@+id/rdgpu5u2em3ua"
+                android:id="@+id/layout5"
                 android:layout_width="385dp"
                 android:layout_height="110dp"
                 android:layout_marginHorizontal="11dp"
@@ -563,7 +563,7 @@
                     android:layout_weight="1" />
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image4a"
+                    android:id="@+id/image5"
                     android:layout_width="148dp"
                     android:layout_height="110dp"
                     android:src="@mipmap/ic_launcher"
@@ -578,7 +578,7 @@
                 android:layout_height="20dp"/>
 
             <LinearLayout
-                android:id="@+id/rdgpu5u2em3us"
+                android:id="@+id/layout6"
                 android:layout_width="385dp"
                 android:layout_height="110dp"
                 android:layout_marginHorizontal="11dp"
@@ -621,7 +621,7 @@
                     android:layout_weight="1" />
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/image4s"
+                    android:id="@+id/image6"
                     android:layout_width="148dp"
                     android:layout_height="110dp"
                     android:src="@mipmap/ic_launcher"

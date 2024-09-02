@@ -13,7 +13,9 @@ public class Question {
     String answerNo4;
     int choseAnswer;
 
-    public Question(String questionText, String answerNo1, String answerNo2, String answerNo3, String answerNo4 ,int choseAnswer) {
+
+
+    public Question(String questionText, String answerNo1, String answerNo2, String answerNo3, String answerNo4,int choseAnswer) {
         this.questionText = questionText;
         this.answerNo1 = answerNo1;
         this.answerNo2 = answerNo2;
@@ -64,6 +66,14 @@ public class Question {
     public String getAnswerNo4() {
         return answerNo4;
     }
+    public void setAnswerNo4(String answerNo4) {
+        this.answerNo4 = answerNo4;
+    }
+
+    public String getAnswerNo4() {
+        return answerNo4;
+    }
+
     public void setAnswerNo4(String answerNo4) {
         this.answerNo4 = answerNo4;
     }

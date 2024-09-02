@@ -6,10 +6,14 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +23,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.projectfit.R;
+import com.github.lzyzsd.circleprogress.CircleProgress;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -35,11 +40,14 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     BarChart stepChart, waterChart;
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
+    LinearLayout addCupSizeButton;
     ProgressBar circularProgressBar;
     private TextView stepCountTextView;
     private ImageView runningImageView;
     private RelativeLayout progressBarContainer;
     private int stepCount = 0;
+    CircleProgress waterCupProgress;
+    RelativeLayout progressBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +63,8 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         stepCountTextView = findViewById(R.id.step_count_text_view);
         runningImageView = findViewById(R.id.running_image);
         progressBarContainer = findViewById(R.id.progressBarContainer);
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rtejx37ax1fg));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.r4nmnnagzvip));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.raju1mwklbia));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rkfm73wy97fr));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rr72cr43mxo9));
+        addCupSizeButton = findViewById(R.id.r04ysmm44lgo5);
+        waterCupProgress = findViewById(R.id.waterCupProgress);
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rks7n0a9hm5l));
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rrif4xi0ks2s));
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rt6mp0emoe48));
@@ -68,6 +73,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.image3));
         stepChart = findViewById(R.id.stepChart);
         waterChart = findViewById(R.id.WaterChart);
+        progressBarLayout = findViewById(R.id.progressBarLayout);
 
         List<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0f, 1f));
@@ -83,6 +89,11 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         waterChart.setData(barData);
         stepChart.invalidate();
         waterChart.invalidate();
+
+        addCupSizeButton.setOnClickListener(view -> showAddCupSizeDialog());
+        progressBarLayout.setOnClickListener(view -> {
+            increaseWaterCupProgress();
+        });
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
@@ -114,8 +125,6 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
                                                     stepCountTextView.setVisibility(View.GONE);
                                                     runningImageView.setAlpha(0f);
                                                     runningImageView.setVisibility(View.VISIBLE);
-
-                                                    // Fade in the ImageView
                                                     runningImageView.animate()
                                                             .alpha(1f)
                                                             .setDuration(500)
@@ -164,5 +173,29 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         if (stepCounterSensor != null) {
             sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
+    }
+
+    private void showAddCupSizeDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_add_cup_size, null);
+        builder.setView(dialogView);
+
+        builder.setPositiveButton("Add", (dialog, which) -> {
+        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    private void increaseWaterCupProgress() {
+        int currentProgress = waterCupProgress.getProgress();
+        int maxProgress = waterCupProgress.getMax();
+        int newProgress = currentProgress + (maxProgress / 20);
+        if (newProgress > maxProgress) {
+            newProgress = maxProgress;
+        }
+        waterCupProgress.setProgress(newProgress);
     }
 }

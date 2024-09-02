@@ -63,12 +63,6 @@ public class Question {
     public void setAnswerNo3(String answerNo3) {
         this.answerNo3 = answerNo3;
     }
-    public String getAnswerNo4() {
-        return answerNo4;
-    }
-    public void setAnswerNo4(String answerNo4) {
-        this.answerNo4 = answerNo4;
-    }
 
     public String getAnswerNo4() {
         return answerNo4;

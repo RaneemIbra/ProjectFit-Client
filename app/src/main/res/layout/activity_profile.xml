@@ -33,6 +33,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
+
                 <Button
                     android:id="@+id/home_button"
                     android:layout_width="104dp"
@@ -54,7 +55,8 @@
                     android:id="@+id/plan_button"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/s000000sw1cr38bffffff"                    android:paddingVertical="11dp"
+                    android:background="@drawable/s000000sw1cr38bffffff"
+                    android:paddingVertical="11dp"
                     android:elevation="4dp"
                     android:text="PLAN"
                     android:textColor="#000000"
@@ -67,7 +69,7 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/button_profile_home"
+                    android:id="@+id/profileButton"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/s000000sw1cr38bff9a01"

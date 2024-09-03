@@ -14,7 +14,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.projectfit.R;
 
 public class ProfileActivity extends AppCompatActivity {
-
     private EditText emailEditText, phoneEditText, heightEditText, weightEditText, dateEditText, nameEditText;
     private Button editProfileButton, homePageBtn, planBtn;
 

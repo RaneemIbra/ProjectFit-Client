@@ -1,7 +1,9 @@
 package com.example.projectfit.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-
+import android.view.View;
+import android.widget.LinearLayout;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -10,8 +12,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.projectfit.R;
 import com.google.android.material.imageview.ShapeableImageView;
-
-
 
 public class WorkoutsFilterActivity extends AppCompatActivity {
 
@@ -25,6 +25,8 @@ public class WorkoutsFilterActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Set images for each category
         ShapeableImageView imageView = findViewById(R.id.body_building_image);
         imageView.setImageResource(R.drawable.bodybuilding1);
         ShapeableImageView imageView2 = findViewById(R.id.mobility_image);
@@ -53,5 +55,36 @@ public class WorkoutsFilterActivity extends AppCompatActivity {
         imageView14.setImageResource(R.drawable.abs);
         ShapeableImageView imageView15 = findViewById(R.id.advanced_image);
         imageView15.setImageResource(R.drawable.bodybuilding);
+
+        // Set onClickListeners for each category LinearLayout
+        setCategoryClickListener(R.id.body_part_chest);
+        setCategoryClickListener(R.id.body_part_back);
+        setCategoryClickListener(R.id.body_part_legs);
+        setCategoryClickListener(R.id.body_part_abs);
+        setCategoryClickListener(R.id.body_part_core);
+        setCategoryClickListener(R.id.body_part_biceps);
+        setCategoryClickListener(R.id.body_part_shoulders);
+        setCategoryClickListener(R.id.body_part_triceps);
+        setCategoryClickListener(R.id.beginner_level);
+        setCategoryClickListener(R.id.intermediate_level);
+        setCategoryClickListener(R.id.advanced_level);
+        setCategoryClickListener(R.id.r7kmbxwvlz6o); // Body Building
+        setCategoryClickListener(R.id.rcdhqfptnugj); // Mobility
+        setCategoryClickListener(R.id.r17jd3ea8ta1); // Calisthenics
+        setCategoryClickListener(R.id.rvg9e9e3fjjq); // 30 Minutes
+        setCategoryClickListener(R.id.ro2x0y9luguo); // 60 Minutes
+        setCategoryClickListener(R.id.rzxm2hmf0u7); // 90 Minutes
+    }
+
+    // Method to set OnClickListener for each category
+    private void setCategoryClickListener(int layoutId) {
+        LinearLayout categoryLayout = findViewById(layoutId);
+        categoryLayout.setOnClickListener(v -> {
+            // Navigate to WorkoutsListActivity when clicked
+            Intent intent = new Intent(WorkoutsFilterActivity.this, WorkoutsListActivity.class);
+            // Optionally pass extra data about the selected category
+            intent.putExtra("selected_category", v.getId());
+            startActivity(intent);
+        });
     }
 }

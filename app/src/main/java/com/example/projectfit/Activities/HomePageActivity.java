@@ -122,9 +122,10 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     private void animatedProgressBarWaterTracker() {
         int currentProgress = waterCupProgress.getProgress();
         waterProgressTextView.setText("Water Progress: " + currentProgress + "ml");
-
         AnimationUtils.fadeInView(waterProgressTextView, 300);
-        new Handler().postDelayed(() -> AnimationUtils.fadeOutView(waterProgressTextView, 300, 0), 2000);
+        new Handler().postDelayed(() -> {
+            AnimationUtils.fadeOutView(waterProgressTextView, 300, View.GONE);
+        }, 2000);
     }
 
     private void animatedProgressBarStepCount() {

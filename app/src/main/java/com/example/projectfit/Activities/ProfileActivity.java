@@ -1,5 +1,6 @@
 package com.example.projectfit.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,17 +11,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.bumptech.glide.Glide;
 import com.example.projectfit.R;
-import com.google.android.material.imageview.ShapeableImageView;
 
 public class ProfileActivity extends AppCompatActivity {
-    private EditText emailEditText;
-    private EditText phoneEditText;
-    private EditText heightEditText;
-    private EditText weightEditText;
-    private EditText dateEditText;
-    private Button editProfileButton;
+
+    private EditText emailEditText, phoneEditText, heightEditText, weightEditText, dateEditText, nameEditText;
+    private Button editProfileButton, homePageBtn, planBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,36 +27,31 @@ public class ProfileActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-
         });
+        initViews();
+        setupButtonListeners();
+    }
 
+    private void initViews() {
+        heightEditText = findViewById(R.id.heightEditText);
+        weightEditText = findViewById(R.id.weightEditText);
+        phoneEditText = findViewById(R.id.phoneEditText);
+        dateEditText = findViewById(R.id.dateEditText);
+        emailEditText = findViewById(R.id.emailEditText);
+        nameEditText = findViewById(R.id.nameEditText);
 
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rew4om8nwfp9));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.r1dt24381yha));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.r9ytoxqfuc0m));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rjaltsn56sbf));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rmw7gh2fx21g));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rmwt9q7s677o));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.raltse61lt9h));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rltnfh9vdac9));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.r9hnczojci8l));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rihtyk0bypl));
-        // Find and set up EditText views
-        EditText heightEditText = findViewById(R.id.heightEditText);
-        EditText weightEditText = findViewById(R.id.weightEditText);
-        EditText phoneEditText = findViewById(R.id.phoneEditText);
-        EditText dateEditText = findViewById(R.id.dateEditText);
-        EditText emailEditText = findViewById(R.id.emailEditText);
-        EditText nameEditText = findViewById(R.id.nameEditText);
+        editProfileButton = findViewById(R.id.editProfileButton);
+        homePageBtn = findViewById(R.id.home_button);
+        planBtn = findViewById(R.id.plan_button);
+    }
 
-
-        Button editProfileButton = findViewById(R.id.editProfileButton);
-
-
+    private void setupButtonListeners() {
+        homePageBtn.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this, HomePageActivity.class)));
+        planBtn.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this, MyPlanActivity.class)));
     }
 
     private void validateEmail() {
-        String emailInput = emailEditText.getText().toString();
+        String emailInput = emailEditText.getText().toString().trim();
 
         if (emailInput.isEmpty()) {
             emailEditText.setError("Email cannot be empty");
@@ -68,6 +60,5 @@ public class ProfileActivity extends AppCompatActivity {
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
             emailEditText.setError("Invalid email format");
         }
-
     }
 }

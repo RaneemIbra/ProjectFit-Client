@@ -23,136 +23,99 @@
 
             <!-- Top Menu Section -->
             <LinearLayout
-                android:id="@+id/rlol35lgf97"
+                android:id="@+id/r2tgxsisf2kk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="11dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <!-- Home Button -->
-                <LinearLayout
-                    android:id="@+id/r393ruhu3ipc"
+                <Button
+                    android:id="@+id/button_home_filter"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/s000000sw1cr38bffffff"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:paddingVertical="11dp">
-
-                    <TextView
-                        android:id="@+id/rkeim7fuqpx"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="HOME"
-                        android:textColor="#000000"
-                        android:textSize="17sp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="10dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <!-- Plan Button -->
-                <LinearLayout
-                    android:id="@+id/r1vjetzf7c5w"
-                    android:layout_width="104dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/s000000sw1cr38bff9a01"
+                    android:paddingVertical="11dp"
                     android:elevation="4dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:paddingVertical="11dp">
-
-                    <TextView
-                        android:id="@+id/r7v0w1f0zae7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PLAN"
-                        android:textColor="#000000"
-                        android:textSize="17sp" />
-                </LinearLayout>
+                    android:text="HOME"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
+                    android:gravity="center_horizontal" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <!-- Profile Button -->
-                <LinearLayout
-                    android:id="@+id/r8ulawbthvhh"
+                <Button
+                    android:id="@+id/button_plan_list"
+                    android:layout_width="104dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/s000000sw1cr38bff9a01"
+                    android:paddingVertical="11dp"
+                    android:elevation="4dp"
+                    android:text="PLAN"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
+                    android:gravity="center_horizontal" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button_profile_filter"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/s000000sw1cr38bffffff"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:paddingVertical="11dp">
+                    android:paddingVertical="11dp"
+                    android:text="PROFILE"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
+                    android:gravity="center_horizontal" />
 
-                    <TextView
-                        android:id="@+id/r7ry6uxfh4hb"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PROFILE"
-                        android:textColor="#000000"
-                        android:textSize="17sp" />
-                </LinearLayout>
             </LinearLayout>
 
             <!-- "Build My Plan" and "Workouts" Buttons Section -->
             <LinearLayout
-                android:id="@+id/rnvlzosm3gi"
+                android:id="@+id/rdhvrvygcei"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="7dp"
-                android:layout_marginBottom="46dp"
+                android:layout_marginBottom="74dp"
+                android:layout_marginHorizontal="2dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <!-- Build My Plan Button -->
-                <LinearLayout
-                    android:id="@+id/r3fb8m4akb8h"
+                <Button
+                    android:id="@+id/button_build_plan_filter"
                     android:layout_width="167dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/s000000sw1cr38bffffff"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:paddingVertical="13dp">
-
-                    <TextView
-                        android:id="@+id/rf3rhcfohjgh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Build My Plan"
-                        android:textColor="#131313"
-                        android:textSize="17sp" />
-                </LinearLayout>
+                    android:paddingVertical="13dp"
+                    android:text="Build My Plan"
+                    android:textColor="#131313"
+                    android:textSize="17sp"
+                    android:gravity="center_horizontal" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <!-- Workouts Button -->
-                <LinearLayout
-                    android:id="@+id/rigtrdtghbu"
+                <Button
+                    android:id="@+id/button_workouts_list"
                     android:layout_width="167dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/s000000sw1cr38bff9a01"
+                    android:paddingVertical="13dp"
                     android:elevation="4dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:paddingVertical="13dp">
+                    android:text="Workouts"
+                    android:textColor="#131313"
+                    android:textSize="17sp"
+                    android:gravity="center_horizontal" />
 
-                    <TextView
-                        android:id="@+id/rn0v38d9s0v"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Workouts"
-                        android:textColor="#131313"
-                        android:textSize="17sp" />
-                </LinearLayout>
             </LinearLayout>
 
             <!-- Filter By TextView -->

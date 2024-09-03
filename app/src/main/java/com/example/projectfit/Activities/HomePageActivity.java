@@ -81,7 +81,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         stepChart = findViewById(R.id.stepChart);
         waterChart = findViewById(R.id.WaterChart);
         progressBarLayout = findViewById(R.id.progressBarLayout);
-        planPage = findViewById(R.id.button_plan_home);
+        planPage = findViewById(R.id.plan_button);
         profilePage = findViewById(R.id.button_profile_home);
     }
 

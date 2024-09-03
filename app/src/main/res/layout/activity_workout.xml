@@ -97,7 +97,7 @@
                     android:textSize="17sp"
                     android:layout_height="wrap_content"
                     android:layout_width="167dp"
-                    android:text="Build My Plan"
+                    android:text="My Plan"
                     android:gravity="center"
                     android:background="@drawable/s000000sw1cr38bffffff"
                     android:paddingVertical="13dp" />

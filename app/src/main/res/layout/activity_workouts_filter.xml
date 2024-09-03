@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:paddingTop="18dp"
+        android:background="@drawable/sffffffsw1cr20bd9d9d9"
         android:paddingBottom="29dp">
 
         <LinearLayout
@@ -326,7 +327,7 @@
                                 android:layout_height="70dp"
                                 android:layout_marginTop="3dp"
                                 android:scaleType="fitXY"
-                                android:src="@mipmap/ic_launcher"
+                                android:src="@drawable/timer"
                                 app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
                             <TextView
@@ -358,7 +359,7 @@
                                 android:layout_height="70dp"
                                 android:layout_marginTop="3dp"
                                 android:scaleType="fitXY"
-                                android:src="@mipmap/ic_launcher"
+                                android:src="@drawable/timer"
                                 app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
                             <TextView
@@ -390,7 +391,7 @@
                                 android:layout_height="70dp"
                                 android:layout_marginTop="3dp"
                                 android:scaleType="fitXY"
-                                android:src="@mipmap/ic_launcher"
+                                android:src="@drawable/timer"
                                 app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
                             <TextView

@@ -37,7 +37,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button_home_home"
+                    android:id="@+id/home_button"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/s000000sw1cr38bff9a01"
@@ -54,7 +54,7 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/button_plan_home"
+                    android:id="@+id/plan_button"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/s000000sw1cr38bffffff"                    android:paddingVertical="11dp"

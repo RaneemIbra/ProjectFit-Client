@@ -36,77 +36,53 @@
                 android:layout_marginHorizontal="8dp"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/rosdld3qhpb"
+                <!-- Button to navigate to the homepage -->
+                <Button
+                    android:id="@+id/homeButton"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr38bffffff"
                     android:paddingVertical="11dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/rnscmwtehkf"
-                        android:textColor="#000000"
-                        android:textSize="17sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="HOME"
-                        />
-                </LinearLayout>
+                    android:text="HOME"
+                    android:textColor="#000000"
+                    android:textSize="17sp" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     />
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/rval3pw4dndr"
+                <!-- Button to navigate to the My Plan page -->
+                <Button
+                    android:id="@+id/planButton"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr38bffffff"
                     android:paddingVertical="11dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/ryinix9nkk2s"
-                        android:textColor="#000000"
-                        android:textSize="17sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="PLAN"
-                        />
-                </LinearLayout>
+                    android:text="PLAN"
+                    android:textColor="#000000"
+                    android:textSize="17sp" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     />
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/rfwocro0ctz"
+                <!-- Button to navigate to the Profile page -->
+                <Button
+                    android:id="@+id/profileButton"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr38bff9a01"
                     android:paddingVertical="11dp"
                     android:elevation="4dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/r392y21r74py"
-                        android:textColor="#000000"
-                        android:textSize="17sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="PROFILE"
-                        />
-                </LinearLayout>
+                    android:text="PROFILE"
+                    android:textColor="#000000"
+                    android:textSize="17sp" />
+
             </LinearLayout>
             <RelativeLayout
                 android:id="@+id/rx0n2u1e2z0h"

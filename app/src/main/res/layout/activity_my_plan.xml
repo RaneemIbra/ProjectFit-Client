@@ -261,131 +261,141 @@
                     android:id="@+id/Layout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
                     android:layout_marginHorizontal="8dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/cr18bffffff"
                     android:paddingVertical="9dp"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/rvyty175eb"
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/rv4ymb3kdafe"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="19dp"
                         android:layout_marginHorizontal="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/rom7ulx78ml"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:src="@mipmap/ic_launcher"
-                            android:scaleType="fitXY" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
+                        <!-- Workout Image and Details -->
                         <LinearLayout
-                            android:id="@+id/rkaan9fjvze"
-                            android:layout_width="248dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
 
+                            <!-- Workout Image -->
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/rlaob0eufl3"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/building"
+                                android:scaleType="fitXY"
+                                android:layout_marginEnd="8dp" />
+
+                            <!-- Workout Name and Calories Info -->
                             <LinearLayout
-                                android:id="@+id/r2knos31yjvq"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rd6bw1i18hr"
-                                    android:layout_width="7dp"
-                                    android:layout_height="9dp"
-                                    android:src="@mipmap/ic_launcher"
-                                    android:scaleType="fitXY" />
-
+                                <!-- Workout Name -->
                                 <TextView
-                                    android:id="@+id/rcwktjk2k40w"
+                                    android:id="@+id/r58ginjerv5o"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="11dp"
-                                    android:text="164 Kcal"
-                                    android:textColor="#212020"
-                                    android:textSize="12sp" />
-
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rj9f97ph8grd"
-                                    android:layout_width="110dp"
-                                    android:layout_height="29dp"
-                                    android:layout_marginHorizontal="55dp"
-                                    android:src="@mipmap/ic_launcher"
-                                    android:scaleType="fitXY" />
-
-                                <TextView
-                                    android:id="@+id/r61wyomn4kb6"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Duration"
-                                    android:textColor="#007AFF"
-                                    android:textSize="13sp" />
-
-                                <TextView
-                                    android:id="@+id/reaudud1noco"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="1dp"
-                                    android:text="Bench Press "
+                                    android:text="Upper Body Workout"
                                     android:textColor="#131313"
-                                    android:textSize="13sp" />
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:layout_marginBottom="4dp" />
 
-                                <TextView
-                                    android:id="@+id/rmvr7bajo2q"
+                                <!-- Calories Image and Amount -->
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="1dp"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/rhh070fllio8"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/calories"
+                                        android:scaleType="fitXY" />
+
+                                    <TextView
+                                        android:id="@+id/rqd9c60hxzf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="120 Kcal"
+                                        android:textColor="#212020"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+
+                                <!-- Next Set Info -->
+                                <TextView
+                                    android:id="@+id/rg5slbkteo9w"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="The next set is 4 reps!"
+                                    android:textColor="#FF9A01"
+                                    android:textSize="12sp"
+                                    android:layout_marginTop="4dp" />
+                            </LinearLayout>
+
+                            <!-- Timer Image and Duration -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/rb39xm020i8"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/timer"
+                                    android:scaleType="fitXY" />
+
+                                <TextView
+                                    android:id="@+id/rc5h6rvwtrkr"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:text="25 Mins"
                                     android:textColor="#007AFF"
-                                    android:textSize="15sp" />
-
-                                <TextView
-                                    android:id="@+id/ry7dmq5xpy9q"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="The next set is 4 reps! "
-                                    android:textColor="#FF9A01"
-                                    android:textSize="12sp" />
+                                    android:textSize="15sp"
+                                    android:layout_marginTop="4dp" />
                             </LinearLayout>
                         </LinearLayout>
+
+                        <!-- Set Completion Info -->
+                        <TextView
+                            android:id="@+id/ra3jfriwglt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="When a set is completed, tap on the progress bar"
+                            android:textColor="#007AFF"
+                            android:textSize="13sp"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center" />
+
+                        <!-- Progress Bar -->
+                        <ProgressBar
+                            android:id="@+id/training_progress_bar1"
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginHorizontal="16dp"
+                            android:max="100"
+                            android:progress="0"
+                            android:indeterminate="false"
+                            android:progressDrawable="@drawable/progress_bar_custom"
+                            style="?android:attr/progressBarStyleHorizontal" />
                     </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/rpdz212k3g78"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginStart="42dp"
-                        android:text="when a set is completed tap on the progress bar"
-                        android:textColor="#131313"
-                        android:textSize="7sp" />
-
-
-                    <ProgressBar
-                        android:id="@+id/training_progress_bar"
-                        android:layout_width="match_parent"
-                        android:layout_height="16dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginHorizontal="16dp"
-                        android:max="100"
-                        android:progress="0"
-                        android:indeterminate="false"
-                        android:progressDrawable="@drawable/progress_bar_custom"
-                        style="?android:attr/progressBarStyleHorizontal" />
-
                 </LinearLayout>
 
                 <!-- Second Training Section -->
@@ -393,119 +403,141 @@
                     android:id="@+id/Layout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
                     android:layout_marginHorizontal="8dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/cr18bffffff"
                     android:paddingVertical="9dp"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/rutux2paubss"
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/rv4ymb3kdafea"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="19dp"
                         android:layout_marginHorizontal="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/re4ohojcs3l"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:src="@mipmap/ic_launcher"
-                            android:scaleType="fitXY" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
+                        <!-- Workout Image and Details -->
                         <LinearLayout
-                            android:id="@+id/r1i44dc89btw"
-                            android:layout_width="248dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
 
+                            <!-- Workout Image -->
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/rlaob0eufl3a"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/building"
+                                android:scaleType="fitXY"
+                                android:layout_marginEnd="8dp" />
+
+                            <!-- Workout Name and Calories Info -->
                             <LinearLayout
-                                android:id="@+id/rbk27fkh5x46"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rwfhrlkzvuq"
-                                    android:layout_width="7dp"
-                                    android:layout_height="9dp"
-                                    android:src="@mipmap/ic_launcher"
-                                    android:scaleType="fitXY" />
-
+                                <!-- Workout Name -->
                                 <TextView
-                                    android:id="@+id/rbirmtiws4ft"
+                                    android:id="@+id/r58ginjerv5oa"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="11dp"
-                                    android:text="123 Kcal"
-                                    android:textColor="#212020"
-                                    android:textSize="12sp" />
-
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rj8vvk076jho"
-                                    android:layout_width="110dp"
-                                    android:layout_height="29dp"
-                                    android:layout_marginHorizontal="55dp"
-                                    android:src="@mipmap/ic_launcher"
-                                    android:scaleType="fitXY" />
-
-                                <TextView
-                                    android:id="@+id/r76ga0er5sfx"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Duration"
-                                    android:textColor="#007AFF"
-                                    android:textSize="13sp" />
-
-                                <TextView
-                                    android:id="@+id/rijwi00yx18"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="1dp"
-                                    android:text="incline bench "
+                                    android:text="Upper Body Workout"
                                     android:textColor="#131313"
-                                    android:textSize="13sp" />
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:layout_marginBottom="4dp" />
 
-                                <TextView
-                                    android:id="@+id/rfc06fxbk8la"
+                                <!-- Calories Image and Amount -->
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="1dp"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/rhh070fllio8a"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/calories"
+                                        android:scaleType="fitXY" />
+
+                                    <TextView
+                                        android:id="@+id/rqd9c60hxzfa"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="120 Kcal"
+                                        android:textColor="#212020"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+
+                                <!-- Next Set Info -->
+                                <TextView
+                                    android:id="@+id/rg5slbkteo9wa"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="The next set is 4 reps!"
+                                    android:textColor="#FF9A01"
+                                    android:textSize="12sp"
+                                    android:layout_marginTop="4dp" />
+                            </LinearLayout>
+
+                            <!-- Timer Image and Duration -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/rb39xm020i8a"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/timer"
+                                    android:scaleType="fitXY" />
+
+                                <TextView
+                                    android:id="@+id/rc5h6rvwtrkra"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:text="25 Mins"
                                     android:textColor="#007AFF"
-                                    android:textSize="15sp" />
-
-                                <TextView
-                                    android:id="@+id/ro7y277bzf2i"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="The next set is 8 reps! "
-                                    android:textColor="#FF9A01"
-                                    android:textSize="12sp" />
+                                    android:textSize="15sp"
+                                    android:layout_marginTop="4dp" />
                             </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
 
-                    <ProgressBar
-                        android:id="@+id/training_progress_bar2"
-                        android:layout_width="match_parent"
-                        android:layout_height="16dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginHorizontal="16dp"
-                        android:max="100"
-                        android:progress="0"
-                        android:indeterminate="false"
-                        android:progressDrawable="@drawable/progress_bar_custom"
-                        style="?android:attr/progressBarStyleHorizontal" />
+                        <!-- Set Completion Info -->
+                        <TextView
+                            android:id="@+id/ra3jfriwglta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="When a set is completed, tap on the progress bar"
+                            android:textColor="#007AFF"
+                            android:textSize="13sp"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center" />
+
+                        <!-- Progress Bar -->
+                        <ProgressBar
+                            android:id="@+id/training_progress_bar2"
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginHorizontal="16dp"
+                            android:max="100"
+                            android:progress="0"
+                            android:indeterminate="false"
+                            android:progressDrawable="@drawable/progress_bar_custom"
+                            style="?android:attr/progressBarStyleHorizontal" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <!-- Third Training Section -->
@@ -519,123 +551,134 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/rv4ymb3kdafe"
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/rv4ymb3kdafes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="19dp"
                         android:layout_marginHorizontal="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/rlaob0eufl3"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:src="@mipmap/ic_launcher"
-                            android:scaleType="fitXY" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
+                        <!-- Workout Image and Details -->
                         <LinearLayout
-                            android:id="@+id/r8irv5bbkfyh"
-                            android:layout_width="248dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
 
+                            <!-- Workout Image -->
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/rlaob0eufl3s"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/building"
+                                android:scaleType="fitXY"
+                                android:layout_marginEnd="8dp" />
+
+                            <!-- Workout Name and Calories Info -->
                             <LinearLayout
-                                android:id="@+id/rnwyhi5gtldk"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rhh070fllio8"
-                                    android:layout_width="7dp"
-                                    android:layout_height="9dp"
-                                    android:src="@mipmap/ic_launcher"
-                                    android:scaleType="fitXY" />
-
+                                <!-- Workout Name -->
                                 <TextView
-                                    android:id="@+id/rqd9c60hxzf"
+                                    android:id="@+id/r58ginjerv5os"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="11dp"
-                                    android:text="120 Kcal"
-                                    android:textColor="#212020"
-                                    android:textSize="12sp" />
-
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rb39xm020i8"
-                                    android:layout_width="110dp"
-                                    android:layout_height="29dp"
-                                    android:layout_marginHorizontal="55dp"
-                                    android:src="@mipmap/ic_launcher"
-                                    android:scaleType="fitXY" />
-
-                                <TextView
-                                    android:id="@+id/ra3jfriwglt"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Duration"
-                                    android:textColor="#007AFF"
-                                    android:textSize="13sp" />
-
-                                <TextView
-                                    android:id="@+id/r58ginjerv5o"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="1dp"
                                     android:text="Upper Body Workout"
                                     android:textColor="#131313"
-                                    android:textSize="13sp" />
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:layout_marginBottom="4dp" />
 
-                                <TextView
-                                    android:id="@+id/rc5h6rvwtrkr"
+                                <!-- Calories Image and Amount -->
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="1dp"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/rhh070fllio8s"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/calories"
+                                        android:scaleType="fitXY" />
+
+                                    <TextView
+                                        android:id="@+id/rqd9c60hxzfs"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="120 Kcal"
+                                        android:textColor="#212020"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+
+                                <!-- Next Set Info -->
+                                <TextView
+                                    android:id="@+id/rg5slbkteo9ws"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="The next set is 4 reps!"
+                                    android:textColor="#FF9A01"
+                                    android:textSize="12sp"
+                                    android:layout_marginTop="4dp" />
+                            </LinearLayout>
+
+                            <!-- Timer Image and Duration -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/rb39xm020i8s"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/timer"
+                                    android:scaleType="fitXY" />
+
+                                <TextView
+                                    android:id="@+id/rc5h6rvwtrkrs"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:text="25 Mins"
                                     android:textColor="#007AFF"
-                                    android:textSize="15sp" />
-
-                                <TextView
-                                    android:id="@+id/rg5slbkteo9w"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="The next set is 4 reps! "
-                                    android:textColor="#FF9A01"
-                                    android:textSize="12sp" />
+                                    android:textSize="15sp"
+                                    android:layout_marginTop="4dp" />
                             </LinearLayout>
                         </LinearLayout>
+
+                        <!-- Set Completion Info -->
+                        <TextView
+                            android:id="@+id/ra3jfriwglts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="When a set is completed, tap on the progress bar"
+                            android:textColor="#007AFF"
+                            android:textSize="13sp"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center" />
+
+                        <!-- Progress Bar -->
+                        <ProgressBar
+                            android:id="@+id/training_progress_bar3"
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginHorizontal="16dp"
+                            android:max="100"
+                            android:progress="0"
+                            android:indeterminate="false"
+                            android:progressDrawable="@drawable/progress_bar_custom"
+                            style="?android:attr/progressBarStyleHorizontal" />
                     </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/rjfyojjkqm2a"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginStart="42dp"
-                        android:text="when a set is completed tap on the progress bar"
-                        android:textColor="#131313"
-                        android:textSize="7sp" />
-
-
-                    <ProgressBar
-                        android:id="@+id/training_progress_bar3"
-                        android:layout_width="match_parent"
-                        android:layout_height="16dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginHorizontal="16dp"
-                        android:max="100"
-                        android:progress="0"
-                        android:indeterminate="false"
-                        android:progressDrawable="@drawable/progress_bar_custom"
-                        style="?android:attr/progressBarStyleHorizontal" />
                 </LinearLayout>
             </LinearLayout>
 

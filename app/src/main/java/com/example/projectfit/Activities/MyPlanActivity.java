@@ -1,9 +1,9 @@
 package com.example.projectfit.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.content.Intent;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
@@ -13,17 +13,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.bumptech.glide.Glide;
 import com.example.projectfit.R;
-import com.google.android.material.imageview.ShapeableImageView;
 
 public class MyPlanActivity extends AppCompatActivity {
-    Button button_homePage, button_profilePage, button_workoutPage;
-    Button button_sunday, button_monday, button_tuesday, button_wednesday, button_thursday, button_friday, button_saturday;
-    Button selectedDayButton;
-    ProgressBar trainingProgressBar1, trainingProgressBar2, trainingProgressBar3;
-    LinearLayout trainingLayout1, trainingLayout2, trainingLayout3;
-    int progressStatus1 = 0, progressStatus2 = 0, progressStatus3 = 0;
+    private Button buttonHomePage, buttonProfilePage, buttonWorkoutPage;
+    private Button[] dayButtons;
+    private Button selectedDayButton;
+    private ProgressBar[] progressBars;
+    private LinearLayout[] trainingLayouts;
+    private int[] progressStatuses = {0, 0, 0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,90 +33,80 @@ public class MyPlanActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rom7ulx78ml));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rd6bw1i18hr));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rj9f97ph8grd));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.re4ohojcs3l));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rwfhrlkzvuq));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rj8vvk076jho));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rlaob0eufl3));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rhh070fllio8));
-        Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rb39xm020i8));
-
-        button_homePage = findViewById(R.id.button_home_my_plan);
-        button_profilePage = findViewById(R.id.button_profile_my_plan);
-        button_workoutPage = findViewById(R.id.button_workout_my_plan);
-        button_sunday = findViewById(R.id.sunday);
-        button_monday = findViewById(R.id.monday);
-        button_tuesday = findViewById(R.id.tuesday);
-        button_wednesday = findViewById(R.id.wednesday);
-        button_thursday = findViewById(R.id.thursday);
-        button_friday = findViewById(R.id.friday);
-        button_saturday = findViewById(R.id.saturday);
-        trainingProgressBar1 = findViewById(R.id.training_progress_bar);
-        trainingProgressBar2 = findViewById(R.id.training_progress_bar2);
-        trainingProgressBar3 = findViewById(R.id.training_progress_bar3);
-        trainingLayout1 = findViewById(R.id.Layout1);
-        trainingLayout2 = findViewById(R.id.Layout2);
-        trainingLayout3 = findViewById(R.id.Layout3);
-
-        selectedDayButton = button_sunday;
+        initViews();
         setupNavigation();
         setupDayButtons();
         setupProgressBars();
     }
-    private void setupProgressBars(){
-        trainingLayout1.setOnClickListener(view -> {
-            if (progressStatus1 < 100) {
-                progressStatus1 += 10;
-                trainingProgressBar1.setProgress(progressStatus1);
-            }
-        });
-        trainingLayout2.setOnClickListener(view -> {
-            if (progressStatus2 < 100) {
-                progressStatus2 += 10;
-                trainingProgressBar2.setProgress(progressStatus2);
-            }
-        });
-        trainingLayout3.setOnClickListener(view -> {
-            if (progressStatus3 < 100) {
-                progressStatus3 += 10;
-                trainingProgressBar3.setProgress(progressStatus3);
-            }
-        });
+
+    private void initViews() {
+        buttonHomePage = findViewById(R.id.button_home_my_plan);
+        buttonProfilePage = findViewById(R.id.button_profile_my_plan);
+        buttonWorkoutPage = findViewById(R.id.button_workout_my_plan);
+
+        dayButtons = new Button[]{
+                findViewById(R.id.sunday),
+                findViewById(R.id.monday),
+                findViewById(R.id.tuesday),
+                findViewById(R.id.wednesday),
+                findViewById(R.id.thursday),
+                findViewById(R.id.friday),
+                findViewById(R.id.saturday)
+        };
+        selectedDayButton = dayButtons[0];
+
+        progressBars = new ProgressBar[]{
+                findViewById(R.id.training_progress_bar1),
+                findViewById(R.id.training_progress_bar2),
+                findViewById(R.id.training_progress_bar3)
+        };
+        trainingLayouts = new LinearLayout[]{
+                findViewById(R.id.Layout1),
+                findViewById(R.id.Layout2),
+                findViewById(R.id.Layout3)
+        };
     }
+
+    private void setupProgressBars() {
+        for (int i = 0; i < trainingLayouts.length; i++) {
+            final int index = i;
+            trainingLayouts[i].setOnClickListener(view -> increaseProgressBar(index));
+        }
+    }
+
+    private void increaseProgressBar(int index) {
+        if (progressStatuses[index] < 100) {
+            progressStatuses[index] += 10;
+            progressBars[index].setProgress(progressStatuses[index]);
+        }
+    }
+
     private void setupNavigation() {
-        button_homePage.setOnClickListener(view -> {
-            Intent intent = new Intent(MyPlanActivity.this, HomePageActivity.class);
-            startActivity(intent);
-        });
-        button_profilePage.setOnClickListener(view -> {
-            Intent intent = new Intent(MyPlanActivity.this, ProfileActivity.class);
-            startActivity(intent);
-        });
-        button_workoutPage.setOnClickListener(view -> {
-            Intent intent = new Intent(MyPlanActivity.this, WorkoutsFilterActivity.class);
-            startActivity(intent);
-        });
+        buttonHomePage.setOnClickListener(view -> navigateTo(HomePageActivity.class));
+        buttonProfilePage.setOnClickListener(view -> navigateTo(ProfileActivity.class));
+        buttonWorkoutPage.setOnClickListener(view -> navigateTo(WorkoutsFilterActivity.class));
     }
-    private void setupDayButtons(){
+
+    private void navigateTo(Class<?> targetActivity) {
+        Intent intent = new Intent(MyPlanActivity.this, targetActivity);
+        startActivity(intent);
+    }
+
+    private void setupDayButtons() {
         View.OnClickListener dayButtonClickListener = view -> {
             if (selectedDayButton != null) {
                 selectedDayButton.setBackgroundResource(R.drawable.s000000sw1cr18lr27017b7d9cc0c6073cc);
                 selectedDayButton.setSelected(false);
             }
+
             Button clickedButton = (Button) view;
             clickedButton.setBackgroundResource(R.drawable.s000000sw1cr18bffffff);
             clickedButton.setSelected(true);
             selectedDayButton = clickedButton;
         };
 
-        button_sunday.setOnClickListener(dayButtonClickListener);
-        button_monday.setOnClickListener(dayButtonClickListener);
-        button_tuesday.setOnClickListener(dayButtonClickListener);
-        button_wednesday.setOnClickListener(dayButtonClickListener);
-        button_thursday.setOnClickListener(dayButtonClickListener);
-        button_friday.setOnClickListener(dayButtonClickListener);
-        button_saturday.setOnClickListener(dayButtonClickListener);
+        for (Button dayButton : dayButtons) {
+            dayButton.setOnClickListener(dayButtonClickListener);
+        }
     }
 }

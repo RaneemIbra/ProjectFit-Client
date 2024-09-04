@@ -25,4 +25,8 @@ public class UserRoomRepository {
     public LiveData<List<User>> getAllUsersLocally() {
         return userDatabase.userDAO().getAllUsers();
     }
+
+    public User getUserByEmail(String email) {
+        return userDatabase.userDAO().getUserByEmail(email);
+    }
 }

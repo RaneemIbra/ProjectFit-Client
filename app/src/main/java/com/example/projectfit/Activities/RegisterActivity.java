@@ -20,7 +20,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.projectfit.Models.User;
 import com.example.projectfit.R;
+import com.example.projectfit.Room.Repositories.UserRoomRepository;
+import com.example.projectfit.Server.Repositories.UserServerRepository;
 import com.google.android.material.imageview.ShapeableImageView;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -32,6 +35,8 @@ public class RegisterActivity extends AppCompatActivity {
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
     Button login_button;
+    private UserRoomRepository userRoomRepository;
+    private UserServerRepository userServerRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,6 +49,8 @@ public class RegisterActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        userRoomRepository = new UserRoomRepository(getApplicationContext());
+        userServerRepository = new UserServerRepository();
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView) findViewById(R.id.name_icon));
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView) findViewById(R.id.email_icon));
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView) findViewById(R.id.password_icon));
@@ -158,14 +165,24 @@ public class RegisterActivity extends AppCompatActivity {
 
         // login button
         login_button.setOnClickListener(view -> {
-            // Create an Intent to start the new Activity
+
+            String fullName = nameEditText.getText().toString();
+            String email = emailEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
+            double weight = Double.parseDouble(weightEditText.getText().toString());
+            double height = Double.parseDouble(heightEditText.getText().toString());
+
+            User newUser = new User(null, fullName, null, email, password, null, height, weight, true, null, null, null, null, null, null, null, null);
+            userRoomRepository.addUserLocally(newUser);
+            userServerRepository.addUserInServer(newUser);
+
             nameEditText.setText("");
             emailEditText.setText("");
             passwordEditText.setText("");
             weightEditText.setText("");
             heightEditText.setText("");
-
-            Intent intent = new Intent(this, LoadingScreenActivity.class);
+            System.out.println("hello???");
+            Intent intent = new Intent(this, LoginActivity.class);
             // Start the new Activity
             startActivity(intent);
         });

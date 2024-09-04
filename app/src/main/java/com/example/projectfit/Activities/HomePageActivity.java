@@ -25,6 +25,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.projectfit.Models.User;
 import com.example.projectfit.R;
 import com.example.projectfit.Utils.AnimationUtils;
 import com.example.projectfit.Utils.DialogUtils;
@@ -51,6 +52,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     CircleProgress waterCupProgress;
     RelativeLayout progressBarLayout;
     Button planPage, profilePage;
+    public static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

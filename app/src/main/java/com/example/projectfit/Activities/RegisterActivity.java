@@ -24,14 +24,14 @@ import com.example.projectfit.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText nameEditText = findViewById(R.id.name_txt);
-    EditText emailEditText = findViewById(R.id.email_txt);
-    EditText passwordEditText = findViewById(R.id.password_txt);
-    EditText weightEditText = findViewById(R.id.weight_txt);
-    EditText heightEditText = findViewById(R.id.height_txt);
-    Spinner spinner = findViewById(R.id.spinner);
-    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.spinner_items, android.R.layout.simple_spinner_item);
-    Button login_button = findViewById(R.id.login_button);
+    EditText nameEditText;
+    EditText emailEditText;
+    EditText passwordEditText;
+    EditText weightEditText;
+    EditText heightEditText;
+    Spinner spinner;
+    ArrayAdapter<CharSequence> adapter;
+    Button login_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -51,7 +51,14 @@ public class RegisterActivity extends AppCompatActivity {
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView) findViewById(R.id.weight_icon));
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView) findViewById(R.id.height_icon));
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView) findViewById(R.id.question_icon));
-
+        nameEditText = findViewById(R.id.name_txt);
+        emailEditText = findViewById(R.id.email_txt);
+        passwordEditText = findViewById(R.id.password_txt);
+        weightEditText = findViewById(R.id.weight_txt);
+        heightEditText = findViewById(R.id.height_txt);
+        spinner = findViewById(R.id.spinner);
+        adapter = ArrayAdapter.createFromResource(this, R.array.spinner_items, android.R.layout.simple_spinner_item);
+        login_button = findViewById(R.id.login_button);
         // Set up username real-time feedback
         nameEditText.addTextChangedListener(new TextWatcher() {
             @Override

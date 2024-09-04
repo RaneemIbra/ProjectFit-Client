@@ -2,8 +2,8 @@ package com.example.projectfit.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,26 +14,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.bumptech.glide.Glide;
 import com.example.projectfit.Models.User;
 import com.example.projectfit.R;
 import com.example.projectfit.Room.Repositories.UserRoomRepository;
 import com.example.projectfit.Server.Repositories.UserServerRepository;
-import com.google.android.material.imageview.ShapeableImageView;
-
-import java.util.concurrent.Executors;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.example.projectfit.Utils.Validation;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {
+    private TextInputLayout emailLayout, passwordLayout;
+    private Button loginButton;
+    private TextView signUpText, forgotPasswordText;
+    private CheckBox rememberMeCheckBox;
+    private Validation validation;
     private UserRoomRepository userRoomRepository;
     private UserServerRepository userServerRepository;
-
-    EditText emailEditText,passwordEditText;
-    Button signInButton;
-    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,62 +41,89 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
-        emailEditText = findViewById(R.id.email_input);
-        passwordEditText = findViewById(R.id.password_input);
-        signInButton = findViewById(R.id.login_button);
+        initializeRepositories();
+        initializeViews();
+        setupClickListeners();
+    }
 
-        userRoomRepository = new UserRoomRepository(getApplicationContext());
+    private void initializeRepositories() {
+        userRoomRepository = new UserRoomRepository(this);
         userServerRepository = new UserServerRepository();
+        validation = new Validation();
+    }
 
-        signInButton.setOnClickListener(v -> {
-            String email = emailEditText.getText().toString();
-            String password = passwordEditText.getText().toString();
+    private void initializeViews() {
+        emailLayout = findViewById(R.id.emailLayoutLogin);
+        passwordLayout = findViewById(R.id.passwordLayoutLogin);
+        loginButton = findViewById(R.id.login_button);
+        signUpText = findViewById(R.id.signUp_text);
+        forgotPasswordText = findViewById(R.id.password_restTxt);
+        rememberMeCheckBox = findViewById(R.id.remember_me_checkbox);
+    }
 
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please fill in both email and password", Toast.LENGTH_SHORT).show();
-                return;
-            }
+    private void setupClickListeners() {
+        signUpText.setOnClickListener(view -> navigateToActivity(RegisterActivity.class));
+        forgotPasswordText.setOnClickListener(view -> navigateToActivity(ResetPasswordActivity.class));
+        loginButton.setOnClickListener(view -> handleLogin());
+    }
 
-            Executors.newSingleThreadExecutor().execute(() -> {
-                user = userRoomRepository.getUserByEmail(email);
-                if (user != null && user.getPassword().equals(password)) {
-                    runOnUiThread(() -> navigateToHome());
-                } else {
-                    userServerRepository.getUserByEmail(email, new Callback<User>() {
-                        @Override
-                        public void onResponse(Call<User> call, Response<User> response) {
-                            if (response.isSuccessful() && response.body() != null) {
-                                User serverUser = response.body();
-                                if (serverUser.getPassword().equals(password)) {
-                                    navigateToHome();
-                                } else {
-                                    runOnUiThread(() -> showError("Invalid email or password"));
-                                }
-                            } else {
-                                runOnUiThread(() -> showError("Invalid email or password"));
-                            }
-                        }
+    private void navigateToActivity(Class<?> targetActivity) {
+        Intent intent = new Intent(LoginActivity.this, targetActivity);
+        startActivity(intent);
+    }
 
-                        @Override
-                        public void onFailure(Call<User> call, Throwable t) {
-                            runOnUiThread(() -> showError("Error connecting to the server"));
-                        }
-                    });
+    private void handleLogin() {
+        String email = getTextFromInput(emailLayout);
+        String password = getTextFromInput(passwordLayout);
+
+        if (validation.emailValidate(email, emailLayout) && validation.passwordValidate(password, passwordLayout)) {
+            userRoomRepository.validateUserLocal(email, password, new UserRoomRepository.OnUserValidationCallback() {
+                @Override
+                public void onSuccess(User user) {
+                    showLoginSuccessMessage("Login successful (Local)");
+                }
+
+                @Override
+                public void onFailure(String errorMessage) {
+                    checkUserOnServer(email, password);
                 }
             });
+        }
+    }
+
+    private void checkUserOnServer(String email, String password) {
+        userServerRepository.validateUserServer(email, password, new UserServerRepository.OnUserValidationCallback() {
+            @Override
+            public void onSuccess(User user) {
+                showLoginSuccessMessage("Login successful (Server)");
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                showToastMessage(errorMessage);
+            }
         });
     }
 
-    private void navigateToHome() {
-        Intent intent = new Intent(this, HomePageActivity.class);
-        intent.putExtra("user", user);
+    private void showLoginSuccessMessage(String message) {
+        runOnUiThread(() -> {
+            showToastMessage(message);
+            navigateToHomePage();
+        });
+    }
+
+    private void showToastMessage(String message) {
+        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void navigateToHomePage() {
+        Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
         startActivity(intent);
         finish();
     }
 
-    private void showError(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    private String getTextFromInput(TextInputLayout textInputLayout) {
+        EditText editText = textInputLayout.getEditText();
+        return editText != null ? editText.getText().toString().trim() : "";
     }
 }
-
-

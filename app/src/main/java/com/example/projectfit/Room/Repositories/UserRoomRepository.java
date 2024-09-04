@@ -7,6 +7,7 @@ import com.example.projectfit.Models.User;
 
 import java.util.List;
 import java.util.concurrent.Executors;
+
 import androidx.lifecycle.LiveData;
 
 public class UserRoomRepository {
@@ -28,5 +29,40 @@ public class UserRoomRepository {
 
     public User getUserByEmail(String email) {
         return userDatabase.userDAO().getUserByEmail(email);
+    }
+
+    public void validateUserLocal(String email, String password, OnUserValidationCallback callback) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            User localUser = userDatabase.userDAO().getUserByEmail(email);
+            if (localUser != null && localUser.getPassword().equals(password)) {
+                callback.onSuccess(localUser);
+            } else if (localUser != null) {
+                callback.onFailure("Incorrect password");
+            } else {
+                callback.onFailure("User not found locally");
+            }
+        });
+    }
+
+    public void validateUserLocalByAnswer(String email, String answer, OnUserValidationCallback callback) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            User localUser = userDatabase.userDAO().getUserByEmailAndAnswer(email, answer);
+            if (localUser != null) {
+                callback.onSuccess(localUser);
+            } else {
+                callback.onFailure("Incorrect email or security answer");
+            }
+        });
+    }
+
+    public void updateUserLocally(User user) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            userDatabase.userDAO().updateUser(user);
+        });
+    }
+
+    public interface OnUserValidationCallback {
+        void onSuccess(User user);
+        void onFailure(String errorMessage);
     }
 }

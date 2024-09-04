@@ -32,4 +32,9 @@ public class UserServerRepository {
             }
         });
     }
+
+    public void getUserByEmail(String email, Callback<User> callback) {
+        Call<User> call = userAPI.getUserByEmail(email);
+        call.enqueue(callback);
+    }
 }

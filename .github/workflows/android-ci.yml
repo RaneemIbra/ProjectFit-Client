@@ -4,12 +4,6 @@ on:
   pull_request:
     branches:
       - master
-  push:
-    branches:
-      -master
-      -Raneem
-      -rahaf
-      -aseel
 
 jobs:
   build:

@@ -2,1082 +2,704 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FFFFFF"
     android:id="@+id/main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
     <ScrollView
-        android:clipToPadding="false"
         android:id="@+id/ry6bufhvzu4r"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@drawable/sffffffsw1cr20bd9d9d9"
         android:paddingTop="18dp"
-        android:paddingBottom="40dp">
+        android:paddingBottom="40dp"
+        android:clipToPadding="false">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <!-- HOME, PLAN, PROFILE Buttons -->
             <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/rra9eru2okks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_marginBottom="27dp"
                 android:layout_marginHorizontal="10dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/ru0dxgu84ge"
+
+                <Button
+                    android:id="@+id/button_home_my_plan"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr38bffffff"
                     android:paddingVertical="11dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/rqk4nhb8f9ok"
-                        android:textColor="#000000"
-                        android:textSize="17sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="HOME"
-                        />
-                </LinearLayout>
+                    android:text="HOME"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
+                    android:gravity="center_horizontal" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    />
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/r59fmreu3iin"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button_plan_my_plan"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr38bff9a01"
                     android:paddingVertical="11dp"
                     android:elevation="4dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/rnexlzma4iw9"
-                        android:textColor="#000000"
-                        android:textSize="17sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="PLAN"
-                        />
-                </LinearLayout>
+                    android:text="PLAN"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
+                    android:gravity="center_horizontal" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    />
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/rbd3ccihx7j"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button_profile_my_plan"
                     android:layout_width="104dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr38bffffff"
                     android:paddingVertical="10dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/rpbim8pzzurl"
-                        android:textColor="#000000"
-                        android:textSize="17sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="PROFILE"
-                        />
-                </LinearLayout>
+                    android:text="PROFILE"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
+                    android:gravity="center_horizontal" />
             </LinearLayout>
+
+            <!-- My Plan, Workouts Buttons -->
             <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/rm0lbkncyxlr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_marginBottom="58dp"
                 android:layout_marginHorizontal="8dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/robnu3reu37"
+
+                <Button
+                    android:id="@+id/button_myplan_my_plan"
                     android:layout_width="167dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr38bff9a01"
                     android:paddingVertical="13dp"
                     android:elevation="4dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/rv1vmi62e22p"
-                        android:textColor="#131313"
-                        android:textSize="17sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="My Plan"
-                        />
-                </LinearLayout>
+                    android:text="My Plan"
+                    android:textColor="#131313"
+                    android:textSize="17sp"
+                    android:gravity="center_horizontal" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    />
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/r1o618u39eas"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button_workout_my_plan"
                     android:layout_width="167dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr38bffffff"
                     android:paddingVertical="13dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/r9js389nlw3k"
-                        android:textColor="#131313"
-                        android:textSize="17sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="Workouts"
-                        />
-                </LinearLayout>
+                    android:text="Workouts"
+                    android:textColor="#131313"
+                    android:textSize="17sp"
+                    android:gravity="center_horizontal" />
             </LinearLayout>
+
+            <!-- Day Buttons -->
             <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/rm34nsidea5m"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:layout_marginBottom="29dp"
                 android:layout_marginHorizontal="23dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/r6bzit4qwd6n"
+
+                <Button
+                    android:id="@+id/sunday"
                     android:layout_width="39dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
                     android:paddingVertical="10dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/rkj6agbhdxxi"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="SUN"
-                        />
-                </LinearLayout>
+                    android:text="SUN"
+                    android:textColor="@drawable/button_text"
+                    android:textSize="12sp"
+                    android:gravity="center_horizontal" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    />
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/rovgeqtb8csq"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/monday"
                     android:layout_width="38dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
                     android:paddingVertical="10dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/rce7wghp525"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="MON"
-                        />
-                </LinearLayout>
+                    android:text="MON"
+                    android:textColor="@drawable/button_text"
+                    android:textSize="12sp"
+                    android:gravity="center_horizontal" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    />
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/rgxkypob1s5"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/tuesday"
                     android:layout_width="39dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
                     android:paddingVertical="10dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/rvmvxh9chdm8"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="TUS"
-                        />
-                </LinearLayout>
+                    android:text="TUS"
+                    android:textColor="@drawable/button_text"
+                    android:textSize="12sp"
+                    android:gravity="center_horizontal" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    />
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/rmzwccslpiyb"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/wednesday"
                     android:layout_width="39dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:background="@drawable/s000000sw1cr18bffffff"
-                    android:paddingVertical="11dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/rkgv7nep5pb"
-                        android:textColor="#0C6173"
-                        android:textSize="12sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="WED"
-                        />
-                </LinearLayout>
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    />
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/r5i0b1ub8kt4"
-                    android:layout_width="39dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
                     android:paddingVertical="11dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/ra3wyxnfzhkt"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="THU"
-                        />
-                </LinearLayout>
+                    android:text="WED"
+                    android:textColor="@drawable/button_text"
+                    android:textSize="12sp"
+                    android:gravity="center_horizontal" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    />
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/r33xiwm50yv4"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/thursday"
+                    android:layout_width="39dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                    android:paddingVertical="11dp"
+                    android:text="THU"
+                    android:textColor="@drawable/button_text"
+                    android:textSize="12sp"
+                    android:gravity="center_horizontal" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/friday"
                     android:layout_width="38dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
                     android:paddingVertical="11dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/r7p2ja5zlspw"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="FRI"
-                        />
-                </LinearLayout>
+                    android:text="FRI"
+                    android:textColor="@drawable/button_text"
+                    android:textSize="12sp"
+                    android:gravity="center_horizontal" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    />
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/r9htpupyacq"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/saturday"
                     android:layout_width="39dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
                     android:paddingVertical="10dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/r3ozlr3vveby"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="SAT"
-                        />
-                </LinearLayout>
+                    android:text="SAT"
+                    android:textColor="@drawable/button_text"
+                    android:textSize="12sp"
+                    android:gravity="center_horizontal" />
             </LinearLayout>
+
+            <!-- Today's Training Section -->
             <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/rzacy26dzg1h"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/sffffff4fsw1cr20b131313"
-                android:paddingVertical="21dp"
                 android:layout_marginBottom="22dp"
                 android:layout_marginHorizontal="9dp"
+                android:background="@drawable/sffffff4fsw1cr20b131313"
+                android:paddingVertical="21dp"
+                android:gravity="center_horizontal"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/rh5iakhrluej"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginStart="86dp"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
                     android:text="Today’s Training"
-                    />
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+
+                <!-- Training Details -->
                 <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/rg9p9w8v8x1"
+                    android:id="@+id/Layout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/cr18bffffff"
                     android:paddingVertical="9dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginHorizontal="8dp"
                     android:orientation="vertical">
+
                     <LinearLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:tools="http://schemas.android.com/tools"
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/rvyty175eb"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="19dp"
-                        android:layout_marginHorizontal="8dp"
-                        android:orientation="horizontal">
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/rom7ulx78ml"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:src="@mipmap/ic_launcher"
-                            android:scaleType="fitXY"
-                            />
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rkaan9fjvze"
-                            android:layout_width="248dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-                            <LinearLayout
-                                xmlns:android="http://schemas.android.com/apk/res/android"
-                                xmlns:tools="http://schemas.android.com/tools"
-                                xmlns:app="http://schemas.android.com/apk/res-auto"
-                                android:id="@+id/r2knos31yjvq"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rd6bw1i18hr"
-                                    android:layout_width="7dp"
-                                    android:layout_height="9dp"
-                                    android:src="@mipmap/ic_launcher"
-                                    android:scaleType="fitXY"
-                                    />
-                                <TextView
-                                    android:id="@+id/rcwktjk2k40w"
-                                    android:textColor="#212020"
-                                    android:textSize="12sp"
-                                    android:layout_marginStart="11dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:text="164 Kcal"
-                                    />
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rj9f97ph8grd"
-                                    android:layout_width="110dp"
-                                    android:layout_height="29dp"
-                                    android:layout_marginHorizontal="55dp"
-                                    android:src="@mipmap/ic_launcher"
-                                    android:scaleType="fitXY"
-                                    />
-                                <TextView
-                                    android:id="@+id/r61wyomn4kb6"
-                                    android:textColor="#007AFF"
-                                    android:textSize="13sp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:text="Duration"
-                                    />
-                                <TextView
-                                    android:id="@+id/reaudud1noco"
-                                    android:textColor="#131313"
-                                    android:textSize="13sp"
-                                    android:layout_marginStart="1dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:text="Bench Press "
-                                    />
-                                <TextView
-                                    android:id="@+id/rmvr7bajo2q"
-                                    android:textColor="#007AFF"
-                                    android:textSize="15sp"
-                                    android:layout_marginStart="1dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:text="25 Mins"
-                                    />
-                                <TextView
-                                    android:id="@+id/ry7dmq5xpy9q"
-                                    android:textColor="#FF9A01"
-                                    android:textSize="12sp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:text="The next set is 4 reps! "
-                                    />
-                            </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-                    <TextView
-                        android:id="@+id/rpdz212k3g78"
-                        android:textColor="#131313"
-                        android:textSize="7sp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginStart="42dp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="when a set is completed tap on the progress bar"
-                        />
-                    <LinearLayout
-                        xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:tools="http://schemas.android.com/tools"
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/r61cf2z0plhj"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginHorizontal="30dp"
-                        android:orientation="horizontal">
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rj25209qvn5"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8lr27017b7d90c6173"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rlqapl44hff8"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/r0o7tmajtvlxr"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rhn31hy4wl9p"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/ra2cnphuxlr"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rcipk3d9zhof"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                    </LinearLayout>
-                    <TextView
-                        android:id="@+id/rhco0ua2tu3f"
-                        android:textColor="#131313"
-                        android:textSize="7sp"
-                        android:layout_marginStart="33dp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="1/6"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/rnsq2wncm4ym"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/cr18bffffff"
-                    android:paddingVertical="9dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginHorizontal="8dp"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:tools="http://schemas.android.com/tools"
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/rutux2paubss"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="19dp"
-                        android:layout_marginHorizontal="8dp"
-                        android:orientation="horizontal">
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/re4ohojcs3l"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:src="@mipmap/ic_launcher"
-                            android:scaleType="fitXY"
-                            />
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/r1i44dc89btw"
-                            android:layout_width="248dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-                            <LinearLayout
-                                xmlns:android="http://schemas.android.com/apk/res/android"
-                                xmlns:tools="http://schemas.android.com/tools"
-                                xmlns:app="http://schemas.android.com/apk/res-auto"
-                                android:id="@+id/rbk27fkh5x46"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rwfhrlkzvuq"
-                                    android:layout_width="7dp"
-                                    android:layout_height="9dp"
-                                    android:src="@mipmap/ic_launcher"
-                                    android:scaleType="fitXY"
-                                    />
-                                <TextView
-                                    android:id="@+id/rbirmtiws4ft"
-                                    android:textColor="#212020"
-                                    android:textSize="12sp"
-                                    android:layout_marginStart="11dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:text="123 Kcal"
-                                    />
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rj8vvk076jho"
-                                    android:layout_width="110dp"
-                                    android:layout_height="29dp"
-                                    android:layout_marginHorizontal="55dp"
-                                    android:src="@mipmap/ic_launcher"
-                                    android:scaleType="fitXY"
-                                    />
-                                <TextView
-                                    android:id="@+id/r76ga0er5sfx"
-                                    android:textColor="#007AFF"
-                                    android:textSize="13sp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:text="Duration"
-                                    />
-                                <TextView
-                                    android:id="@+id/rijwi00yx18"
-                                    android:textColor="#131313"
-                                    android:textSize="13sp"
-                                    android:layout_marginStart="1dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:text="incline bench "
-                                    />
-                                <TextView
-                                    android:id="@+id/rfc06fxbk8la"
-                                    android:textColor="#007AFF"
-                                    android:textSize="15sp"
-                                    android:layout_marginStart="1dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:text="25 Mins"
-                                    />
-                                <TextView
-                                    android:id="@+id/ro7y277bzf2i"
-                                    android:textColor="#FF9A01"
-                                    android:textSize="12sp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:text="The next set is 8 reps! "
-                                    />
-                            </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-                    <TextView
-                        android:id="@+id/rt6c7wb4k4de"
-                        android:textColor="#131313"
-                        android:textSize="7sp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginStart="42dp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="when a set is completed tap on the progress bar"
-                        />
-                    <LinearLayout
-                        xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:tools="http://schemas.android.com/tools"
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/rjdrvhlt7m5d"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginHorizontal="30dp"
-                        android:orientation="horizontal">
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rdel82c0vjha"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8lr27017b7d90c6173"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rgxejhmzos3p"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8lr27017b7d90c6173"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/repit2vyyusl"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rzjwyo8wt8ws"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rvnaatgr9if"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/r24cvffn499g"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                    </LinearLayout>
-                    <TextView
-                        android:id="@+id/roq3vnimezy"
-                        android:textColor="#131313"
-                        android:textSize="7sp"
-                        android:layout_marginStart="31dp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="2/6"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/rx8kvxyzaiqd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/cr18bffffff"
-                    android:paddingVertical="9dp"
-                    android:layout_marginHorizontal="8dp"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:tools="http://schemas.android.com/tools"
                         xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/rv4ymb3kdafe"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
                         android:layout_marginBottom="19dp"
                         android:layout_marginHorizontal="8dp"
-                        android:orientation="horizontal">
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/rlaob0eufl3"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:src="@mipmap/ic_launcher"
-                            android:scaleType="fitXY"
-                            />
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <!-- Workout Image and Details -->
                         <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/r8irv5bbkfyh"
-                            android:layout_width="248dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <!-- Workout Image -->
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/rlaob0eufl3"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/building"
+                                android:scaleType="fitXY"
+                                android:layout_marginEnd="8dp" />
+
+                            <!-- Workout Name and Calories Info -->
                             <LinearLayout
-                                xmlns:android="http://schemas.android.com/apk/res/android"
-                                xmlns:tools="http://schemas.android.com/tools"
-                                xmlns:app="http://schemas.android.com/apk/res-auto"
-                                android:id="@+id/rnwyhi5gtldk"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rhh070fllio8"
-                                    android:layout_width="7dp"
-                                    android:layout_height="9dp"
-                                    android:src="@mipmap/ic_launcher"
-                                    android:scaleType="fitXY"
-                                    />
-                                <TextView
-                                    android:id="@+id/rqd9c60hxzf"
-                                    android:textColor="#212020"
-                                    android:textSize="12sp"
-                                    android:layout_marginStart="11dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:text="120 Kcal"
-                                    />
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rb39xm020i8"
-                                    android:layout_width="110dp"
-                                    android:layout_height="29dp"
-                                    android:layout_marginHorizontal="55dp"
-                                    android:src="@mipmap/ic_launcher"
-                                    android:scaleType="fitXY"
-                                    />
-                                <TextView
-                                    android:id="@+id/ra3jfriwglt"
-                                    android:textColor="#007AFF"
-                                    android:textSize="13sp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="wrap_content"
-                                    android:text="Duration"
-                                    />
+
+                                <!-- Workout Name -->
                                 <TextView
                                     android:id="@+id/r58ginjerv5o"
-                                    android:textColor="#131313"
-                                    android:textSize="13sp"
-                                    android:layout_marginStart="1dp"
-                                    android:layout_height="wrap_content"
                                     android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:text="Upper Body Workout"
-                                    />
-                                <TextView
-                                    android:id="@+id/rc5h6rvwtrkr"
-                                    android:textColor="#007AFF"
-                                    android:textSize="15sp"
-                                    android:layout_marginStart="1dp"
-                                    android:layout_height="wrap_content"
+                                    android:textColor="#131313"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:layout_marginBottom="4dp" />
+
+                                <!-- Calories Image and Amount -->
+                                <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:text="25 Mins"
-                                    />
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/rhh070fllio8"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/calories"
+                                        android:scaleType="fitXY" />
+
+                                    <TextView
+                                        android:id="@+id/rqd9c60hxzf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="120 Kcal"
+                                        android:textColor="#212020"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+
+                                <!-- Next Set Info -->
                                 <TextView
                                     android:id="@+id/rg5slbkteo9w"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="The next set is 4 reps!"
                                     android:textColor="#FF9A01"
                                     android:textSize="12sp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp" />
+                            </LinearLayout>
+
+                            <!-- Timer Image and Duration -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/rb39xm020i8"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/timer"
+                                    android:scaleType="fitXY" />
+
+                                <TextView
+                                    android:id="@+id/rc5h6rvwtrkr"
                                     android:layout_width="wrap_content"
-                                    android:text="The next set is 4 reps! "
-                                    />
+                                    android:layout_height="wrap_content"
+                                    android:text="25 Mins"
+                                    android:textColor="#007AFF"
+                                    android:textSize="15sp"
+                                    android:layout_marginTop="4dp" />
                             </LinearLayout>
                         </LinearLayout>
+
+                        <!-- Set Completion Info -->
+                        <TextView
+                            android:id="@+id/ra3jfriwglt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="When a set is completed, tap on the progress bar"
+                            android:textColor="#007AFF"
+                            android:textSize="13sp"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center" />
+
+                        <!-- Progress Bar -->
+                        <ProgressBar
+                            android:id="@+id/training_progress_bar1"
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginHorizontal="16dp"
+                            android:max="100"
+                            android:progress="0"
+                            android:indeterminate="false"
+                            android:progressDrawable="@drawable/progress_bar_custom"
+                            style="?android:attr/progressBarStyleHorizontal" />
                     </LinearLayout>
-                    <TextView
-                        android:id="@+id/rjfyojjkqm2a"
-                        android:textColor="#131313"
-                        android:textSize="7sp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginStart="42dp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="when a set is completed tap on the progress bar"
-                        />
+                </LinearLayout>
+
+                <!-- Second Training Section -->
+                <LinearLayout
+                    android:id="@+id/Layout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/cr18bffffff"
+                    android:paddingVertical="9dp"
+                    android:orientation="vertical">
+
                     <LinearLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:tools="http://schemas.android.com/tools"
                         xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/rtbv6x3dxb3"
+                        android:id="@+id/rv4ymb3kdafea"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginHorizontal="30dp"
-                        android:orientation="horizontal">
+                        android:layout_marginBottom="19dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <!-- Workout Image and Details -->
                         <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/r9qqqzrf9gia"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8lr27017b7d90c6173"
-                            android:orientation="vertical">
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <!-- Workout Image -->
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/rlaob0eufl3a"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/building"
+                                android:scaleType="fitXY"
+                                android:layout_marginEnd="8dp" />
+
+                            <!-- Workout Name and Calories Info -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <!-- Workout Name -->
+                                <TextView
+                                    android:id="@+id/r58ginjerv5oa"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Upper Body Workout"
+                                    android:textColor="#131313"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:layout_marginBottom="4dp" />
+
+                                <!-- Calories Image and Amount -->
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/rhh070fllio8a"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/calories"
+                                        android:scaleType="fitXY" />
+
+                                    <TextView
+                                        android:id="@+id/rqd9c60hxzfa"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="120 Kcal"
+                                        android:textColor="#212020"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+
+                                <!-- Next Set Info -->
+                                <TextView
+                                    android:id="@+id/rg5slbkteo9wa"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="The next set is 4 reps!"
+                                    android:textColor="#FF9A01"
+                                    android:textSize="12sp"
+                                    android:layout_marginTop="4dp" />
+                            </LinearLayout>
+
+                            <!-- Timer Image and Duration -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/rb39xm020i8a"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/timer"
+                                    android:scaleType="fitXY" />
+
+                                <TextView
+                                    android:id="@+id/rc5h6rvwtrkra"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="25 Mins"
+                                    android:textColor="#007AFF"
+                                    android:textSize="15sp"
+                                    android:layout_marginTop="4dp" />
+                            </LinearLayout>
                         </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/r8t7tq7dt9ie"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8lr27017b7d90c6173"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rpdqzeyynmxo"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/r0wwttfzqcyaa"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rob1l3lzucze"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical">
-                        </LinearLayout>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            />
-                        <LinearLayout
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rn8rbxcomt8"
-                            android:layout_width="36dp"
-                            android:layout_height="10dp"
-                            android:background="@drawable/cr8bc7d3eb"
-                            android:orientation="vertical">
-                        </LinearLayout>
+
+                        <!-- Set Completion Info -->
+                        <TextView
+                            android:id="@+id/ra3jfriwglta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="When a set is completed, tap on the progress bar"
+                            android:textColor="#007AFF"
+                            android:textSize="13sp"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center" />
+
+                        <!-- Progress Bar -->
+                        <ProgressBar
+                            android:id="@+id/training_progress_bar2"
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginHorizontal="16dp"
+                            android:max="100"
+                            android:progress="0"
+                            android:indeterminate="false"
+                            android:progressDrawable="@drawable/progress_bar_custom"
+                            style="?android:attr/progressBarStyleHorizontal" />
                     </LinearLayout>
-                    <TextView
-                        android:id="@+id/rayq10fpjc9"
-                        android:textColor="#131313"
-                        android:textSize="7sp"
-                        android:layout_marginStart="31dp"
+                </LinearLayout>
+
+                <!-- Third Training Section -->
+                <LinearLayout
+                    android:id="@+id/Layout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@drawable/cr18bffffff"
+                    android:paddingVertical="9dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/rv4ymb3kdafes"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="2/6"
-                        />
+                        android:layout_marginBottom="19dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <!-- Workout Image and Details -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <!-- Workout Image -->
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/rlaob0eufl3s"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/building"
+                                android:scaleType="fitXY"
+                                android:layout_marginEnd="8dp" />
+
+                            <!-- Workout Name and Calories Info -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <!-- Workout Name -->
+                                <TextView
+                                    android:id="@+id/r58ginjerv5os"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Upper Body Workout"
+                                    android:textColor="#131313"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:layout_marginBottom="4dp" />
+
+                                <!-- Calories Image and Amount -->
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:id="@+id/rhh070fllio8s"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/calories"
+                                        android:scaleType="fitXY" />
+
+                                    <TextView
+                                        android:id="@+id/rqd9c60hxzfs"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="120 Kcal"
+                                        android:textColor="#212020"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+
+                                <!-- Next Set Info -->
+                                <TextView
+                                    android:id="@+id/rg5slbkteo9ws"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="The next set is 4 reps!"
+                                    android:textColor="#FF9A01"
+                                    android:textSize="12sp"
+                                    android:layout_marginTop="4dp" />
+                            </LinearLayout>
+
+                            <!-- Timer Image and Duration -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/rb39xm020i8s"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/timer"
+                                    android:scaleType="fitXY" />
+
+                                <TextView
+                                    android:id="@+id/rc5h6rvwtrkrs"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="25 Mins"
+                                    android:textColor="#007AFF"
+                                    android:textSize="15sp"
+                                    android:layout_marginTop="4dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!-- Set Completion Info -->
+                        <TextView
+                            android:id="@+id/ra3jfriwglts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="When a set is completed, tap on the progress bar"
+                            android:textColor="#007AFF"
+                            android:textSize="13sp"
+                            android:layout_marginTop="8dp"
+                            android:layout_gravity="center" />
+
+                        <!-- Progress Bar -->
+                        <ProgressBar
+                            android:id="@+id/training_progress_bar3"
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginHorizontal="16dp"
+                            android:max="100"
+                            android:progress="0"
+                            android:indeterminate="false"
+                            android:progressDrawable="@drawable/progress_bar_custom"
+                            style="?android:attr/progressBarStyleHorizontal" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
+            <!-- Edit Plan Button -->
             <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/ryd3katlt2w"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:layout_marginHorizontal="119dp"
                 android:background="@drawable/cr38bffffff"
                 android:paddingVertical="7dp"
-                android:layout_marginHorizontal="119dp"
+                android:gravity="center_horizontal"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/r1q5rejf6pyw"
-                    android:textColor="#131313"
-                    android:textSize="17sp"
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Edit Plan"
-                    />
+                    android:textColor="#131313"
+                    android:textSize="17sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

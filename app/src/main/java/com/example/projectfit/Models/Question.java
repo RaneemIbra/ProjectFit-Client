@@ -10,13 +10,17 @@ public class Question {
     String answerNo1;
     String answerNo2;
     String answerNo3;
+    String answerNo4;
     int choseAnswer;
 
-    public Question(String questionText, String answerNo1, String answerNo2, String answerNo3, int choseAnswer) {
+
+
+    public Question(String questionText, String answerNo1, String answerNo2, String answerNo3, String answerNo4,int choseAnswer) {
         this.questionText = questionText;
         this.answerNo1 = answerNo1;
         this.answerNo2 = answerNo2;
         this.answerNo3 = answerNo3;
+        this.answerNo4 = answerNo4;
         this.choseAnswer = choseAnswer;
     }
 
@@ -60,6 +64,14 @@ public class Question {
         this.answerNo3 = answerNo3;
     }
 
+    public String getAnswerNo4() {
+        return answerNo4;
+    }
+
+    public void setAnswerNo4(String answerNo4) {
+        this.answerNo4 = answerNo4;
+    }
+
     public int getChoseAnswer() {
         return choseAnswer;
     }
@@ -67,4 +79,5 @@ public class Question {
     public void setChoseAnswer(int choseAnswer) {
         this.choseAnswer = choseAnswer;
     }
+
 }

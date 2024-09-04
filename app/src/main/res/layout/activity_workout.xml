@@ -53,16 +53,16 @@
                     android:layout_weight="1"/>
 
                 <Button
-                    android:id="@+id/rji5znqyk5h"
-                    android:textColor="#000000"
-                    android:textSize="17sp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/plan"
                     android:layout_width="104dp"
-                    android:text="PLAN"
-                    android:gravity="center"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/s000000sw1cr38bff9a01"
+                    android:elevation="4dp"
+                    android:gravity="center"
                     android:paddingVertical="11dp"
-                    android:elevation="4dp" />
+                    android:text="PLAN"
+                    android:textColor="#000000"
+                    android:textSize="17sp" />
 
                 <View
                     android:layout_width="0dp"
@@ -70,7 +70,7 @@
                     android:layout_weight="1"/>
 
                 <Button
-                    android:id="@+id/rjh8jdahq3jo"
+                    android:id="@+id/profile"
                     android:textColor="#000000"
                     android:textSize="17sp"
                     android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                     android:textSize="17sp"
                     android:layout_height="wrap_content"
                     android:layout_width="167dp"
-                    android:text="Build My Plan"
+                    android:text="My Plan"
                     android:gravity="center"
                     android:background="@drawable/s000000sw1cr38bffffff"
                     android:paddingVertical="13dp" />
@@ -108,7 +108,7 @@
                     android:layout_weight="1"/>
 
                 <Button
-                    android:id="@+id/rjlc7t4pd5m"
+                    android:id="@+id/workouts"
                     android:textColor="#131313"
                     android:textSize="17sp"
                     android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
                 android:layout_height="407dp"
                 android:layout_marginBottom="24dp"
                 android:layout_marginHorizontal="1dp"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/benchpress"
                 android:scaleType="fitXY"/>
 
             <TextView
@@ -139,14 +139,14 @@
                 android:layout_marginBottom="17dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Consistency Is \nthe Key To progress.\nDon't Give Up!"
+                android:text="Bench Press"
                 android:textColor="#000000"
                 android:textSize="30sp" />
 
             <LinearLayout
                 android:id="@+id/r492qk93xeya"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="@drawable/s000000sw1cr20bff9a01"
                 android:paddingTop="33dp"
                 android:paddingBottom="66dp"
@@ -160,7 +160,21 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:layout_weight="1"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+                    android:text="Bench press workouts are a staple in many strength training routines — it’s a dynamic, functional movement that works several muscles at once, including:
+
+Front deltoids and pectorals (chest muscles)
+Shoulders
+Biceps
+Triceps
+While the bench press is a simple movement, it’s highly effective for strengthening the chest and shoulders — and it can be easily modified to work different muscles with various grips and positions"/>
+                <WebView
+                    android:id="@+id/webview"
+                    android:layout_width="match_parent"
+                    android:layout_height="206dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp">
+                </WebView>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -1,11 +1,16 @@
 package com.example.projectfit.Activities;
 
+import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.DragEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +27,9 @@ public class MyPlanActivity extends AppCompatActivity {
     private ProgressBar[] progressBars;
     private LinearLayout[] trainingLayouts;
     private int[] progressStatuses = {0, 0, 0};
+    private LinearLayout editPlanButton;
+    private TextView editPlanText;
+    private boolean isEditModeEnabled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +45,8 @@ public class MyPlanActivity extends AppCompatActivity {
         setupNavigation();
         setupDayButtons();
         setupProgressBars();
+        setupDragAndDrop();
+        setupEditPlanButton();
     }
 
     private void initViews() {
@@ -65,6 +75,8 @@ public class MyPlanActivity extends AppCompatActivity {
                 findViewById(R.id.Layout2),
                 findViewById(R.id.Layout3)
         };
+        editPlanButton = findViewById(R.id.ryd3katlt2w);
+        editPlanText = findViewById(R.id.r1q5rejf6pyw);
     }
 
     private void setupProgressBars() {
@@ -109,4 +121,100 @@ public class MyPlanActivity extends AppCompatActivity {
             dayButton.setOnClickListener(dayButtonClickListener);
         }
     }
+
+    private void setupDragAndDrop() {
+        View.OnLongClickListener longClickListener = view -> {
+            ClipData data = ClipData.newPlainText("", "");
+            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+            view.startDrag(data, shadowBuilder, view, 0);
+            view.setBackgroundColor(Color.LTGRAY);  // Optional: visual cue for dragging
+            return true;
+        };
+
+        View.OnDragListener dragListener = (view, event) -> {
+            LinearLayout layout = (LinearLayout) view;
+            switch (event.getAction()) {
+                case DragEvent.ACTION_DRAG_STARTED:
+                    // Optionally clear background here if needed
+                    return true;
+                case DragEvent.ACTION_DRAG_ENTERED:
+                    // Optionally set a temporary background here if needed
+                    return true;
+                case DragEvent.ACTION_DRAG_EXITED:
+                    // Optionally reset to original background here if needed
+                    return true;
+                case DragEvent.ACTION_DROP:
+                    View sourceView = (View) event.getLocalState();
+                    ViewGroup sourceParent = (ViewGroup) sourceView.getParent();
+                    LinearLayout targetLayout = (LinearLayout) view;
+                    ViewGroup targetParent = (ViewGroup) targetLayout.getParent();
+
+                    int sourceIndex = sourceParent.indexOfChild(sourceView);
+                    int targetIndex = targetParent.indexOfChild(targetLayout);
+
+                    // Check if source and target are in the same ViewGroup
+                    if (sourceParent == targetParent) {
+                        if (sourceIndex != targetIndex) {
+                            rearrangeWorkouts(targetParent, sourceIndex, targetIndex);
+                        }
+                    }
+
+                    sourceView.setVisibility(View.VISIBLE); // Ensure visibility
+                    view.setBackgroundColor(Color.TRANSPARENT);  // Reset background after drop
+                    return true;
+                case DragEvent.ACTION_DRAG_ENDED:
+                    // Reset to the original background after dragging ends
+                    layout.setBackgroundResource(R.drawable.cr18bffffff);
+                    return true;
+                default:
+                    return false;
+            }
+        };
+
+        for (LinearLayout layout : new LinearLayout[]{findViewById(R.id.Layout1), findViewById(R.id.Layout2), findViewById(R.id.Layout3)}) {
+            layout.setOnLongClickListener(longClickListener);
+            layout.setOnDragListener(dragListener);
+        }
+    }
+
+
+    private void rearrangeWorkouts(ViewGroup parent, int sourceIndex, int targetIndex) {
+        View draggedView = parent.getChildAt(sourceIndex);
+        parent.removeViewAt(sourceIndex);  // Remove the view from its current position
+
+        if (targetIndex <= parent.getChildCount()) {
+            parent.addView(draggedView, targetIndex);  // Add the view at the new position
+        } else {
+            parent.addView(draggedView);  // Add it back at the end if targetIndex exceeds count
+        }
+
+        // This single step handles reordering by removing and then re-adding the view in the new position
+    }
+    private void setupEditPlanButton() {
+        editPlanButton.setOnClickListener(v -> toggleEditMode());
+    }
+
+    private void toggleEditMode() {
+        isEditModeEnabled = !isEditModeEnabled;
+        editPlanText.setText(isEditModeEnabled ? "Done Editing" : "Edit Plan");
+        enableDrag(isEditModeEnabled);
+    }
+    private void enableDrag(boolean enable) {
+        for (LinearLayout layout : trainingLayouts) {
+            layout.setOnLongClickListener(enable ? onLongClickListener : null); // Enable or disable long click
+        }
+    }
+
+    private View.OnLongClickListener onLongClickListener = view -> {
+        if (isEditModeEnabled) {
+            ClipData data = ClipData.newPlainText("", "");
+            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+            view.startDrag(data, shadowBuilder, view, 0);
+            view.setBackgroundColor(Color.LTGRAY); // Visual cue for dragging
+            return true;
+        }
+        return false;
+    };
+
+
 }

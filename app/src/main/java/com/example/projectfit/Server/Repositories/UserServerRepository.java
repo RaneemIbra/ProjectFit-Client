@@ -15,6 +15,11 @@ public class UserServerRepository {
         userAPI = AppAPI.getClient().create(UserAPI.class);
     }
 
+    public void getUserByEmail(String email, Callback<User> callback) {
+        Call<User> call = userAPI.getUserByEmail(email);
+        call.enqueue(callback);
+    }
+
     public void addUserInServer(User user) {
         Call<User> call = userAPI.createUser(user);
         call.enqueue(new Callback<User>() {
@@ -26,6 +31,7 @@ public class UserServerRepository {
                     System.out.println("User wasn't submitted successfully");
                 }
             }
+
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 System.out.println("Error: " + t.getMessage());
@@ -33,8 +39,78 @@ public class UserServerRepository {
         });
     }
 
-    public void getUserByEmail(String email, Callback<User> callback) {
-        Call<User> call = userAPI.getUserByEmail(email);
-        call.enqueue(callback);
+    public void validateUserServer(String email, String password, OnUserValidationCallback callback) {
+        getUserByEmail(email, new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    User serverUser = response.body();
+                    if (serverUser.getPassword().equals(password)) {
+                        callback.onSuccess(serverUser);
+                    } else {
+                        callback.onFailure("Incorrect password");
+                    }
+                } else {
+                    callback.onFailure("User not found on server");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                callback.onFailure("Server error: " + t.getMessage());
+            }
+        });
+    }
+
+    public void validateUserServerByAnswer(String email, String answer, OnUserValidationCallback callback) {
+        getUserByEmail(email, new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    User serverUser = response.body();
+                    if (serverUser.getAnswer().equals(answer)) {
+                        callback.onSuccess(serverUser);
+                    } else {
+                        callback.onFailure("Incorrect security answer");
+                    }
+                } else {
+                    callback.onFailure("User not found on server");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                callback.onFailure("Server error: " + t.getMessage());
+            }
+        });
+    }
+
+    public void updateUserPassword(User user, OnUserUpdateCallback callback) {
+        Call<User> call = userAPI.updateUser(user.getId(), user);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess();
+                } else {
+                    callback.onFailure("Failed to update password on server");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                callback.onFailure("Error: " + t.getMessage());
+            }
+        });
+    }
+
+    public interface OnUserValidationCallback {
+        void onSuccess(User user);
+        void onFailure(String errorMessage);
+    }
+
+    public interface OnUserUpdateCallback {
+        void onSuccess();
+        void onFailure(String errorMessage);
     }
 }

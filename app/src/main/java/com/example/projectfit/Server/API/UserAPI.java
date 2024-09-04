@@ -23,5 +23,4 @@ public interface UserAPI {
 
     @GET("users/email/{email}")
     Call<User> getUserByEmail(@Path("email") String email);
-
 }

@@ -64,6 +64,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        user = getIntent().getParcelableExtra("user");
         initViews();
         setupCharts();
         setupSensors();

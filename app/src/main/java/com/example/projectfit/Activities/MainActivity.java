@@ -10,17 +10,24 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.projectfit.Models.Workout;
 import com.example.projectfit.Room.Repositories.UserRoomRepository;
 import com.example.projectfit.R;
 import com.example.projectfit.Models.User;
+import com.example.projectfit.Room.Repositories.WorkoutRoomRepository;
 import com.example.projectfit.Server.Repositories.UserServerRepository;
+import com.example.projectfit.Server.Repositories.WorkoutServerRepository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Button nav, nav2, nav3, nav4, nav5, nav6, nav7, nav8, nav9, nav10, nav11;
     private UserServerRepository userServerRepository;
     private UserRoomRepository userRoomRepository;
+    private WorkoutRoomRepository workoutRoomRepository;
+    private WorkoutServerRepository workoutServerRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         });
         userServerRepository = new UserServerRepository();
         userRoomRepository = new UserRoomRepository(this);
+        workoutRoomRepository = new WorkoutRoomRepository(this);
+        workoutServerRepository = new WorkoutServerRepository();
         nav = findViewById(R.id.HomePageBTN);
         nav2 = findViewById(R.id.MyPlanBTN);
         nav3 = findViewById(R.id.PlanQuestionsBTN);
@@ -55,7 +64,23 @@ public class MainActivity extends AppCompatActivity {
         1.9,80,true,"Temp1","Temp1",null,null,null,null,null,null);
         userServerRepository.addUserInServer(user1);
         userRoomRepository.addUserLocally(user1);
+        addWorkouts();
         setupNavigation();
+    }
+
+    private void addWorkouts() {
+        List<String> muscles = new ArrayList<>();
+        muscles.add("Chest");
+        muscles.add("Triceps");
+
+        List<Integer> setsReps = new ArrayList<>();
+        setsReps.add(4);
+        setsReps.add(12);
+        Workout workout1 = new Workout("Bench Press",60,
+                "Strength","A compound upper body exercise focusing on the chest, triceps, and shoulders.",
+                muscles,300,null,null,null, setsReps,3);
+        workoutRoomRepository.addWorkoutLocally(workout1);
+        workoutServerRepository.addWorkoutInServer(workout1);
     }
     private void setupNavigation() {
         nav.setOnClickListener(view -> {

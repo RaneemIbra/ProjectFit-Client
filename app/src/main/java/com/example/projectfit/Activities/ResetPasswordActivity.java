@@ -20,10 +20,10 @@ import com.example.projectfit.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
 public class ResetPasswordActivity extends AppCompatActivity {
-    EditText passwordEditText = findViewById(R.id.password_txt);
-    EditText confirmedPasswordEditText = findViewById(R.id.confirmed_password_txt);
-    Button reset_button = findViewById(R.id.Reset_button);
-    EditText emailEditText = findViewById(R.id.email_txt);
+    EditText passwordEditText;
+    EditText confirmedPasswordEditText;
+    Button reset_button;
+    EditText emailEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        passwordEditText = findViewById(R.id.password_txt);
+        confirmedPasswordEditText = findViewById(R.id.confirmed_password_txt);
+        reset_button = findViewById(R.id.Reset_button);
+        emailEditText = findViewById(R.id.email_txt);
 
         // Set up password real-time feedback
         passwordEditText.addTextChangedListener(new TextWatcher() {

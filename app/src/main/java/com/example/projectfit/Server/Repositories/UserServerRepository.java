@@ -92,6 +92,8 @@ public class UserServerRepository {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     callback.onSuccess();
+                    System.out.println("Sending updated password to server: " + user.getPassword());
+
                 } else {
                     callback.onFailure("Failed to update password on server");
                 }
@@ -103,6 +105,8 @@ public class UserServerRepository {
             }
         });
     }
+
+
 
     public interface OnUserValidationCallback {
         void onSuccess(User user);

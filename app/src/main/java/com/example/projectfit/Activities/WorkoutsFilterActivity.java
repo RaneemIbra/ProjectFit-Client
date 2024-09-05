@@ -13,7 +13,7 @@ import com.example.projectfit.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
 public class WorkoutsFilterActivity extends AppCompatActivity {
-    private Button homePage, profilePage, buildPlan;
+
     private int[] categoryLayoutIds = {
             R.id.body_part_chest, R.id.body_part_back, R.id.body_part_legs, R.id.body_part_abs,
             R.id.body_part_core, R.id.body_part_biceps, R.id.body_part_shoulders, R.id.body_part_triceps,
@@ -51,13 +51,7 @@ public class WorkoutsFilterActivity extends AppCompatActivity {
     }
 
     private void setupNavigationButtons() {
-        homePage = findViewById(R.id.button_home_filter);
-        profilePage = findViewById(R.id.button_profile_filter);
-        buildPlan = findViewById(R.id.button_build_plan_filter);
 
-        homePage.setOnClickListener(view -> navigateTo(HomePageActivity.class));
-        profilePage.setOnClickListener(view -> navigateTo(ProfileActivity.class));
-        buildPlan.setOnClickListener(view -> navigateTo(PlanQuestionsActivity.class));
     }
 
     private void navigateTo(Class<?> targetActivity) {

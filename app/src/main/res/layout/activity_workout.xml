@@ -23,103 +23,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/r2vtl65tp5h5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="20dp"
-                android:layout_marginHorizontal="12dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/homePageBtn"
-                    android:textColor="#000000"
-                    android:textSize="17sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="HOME"
-                    android:gravity="center"
-                    android:background="@drawable/custom_button_white"
-                    android:paddingVertical="11dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:elevation="0dp"
-                    android:stateListAnimator="@null" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
-
-                <Button
-                    android:id="@+id/plan"
-                    android:layout_width="104dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/s000000sw1cr38bff9a01"
-                    android:elevation="4dp"
-                    android:gravity="center"
-                    android:paddingVertical="11dp"
-                    android:text="PLAN"
-                    android:textColor="#000000"
-                    android:textSize="17sp" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
-
-                <Button
-                    android:id="@+id/profile"
-                    android:textColor="#000000"
-                    android:textSize="17sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="PROFILE"
-                    android:gravity="center"
-                    android:background="@drawable/s000000sw1cr38bffffff"
-                    android:paddingVertical="11dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/rsumx2xn2gl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="30dp"
-                android:layout_marginHorizontal="7dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/rkhm7whceym"
-                    android:textColor="#131313"
-                    android:textSize="17sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="167dp"
-                    android:text="My Plan"
-                    android:gravity="center"
-                    android:background="@drawable/s000000sw1cr38bffffff"
-                    android:paddingVertical="13dp" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
-
-                <Button
-                    android:id="@+id/workouts"
-                    android:textColor="#131313"
-                    android:textSize="17sp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="167dp"
-                    android:text="Workouts"
-                    android:gravity="center"
-                    android:background="@drawable/s000000sw1cr38bff9a01"
-                    android:paddingVertical="13dp"
-                    android:elevation="4dp" />
-
-            </LinearLayout>
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/rfe6q4utew2b"
@@ -178,4 +81,14 @@ While the bench press is a simple movement, it’s highly effective for strength
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemIconTint="@color/nav_color"
+        app:itemTextColor="@color/nav_color_text"
+        app:menu="@menu/tool_bar"
+        app:labelVisibilityMode="labeled"
+        android:background="@drawable/rounded"
+        app:itemIconSize="24dp"/>
 </LinearLayout>

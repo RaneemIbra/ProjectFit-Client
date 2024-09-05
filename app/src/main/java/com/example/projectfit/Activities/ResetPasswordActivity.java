@@ -91,6 +91,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         if (!isValid) {
             return;
         }
+
         resetButton.setEnabled(false);
 
         userRoomRepository.validateUserLocalByAnswer(email, answer, new UserRoomRepository.OnUserValidationCallback() {
@@ -98,7 +99,12 @@ public class ResetPasswordActivity extends AppCompatActivity {
             public void onSuccess(User user) {
                 user.setPassword(newPassword);
                 userRoomRepository.updateUserLocally(user);
+
                 updatePasswordOnServer(user, "Password reset successfully");
+
+                runOnUiThread(() -> {
+                    Toast.makeText(ResetPasswordActivity.this, "Password reset successfully (Local)", Toast.LENGTH_SHORT).show();
+                });
             }
 
             @Override
@@ -109,7 +115,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         user.setPassword(newPassword);
                         userServerRepository.updateUserPassword(user, new UserServerRepository.OnUserUpdateCallback() {
                             @Override
-                            public void onSuccess() {userRoomRepository.updateUserLocally(user);
+                            public void onSuccess() {
+                                userRoomRepository.updateUserLocally(user);
                                 runOnUiThread(() -> {
                                     Toast.makeText(ResetPasswordActivity.this, "Password reset successfully (Server)", Toast.LENGTH_SHORT).show();
                                     finish();
@@ -138,7 +145,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         });
     }
 
-
     private void updatePasswordOnServer(User user, String successMessage) {
         userServerRepository.updateUserPassword(user, new UserServerRepository.OnUserUpdateCallback() {
             @Override
@@ -158,6 +164,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private String getTextFromInput(TextInputLayout textInputLayout) {
         return textInputLayout.getEditText() != null ?

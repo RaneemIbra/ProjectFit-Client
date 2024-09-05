@@ -132,7 +132,7 @@
                 android:scaleType="fitXY"/>
 
             <TextView
-                android:id="@+id/rr7stgucrrs"
+                android:id="@+id/WorkoutTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="28dp"
@@ -154,7 +154,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/rjn9ctdzf91r"
+                    android:id="@+id/WorkoutDescription"
                     android:textColor="#000000"
                     android:textSize="24sp"
                     android:layout_height="wrap_content"

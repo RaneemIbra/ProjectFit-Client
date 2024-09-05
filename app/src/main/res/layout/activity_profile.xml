@@ -175,7 +175,7 @@
                         </RelativeLayout>
 
                         <TextView
-                            android:id="@+id/ruq5zpmkcykl"
+                            android:id="@+id/userNameTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
@@ -203,6 +203,16 @@
                             android:layout_marginStart="135dp"
                             android:layout_marginTop="1dp"
                             android:text="Birthday: April 1st"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/userPhoneTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="135dp"
+                            android:layout_marginTop="1dp"
+                            android:text="Phone : 054-1234567"
                             android:textColor="#000000"
                             android:textSize="15sp" />
 
@@ -317,6 +327,18 @@
 
             </RelativeLayout>
 
+            <Button
+                android:id="@+id/editDetailsButton"
+                android:layout_width="125dp"
+                android:layout_height="39dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="-50dp"
+                android:background="@drawable/cr100lr2707de5fb0c6173"
+                android:text="Edit Details"
+                android:textColor="#000000"
+                android:textSize="17sp" />
+
             <TextView
                 android:id="@+id/r6cunn4e8836"
                 android:layout_width="wrap_content"
@@ -326,7 +348,8 @@
                 android:layout_marginTop="-35dp"
                 android:text="Full name"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="gone"/>
 
             <!-- EditText for name input -->
             <EditText
@@ -341,7 +364,8 @@
                 android:layout_marginBottom="13dp"
                 android:layout_marginHorizontal="31dp"
                 android:textColor="#391713"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/rxxt9qq85tja"
@@ -352,6 +376,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Email"
+                android:visibility="gone"
                 />
             <EditText
                 xmlns:android="http://schemas.android.com/apk/res/android"
@@ -370,6 +395,7 @@
                 android:textColor="#391713"
                 android:textSize="20sp"
                 android:importantForAccessibility="yes"
+                android:visibility="gone"
                 />
 
             <TextView
@@ -381,6 +407,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Mobile Number"
+                android:visibility="gone"
                 />
             <EditText
                 xmlns:android="http://schemas.android.com/apk/res/android"
@@ -398,6 +425,7 @@
                 android:hint="+972 123 456 7890"
                 android:textColor="#391713"
                 android:textSize="20sp"
+                android:visibility="gone"
 
                 />
 
@@ -409,6 +437,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Date of birth"
+                android:visibility="gone"
                 />
             <EditText
                 xmlns:android="http://schemas.android.com/apk/res/android"
@@ -427,6 +456,7 @@
                 android:hint="DD/MM/YYYY"
                 android:textColor="#391713"
                 android:textSize="20sp"
+                android:visibility="gone"
 
                 />
 
@@ -439,6 +469,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Weight"
+                android:visibility="gone"
                 />
             <EditText
                 xmlns:android="http://schemas.android.com/apk/res/android"
@@ -456,6 +487,7 @@
                 android:hint="Enter weight (e.g., 75 Kg)"
                 android:textColor="#391713"
                 android:textSize="20sp"
+                android:visibility="gone"
 
                 />
 
@@ -468,6 +500,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Height"
+                android:visibility="gone"
                 />
             <EditText
                 xmlns:android="http://schemas.android.com/apk/res/android"
@@ -485,6 +518,7 @@
                 android:hint="Enter value (e.g., 1.65 cm)"
                 android:textColor="#391713"
                 android:textSize="20sp"
+                android:visibility="gone"
 
                 />
 
@@ -502,7 +536,8 @@
                 android:paddingVertical="7dp"
                 android:text="Update Profile"
                 android:textColor="#232222"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/rkd7uc95k5kj"
@@ -660,8 +695,24 @@
                             android:scaleType="fitXY"
                              />
                     </LinearLayout>
+
                 </LinearLayout>
+
+
+
             </ScrollView>
+
+            <Button
+                android:id="@+id/logoutButton"
+
+                android:layout_width="125dp"
+                android:layout_height="39dp"
+
+                android:background="@drawable/cr100lr2707de5fb0c6173"
+                android:text="Log Out"
+                android:textColor="#000000"
+                android:textSize="17sp" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

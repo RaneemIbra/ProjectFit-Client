@@ -2,16 +2,17 @@ package com.example.projectfit.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,13 +30,13 @@ import com.example.projectfit.Models.User;
 import com.example.projectfit.R;
 import com.example.projectfit.Utils.AnimationUtils;
 import com.example.projectfit.Utils.DialogUtils;
-
 import com.github.lzyzsd.circleprogress.CircleProgress;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,20 +55,29 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     Button planPage, profilePage;
     public static User user;
 
+    private static final String PREFS_NAME = "StepCounterPrefs";
+    private static final String KEY_INITIAL_STEPS = "initialSteps";
+    private static final String KEY_LAST_DATE = "lastDate";
+    private int initialStepCount = 0;
+    private LocalDate lastDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home_page);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         user = getIntent().getParcelableExtra("user");
         initViews();
         setupCharts();
         setupSensors();
+        loadStepData();
         initClickListeners();
         waterCupProgress.setMax(2000);
     }
@@ -143,16 +153,45 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
-            stepCount = (int) event.values[0];
-            updateProgressBar(stepCount);
+            int totalSteps = (int) event.values[0];
+            checkForDayReset();
+            updateStepCount(totalSteps);
         }
     }
 
-    private void updateProgressBar(int steps) {
-        int maxSteps = 10000;
-        circularProgressBar.setMax(maxSteps);
-        circularProgressBar.setProgress(steps);
-        stepCountTextView.setText("Steps: " + steps);
+    private void checkForDayReset() {
+        LocalDate currentDate = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            currentDate = LocalDate.now();
+        }
+        if (!currentDate.equals(lastDate)) {
+            initialStepCount = stepCount;
+            lastDate = currentDate;
+            saveStepData();
+        }
+    }
+
+    private void updateStepCount(int totalSteps) {
+        stepCount = totalSteps - initialStepCount;
+        circularProgressBar.setProgress(stepCount);
+        stepCountTextView.setText("Steps: " + stepCount);
+    }
+
+    private void loadStepData() {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        initialStepCount = prefs.getInt(KEY_INITIAL_STEPS, 0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            lastDate = LocalDate.parse(prefs.getString(KEY_LAST_DATE, LocalDate.now().toString()));
+        }
+        stepCountTextView.setText("Steps: " + (stepCount - initialStepCount));
+    }
+
+    private void saveStepData() {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(KEY_INITIAL_STEPS, initialStepCount);
+        editor.putString(KEY_LAST_DATE, lastDate.toString());
+        editor.apply();
     }
 
     @Override

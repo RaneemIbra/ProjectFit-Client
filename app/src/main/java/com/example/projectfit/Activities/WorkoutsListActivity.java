@@ -100,6 +100,7 @@ public class WorkoutsListActivity extends AppCompatActivity {
                 intent.putExtra("workout_name", workout.getWorkoutName());
                 intent.putExtra("workout_duration", workout.getDurationInMinutes());
                 intent.putExtra("workout_calories", workout.getCalories());
+                intent.putExtra("workout_description", workout.getWorkoutDescription());
                 startActivity(intent);
             });
 

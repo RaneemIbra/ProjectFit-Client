@@ -1,0 +1,6 @@
+<!-- res/drawable/workout_background.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/cr18bffffff_drag" android:state_pressed="true"/>
+    <item android:drawable="@drawable/cr18bffffff_hover" android:state_hovered="true"/>
+    <item android:drawable="@drawable/cr18bffffff"/>
+</selector>

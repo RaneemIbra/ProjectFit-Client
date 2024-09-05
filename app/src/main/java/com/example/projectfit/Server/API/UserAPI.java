@@ -20,4 +20,7 @@ public interface UserAPI {
 
     @PUT("users/{id}")
     Call<User> updateUser(@Path("id") Long id, @Body User user);
+
+    @GET("users/email/{email}")
+    Call<User> getUserByEmail(@Path("email") String email);
 }

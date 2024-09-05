@@ -1,5 +1,8 @@
 package com.example.projectfit.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -10,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Entity(tableName = "users")
-public class User {
+public class User implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private Long id;
     String fullName;
@@ -52,6 +55,70 @@ public class User {
         this.workoutHistory = workoutHistory;
         this.stepsHistory = stepsHistory;
         this.waterHistory = waterHistory;
+    }
+
+    protected User(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readLong();
+        }
+        fullName = in.readString();
+        if (in.readByte() == 0) {
+            phoneNum = null;
+        } else {
+            phoneNum = in.readLong();
+        }
+        emailAddress = in.readString();
+        password = in.readString();
+        height = in.readDouble();
+        weight = in.readDouble();
+        gender = in.readByte() != 0;
+        securityQuestion = in.readString();
+        answer = in.readString();
+        profilePicture = in.createByteArray();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(id);
+        }
+        dest.writeString(fullName);
+        if (phoneNum == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(phoneNum);
+        }
+        dest.writeString(emailAddress);
+        dest.writeString(password);
+        dest.writeDouble(height);
+        dest.writeDouble(weight);
+        dest.writeByte((byte) (gender ? 1 : 0));
+        dest.writeString(securityQuestion);
+        dest.writeString(answer);
+        dest.writeByteArray(profilePicture);
     }
 
     public Long getId() {

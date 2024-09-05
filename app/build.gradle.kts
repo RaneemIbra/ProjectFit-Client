@@ -48,6 +48,7 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation ("com.github.lzyzsd:circleprogress:1.2.1")
+    api("com.google.android.material:material:1.12.0-alpha01")
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")

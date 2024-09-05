@@ -1,12 +1,8 @@
 package com.example.projectfit.Activities;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -15,15 +11,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.bumptech.glide.Glide;
+import com.example.projectfit.Models.User;
 import com.example.projectfit.R;
-import com.google.android.material.imageview.ShapeableImageView;
+import com.example.projectfit.Room.Repositories.UserRoomRepository;
+import com.example.projectfit.Server.Repositories.UserServerRepository;
+import com.example.projectfit.Utils.Validation;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class ResetPasswordActivity extends AppCompatActivity {
-    EditText passwordEditText = findViewById(R.id.password_txt);
-    EditText confirmedPasswordEditText = findViewById(R.id.confirmed_password_txt);
-    Button reset_button = findViewById(R.id.Reset_button);
-    EditText emailEditText = findViewById(R.id.email_txt);
+    private TextInputLayout emailLayout, answerLayout, passwordLayout, confirmPasswordLayout;
+    private Spinner securityQuestionSpinner;
+    private Button resetButton;
+    private Validation validation;
+    private UserRoomRepository userRoomRepository;
+    private UserServerRepository userServerRepository;
+    private String selectedSecurityQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,70 +38,129 @@ public class ResetPasswordActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Set up password real-time feedback
-        passwordEditText.addTextChangedListener(new TextWatcher() {
+        initializeViews();
+        initializeRepositories();
+        resetButton.setOnClickListener(view -> handleResetPassword());
+    }
+
+    private void initializeViews() {
+        emailLayout = findViewById(R.id.emailLayout);
+        answerLayout = findViewById(R.id.AnswerLayout);
+        passwordLayout = findViewById(R.id.passwordLayout);
+        confirmPasswordLayout = findViewById(R.id.confirmPasswordLayout);
+        securityQuestionSpinner = findViewById(R.id.spinner);
+        resetButton = findViewById(R.id.Reset_button);
+    }
+
+    private void initializeRepositories() {
+        userRoomRepository = new UserRoomRepository(this);
+        userServerRepository = new UserServerRepository();
+        validation = new Validation();
+    }
+
+    private void handleResetPassword() {
+        String email = getTextFromInput(emailLayout);
+        String answer = getTextFromInput(answerLayout);
+        String newPassword = getTextFromInput(passwordLayout);
+        String confirmPassword = getTextFromInput(confirmPasswordLayout);
+        selectedSecurityQuestion = securityQuestionSpinner.getSelectedItem().toString();
+
+        emailLayout.setError(null);
+        answerLayout.setError(null);
+        passwordLayout.setError(null);
+        confirmPasswordLayout.setError(null);
+        boolean isValid = true;
+
+        if (!validation.emailValidate(email, emailLayout)) {
+            isValid = false;
+        }
+
+        if (!validation.ValidateText(answer, answerLayout)) {
+            isValid = false;
+        }
+
+        if (!validation.passwordValidate(newPassword, passwordLayout)) {
+            isValid = false;
+        }
+
+        if (!newPassword.equals(confirmPassword)) {
+            confirmPasswordLayout.setError("Passwords do not match");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            return;
+        }
+        resetButton.setEnabled(false);
+
+        userRoomRepository.validateUserLocalByAnswer(email, answer, new UserRoomRepository.OnUserValidationCallback() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onSuccess(User user) {
+                user.setPassword(newPassword);
+                userRoomRepository.updateUserLocally(user);
+                updatePasswordOnServer(user, "Password reset successfully");
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                validatePasswordInput(s.toString());
-            }
+            public void onFailure(String errorMessage) {
+                userServerRepository.validateUserServerByAnswer(email, answer, new UserServerRepository.OnUserValidationCallback() {
+                    @Override
+                    public void onSuccess(User user) {
+                        user.setPassword(newPassword);
+                        userServerRepository.updateUserPassword(user, new UserServerRepository.OnUserUpdateCallback() {
+                            @Override
+                            public void onSuccess() {userRoomRepository.updateUserLocally(user);
+                                runOnUiThread(() -> {
+                                    Toast.makeText(ResetPasswordActivity.this, "Password reset successfully (Server)", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                });
+                            }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+                            @Override
+                            public void onFailure(String errorMessage) {
+                                runOnUiThread(() -> {
+                                    Toast.makeText(ResetPasswordActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                                    resetButton.setEnabled(true);
+                                });
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(String errorMessage) {
+                        runOnUiThread(() -> {
+                            Toast.makeText(ResetPasswordActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                            resetButton.setEnabled(true);
+                        });
+                    }
+                });
             }
         });
-        reset_button.setOnClickListener(view -> {
-            passwordEditText.setText("");
-            confirmedPasswordEditText.setText("");
-            checkPasswords();
+    }
+
+
+    private void updatePasswordOnServer(User user, String successMessage) {
+        userServerRepository.updateUserPassword(user, new UserServerRepository.OnUserUpdateCallback() {
+            @Override
+            public void onSuccess() {
+                runOnUiThread(() -> {
+                    Toast.makeText(ResetPasswordActivity.this, successMessage, Toast.LENGTH_SHORT).show();
+                    finish();
+                });
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                runOnUiThread(() -> {
+                    Toast.makeText(ResetPasswordActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                    resetButton.setEnabled(true);
+                });
+            }
         });
     }
 
-    private void checkPasswords() {
-        String newPassword = passwordEditText.getText().toString();
-        String confirmPassword = confirmedPasswordEditText.getText().toString();
-
-        if (newPassword.equals(confirmPassword)) {
-            Toast.makeText(this, "Reset successful", Toast.LENGTH_SHORT).show();
-            // Return to the sign-in page (assume it's MainActivity)
-            Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish(); // Finish this activity so the user can't go back to it
-        } else {
-            Toast.makeText(this, "The two passwords do not match", Toast.LENGTH_SHORT).show();
-        }
+    private String getTextFromInput(TextInputLayout textInputLayout) {
+        return textInputLayout.getEditText() != null ?
+                textInputLayout.getEditText().getText().toString().trim() : "";
     }
-    // Method to validate password input in real-time
-    private void validatePasswordInput(String password) {
-        // Check if password is non-empty
-        if (password.isEmpty()) {
-            ShowError("Password cannot be empty", passwordEditText);
-        }
-        // Check if password length is at least 8 characters
-        else if (password.length() < 8) {
-            ShowError("Password must be at least 8 characters", passwordEditText);
-        }
-        // Check if password contains both letters and numbers
-        else if (!password.matches("^(?=.*[a-zA-Z])(?=.*\\d).+$")) {
-            ShowError("Password must contain both letters and numbers", passwordEditText);
-        }
-        // If all conditions are met, reset the error state
-        else {
-            ResetErrorState(passwordEditText);
-        }
-    }
-    // Method to show error (Toast and change background to red)
-    void ShowError(String message, EditText editText) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        editText.setBackgroundColor(Color.RED);
-    }
-
-    // Method to reset the error state (change background to white)
-    void ResetErrorState(EditText editText) {
-        editText.setBackgroundColor(Color.WHITE);
-    }
-
 }

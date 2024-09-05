@@ -261,11 +261,12 @@
                     android:id="@+id/Layout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/cr18bffffff"
+                    android:orientation="vertical"
                     android:paddingVertical="9dp"
-                    android:orientation="vertical">
+                    android:clickable="true"
+                    android:focusable="true"
+                    tools:targetApi="o">
 
                     <LinearLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -331,7 +332,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="8dp"
-                                        android:text="120 Kcal"
+                                        android:text="121 Kcal"
                                         android:textColor="#212020"
                                         android:textSize="12sp" />
                                 </LinearLayout>
@@ -403,11 +404,12 @@
                     android:id="@+id/Layout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/cr18bffffff"
+                    android:orientation="vertical"
                     android:paddingVertical="9dp"
-                    android:orientation="vertical">
+                    android:clickable="true"
+                    android:focusable="true"
+                    tools:targetApi="o">
 
                     <LinearLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -473,7 +475,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="8dp"
-                                        android:text="120 Kcal"
+                                        android:text="122 Kcal"
                                         android:textColor="#212020"
                                         android:textSize="12sp" />
                                 </LinearLayout>
@@ -545,10 +547,12 @@
                     android:id="@+id/Layout3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
                     android:background="@drawable/cr18bffffff"
+                    android:orientation="vertical"
                     android:paddingVertical="9dp"
-                    android:orientation="vertical">
+                    android:clickable="true"
+                    android:focusable="true"
+                    tools:targetApi="o">
 
                     <LinearLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -614,7 +618,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="8dp"
-                                        android:text="120 Kcal"
+                                        android:text="123 Kcal"
                                         android:textColor="#212020"
                                         android:textSize="12sp" />
                                 </LinearLayout>

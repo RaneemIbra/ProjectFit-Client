@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -35,6 +37,7 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -52,8 +55,8 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     int stepCount = 0;
     CircleProgress waterCupProgress;
     RelativeLayout progressBarLayout;
-    Button planPage, profilePage;
     public static User user;
+    BottomNavigationView bottomBar;
 
     private static final String PREFS_NAME = "StepCounterPrefs";
     private static final String KEY_INITIAL_STEPS = "initialSteps";
@@ -94,8 +97,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         stepChart = findViewById(R.id.stepChart);
         waterChart = findViewById(R.id.WaterChart);
         progressBarLayout = findViewById(R.id.progressBarLayout);
-        planPage = findViewById(R.id.plan_button);
-        profilePage = findViewById(R.id.button_profile_home);
+        bottomBar=findViewById(R.id.bottom_navigation);
     }
 
     private void setupCharts() {
@@ -120,12 +122,34 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     }
 
     private void initClickListeners() {
-        profilePage.setOnClickListener(v -> navigateTo(ProfileActivity.class));
-        planPage.setOnClickListener(v -> navigateTo(MyPlanActivity.class));
+
         progressBarContainer.setOnClickListener(v -> animatedProgressBarStepCount());
         waterCupProgress.setOnClickListener(v -> animatedProgressBarWaterTracker());
         addCupSizeButton.setOnClickListener(v -> showAddCupSizeDialog());
         progressBarLayout.setOnClickListener(v -> increaseWaterCupProgress(0));
+        bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener (){
+            @Override
+            public boolean onNavigationItemSelected( @NonNull MenuItem item)
+            {
+                   int id_item=item.getItemId();
+                   if(id_item==R.id.home_BottomIcon)
+                        return true;
+                   else if (id_item == R.id.plan_BottomIcon) {
+                       navigateTo(MyPlanActivity.class);
+                       return true;
+                   } else if (id_item==R.id.workouts_BottomIcon) {
+                       navigateTo(WorkoutsFilterActivity.class);
+                       return true;
+                   } else if ( id_item==R.id.profile_BottomIcon) {
+                       navigateTo(ProfileActivity.class);
+                       return true;
+                   }
+                    else
+                        return false;
+
+                }
+
+        });
     }
 
     private void navigateTo(Class<?> targetActivity) {

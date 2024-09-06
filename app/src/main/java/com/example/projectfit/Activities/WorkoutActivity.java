@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+
 import android.util.Base64;
+import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -12,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -19,8 +23,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.projectfit.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class WorkoutActivity extends AppCompatActivity {
+
+    BottomNavigationView bottomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +39,15 @@ public class WorkoutActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        bottomBar = findViewById(R.id.bottom_navigation);
         setupWindowInsets();
         setupWebView();
         setupNavigationButtons();
         loadWorkoutDetails();
+        setupButtonListeners();
     }
+
+
     private void setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -55,15 +66,46 @@ public class WorkoutActivity extends AppCompatActivity {
         webView.setWebChromeClient(new WebChromeClient());
     }
 
-    private void setupNavigationButtons() {
-        int[] buttonIds = {R.id.homePageBtn, R.id.plan, R.id.profile, R.id.workouts};
-        Class<?>[] activities = {MainActivity.class, MyPlanActivity.class, ProfileActivity.class, WorkoutsFilterActivity.class};
+    private void setupButtonListeners() {
+        bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener (){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item)
+            {
+                int id_item=item.getItemId();
+                if(id_item==R.id.home_BottomIcon)
+                {
+                    navigateTo(HomePageActivity.class);
+                    return true;
+                }
+                else if (id_item == R.id.plan_BottomIcon)
+                {
+                    navigateTo(MyPlanActivity.class);
+                    return true;
+                }
+                else if (id_item==R.id.workouts_BottomIcon)
+                {
+                    navigateTo(WorkoutsFilterActivity.class);
+                    return true;
+                }
+                else if ( id_item==R.id.profile_BottomIcon)
+                {
+                    navigateTo(ProfileActivity.class);
+                    return true;
+                }
+                else
+                    return false;
 
-        for (int i = 0; i < buttonIds.length; i++) {
-            Button button = findViewById(buttonIds[i]);
-            Class<?> targetActivity = activities[i];
-            button.setOnClickListener(view -> startActivity(new Intent(WorkoutActivity.this, targetActivity)));
-        }
+            }
+        });
+    }
+
+    private void navigateTo(Class<?> targetActivity) {
+        startActivity(new Intent(WorkoutActivity.this, targetActivity));
+    }
+    public void onBackClicked(View view) {
+        navigateTo(WorkoutsListActivity.class);
+        //  finish the current activity
+        finish();
     }
 
     private void loadWorkoutDetails(){

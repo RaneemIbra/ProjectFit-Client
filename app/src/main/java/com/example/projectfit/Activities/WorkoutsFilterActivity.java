@@ -2,18 +2,20 @@ package com.example.projectfit.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.example.projectfit.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.imageview.ShapeableImageView;
 
 public class WorkoutsFilterActivity extends AppCompatActivity {
-    private Button homePage, profilePage, buildPlan;
     private int[] categoryLayoutIds = {
             R.id.body_part_chest, R.id.body_part_back, R.id.body_part_legs, R.id.body_part_abs,
             R.id.body_part_core, R.id.body_part_biceps, R.id.body_part_shoulders, R.id.body_part_triceps,
@@ -33,6 +35,7 @@ public class WorkoutsFilterActivity extends AppCompatActivity {
             R.drawable.biceps_curl, R.drawable.gym, R.drawable.gym1,
             R.drawable.thin, R.drawable.abs, R.drawable.bodybuilding
     };
+    BottomNavigationView bottomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +47,37 @@ public class WorkoutsFilterActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        bottomBar=findViewById(R.id.bottom_navigation);
         setupNavigationButtons();
         setupCategoryImages();
         setupCategoryClickListeners();
     }
 
     private void setupNavigationButtons() {
-        homePage = findViewById(R.id.button_home_filter);
-        profilePage = findViewById(R.id.button_profile_filter);
-        buildPlan = findViewById(R.id.button_build_plan_filter);
+        bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener (){
+            @Override
+            public boolean onNavigationItemSelected( @NonNull MenuItem item)
+            {
+                int id_item=item.getItemId();
+                if(id_item==R.id.home_BottomIcon)
+                    return true;
+                else if (id_item == R.id.plan_BottomIcon) {
+                    navigateTo(MyPlanActivity.class);
+                    return true;
+                } else if (id_item==R.id.workouts_BottomIcon) {
+                    return true;
+                } else if ( id_item==R.id.profile_BottomIcon) {
+                    navigateTo(ProfileActivity.class);
+                    return true;
+                }
+                else
+                    return false;
 
-        homePage.setOnClickListener(view -> navigateTo(HomePageActivity.class));
-        profilePage.setOnClickListener(view -> navigateTo(ProfileActivity.class));
-        buildPlan.setOnClickListener(view -> navigateTo(PlanQuestionsActivity.class));
+            }
+
+        });
     }
+
 
     private void navigateTo(Class<?> targetActivity) {
         Intent intent = new Intent(WorkoutsFilterActivity.this, targetActivity);

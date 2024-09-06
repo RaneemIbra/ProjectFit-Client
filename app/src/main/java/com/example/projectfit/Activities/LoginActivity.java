@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             userRoomRepository.validateUserLocal(email, password, new UserRoomRepository.OnUserValidationCallback() {
                 @Override
                 public void onSuccess(User user) {
-                    showLoginSuccessMessage("Login successful (Local)");
+                    showLoginSuccessMessage("Login successful (Local)", user);
                 }
 
                 @Override
@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
         userServerRepository.validateUserServer(email, password, new UserServerRepository.OnUserValidationCallback() {
             @Override
             public void onSuccess(User user) {
-                showLoginSuccessMessage("Login successful (Server)");
+                showLoginSuccessMessage("Login successful (Server)", user);
             }
 
             @Override
@@ -105,10 +105,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void showLoginSuccessMessage(String message) {
+    private void showLoginSuccessMessage(String message, User user) {
         runOnUiThread(() -> {
             showToastMessage(message);
-            navigateToHomePage();
+            navigateToHomePage(user);
         });
     }
 
@@ -116,8 +116,9 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 
-    private void navigateToHomePage() {
+    private void navigateToHomePage(User user) {
         Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+        intent.putExtra("user", user);
         startActivity(intent);
         finish();
     }

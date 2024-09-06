@@ -65,7 +65,7 @@ public class ProfileActivity extends AppCompatActivity {
                 }
                 else if (id_item==R.id.workouts_BottomIcon)
                 {
-                    navigateTo(WorkoutsListActivity.class);
+                    navigateTo(WorkoutsFilterActivity.class);
                     return true;
                 }
                 else if ( id_item==R.id.profile_BottomIcon)

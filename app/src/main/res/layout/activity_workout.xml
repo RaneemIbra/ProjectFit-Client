@@ -15,6 +15,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@drawable/sffffffsw1cr20bd9d9d9"
+
         android:paddingTop="23dp"
         android:paddingBottom="-52dp">
 
@@ -23,6 +24,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="Back"
+                android:onClick="onBackClicked"
+                android:src="@drawable/back_button" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/rfe6q4utew2b"

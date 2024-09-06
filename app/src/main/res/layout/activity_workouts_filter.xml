@@ -11,9 +11,10 @@
         android:id="@+id/r7ny1pwa96se"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/sffffffsw1cr20bd9d9d9"
         android:clipToPadding="false"
         android:paddingTop="18dp"
-        android:background="@drawable/sffffffsw1cr20bd9d9d9"
         android:paddingBottom="29dp">
 
         <LinearLayout
@@ -670,7 +671,6 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -681,5 +681,4 @@
         app:labelVisibilityMode="labeled"
         android:background="@drawable/rounded"
         app:itemIconSize="24dp"/>
-
 </LinearLayout>

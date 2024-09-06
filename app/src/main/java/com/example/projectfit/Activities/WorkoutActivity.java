@@ -3,6 +3,7 @@ package com.example.projectfit.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -77,7 +78,7 @@ public class WorkoutActivity extends AppCompatActivity {
                 }
                 else if (id_item==R.id.workouts_BottomIcon)
                 {
-                    navigateTo(WorkoutsListActivity.class);
+                    navigateTo(WorkoutsFilterActivity.class);
                     return true;
                 }
                 else if ( id_item==R.id.profile_BottomIcon)
@@ -95,16 +96,9 @@ public class WorkoutActivity extends AppCompatActivity {
     private void navigateTo(Class<?> targetActivity) {
         startActivity(new Intent(WorkoutActivity.this, targetActivity));
     }
-/*
-    private void setupNavigationButtons() {
-        int[] buttonIds = {R.id.homePageBtn, R.id.plan, R.id.profile, R.id.workouts};
-        Class<?>[] activities = {MainActivity.class, MyPlanActivity.class, ProfileActivity.class, WorkoutsFilterActivity.class};
-
-        for (int i = 0; i < buttonIds.length; i++) {
-            Button button = findViewById(buttonIds[i]);
-            Class<?> targetActivity = activities[i];
-            button.setOnClickListener(view -> startActivity(new Intent(WorkoutActivity.this, targetActivity)));
-        }
+    public void onBackClicked(View view) {
+        navigateTo(WorkoutsListActivity.class);
+        //  finish the current activity
+        finish();
     }
-    */
 }

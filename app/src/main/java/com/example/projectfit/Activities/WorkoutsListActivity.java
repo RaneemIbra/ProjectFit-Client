@@ -1,6 +1,9 @@
 package com.example.projectfit.Activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -60,15 +63,11 @@ public class WorkoutsListActivity extends AppCompatActivity {
     }
 
     private void loadWorkouts() {
-        workoutServerRepository.getAllWorkoutsFromServer(new WorkoutServerRepository.OnWorkoutsReceivedCallback() {
-            @Override
-            public void onSuccess(List<Workout> workouts) {
+        workoutRoomRepository.getAllWorkoutsLocally().observe(this, workouts -> {
+            if (workouts != null) {
                 displayWorkouts(workouts);
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                Toast.makeText(WorkoutsListActivity.this, "Failed to load workouts: " + errorMessage, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(WorkoutsListActivity.this, "No workouts available", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -84,29 +83,35 @@ public class WorkoutsListActivity extends AppCompatActivity {
             TextView workoutName = workoutView.findViewById(R.id.workoutName);
             TextView workoutDuration = workoutView.findViewById(R.id.workoutDuration);
             TextView workoutCalories = workoutView.findViewById(R.id.workoutCalories);
-            ShapeableImageView workoutImage = workoutView.findViewById(R.id.workoutImage);
+            ShapeableImageView workoutLogo = workoutView.findViewById(R.id.workoutLogo);
 
             workoutName.setText(workout.getWorkoutName());
             workoutDuration.setText(workout.getDurationInMinutes() + " Minutes");
             workoutCalories.setText(workout.getCalories() + " Kcal");
 
-            if (workout.getWorkoutImage() != null) {
-                Glide.with(this).load(workout.getWorkoutImage()).into(workoutImage);
+            if (workout.getWorkoutImageBase64() != null && !workout.getWorkoutImageBase64().isEmpty()) {
+                byte[] imageBytes = Base64.decode(workout.getWorkoutImageBase64(), Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                workoutLogo.setImageBitmap(bitmap);
             } else {
-                Glide.with(this).load(R.drawable.img).into(workoutImage);
+                Glide.with(this).load(R.drawable.img).into(workoutLogo);
             }
+
+
             workoutView.setOnClickListener(v -> {
                 Intent intent = new Intent(WorkoutsListActivity.this, WorkoutActivity.class);
                 intent.putExtra("workout_name", workout.getWorkoutName());
                 intent.putExtra("workout_duration", workout.getDurationInMinutes());
                 intent.putExtra("workout_calories", workout.getCalories());
                 intent.putExtra("workout_description", workout.getWorkoutDescription());
+                intent.putExtra("workout_image_base64", workout.getWorkoutImageBase64());
                 startActivity(intent);
             });
 
             layoutContainer.addView(workoutView);
         }
     }
+
 
     private void initClickListeners() {
         button_home.setOnClickListener(v -> navigateTo(HomePageActivity.class));

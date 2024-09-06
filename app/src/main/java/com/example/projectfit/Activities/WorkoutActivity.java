@@ -1,11 +1,15 @@
 package com.example.projectfit.Activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +35,7 @@ public class WorkoutActivity extends AppCompatActivity {
         setupWindowInsets();
         setupWebView();
         setupNavigationButtons();
+        loadWorkoutDetails();
     }
     private void setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -58,6 +63,26 @@ public class WorkoutActivity extends AppCompatActivity {
             Button button = findViewById(buttonIds[i]);
             Class<?> targetActivity = activities[i];
             button.setOnClickListener(view -> startActivity(new Intent(WorkoutActivity.this, targetActivity)));
+        }
+    }
+
+    private void loadWorkoutDetails(){
+        Intent intent = getIntent();
+        String workoutName = intent.getStringExtra("workout_name");
+        String workoutDescription = intent.getStringExtra("workout_description");
+        String workoutImageBase64 = intent.getStringExtra("workout_image_base64");
+        TextView workoutNameTextView = findViewById(R.id.WorkoutTitle);
+        TextView workoutDescriptionTextView = findViewById(R.id.WorkoutDescription);
+        ImageView workoutImageView = findViewById(R.id.WorkoutImage);
+
+        workoutNameTextView.setText(workoutName);
+        workoutDescriptionTextView.setText(workoutDescription);
+        if (workoutImageBase64 != null && !workoutImageBase64.isEmpty()) {
+            byte[] imageBytes = Base64.decode(workoutImageBase64, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            workoutImageView.setImageBitmap(bitmap);
+        } else {
+            workoutImageView.setImageResource(R.drawable.img);
         }
     }
 }

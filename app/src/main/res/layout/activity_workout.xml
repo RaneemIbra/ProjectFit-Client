@@ -122,7 +122,7 @@
             </LinearLayout>
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/rfe6q4utew2b"
+                android:id="@+id/WorkoutImage"
                 app:shapeAppearanceOverlay="@style/cr20"
                 android:layout_width="match_parent"
                 android:layout_height="407dp"

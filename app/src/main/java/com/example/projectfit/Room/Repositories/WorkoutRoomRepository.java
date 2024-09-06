@@ -2,9 +2,13 @@ package com.example.projectfit.Room.Repositories;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.projectfit.Models.Workout;
+import com.example.projectfit.Room.DAOS.WorkoutDAO;
 import com.example.projectfit.Room.Databases.WorkoutDatabase;
 
+import java.util.List;
 import java.util.concurrent.Executors;
 
 public class WorkoutRoomRepository {
@@ -17,7 +21,14 @@ public class WorkoutRoomRepository {
     public void addWorkoutLocally(Workout workout) {
         Executors.newSingleThreadExecutor().execute(() -> {
             workoutDatabase.workoutDAO().insertWorkout(workout);
-            System.out.println("is it working?");
         });
+    }
+
+    public LiveData<List<Workout>> getAllWorkoutsLocally() {
+        return workoutDatabase.workoutDAO().getAllWorkouts();
+    }
+
+    public Workout getWorkoutByName(String workoutName) {
+        return workoutDatabase.workoutDAO().getWorkoutByName(workoutName);
     }
 }

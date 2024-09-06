@@ -1,18 +1,23 @@
 package com.example.projectfit.Activities;
 
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -26,10 +31,12 @@ public class MyPlanActivity extends AppCompatActivity {
     private Button selectedDayButton;
     private ProgressBar[] progressBars;
     private LinearLayout[] trainingLayouts;
-    private int[] progressStatuses = {0, 0, 0};
+    private int[] progressStatuses = {0, 0, 0}; // Track progress for each workout
     private LinearLayout editPlanButton;
     private TextView editPlanText;
     private boolean isEditModeEnabled = false;
+    private ImageView trashIcon;
+    private boolean isFirstTime = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +51,7 @@ public class MyPlanActivity extends AppCompatActivity {
         initViews();
         setupNavigation();
         setupDayButtons();
-        setupProgressBars();
-        setupDragAndDrop();
+        setupTrainingLayouts();
         setupEditPlanButton();
     }
 
@@ -77,20 +83,90 @@ public class MyPlanActivity extends AppCompatActivity {
         };
         editPlanButton = findViewById(R.id.ryd3katlt2w);
         editPlanText = findViewById(R.id.r1q5rejf6pyw);
+        trashIcon = findViewById(R.id.trash_icon);
     }
 
-    private void setupProgressBars() {
+    private void setupTrainingLayouts() {
         for (int i = 0; i < trainingLayouts.length; i++) {
             final int index = i;
-            trainingLayouts[i].setOnClickListener(view -> increaseProgressBar(index));
+
+            // Set on click listener to handle both edit and non-edit modes
+            trainingLayouts[i].setOnClickListener(view -> handleClick(index));
+
+            // Set on long click listener to handle both edit and non-edit modes
+            trainingLayouts[i].setOnLongClickListener(view -> handleLongClick(view, index));
         }
+
+
+    }
+
+    private void handleClick(int index) {
+        if (!isEditModeEnabled) {
+            increaseProgressBar(index);
+        } else {
+            showEditDialog(index);
+        }
+    }
+
+    private boolean handleLongClick(View view, int index) {
+        if (!isEditModeEnabled) {
+            undoProgress(index);
+        } else {
+            startDrag(view);
+        }
+        return true;
+    }
+
+    private void startDrag(View view) {
+        ClipData data = ClipData.newPlainText("", "");
+        View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            view.startDragAndDrop(data, shadowBuilder, view, 0);
+        }
+        view.setBackgroundColor(Color.LTGRAY);  // Visual cue for dragging
     }
 
     private void increaseProgressBar(int index) {
         if (progressStatuses[index] < 100) {
-            progressStatuses[index] += 10;
+            progressStatuses[index] += 10; // Increase by 10 each click
             progressBars[index].setProgress(progressStatuses[index]);
         }
+    }
+
+    private void undoProgress(int index) {
+        if (progressStatuses[index] > 0) {
+            progressStatuses[index] -= 10; // Decrease by 10 on long press
+            progressBars[index].setProgress(progressStatuses[index]);
+        }
+    }
+
+    private void showEditDialog(int index) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Edit Workout");
+
+        // Add an input field for sets and reps
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        final EditText inputSets = new EditText(this);
+        inputSets.setHint("Sets");
+        layout.addView(inputSets);
+
+        final EditText inputReps = new EditText(this);
+        inputReps.setHint("Reps");
+        layout.addView(inputReps);
+
+        builder.setView(layout);
+
+        builder.setPositiveButton("Change", (dialog, which) -> {
+            // Retrieve and use input values to set workout details
+            String sets = inputSets.getText().toString();
+            String reps = inputReps.getText().toString();
+            // Update workout details logic here
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+        builder.create().show();
     }
 
     private void setupNavigation() {
@@ -170,6 +246,64 @@ public class MyPlanActivity extends AppCompatActivity {
                     return false;
             }
         };
+        View.OnDragListener trashDragListener = new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View v, DragEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        v.setAlpha(0.5f); // Visual cue
+                        return true;
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        v.setAlpha(1.0f);
+                        return true;
+                    case DragEvent.ACTION_DROP:
+                        View sourceView = (View) event.getLocalState();
+                        ViewGroup sourceParent = (ViewGroup) sourceView.getParent();
+                        sourceParent.removeView(sourceView); // Remove the workout
+                        return true;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        v.setAlpha(1.0f);
+                        return true;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        };
+        trashIcon.setOnDragListener(trashDragListener);
+        trashIcon.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View v, DragEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        // Optional: Highlight the trash icon
+                        trashIcon.setColorFilter(Color.RED); // Highlight
+                        break;
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        // Optional: Remove highlight
+                        trashIcon.setColorFilter(null); // Remove highlight
+                        break;
+                    case DragEvent.ACTION_DROP:
+                        // Handle the drop of a workout item
+                        View view = (View) event.getLocalState();
+                        ViewGroup owner = (ViewGroup) view.getParent();
+                        owner.removeView(view); // Remove the workout view
+                        // Optional: Update any underlying data or notify adapters
+                        break;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        // Optional: Reset any visual cues
+                        trashIcon.setColorFilter(null); // Reset color filter if used
+                        trashIcon.setVisibility(View.VISIBLE); // Make sure the view is visible if not deleted
+                        break;
+                }
+                return true;
+            }
+        });
+
+
+
 
         for (LinearLayout layout : new LinearLayout[]{findViewById(R.id.Layout1), findViewById(R.id.Layout2), findViewById(R.id.Layout3)}) {
             layout.setOnLongClickListener(longClickListener);
@@ -190,31 +324,32 @@ public class MyPlanActivity extends AppCompatActivity {
 
         // This single step handles reordering by removing and then re-adding the view in the new position
     }
+
     private void setupEditPlanButton() {
         editPlanButton.setOnClickListener(v -> toggleEditMode());
+
+
     }
 
     private void toggleEditMode() {
         isEditModeEnabled = !isEditModeEnabled;
         editPlanText.setText(isEditModeEnabled ? "Done Editing" : "Edit Plan");
+        if(isFirstTime){
+        // Set up drag listeners
+        setupDragAndDrop();
+        isFirstTime = false;
+        }
+        trashIcon.setVisibility(isEditModeEnabled ? View.VISIBLE : View.GONE);
         enableDrag(isEditModeEnabled);
+
     }
+
     private void enableDrag(boolean enable) {
-        for (LinearLayout layout : trainingLayouts) {
-            layout.setOnLongClickListener(enable ? onLongClickListener : null); // Enable or disable long click
+        if (enable) {
+            for (int i = 0; i < trainingLayouts.length; i++) {
+                final int index = i;
+                trainingLayouts[i].setOnLongClickListener(enable ? view -> handleLongClick(view, index) : null);
+            }
         }
     }
-
-    private View.OnLongClickListener onLongClickListener = view -> {
-        if (isEditModeEnabled) {
-            ClipData data = ClipData.newPlainText("", "");
-            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
-            view.startDrag(data, shadowBuilder, view, 0);
-            view.setBackgroundColor(Color.LTGRAY); // Visual cue for dragging
-            return true;
-        }
-        return false;
-    };
-
-
 }

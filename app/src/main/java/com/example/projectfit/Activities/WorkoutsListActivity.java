@@ -88,7 +88,7 @@ public class WorkoutsListActivity extends AppCompatActivity {
             }
         });
     }
-    
+
     private void initRepositories() {
         workoutRoomRepository = new WorkoutRoomRepository(this);
         workoutServerRepository = new WorkoutServerRepository();
@@ -149,12 +149,6 @@ public class WorkoutsListActivity extends AppCompatActivity {
 
             layoutContainer.addView(workoutView);
         }
-    }
-
-    private void initClickListeners() {
-        button_home.setOnClickListener(v -> navigateTo(HomePageActivity.class));
-        button_profile.setOnClickListener(v -> navigateTo(ProfileActivity.class));
-        button_build_plan.setOnClickListener(v -> navigateTo(MyPlanActivity.class));
     }
 
     private void navigateTo(Class<?> targetActivity) {

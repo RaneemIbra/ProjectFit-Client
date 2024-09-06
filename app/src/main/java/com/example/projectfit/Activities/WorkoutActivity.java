@@ -42,7 +42,6 @@ public class WorkoutActivity extends AppCompatActivity {
         bottomBar = findViewById(R.id.bottom_navigation);
         setupWindowInsets();
         setupWebView();
-        setupNavigationButtons();
         loadWorkoutDetails();
         setupButtonListeners();
     }

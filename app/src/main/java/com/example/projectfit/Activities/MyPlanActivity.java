@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.DragEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -13,15 +14,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.projectfit.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MyPlanActivity extends AppCompatActivity {
-    private Button buttonHomePage, buttonProfilePage, buttonWorkoutPage;
+
     private Button[] dayButtons;
     private Button selectedDayButton;
     private ProgressBar[] progressBars;
@@ -30,6 +33,7 @@ public class MyPlanActivity extends AppCompatActivity {
     private LinearLayout editPlanButton;
     private TextView editPlanText;
     private boolean isEditModeEnabled = false;
+    BottomNavigationView bottomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +54,7 @@ public class MyPlanActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        buttonHomePage = findViewById(R.id.button_home_my_plan);
-        buttonProfilePage = findViewById(R.id.button_profile_my_plan);
-        buttonWorkoutPage = findViewById(R.id.button_workout_my_plan);
+
 
         dayButtons = new Button[]{
                 findViewById(R.id.sunday),
@@ -77,6 +79,7 @@ public class MyPlanActivity extends AppCompatActivity {
         };
         editPlanButton = findViewById(R.id.ryd3katlt2w);
         editPlanText = findViewById(R.id.r1q5rejf6pyw);
+        bottomBar=findViewById(R.id.bottom_navigation);
     }
 
     private void setupProgressBars() {
@@ -94,9 +97,35 @@ public class MyPlanActivity extends AppCompatActivity {
     }
 
     private void setupNavigation() {
-        buttonHomePage.setOnClickListener(view -> navigateTo(HomePageActivity.class));
-        buttonProfilePage.setOnClickListener(view -> navigateTo(ProfileActivity.class));
-        buttonWorkoutPage.setOnClickListener(view -> navigateTo(WorkoutsFilterActivity.class));
+        bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener (){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item)
+            {
+                int id_item=item.getItemId();
+                if(id_item==R.id.home_BottomIcon)
+                {
+                    navigateTo(HomePageActivity.class);
+                    return true;
+                }
+                else if (id_item == R.id.plan_BottomIcon)
+                {
+                    return true;
+                }
+                else if (id_item==R.id.workouts_BottomIcon)
+                {
+                    navigateTo(WorkoutsFilterActivity.class);
+                    return true;
+                }
+                else if ( id_item==R.id.profile_BottomIcon)
+                {
+                    navigateTo(ProfileActivity.class);
+                    return true;
+                }
+                else
+                    return false;
+
+            }
+        });
     }
 
     private void navigateTo(Class<?> targetActivity) {

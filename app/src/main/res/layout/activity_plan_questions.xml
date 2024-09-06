@@ -141,13 +141,6 @@
 
     </LinearLayout>
 
-    <!-- Progress Bar -->
-
-    <!-- Question Title -->
-
-    <!-- Answer Options -->
-
-    <!-- Continue Button -->
     <Button
         android:id="@+id/r9i96idg3y5l"
         android:layout_width="match_parent"
@@ -161,4 +154,12 @@
         android:paddingVertical="13dp"
         android:textColor="#131313"
         android:textSize="18sp" />
+
+    <!-- Progress Bar -->
+
+    <!-- Question Title -->
+
+    <!-- Answer Options -->
+
+    <!-- Continue Button -->
 </LinearLayout>

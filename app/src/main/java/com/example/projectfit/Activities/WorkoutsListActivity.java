@@ -1,6 +1,8 @@
 package com.example.projectfit.Activities;
 
 import android.os.Bundle;
+
+import android.view.MenuItem;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -18,6 +21,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.bumptech.glide.Glide;
 import com.example.projectfit.Models.Workout;
 import com.example.projectfit.R;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.projectfit.Room.Repositories.WorkoutRoomRepository;
 import com.example.projectfit.Server.Repositories.WorkoutServerRepository;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -25,6 +30,8 @@ import com.google.android.material.imageview.ShapeableImageView;
 import java.util.List;
 
 public class WorkoutsListActivity extends AppCompatActivity {
+
+    BottomNavigationView bottomBar;
     Button button_home, button_profile, button_build_plan;
     LinearLayout layoutContainer;
 
@@ -41,10 +48,45 @@ public class WorkoutsListActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         initViews();
         initRepositories();
         loadWorkouts();
         initClickListeners();
+    }
+
+
+    private void initClickListeners() {
+        bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener (){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item)
+            {
+                int id_item=item.getItemId();
+                if(id_item==R.id.home_BottomIcon)
+                {
+                    navigateTo(HomePageActivity.class);
+                    return true;
+                }
+                else if (id_item == R.id.plan_BottomIcon)
+                {
+                    navigateTo(MyPlanActivity.class);
+                    return true;
+                }
+                else if (id_item==R.id.workouts_BottomIcon)
+                {
+                    navigateTo(WorkoutsFilterActivity.class);
+                    return true;
+                }
+                else if ( id_item==R.id.profile_BottomIcon)
+                {
+                    navigateTo(ProfileActivity.class);
+                    return true;
+                }
+                else
+                    return false;
+
+            }
+        });
     }
 
     private void initRepositories() {
@@ -53,6 +95,7 @@ public class WorkoutsListActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        bottomBar=findViewById(R.id.bottom_navigation);
         button_home = findViewById(R.id.button_home_list);
         button_profile = findViewById(R.id.button_profile_list);
         button_build_plan = findViewById(R.id.button_build_plan_list);
@@ -106,12 +149,6 @@ public class WorkoutsListActivity extends AppCompatActivity {
 
             layoutContainer.addView(workoutView);
         }
-    }
-
-    private void initClickListeners() {
-        button_home.setOnClickListener(v -> navigateTo(HomePageActivity.class));
-        button_profile.setOnClickListener(v -> navigateTo(ProfileActivity.class));
-        button_build_plan.setOnClickListener(v -> navigateTo(MyPlanActivity.class));
     }
 
     private void navigateTo(Class<?> targetActivity) {

@@ -87,7 +87,8 @@ public class WorkoutsListActivity extends AppCompatActivity {
 
             }
         });
-
+    }
+    
     private void initRepositories() {
         workoutRoomRepository = new WorkoutRoomRepository(this);
         workoutServerRepository = new WorkoutServerRepository();

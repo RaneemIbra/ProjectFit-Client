@@ -22,6 +22,9 @@ public interface WorkoutDAO {
     @Query("SELECT * FROM workouts")
     LiveData<List<Workout>> getAllWorkouts();
 
+    @Query("SELECT * FROM workouts WHERE workoutName = :workoutName LIMIT 1")
+    Workout getWorkoutByName(String workoutName);
+
     @Query("SELECT * FROM workouts WHERE workoutType = :type")
     LiveData<List<Workout>> getWorkoutsByType(String type);
 

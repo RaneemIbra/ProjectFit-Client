@@ -22,6 +22,9 @@ import com.example.projectfit.Server.Repositories.UserServerRepository;
 import com.example.projectfit.Utils.Validation;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class LoginActivity extends AppCompatActivity {
     private TextInputLayout emailLayout, passwordLayout;
     private Button loginButton;
@@ -30,12 +33,14 @@ public class LoginActivity extends AppCompatActivity {
     private Validation validation;
     private UserRoomRepository userRoomRepository;
     private UserServerRepository userServerRepository;
+    private ExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -52,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         userRoomRepository = new UserRoomRepository(this);
         userServerRepository = new UserServerRepository();
         validation = new Validation();
+        executorService = Executors.newSingleThreadExecutor();
     }
 
     private void initializeViews() {
@@ -67,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         signUpText.setOnClickListener(view -> navigateToActivity(RegisterActivity.class));
         forgotPasswordText.setOnClickListener(view -> navigateToActivity(ResetPasswordActivity.class));
         loginButton.setOnClickListener(view -> handleLogin());
+
         rememberMeCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (!isChecked) {
                 clearCredentials();
@@ -102,20 +109,26 @@ public class LoginActivity extends AppCompatActivity {
         String password = getTextFromInput(passwordLayout);
 
         if (validation.emailValidate(email, emailLayout) && validation.passwordValidate(password, passwordLayout)) {
-            userRoomRepository.validateUserLocal(email, password, new UserRoomRepository.OnUserValidationCallback() {
-                @Override
-                public void onSuccess(User user) {
-                    showLoginSuccessMessage("Login successful (Local)", user);
-                    if (rememberMeCheckBox.isChecked()) {
-                        saveCredentials(email, password);
+            executorService.execute(() -> {
+                userRoomRepository.validateUserLocal(email, password, new UserRoomRepository.OnUserValidationCallback() {
+                    @Override
+                    public void onSuccess(User user) {
+                        runOnUiThread(() -> handleLocalLoginSuccess(email, password, user));
                     }
-                }
 
-                @Override
-                public void onFailure(String errorMessage) {
-                    checkUserOnServer(email, password);
-                }
+                    @Override
+                    public void onFailure(String errorMessage) {
+                        checkUserOnServer(email, password);
+                    }
+                });
             });
+        }
+    }
+
+    private void handleLocalLoginSuccess(String email, String password, User user) {
+        showLoginSuccessMessage("Login successful (Local)", user);
+        if (rememberMeCheckBox.isChecked()) {
+            saveCredentials(email, password);
         }
     }
 
@@ -136,24 +149,24 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void checkUserOnServer(String email, String password) {
-        userServerRepository.validateUserServer(email, password, new UserServerRepository.OnUserValidationCallback() {
-            @Override
-            public void onSuccess(User user) {
-                showLoginSuccessMessage("Login successful (Server)", user);
-            }
+        executorService.execute(() -> {
+            userServerRepository.validateUserServer(email, password, new UserServerRepository.OnUserValidationCallback() {
+                @Override
+                public void onSuccess(User user) {
+                    runOnUiThread(() -> showLoginSuccessMessage("Login successful (Server)", user));
+                }
 
-            @Override
-            public void onFailure(String errorMessage) {
-                showToastMessage(errorMessage);
-            }
+                @Override
+                public void onFailure(String errorMessage) {
+                    runOnUiThread(() -> showToastMessage(errorMessage));
+                }
+            });
         });
     }
 
     private void showLoginSuccessMessage(String message, User user) {
-        runOnUiThread(() -> {
-            showToastMessage(message);
-            navigateToHomePage(user);
-        });
+        showToastMessage(message);
+        navigateToHomePage(user);
     }
 
     private void showToastMessage(String message) {
@@ -170,5 +183,11 @@ public class LoginActivity extends AppCompatActivity {
     private String getTextFromInput(TextInputLayout textInputLayout) {
         EditText editText = textInputLayout.getEditText();
         return editText != null ? editText.getText().toString().trim() : "";
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        executorService.shutdown();
     }
 }

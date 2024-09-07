@@ -15,9 +15,8 @@ public class Workout {
     String workoutDescription;
     List<String> muscles;
     int calories;
-    private String workoutImageBase64;
-    private String workoutIconBase64;
-    private String workoutAnimationBase64;
+    int workoutImageResId;
+    int workoutLogoResId;
     List<Integer> sets_reps;
     int difficulty;
 
@@ -26,19 +25,18 @@ public class Workout {
     }
 
     public Workout(String workoutName, int durationInMinutes, String workoutType, String workoutDescription,
-                   List<String> muscles, int calories, String workoutImage, String workoutIconBase64,
-                   String workoutAnimation, List<Integer> sets_reps, int difficulty) {
+                   List<String> muscles, int calories, int workoutImageResId,
+                    List<Integer> sets_reps, int difficulty, int workoutLogoResId) {
         this.workoutName = workoutName;
         this.durationInMinutes = durationInMinutes;
         this.workoutType = workoutType;
         this.workoutDescription = workoutDescription;
         this.muscles = muscles;
         this.calories = calories;
-        this.workoutImageBase64 = workoutImage;
-        this.workoutIconBase64 = workoutIconBase64;
-        this.workoutAnimationBase64 = workoutAnimation;
+        this.workoutImageResId = workoutImageResId;
         this.sets_reps = sets_reps;
         this.difficulty = difficulty;
+        this.workoutLogoResId = workoutLogoResId;
     }
 
     public Long getId() {
@@ -81,6 +79,14 @@ public class Workout {
         this.workoutDescription = workoutDescription;
     }
 
+    public int getWorkoutLogoResId() {
+        return workoutLogoResId;
+    }
+
+    public void setWorkoutLogoResId(int workoutLogoResId) {
+        this.workoutLogoResId = workoutLogoResId;
+    }
+
     public List<String> getMuscles() {
         return muscles;
     }
@@ -97,28 +103,12 @@ public class Workout {
         this.calories = calories;
     }
 
-    public String getWorkoutImageBase64() {
-        return workoutImageBase64;
+    public int getWorkoutImageResId() {
+        return workoutImageResId;
     }
 
-    public void setWorkoutImageBase64(String workoutImageBase64) {
-        this.workoutImageBase64 = workoutImageBase64;
-    }
-
-    public String getWorkoutIconBase64() {
-        return workoutIconBase64;
-    }
-
-    public void setWorkoutIconBase64(String workoutIconBase64) {
-        this.workoutIconBase64 = workoutIconBase64;
-    }
-
-    public String getWorkoutAnimationBase64() {
-        return workoutAnimationBase64;
-    }
-
-    public void setWorkoutAnimationBase64(String workoutAnimationBase64) {
-        this.workoutAnimationBase64 = workoutAnimationBase64;
+    public void setWorkoutImageResId(int workoutImageResId) {
+        this.workoutImageResId = workoutImageResId;
     }
 
     public List<Integer> getSets_reps() {

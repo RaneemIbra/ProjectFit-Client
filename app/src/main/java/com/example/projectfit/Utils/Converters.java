@@ -1,10 +1,7 @@
 package com.example.projectfit.Utils;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
 import android.os.Build;
-import android.util.Base64;
 
 import androidx.room.TypeConverter;
 
@@ -12,7 +9,6 @@ import com.example.projectfit.Models.Workout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,23 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Converters {
-
-    public static String convertDrawableToBase64(Context context, int drawableId) {
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), drawableId);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
-    }
-
-
-    public static byte[] convertDrawableToByteArray(Context context, int drawableId) {
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), drawableId);
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-        return outputStream.toByteArray();
-    }
 
     // LocalDate to String
     @TypeConverter

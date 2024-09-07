@@ -18,6 +18,9 @@ import com.example.projectfit.Server.Repositories.UserServerRepository;
 import com.example.projectfit.Utils.Validation;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class ResetPasswordActivity extends AppCompatActivity {
     private TextInputLayout emailLayout, answerLayout, passwordLayout, confirmPasswordLayout;
     private Spinner securityQuestionSpinner;
@@ -26,12 +29,14 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private UserRoomRepository userRoomRepository;
     private UserServerRepository userServerRepository;
     private String selectedSecurityQuestion;
+    private ExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_reset_password);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -40,6 +45,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         initializeViews();
         initializeRepositories();
+
         resetButton.setOnClickListener(view -> handleResetPassword());
     }
 
@@ -56,6 +62,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         userRoomRepository = new UserRoomRepository(this);
         userServerRepository = new UserServerRepository();
         validation = new Validation();
+        executorService = Executors.newSingleThreadExecutor();
     }
 
     private void handleResetPassword() {
@@ -65,82 +72,60 @@ public class ResetPasswordActivity extends AppCompatActivity {
         String confirmPassword = getTextFromInput(confirmPasswordLayout);
         selectedSecurityQuestion = securityQuestionSpinner.getSelectedItem().toString();
 
-        emailLayout.setError(null);
-        answerLayout.setError(null);
-        passwordLayout.setError(null);
-        confirmPasswordLayout.setError(null);
-        boolean isValid = true;
-
-        if (!validation.emailValidate(email, emailLayout)) {
-            isValid = false;
-        }
-
-        if (!validation.ValidateText(answer, answerLayout)) {
-            isValid = false;
-        }
-
-        if (!validation.passwordValidate(newPassword, passwordLayout)) {
-            isValid = false;
-        }
-
-        if (!newPassword.equals(confirmPassword)) {
-            confirmPasswordLayout.setError("Passwords do not match");
-            isValid = false;
-        }
-
-        if (!isValid) {
+        if (!validateInput(email, answer, newPassword, confirmPassword)) {
             return;
         }
 
         resetButton.setEnabled(false);
 
-        userRoomRepository.validateUserLocalByAnswer(email, answer, new UserRoomRepository.OnUserValidationCallback() {
+        executorService.execute(() -> {
+            userRoomRepository.validateUserLocalByAnswer(email, answer, new UserRoomRepository.OnUserValidationCallback() {
+                @Override
+                public void onSuccess(User user) {
+                    user.setPassword(newPassword);
+                    userRoomRepository.updateUserLocally(user);
+                    updateUserOnServer(user, "Password reset successfully (Local)");
+                }
+
+                @Override
+                public void onFailure(String errorMessage) {
+                    checkUserOnServer(email, answer, newPassword);
+                }
+            });
+        });
+    }
+
+    private boolean validateInput(String email, String answer, String newPassword, String confirmPassword) {
+        boolean isValid = true;
+
+        if (!validation.emailValidate(email, emailLayout)) {
+            isValid = false;
+        }
+        if (!validation.ValidateText(answer, answerLayout)) {
+            isValid = false;
+        }
+        if (!validation.passwordValidate(newPassword, passwordLayout)) {
+            isValid = false;
+        }
+        if (!newPassword.equals(confirmPassword)) {
+            confirmPasswordLayout.setError("Passwords do not match");
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    private void checkUserOnServer(String email, String answer, String newPassword) {
+        userServerRepository.validateUserServerByAnswer(email, answer, new UserServerRepository.OnUserValidationCallback() {
             @Override
             public void onSuccess(User user) {
                 user.setPassword(newPassword);
-                userRoomRepository.updateUserLocally(user);
-
-                updateUserOnServer(user, "Password reset successfully");
-
-                runOnUiThread(() -> {
-                    Toast.makeText(ResetPasswordActivity.this, "Password reset successfully (Local)", Toast.LENGTH_SHORT).show();
-                });
+                updateUserOnServer(user, "Password reset successfully (Server)");
             }
 
             @Override
             public void onFailure(String errorMessage) {
-                userServerRepository.validateUserServerByAnswer(email, answer, new UserServerRepository.OnUserValidationCallback() {
-                    @Override
-                    public void onSuccess(User user) {
-                        user.setPassword(newPassword);
-                        userServerRepository.updateUser(user, new UserServerRepository.OnUserUpdateCallback() {
-                            @Override
-                            public void onSuccess() {
-                                userRoomRepository.updateUserLocally(user);
-                                runOnUiThread(() -> {
-                                    Toast.makeText(ResetPasswordActivity.this, "Password reset successfully (Server)", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                });
-                            }
-
-                            @Override
-                            public void onFailure(String errorMessage) {
-                                runOnUiThread(() -> {
-                                    Toast.makeText(ResetPasswordActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
-                                    resetButton.setEnabled(true);
-                                });
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onFailure(String errorMessage) {
-                        runOnUiThread(() -> {
-                            Toast.makeText(ResetPasswordActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
-                            resetButton.setEnabled(true);
-                        });
-                    }
-                });
+                showError(errorMessage);
             }
         });
     }
@@ -157,17 +142,25 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorMessage) {
-                runOnUiThread(() -> {
-                    Toast.makeText(ResetPasswordActivity.this, "Server update failed: " + errorMessage, Toast.LENGTH_SHORT).show();
-                    resetButton.setEnabled(true);
-                });
+                showError("Server update failed: " + errorMessage);
             }
         });
     }
 
+    private void showError(String errorMessage) {
+        runOnUiThread(() -> {
+            Toast.makeText(ResetPasswordActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+            resetButton.setEnabled(true);
+        });
+    }
 
     private String getTextFromInput(TextInputLayout textInputLayout) {
-        return textInputLayout.getEditText() != null ?
-                textInputLayout.getEditText().getText().toString().trim() : "";
+        return textInputLayout.getEditText() != null ? textInputLayout.getEditText().getText().toString().trim() : "";
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        executorService.shutdown();
     }
 }

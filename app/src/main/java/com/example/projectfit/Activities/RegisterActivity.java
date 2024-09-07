@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -26,11 +27,12 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private TextInputLayout fullNameLayout, emailLayout, passwordLayout,
-            birthDateLayout, heightLayout, weightLayout, answerLayout;
+    private TextInputLayout fullNameLayout, emailLayout, passwordLayout, birthDateLayout, heightLayout, weightLayout, answerLayout;
     private TextInputEditText birthDateEditText;
     private Button registerButton;
     private Validation validation;
@@ -40,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
     private UserRoomRepository userRoomRepository;
     private UserServerRepository userServerRepository;
     private LocalDate selectedBirthDate;
+    private ExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +54,38 @@ public class RegisterActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        initializeRepositories();
+        initializeViews();
+        setupListeners();
+    }
+
+    private void initializeRepositories() {
         userRoomRepository = new UserRoomRepository(this);
         userServerRepository = new UserServerRepository();
-        initializeViews();
         validation = new Validation();
+        executorService = Executors.newSingleThreadExecutor();
+    }
+
+    private void initializeViews() {
+        fullNameLayout = findViewById(R.id.nameLayout);
+        emailLayout = findViewById(R.id.emailLayout);
+        passwordLayout = findViewById(R.id.passwordLayout);
+        heightLayout = findViewById(R.id.HeightLayout);
+        weightLayout = findViewById(R.id.WeightLayout);
+        answerLayout = findViewById(R.id.AnswerLayout);
+        securityQuestionSpinner = findViewById(R.id.spinner);
+        birthDateLayout = findViewById(R.id.birthDateLayout);
+        birthDateEditText = findViewById(R.id.birthDate);
+        registerButton = findViewById(R.id.register_button);
+        signInText = findViewById(R.id.signInText);
+    }
+
+    private void setupListeners() {
         setupSpinnerListener();
         birthDateEditText.setOnClickListener(v -> showDatePickerDialog());
         registerButton.setOnClickListener(view -> handleRegisterClick());
-        signInText.setOnClickListener(view -> {
-            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        });
+        signInText.setOnClickListener(view -> navigateToActivity(LoginActivity.class));
     }
 
     private void setupSpinnerListener() {
@@ -74,6 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                selectedQuestion = null;
             }
         });
     }
@@ -91,26 +115,12 @@ public class RegisterActivity extends AppCompatActivity {
                     String birthDateString = selectedDay + "/" + selectedMonth + "/" + selectedYear;
                     birthDateEditText.setText(birthDateString);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        selectedBirthDate = LocalDate.of(selectedYear, selectedMonth, selectedDay); // Store selected birth date
+                        selectedBirthDate = LocalDate.of(selectedYear, selectedMonth, selectedDay);
                     }
                 },
                 year, month, day);
 
         datePickerDialog.show();
-    }
-
-    private void initializeViews() {
-        fullNameLayout = findViewById(R.id.nameLayout);
-        emailLayout = findViewById(R.id.emailLayout);
-        passwordLayout = findViewById(R.id.passwordLayout);
-        heightLayout = findViewById(R.id.HeightLayout);
-        weightLayout = findViewById(R.id.WeightLayout);
-        answerLayout = findViewById(R.id.AnswerLayout);
-        securityQuestionSpinner = findViewById(R.id.spinner);
-        birthDateLayout = findViewById(R.id.birthDateLayout);
-        birthDateEditText = findViewById(R.id.birthDate);
-        registerButton = findViewById(R.id.register_button);
-        signInText = findViewById(R.id.signInText);
     }
 
     private void handleRegisterClick() {
@@ -121,6 +131,23 @@ public class RegisterActivity extends AppCompatActivity {
         String weightText = getTextFromInput(weightLayout);
         String answerText = getTextFromInput(answerLayout);
 
+        if (isValidInput(fullNameText, emailText, passwordText, heightText, weightText, answerText)) {
+            User newUser = new User(null, fullNameText, null, emailText, passwordText, selectedBirthDate,
+                    Double.parseDouble(heightText), Double.parseDouble(weightText), true, selectedQuestion, answerText, null, null, null, null, null, null);
+
+            executorService.execute(() -> {
+                userRoomRepository.addUserLocally(newUser);
+                userServerRepository.addUserInServer(newUser);
+
+                runOnUiThread(() -> {
+                    Toast.makeText(RegisterActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
+                    navigateToActivity(LoginActivity.class);
+                });
+            });
+        }
+    }
+
+    private boolean isValidInput(String fullNameText, String emailText, String passwordText, String heightText, String weightText, String answerText) {
         boolean isFullNameValid = validation.ValidateText(fullNameText, fullNameLayout);
         boolean isEmailValid = validation.emailValidate(emailText, emailLayout);
         boolean isPasswordValid = validation.passwordValidate(passwordText, passwordLayout);
@@ -136,19 +163,7 @@ public class RegisterActivity extends AppCompatActivity {
             birthDateLayout.setErrorEnabled(false);
         }
 
-        if (isFullNameValid && isEmailValid && isPasswordValid && isHeightValid &&
-                isWeightValid && isAnswerValid && isQuestionSelected && isBirthDateValid) {
-            User newUser = new User(null, fullNameText, null, emailText, passwordText,
-                    selectedBirthDate, Double.parseDouble(heightText), Double.parseDouble(weightText),
-                    true, selectedQuestion, answerText, null, null, null, null, null, null);
-
-            userRoomRepository.addUserLocally(newUser);
-            userServerRepository.addUserInServer(newUser);
-            Toast.makeText(this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        return isFullNameValid && isEmailValid && isPasswordValid && isHeightValid && isWeightValid && isAnswerValid && isQuestionSelected && isBirthDateValid;
     }
 
     private String getTextFromInput(TextInputLayout textInputLayout) {
@@ -162,5 +177,16 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private void navigateToActivity(Class<?> targetActivity) {
+        Intent intent = new Intent(RegisterActivity.this, targetActivity);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        executorService.shutdown();
     }
 }

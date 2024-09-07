@@ -23,7 +23,7 @@ public class UserRoomRepository {
         });
     }
 
-    public LiveData<List<User>> getAllUsersLocally() {
+    public List<User> getAllUsersLocally() {
         return userDatabase.userDAO().getAllUsers();
     }
 

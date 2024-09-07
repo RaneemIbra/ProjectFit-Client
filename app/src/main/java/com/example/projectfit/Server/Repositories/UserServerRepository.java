@@ -85,27 +85,34 @@ public class UserServerRepository {
         });
     }
 
-    public void updateUserPassword(User user, OnUserUpdateCallback callback) {
+    public void updateUser(User user, OnUserUpdateCallback callback) {
+        if (user.getId() == null) {
+            System.out.println("User ID is null. Cannot update user on server.");
+            callback.onFailure("User ID is missing");
+            return;
+        }
+
+        System.out.println("Updating user with ID: " + user.getId());
         Call<User> call = userAPI.updateUser(user.getId(), user);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
+                    System.out.println("User successfully updated on server: " + response.body().getPassword());
                     callback.onSuccess();
-                    System.out.println("Sending updated password to server: " + user.getPassword());
-
                 } else {
-                    callback.onFailure("Failed to update password on server");
+                    System.out.println("Failed to update user on server: " + response.code() + ", " + response.message());
+                    callback.onFailure("Failed to update user on server");
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                System.out.println("Error: " + t.getMessage());
                 callback.onFailure("Error: " + t.getMessage());
             }
         });
     }
-
 
 
     public interface OnUserValidationCallback {

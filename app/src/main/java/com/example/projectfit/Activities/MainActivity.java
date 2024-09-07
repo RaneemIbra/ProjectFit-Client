@@ -1,7 +1,10 @@
 package com.example.projectfit.Activities;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initializeRepositories();
-        addSampleUser();
         addAllWorkouts();
+        transferUserDataToServer();
         setupNavigation();
     }
 
@@ -55,25 +58,6 @@ public class MainActivity extends AppCompatActivity {
         workoutRoomRepository = new WorkoutRoomRepository(this);
         workoutServerRepository = new WorkoutServerRepository();
     }
-
-    private void addSampleUser() {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(() -> {
-            LocalDate birthday = null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                birthday = LocalDate.ofYearDay(2024, 1);
-            }
-
-            User sampleUser = new User(null, "Temp1", 5L, "Temp1", "Temp1", birthday, 1.9, 80, true, "Temp1", "Temp1", null, null, null, null, null, null);
-
-            if (userRoomRepository.getUserByEmail("Temp1") == null) {
-                userRoomRepository.addUserLocally(sampleUser);
-                userServerRepository.addUserInServer(sampleUser);
-            }
-        });
-        executor.shutdown();
-    }
-
 
     private void addAllWorkouts() {
         ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -233,4 +217,31 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+    private boolean isConnectedToServer() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private void transferUserDataToServer() {
+        if (isConnectedToServer()) {
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.execute(() -> {
+                List<User> localUsers = userRoomRepository.getAllUsersLocally();
+
+                for (User user : localUsers) {
+                    userServerRepository.addUserInServer(user);
+                }
+
+                runOnUiThread(() -> {
+                    Toast.makeText(MainActivity.this, "All local users transferred to the server", Toast.LENGTH_SHORT).show();
+                });
+            });
+            executor.shutdown();
+        } else {
+            Toast.makeText(MainActivity.this, "No network connection. Unable to transfer users.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

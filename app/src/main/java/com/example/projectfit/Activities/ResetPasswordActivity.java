@@ -100,7 +100,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 user.setPassword(newPassword);
                 userRoomRepository.updateUserLocally(user);
 
-                updatePasswordOnServer(user, "Password reset successfully");
+                updateUserOnServer(user, "Password reset successfully");
 
                 runOnUiThread(() -> {
                     Toast.makeText(ResetPasswordActivity.this, "Password reset successfully (Local)", Toast.LENGTH_SHORT).show();
@@ -113,7 +113,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(User user) {
                         user.setPassword(newPassword);
-                        userServerRepository.updateUserPassword(user, new UserServerRepository.OnUserUpdateCallback() {
+                        userServerRepository.updateUser(user, new UserServerRepository.OnUserUpdateCallback() {
                             @Override
                             public void onSuccess() {
                                 userRoomRepository.updateUserLocally(user);
@@ -145,8 +145,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
         });
     }
 
-    private void updatePasswordOnServer(User user, String successMessage) {
-        userServerRepository.updateUserPassword(user, new UserServerRepository.OnUserUpdateCallback() {
+    private void updateUserOnServer(User user, String successMessage) {
+        userServerRepository.updateUser(user, new UserServerRepository.OnUserUpdateCallback() {
             @Override
             public void onSuccess() {
                 runOnUiThread(() -> {
@@ -158,7 +158,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
             @Override
             public void onFailure(String errorMessage) {
                 runOnUiThread(() -> {
-                    Toast.makeText(ResetPasswordActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ResetPasswordActivity.this, "Server update failed: " + errorMessage, Toast.LENGTH_SHORT).show();
                     resetButton.setEnabled(true);
                 });
             }

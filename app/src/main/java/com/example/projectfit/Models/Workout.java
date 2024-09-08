@@ -2,6 +2,9 @@ package com.example.projectfit.Models;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.example.projectfit.Utils.Converters;
 
 import java.util.List;
 
@@ -13,7 +16,8 @@ public class Workout {
     int durationInMinutes;
     String workoutType;
     String workoutDescription;
-    List<String> muscles;
+    @TypeConverters(Converters.class)
+    private List<String> muscles;
     int calories;
     int workoutImageResId;
     int workoutLogoResId;

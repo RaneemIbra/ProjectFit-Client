@@ -2,10 +2,8 @@ package com.example.projectfit.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.LinearLayout;
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -17,12 +15,20 @@ import com.google.android.material.imageview.ShapeableImageView;
 
 public class WorkoutsFilterActivity extends AppCompatActivity {
 
-    private final int[] categoryLayoutIds = {
-            R.id.body_part_chest, R.id.body_part_back, R.id.body_part_legs, R.id.body_part_abs,
-            R.id.body_part_core, R.id.body_part_biceps, R.id.body_part_shoulders, R.id.body_part_triceps,
-            R.id.beginner_level, R.id.intermediate_level, R.id.advanced_level,
-            R.id.r7kmbxwvlz6o, R.id.rcdhqfptnugj, R.id.r17jd3ea8ta1,
-            R.id.rvg9e9e3fjjq, R.id.ro2x0y9luguo, R.id.rzxm2hmf0u7
+//    private final int[] categoryLayoutIds = {
+//            R.id.body_part_chest, R.id.body_part_back, R.id.body_part_legs, R.id.body_part_abs,
+//            R.id.body_part_core, R.id.body_part_biceps, R.id.body_part_shoulders, R.id.body_part_triceps,
+//            R.id.beginner_level, R.id.intermediate_level, R.id.advanced_level,
+//            R.id.BodyBuildingLayout, R.id.MobilityLayout, R.id.CalisthenicsLayout,
+//            R.id.rvg9e9e3fjjq, R.id.ro2x0y9luguo, R.id.rzxm2hmf0u7
+//    };
+
+    private final int[] workoutTypeLayoutIds = {
+            R.id.BodyBuildingLayout, R.id.MobilityLayout, R.id.CalisthenicsLayout
+    };
+
+    private final int[] difficultyLayoutIds = {
+            R.id.beginner_level, R.id.intermediate_level, R.id.advanced_level
     };
 
     private final int[] imageViewIds = {
@@ -56,6 +62,7 @@ public class WorkoutsFilterActivity extends AppCompatActivity {
         setupBottomNavigation();
         setupCategoryImages();
         setupCategoryClickListeners();
+        setupDifficultyClickListeners();
     }
 
     private void setupBottomNavigation() {
@@ -98,13 +105,50 @@ public class WorkoutsFilterActivity extends AppCompatActivity {
     }
 
     private void setupCategoryClickListeners() {
-        for (int layoutId : categoryLayoutIds) {
+        for (int layoutId : workoutTypeLayoutIds) {
             LinearLayout categoryLayout = findViewById(layoutId);
             categoryLayout.setOnClickListener(v -> {
+                String selectedCategory = getCategoryById(v.getId());
                 Intent intent = new Intent(WorkoutsFilterActivity.this, WorkoutsListActivity.class);
-                intent.putExtra("selected_category", v.getId());
+                intent.putExtra("workout_category", selectedCategory); // Pass selected category
                 startActivity(intent);
             });
+        }
+    }
+
+    private void setupDifficultyClickListeners() {
+        for (int layoutId : difficultyLayoutIds) {
+            LinearLayout difficultyLayout = findViewById(layoutId);
+            difficultyLayout.setOnClickListener(v -> {
+                int selectedDifficulty = getDifficultyById(v.getId());
+                Intent intent = new Intent(WorkoutsFilterActivity.this, WorkoutsListActivity.class);
+                intent.putExtra("difficulty_level", selectedDifficulty);
+                startActivity(intent);
+            });
+        }
+    }
+
+    private int getDifficultyById(int difficultyId) {
+        if (difficultyId == R.id.beginner_level) {
+            return 1;
+        } else if (difficultyId == R.id.intermediate_level) {
+            return 2;
+        } else if (difficultyId == R.id.advanced_level) {
+            return 3;
+        } else {
+            return -1;
+        }
+    }
+
+    private String getCategoryById(int categoryId) {
+        if (categoryId == R.id.BodyBuildingLayout) {
+            return "Bodybuilding";
+        } else if (categoryId == R.id.MobilityLayout) {
+            return "Mobility";
+        } else if (categoryId == R.id.CalisthenicsLayout) {
+            return "Calisthenics";
+        } else {
+            return null;
         }
     }
 }

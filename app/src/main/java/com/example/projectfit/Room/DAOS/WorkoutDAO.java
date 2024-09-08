@@ -33,4 +33,5 @@ public interface WorkoutDAO {
 
     @Query("SELECT * FROM workouts WHERE difficulty = :difficulty")
     LiveData<List<Workout>> getWorkoutsByDifficulty(int difficulty);
+
 }

@@ -44,7 +44,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
         holder.workoutDuration.setText(workout.getDurationInMinutes() + " Minutes");
         holder.workoutCalories.setText(workout.getCalories() + " Kcal");
 
-        Glide.with(holder.itemView.getContext()).load(workout.getWorkoutImageResId()).into(holder.workoutLogo);
+        Glide.with(holder.itemView.getContext()).load(workout.getWorkoutLogoResId()).into(holder.workoutLogo);
 
         holder.itemView.setOnClickListener(v -> listener.onWorkoutSelected(workout));
     }

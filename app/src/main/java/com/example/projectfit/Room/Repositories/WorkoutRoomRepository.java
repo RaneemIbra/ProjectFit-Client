@@ -39,4 +39,12 @@ public class WorkoutRoomRepository {
     public LiveData<List<Workout>> getWorkoutsByType(String type) {
         return workoutDatabase.workoutDAO().getWorkoutsByType(type);
     }
+
+    public LiveData<List<Workout>> getWorkoutsByMuscle(String muscle) {
+        return workoutDatabase.workoutDAO().getWorkoutsByMuscle(muscle);
+    }
+
+    public LiveData<List<Workout>> getWorkoutsByDurationRange(int minDuration, int maxDuration) {
+        return workoutDatabase.workoutDAO().getWorkoutsByDurationRange(minDuration, maxDuration);
+    }
 }

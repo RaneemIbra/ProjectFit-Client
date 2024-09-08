@@ -27,66 +27,14 @@
             android:clipToPadding="false"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/r2tgxsisf2kk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginHorizontal="11dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/home_button"
-                    android:layout_width="104dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/s000000sw1cr38bff9a01"
-                    android:paddingVertical="11dp"
-                    android:elevation="4dp"
-                    android:text="HOME"
-                    android:textColor="#000000"
-                    android:textSize="17sp"
-                    android:gravity="center_horizontal" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/plan_button"
-                    android:layout_width="104dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/s000000sw1cr38bffffff"                    android:paddingVertical="11dp"
-                    android:elevation="4dp"
-                    android:text="PLAN"
-                    android:textColor="#000000"
-                    android:textSize="17sp"
-                    android:gravity="center_horizontal" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/button_profile_home"
-                    android:layout_width="104dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/s000000sw1cr38bffffff"
-                    android:paddingVertical="11dp"
-                    android:text="PROFILE"
-                    android:textColor="#000000"
-                    android:textSize="17sp"
-                    android:gravity="center_horizontal" />
-
-            </LinearLayout>
 
             <TextView
                 android:id="@+id/r5n274afxjlp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="50dp"
                 android:gravity="center"
                 android:text="Weekly Report"
                 android:textColor="#131313"
@@ -321,4 +269,17 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemIconTint="@color/nav_color"
+        app:itemTextColor="@color/nav_color_text"
+        app:menu="@menu/tool_bar"
+        app:labelVisibilityMode="labeled"
+        android:background="@drawable/rounded"
+        app:itemIconSize="24dp"/>
+
 </LinearLayout>

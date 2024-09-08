@@ -2,66 +2,136 @@ package com.example.projectfit.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.example.projectfit.Models.Workout;
 import com.example.projectfit.R;
-import com.google.android.material.imageview.ShapeableImageView;
+import com.example.projectfit.Room.Repositories.WorkoutRoomRepository;
+import com.example.projectfit.Utils.WorkoutAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.List;
 
 public class WorkoutsListActivity extends AppCompatActivity {
-    Button button_home, button_profile, button_build_plan;
-    LinearLayout layout1,layout2,layout3,layout4,layout5,layout6;
+
+    private BottomNavigationView bottomBar;
+    private WorkoutRoomRepository workoutRoomRepository;
+    private RecyclerView workoutRecyclerView;
+    private WorkoutAdapter workoutAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_workouts_list);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;  
+            return insets;
         });
+
         initViews();
+        initRepositories();
+        observeFilteredWorkouts();
         initClickListeners();
+    }
+
+    private void initClickListeners() {
+        bottomBar.setOnNavigationItemSelectedListener(item -> {
+            int id_item = item.getItemId();
+            if (id_item == R.id.home_BottomIcon) {
+                navigateTo(HomePageActivity.class);
+                return true;
+            } else if (id_item == R.id.plan_BottomIcon) {
+                navigateTo(MyPlanActivity.class);
+                return true;
+            } else if (id_item == R.id.workouts_BottomIcon) {
+                navigateTo(WorkoutsFilterActivity.class);
+                return true;
+            } else if (id_item == R.id.profile_BottomIcon) {
+                navigateTo(ProfileActivity.class);
+                return true;
+            } else
+                return false;
+        });
+    }
+
+    private void initRepositories() {
+        workoutRoomRepository = new WorkoutRoomRepository(this);
+    }
+
+    private void initViews() {
+        bottomBar = findViewById(R.id.bottom_navigation);
+        workoutRecyclerView = findViewById(R.id.workoutRecyclerView);
+        workoutRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        workoutAdapter = new WorkoutAdapter(this::onWorkoutSelected);
+        workoutRecyclerView.setAdapter(workoutAdapter);
+    }
+
+    private void observeFilteredWorkouts() {
+        String workoutCategory = getIntent().getStringExtra("workout_category");
+        int difficultyLevel = getIntent().getIntExtra("difficulty_level", -1);
+
+        if (workoutCategory != null) {
+            workoutRoomRepository.getWorkoutsByType(workoutCategory).observe(this, new Observer<List<Workout>>() {
+                @Override
+                public void onChanged(List<Workout> workouts) {
+                    if (workouts != null && !workouts.isEmpty()) {
+                        workoutAdapter.setWorkouts(workouts);
+                    } else {
+                        Toast.makeText(WorkoutsListActivity.this, "No workouts available for the selected category", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+        else if (difficultyLevel != -1) {
+            workoutRoomRepository.getWorkoutsByDifficulty(difficultyLevel).observe(this, new Observer<List<Workout>>() {
+                @Override
+                public void onChanged(List<Workout> workouts) {
+                    if (workouts != null && !workouts.isEmpty()) {
+                        workoutAdapter.setWorkouts(workouts);
+                    } else {
+                        Toast.makeText(WorkoutsListActivity.this, "No workouts available for the selected difficulty", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            workoutRoomRepository.getAllWorkoutsLocally().observe(this, new Observer<List<Workout>>() {
+                @Override
+                public void onChanged(List<Workout> workouts) {
+                    if (workouts != null && !workouts.isEmpty()) {
+                        workoutAdapter.setWorkouts(workouts);
+                    } else {
+                        Toast.makeText(WorkoutsListActivity.this, "No workouts available", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
+    private void onWorkoutSelected(Workout workout) {
+        Intent intent = new Intent(WorkoutsListActivity.this, WorkoutActivity.class);
+        intent.putExtra("workout_name", workout.getWorkoutName());
+        intent.putExtra("workout_duration", workout.getDurationInMinutes());
+        intent.putExtra("workout_calories", workout.getCalories());
+        intent.putExtra("workout_description", workout.getWorkoutDescription());
+        intent.putExtra("workout_image_res_id", workout.getWorkoutImageResId());
+        startActivity(intent);
     }
 
     private void navigateTo(Class<?> targetActivity) {
         startActivity(new Intent(WorkoutsListActivity.this, targetActivity));
-    }
-    private void initClickListeners() {
-        button_home.setOnClickListener(v -> navigateTo(HomePageActivity.class));
-        button_profile.setOnClickListener(v -> navigateTo(ProfileActivity.class));
-        button_build_plan.setOnClickListener(v -> navigateTo(PlanQuestionsActivity.class));
-        layout1.setOnClickListener(v -> navigateTo(WorkoutActivity.class));
-        layout2.setOnClickListener(v -> navigateTo(WorkoutActivity.class));
-        layout3.setOnClickListener(v -> navigateTo(WorkoutActivity.class));
-        layout4.setOnClickListener(v -> navigateTo(WorkoutActivity.class));
-        layout5.setOnClickListener(v -> navigateTo(WorkoutActivity.class));
-        layout6.setOnClickListener(v -> navigateTo(WorkoutActivity.class));
-    }
-    private void initViews() {
-        button_home = findViewById(R.id.button_home_list);
-        button_profile = findViewById(R.id.button_profile_list);
-        button_build_plan = findViewById(R.id.button_build_plan_list);
-        layout1 = findViewById(R.id.layout1);
-        layout2 = findViewById(R.id.layout2);
-        layout3 = findViewById(R.id.layout3);
-        layout4 = findViewById(R.id.layout4);
-        layout5 = findViewById(R.id.layout5);
-        layout6 = findViewById(R.id.layout6);
-        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image1));
-        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image2));
-        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image3));
-        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image4));
-        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image5));
-        Glide.with(this).load("https://i.imgur.com/kyjOOcy.jpeg").into((ShapeableImageView) findViewById(R.id.image6));
     }
 }

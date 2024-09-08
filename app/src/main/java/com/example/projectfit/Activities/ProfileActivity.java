@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -17,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.projectfit.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.sql.Date;
@@ -31,6 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
             userWeightTextView , userBirthdateTextView , userPhoneTextView ;
     private boolean isEditing = false; // To track whether we are in edit mode
 
+    BottomNavigationView bottomBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,48 +45,9 @@ public class ProfileActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-
-
         });
-
         initViews();
-
         setupButtonListeners();
-        // Set a click listener on the "Edit Details" button
-        editDetailsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Set the visibility of the form elements to VISIBLE
-                userNameTextView.setVisibility(View.VISIBLE);
-                nameEditText.setVisibility(View.VISIBLE);
-                UpdateProfileButton.setVisibility(View.VISIBLE);
-                // Make other form elements visible similarly...
-
-                // Optionally hide the "Edit Details" button if you want
-                editDetailsButton.setVisibility(View.GONE);
-            }
-        });
-
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Clear user session or data (e.g., SharedPreferences)
-                SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear(); // Clear all stored user data
-                editor.apply();
-
-                // Optionally, show a Toast message
-                Toast.makeText(ProfileActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
-
-                // Redirect the user to the login activity
-                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
-                startActivity(intent);
-                finish(); // Close the current activity
-            }
-        });
-
     }
 
     private void initViews() {
@@ -97,7 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
         homePageBtn = findViewById(R.id.home_button);
         planBtn = findViewById(R.id.plan_button);
         logoutButton = findViewById(R.id.logoutButton);
-
+        bottomBar = findViewById(R.id.bottom_navigation);
 
 
         // setting the current user name
@@ -223,8 +188,39 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void setupButtonListeners() {
-        homePageBtn.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this, HomePageActivity.class)));
-        planBtn.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this, MyPlanActivity.class)));
+        bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener (){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item)
+            {
+                int id_item=item.getItemId();
+                if(id_item==R.id.home_BottomIcon)
+                {
+                    navigateTo(HomePageActivity.class);
+                    return true;
+                }
+                else if (id_item == R.id.plan_BottomIcon)
+                {
+                    navigateTo(MyPlanActivity.class);
+                    return true;
+                }
+                else if (id_item==R.id.workouts_BottomIcon)
+                {
+                    navigateTo(WorkoutsFilterActivity.class);
+                    return true;
+                }
+                else if ( id_item==R.id.profile_BottomIcon)
+                {
+
+                    return true;
+                }
+                else
+                    return false;
+
+            }
+        });
+    }
+    private void navigateTo(Class<?> targetActivity) {
+        startActivity(new Intent(ProfileActivity.this, targetActivity));
     }
 
     private void validateEmail() {

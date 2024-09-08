@@ -2,8 +2,6 @@ package com.example.projectfit.Activities;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
@@ -12,10 +10,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.bumptech.glide.Glide;
 import com.example.projectfit.R;
 
 public class LoadingScreenActivity extends AppCompatActivity {
+
+    private VideoView videoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,22 +26,37 @@ public class LoadingScreenActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        VideoView videoView = findViewById(R.id.videoView);
-        // Set the video path
+
+        videoView = findViewById(R.id.videoView);
         String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.introvid;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
 
-        // Add media controls
-        MediaController mediaController = new MediaController(this);
-        videoView.setMediaController(mediaController);
-        mediaController.setAnchorView(videoView);
-
-        // Loop the video
         videoView.setOnPreparedListener(mp -> mp.setLooping(true));
-
-        // Start the video
         videoView.start();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (videoView != null && videoView.isPlaying()) {
+            videoView.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (videoView != null) {
+            videoView.start();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (videoView != null) {
+            videoView.stopPlayback();
+        }
     }
 }

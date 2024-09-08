@@ -15,26 +15,28 @@ public class Workout {
     String workoutDescription;
     List<String> muscles;
     int calories;
-    private byte[] workoutImage;
-    private byte[] profileIcon;
-    private byte[] workoutAnimation;
+    int workoutImageResId;
+    int workoutLogoResId;
     List<Integer> sets_reps;
     int difficulty;
 
+    public Workout(){
+
+    }
+
     public Workout(String workoutName, int durationInMinutes, String workoutType, String workoutDescription,
-                   List<String> muscles, int calories, byte[] workoutImage, byte[] profileIcon,
-                   byte[] workoutAnimation, List<Integer> sets_reps, int difficulty) {
+                   List<String> muscles, int calories, int workoutImageResId,
+                    List<Integer> sets_reps, int difficulty, int workoutLogoResId) {
         this.workoutName = workoutName;
         this.durationInMinutes = durationInMinutes;
         this.workoutType = workoutType;
         this.workoutDescription = workoutDescription;
         this.muscles = muscles;
         this.calories = calories;
-        this.workoutImage = workoutImage;
-        this.profileIcon = profileIcon;
-        this.workoutAnimation = workoutAnimation;
+        this.workoutImageResId = workoutImageResId;
         this.sets_reps = sets_reps;
         this.difficulty = difficulty;
+        this.workoutLogoResId = workoutLogoResId;
     }
 
     public Long getId() {
@@ -77,6 +79,14 @@ public class Workout {
         this.workoutDescription = workoutDescription;
     }
 
+    public int getWorkoutLogoResId() {
+        return workoutLogoResId;
+    }
+
+    public void setWorkoutLogoResId(int workoutLogoResId) {
+        this.workoutLogoResId = workoutLogoResId;
+    }
+
     public List<String> getMuscles() {
         return muscles;
     }
@@ -93,28 +103,12 @@ public class Workout {
         this.calories = calories;
     }
 
-    public byte[] getWorkoutImage() {
-        return workoutImage;
+    public int getWorkoutImageResId() {
+        return workoutImageResId;
     }
 
-    public void setWorkoutImage(byte[] workoutImage) {
-        this.workoutImage = workoutImage;
-    }
-
-    public byte[] getProfileIcon() {
-        return profileIcon;
-    }
-
-    public void setProfileIcon(byte[] profileIcon) {
-        this.profileIcon = profileIcon;
-    }
-
-    public byte[] getWorkoutAnimation() {
-        return workoutAnimation;
-    }
-
-    public void setWorkoutAnimation(byte[] workoutAnimation) {
-        this.workoutAnimation = workoutAnimation;
+    public void setWorkoutImageResId(int workoutImageResId) {
+        this.workoutImageResId = workoutImageResId;
     }
 
     public List<Integer> getSets_reps() {

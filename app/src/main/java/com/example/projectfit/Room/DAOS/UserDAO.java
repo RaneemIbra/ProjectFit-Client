@@ -19,7 +19,7 @@ public interface UserDAO {
     void updateUser(User user);
 
     @Query("SELECT * FROM users")
-    LiveData<List<User>> getAllUsers();
+    List<User> getAllUsers();
 
     @Query("SELECT * FROM users WHERE emailAddress = :email LIMIT 1")
     User getUserByEmail(String email);

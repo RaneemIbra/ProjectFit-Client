@@ -6,6 +6,20 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="plan">Plan</string>
+    <string name="home">Home</string>
+    <string name="workouts">Workouts</string>
+    <string name="profile">Profile</string>
+
+    <string-array name="spinner_items">
+        <item>Security Question!</item>
+        <item>What was the name of your first pet?</item>
+        <item>What is the name of the street where you grew up?</item>
+        <item>What was the name of your first school?</item>
+        <item>In what city were you born?</item>
+        <item>What is the title of your favorite book?</item>
+    </string-array>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
@@ -42,13 +56,4 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
-
-    <string-array name="spinner_items">
-        <item>Security Question!</item>
-        <item>What was the name of your first pet?</item>
-        <item>What is the name of the street where you grew up?</item>
-        <item>What was the name of your first school?</item>
-        <item>In what city were you born?</item>
-        <item>What is the title of your favorite book?</item>
-    </string-array>
 </resources>

@@ -1,19 +1,12 @@
 package com.example.projectfit.Activities;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
-import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -26,7 +19,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class WorkoutActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomBar;
-    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,20 +32,8 @@ public class WorkoutActivity extends AppCompatActivity {
         });
 
         bottomBar = findViewById(R.id.bottom_navigation);
-        webView = findViewById(R.id.webview);
-
-        setupWebView();
         loadWorkoutDetails();
         setupBottomNavigation();
-    }
-
-    private void setupWebView() {
-        String videoUrl = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/SCVCLChPQFY?si=7pouIAZ4ioc2cCan\" " +
-                "title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; " +
-                "picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>";
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebChromeClient(new WebChromeClient());
-        webView.loadData(videoUrl, "text/html", "utf-8");
     }
 
     private void setupBottomNavigation() {
@@ -81,73 +61,28 @@ public class WorkoutActivity extends AppCompatActivity {
         startActivity(new Intent(WorkoutActivity.this, targetActivity));
     }
 
-    private void loadWorkoutDetails(){
+    private void loadWorkoutDetails() {
         Intent intent = getIntent();
         String workoutName = intent.getStringExtra("workout_name");
         String workoutDescription = intent.getStringExtra("workout_description");
         int workoutImageResId = intent.getIntExtra("workout_image_res_id", R.drawable.img);
+        int workoutGifResId = intent.getIntExtra("workout_gif_res_id", -1);
 
         TextView workoutNameTextView = findViewById(R.id.WorkoutTitle);
         TextView workoutDescriptionTextView = findViewById(R.id.WorkoutDescription);
         ImageView workoutImageView = findViewById(R.id.WorkoutImage);
+        ImageView workoutGifImageView = findViewById(R.id.workout_gif);
 
         workoutNameTextView.setText(workoutName);
         workoutDescriptionTextView.setText(workoutDescription);
 
         Glide.with(this).load(workoutImageResId).into(workoutImageView);
+        Glide.with(this).asGif().load(workoutGifResId).into(workoutGifImageView);
     }
 
-
-    private Bitmap decodeSampledBitmapFromBase64(String base64Image) {
-        byte[] imageBytes = Base64.decode(base64Image, Base64.DEFAULT);
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-
-        BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length, options);
-        options.inSampleSize = calculateInSampleSize(options, 100, 100);
-
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length, options);
-    }
-
-    private int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-
-        if (height > reqHeight || width > reqWidth) {
-            final int halfHeight = height / 2;
-            final int halfWidth = width / 2;
-
-            while ((halfHeight / inSampleSize) >= reqHeight && (halfWidth / inSampleSize) >= reqWidth) {
-                inSampleSize *= 2;
-            }
-        }
-        return inSampleSize;
-    }
 
     public void onBackClicked(View view) {
         navigateTo(WorkoutsListActivity.class);
         finish();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        webView.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        webView.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (webView != null) {
-            webView.destroy();
-        }
     }
 }

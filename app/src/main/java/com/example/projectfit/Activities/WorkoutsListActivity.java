@@ -138,6 +138,7 @@ public class WorkoutsListActivity extends AppCompatActivity {
         intent.putExtra("workout_calories", workout.getCalories());
         intent.putExtra("workout_description", workout.getWorkoutDescription());
         intent.putExtra("workout_image_res_id", workout.getWorkoutImageResId());
+        intent.putExtra("workout_gif_res_id", workout.getWorkoutGifResId());
         startActivity(intent);
     }
 

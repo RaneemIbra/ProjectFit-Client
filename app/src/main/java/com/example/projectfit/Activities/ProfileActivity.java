@@ -26,9 +26,11 @@ import java.util.Calendar;
 
 public class ProfileActivity extends AppCompatActivity {
     private EditText emailEditText, phoneEditText, heightEditText, weightEditText, dateEditText, nameEditText;
-    private Button editProfileButton, homePageBtn, planBtn,editDetailsButton,logoutButton;
+    private Button UpdateProfileButton, homePageBtn, planBtn,editDetailsButton,logoutButton;
     private TextView userNameTextView , userMailTextView , userAgeTextView , userHeightTextView ,
             userWeightTextView , userBirthdateTextView , userPhoneTextView ;
+    private boolean isEditing = false; // To track whether we are in edit mode
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
                 // Set the visibility of the form elements to VISIBLE
                 userNameTextView.setVisibility(View.VISIBLE);
                 nameEditText.setVisibility(View.VISIBLE);
-                editProfileButton.setVisibility(View.VISIBLE);
+                UpdateProfileButton.setVisibility(View.VISIBLE);
                 // Make other form elements visible similarly...
 
                 // Optionally hide the "Edit Details" button if you want
@@ -91,7 +93,7 @@ public class ProfileActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailEditText);
         nameEditText = findViewById(R.id.nameEditText);
          editDetailsButton = findViewById(R.id.editDetailsButton);
-        editProfileButton = findViewById(R.id.editProfileButton);
+        UpdateProfileButton = findViewById(R.id.UpdateProfileButton);
         homePageBtn = findViewById(R.id.home_button);
         planBtn = findViewById(R.id.plan_button);
         logoutButton = findViewById(R.id.logoutButton);

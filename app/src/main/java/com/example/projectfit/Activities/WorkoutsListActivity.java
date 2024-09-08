@@ -44,7 +44,7 @@ public class WorkoutsListActivity extends AppCompatActivity {
 
         initViews();
         initRepositories();
-        observeWorkouts();
+        observeFilteredWorkouts();
         initClickListeners();
     }
 
@@ -80,17 +80,45 @@ public class WorkoutsListActivity extends AppCompatActivity {
         workoutRecyclerView.setAdapter(workoutAdapter);
     }
 
-    private void observeWorkouts() {
-        workoutRoomRepository.getAllWorkoutsLocally().observe(this, new Observer<List<Workout>>() {
-            @Override
-            public void onChanged(List<Workout> workouts) {
-                if (workouts != null && !workouts.isEmpty()) {
-                    workoutAdapter.setWorkouts(workouts);
-                } else {
-                    Toast.makeText(WorkoutsListActivity.this, "No workouts available", Toast.LENGTH_SHORT).show();
+    private void observeFilteredWorkouts() {
+        String workoutCategory = getIntent().getStringExtra("workout_category");
+        int difficultyLevel = getIntent().getIntExtra("difficulty_level", -1);
+
+        if (workoutCategory != null) {
+            workoutRoomRepository.getWorkoutsByType(workoutCategory).observe(this, new Observer<List<Workout>>() {
+                @Override
+                public void onChanged(List<Workout> workouts) {
+                    if (workouts != null && !workouts.isEmpty()) {
+                        workoutAdapter.setWorkouts(workouts);
+                    } else {
+                        Toast.makeText(WorkoutsListActivity.this, "No workouts available for the selected category", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }
+        else if (difficultyLevel != -1) {
+            workoutRoomRepository.getWorkoutsByDifficulty(difficultyLevel).observe(this, new Observer<List<Workout>>() {
+                @Override
+                public void onChanged(List<Workout> workouts) {
+                    if (workouts != null && !workouts.isEmpty()) {
+                        workoutAdapter.setWorkouts(workouts);
+                    } else {
+                        Toast.makeText(WorkoutsListActivity.this, "No workouts available for the selected difficulty", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            workoutRoomRepository.getAllWorkoutsLocally().observe(this, new Observer<List<Workout>>() {
+                @Override
+                public void onChanged(List<Workout> workouts) {
+                    if (workouts != null && !workouts.isEmpty()) {
+                        workoutAdapter.setWorkouts(workouts);
+                    } else {
+                        Toast.makeText(WorkoutsListActivity.this, "No workouts available", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
     private void onWorkoutSelected(Workout workout) {

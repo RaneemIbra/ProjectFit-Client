@@ -31,4 +31,12 @@ public class WorkoutRoomRepository {
     public Workout getWorkoutByName(String workoutName) {
         return workoutDatabase.workoutDAO().getWorkoutByName(workoutName);
     }
+
+    public LiveData<List<Workout>> getWorkoutsByDifficulty(int difficulty) {
+        return workoutDatabase.workoutDAO().getWorkoutsByDifficulty(difficulty);
+    }
+
+    public LiveData<List<Workout>> getWorkoutsByType(String type) {
+        return workoutDatabase.workoutDAO().getWorkoutsByType(type);
+    }
 }

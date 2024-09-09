@@ -12,7 +12,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,6 +37,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -65,8 +65,9 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     private static final String KEY_INITIAL_STEPS = "initialSteps";
     private static final String KEY_LAST_DATE = "lastDate";
     private int initialStepCount = 0;
-    private int maxSteps; // Max steps suggested by the model
-    private LoadModel loadModel; // TensorFlow Lite model for predicting max steps
+    private int maxSteps = 0;
+    private int maxWaterIntake = 0;
+    private LoadModel loadModelSteps, loadModelWater;
     private ExecutorService executorService;
 
     @Override
@@ -85,14 +86,20 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         user = getIntent().getParcelableExtra("user");
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
+        try {
+            loadModelSteps = new LoadModel(getAssets(), "step_prediction_model.tflite");
+            loadModelWater = new LoadModel(getAssets(), "water_prediction_model.tflite");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         initViews();
         setupCharts();
         setupSensors();
-        loadModel = new LoadModel(this); // Initialize the model
-        predictMaxStepsForUser(); // Predict the max steps for the user
+        predictMaxStepsForUser();
+        predictMaxWaterForUser();
         loadStepDataAsync();
         initClickListeners();
-        waterCupProgress.setMax(2000); // Water progress max value
     }
 
     private void initViews() {
@@ -145,26 +152,41 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
             } else {
                 return 0;
             }
-        }
-        else{
+        } else {
             return 0;
         }
     }
 
-    // Predict max steps for the user using the TensorFlow Lite model
     private void predictMaxStepsForUser() {
         if (user != null) {
-            int gender = user.isGender() ? 1 : 0; // Assuming true = male (1), false = female (0)
+            int gender = user.isGender() ? 1 : 0;
             float height = (float) user.getHeight();
             float weight = (float) user.getWeight();
             int age = calculateAge(user.getBirthday());
 
             executorService.submit(() -> {
-                maxSteps = (int) loadModel.predictMaxSteps(gender, height, weight, age); // Predict max steps
+                maxSteps = (int) loadModelSteps.predictMaxSteps(gender, height, weight, age);
                 runOnUiThread(() -> {
-                    // Print the predicted max steps in the logs and display it
-                    System.out.println("Suggested Max Steps: " + maxSteps);
-                    stepCountTextView.setText("Steps: " + maxSteps);
+                    circularProgressBar.setMax(maxSteps);
+                    stepCountTextView.setText("Steps: " + stepCount + " out of " + maxSteps);
+                });
+            });
+        }
+    }
+
+    private void predictMaxWaterForUser() {
+        if (user != null) {
+            int gender = user.isGender() ? 1 : 0;
+            float height = (float) user.getHeight();
+            float weight = (float) user.getWeight();
+            int age = calculateAge(user.getBirthday());
+
+            executorService.submit(() -> {
+                maxWaterIntake = (int) loadModelWater.predictMaxWater(gender, height, weight, age);
+                runOnUiThread(() -> {
+                    waterCupProgress.setMax(maxWaterIntake);
+                    waterProgressTextView.setText("Max Water: " + maxWaterIntake + " ml");
+                    System.out.println("water intake" + maxWaterIntake);
                 });
             });
         }
@@ -212,7 +234,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
 
     private void animatedProgressBarWaterTracker() {
         int currentProgress = waterCupProgress.getProgress();
-        waterProgressTextView.setText("Water Progress: " + currentProgress + "ml");
+        waterProgressTextView.setText("Water Progress: " + currentProgress + " ml");
         AnimationUtils.fadeInView(waterProgressTextView, 300);
 
         new Handler().postDelayed(() -> {
@@ -287,7 +309,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
             stepCount = totalSteps - initialStepCount;
             runOnUiThread(() -> {
                 circularProgressBar.setProgress(stepCount);
-                stepCountTextView.setText("Steps: " + stepCount);
+                stepCountTextView.setText("Steps: " + stepCount + " out of: " + maxSteps);
             });
         });
     }
@@ -298,7 +320,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 lastDate = LocalDate.parse(sharedPreferences.getString(KEY_LAST_DATE, LocalDate.now().toString()));
             }
-            runOnUiThread(() -> stepCountTextView.setText("Steps: " + (stepCount - initialStepCount)));
+            runOnUiThread(() -> stepCountTextView.setText("Steps: " + (stepCount - initialStepCount) + " out of: " + maxSteps));
         });
     }
 
@@ -328,6 +350,6 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         if (stepCounterSensor != null) {
             sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
-        executorService = Executors.newCachedThreadPool();  // Re-create executorService if resuming
+        executorService = Executors.newCachedThreadPool();
     }
 }

@@ -102,6 +102,8 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         waterChart = findViewById(R.id.WaterChart);
         progressBarLayout = findViewById(R.id.progressBarLayout);
         bottomBar = findViewById(R.id.bottom_navigation);
+        bottomBar.setSelectedItemId(R.id.home_BottomIcon);
+
     }
 
     private void setupCharts() {

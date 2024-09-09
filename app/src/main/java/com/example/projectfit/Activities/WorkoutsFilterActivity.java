@@ -59,6 +59,7 @@ public class WorkoutsFilterActivity extends AppCompatActivity {
         });
 
         bottomBar = findViewById(R.id.bottom_navigation);
+        bottomBar.setSelectedItemId(R.id.workouts_BottomIcon);
         setupBottomNavigation();
         setupCategoryImages();
         setupCategoryClickListeners();

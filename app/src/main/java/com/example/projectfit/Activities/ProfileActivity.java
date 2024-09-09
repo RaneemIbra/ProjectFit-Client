@@ -45,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         editProfileButton = findViewById(R.id.editProfileButton);
         bottomBar = findViewById(R.id.bottom_navigation);
+        bottomBar.setSelectedItemId(R.id.profile_BottomIcon);
     }
 
     private void setupButtonListeners() {

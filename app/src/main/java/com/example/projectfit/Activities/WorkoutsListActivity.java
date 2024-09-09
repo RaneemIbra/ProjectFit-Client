@@ -74,6 +74,7 @@ public class WorkoutsListActivity extends AppCompatActivity {
 
     private void initViews() {
         bottomBar = findViewById(R.id.bottom_navigation);
+        bottomBar.setSelectedItemId(R.id.workouts_BottomIcon);
         workoutRecyclerView = findViewById(R.id.workoutRecyclerView);
         workoutRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         workoutAdapter = new WorkoutAdapter(this::onWorkoutSelected);

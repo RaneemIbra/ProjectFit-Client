@@ -15,7 +15,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@drawable/sffffffsw1cr20bd9d9d9"
-
         android:paddingTop="23dp"
         android:paddingBottom="-52dp">
 
@@ -73,24 +72,19 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:layout_weight="1"
-                    android:text="Bench press workouts are a staple in many strength training routines — it’s a dynamic, functional movement that works several muscles at once, including:
+                    android:text="Bench press workouts are a staple in many strength training routines..."/>
 
-Front deltoids and pectorals (chest muscles)
-Shoulders
-Biceps
-Triceps
-While the bench press is a simple movement, it’s highly effective for strengthening the chest and shoulders — and it can be easily modified to work different muscles with various grips and positions"/>
-                <WebView
-                    android:id="@+id/webview"
+                <ImageView
+                    android:id="@+id/workout_gif"
                     android:layout_width="match_parent"
-                    android:layout_height="206dp"
+                    android:layout_height="200dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp">
-                </WebView>
+                    android:layout_marginBottom="20dp" />
 
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

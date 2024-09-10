@@ -578,7 +578,7 @@
                             android:layout_height="70dp"
                             android:src="@drawable/diamond"
                             android:scaleType="fitXY"
-                             />
+                            />
                     </LinearLayout>
 
                     <TextView
@@ -642,7 +642,7 @@
                             android:layout_height="70dp"
                             android:src="@drawable/diamond"
                             android:scaleType="fitXY"
-                             />
+                            />
                     </LinearLayout>
 
                 </LinearLayout>

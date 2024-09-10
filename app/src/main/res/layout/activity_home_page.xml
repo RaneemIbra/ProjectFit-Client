@@ -275,11 +275,11 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemIconTint="@color/nav_color"
-        app:itemTextColor="@color/nav_color_text"
         app:menu="@menu/tool_bar"
         app:labelVisibilityMode="labeled"
         android:background="@drawable/rounded"
+        app:itemIconTint="@color/nav_color"
+        app:itemTextColor="@color/nav_color_text"
         app:itemIconSize="24dp"/>
 
 </LinearLayout>

@@ -95,6 +95,7 @@ public class MyPlanActivity extends AppCompatActivity {
         trashIcon = findViewById(R.id.trash_icon);
 
         bottomBar=findViewById(R.id.bottom_navigation);
+        bottomBar.setSelectedItemId(R.id.plan_BottomIcon);
 
     }
 

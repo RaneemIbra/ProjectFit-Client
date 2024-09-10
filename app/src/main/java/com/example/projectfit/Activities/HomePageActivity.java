@@ -29,6 +29,7 @@ import com.example.projectfit.Models.User;
 import com.example.projectfit.R;
 import com.example.projectfit.Utils.AnimationUtils;
 import com.example.projectfit.Utils.DialogUtils;
+import com.example.projectfit.Utils.GsonProvider;
 import com.example.projectfit.Utils.LoadModel;
 import com.github.lzyzsd.circleprogress.CircleProgress;
 import com.github.mikephil.charting.charts.BarChart;
@@ -36,8 +37,11 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -57,7 +61,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     private int stepCount = 0;
     private CircleProgress waterCupProgress;
     private RelativeLayout progressBarLayout;
-    public static User user;
+    public User user;
     private BottomNavigationView bottomBar;
     private SharedPreferences sharedPreferences;
     private LocalDate lastDate;
@@ -83,7 +87,6 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         });
 
         executorService = Executors.newCachedThreadPool();
-        user = getIntent().getParcelableExtra("user");
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
         try {
@@ -92,7 +95,11 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        user = getUserFromSharedPreferences();
+        System.out.println(user);
+        if (user != null) {
+            System.out.println("User name: " + user.getFullName() + " User birthday: " + user.getBirthday());
+        }
         initViews();
         setupCharts();
         setupSensors();
@@ -116,6 +123,19 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         progressBarLayout = findViewById(R.id.progressBarLayout);
         bottomBar = findViewById(R.id.bottom_navigation);
         bottomBar.setSelectedItemId(R.id.home_BottomIcon);
+    }
+
+    private User getUserFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        String userJson = sharedPreferences.getString("logged_in_user", null);
+
+        if (userJson != null) {
+            Gson gson = GsonProvider.getGson();
+            Type userType = new TypeToken<User>() {}.getType();
+            return gson.fromJson(userJson, userType);
+        }
+
+        return null;
     }
 
     private void setupCharts() {

@@ -26,7 +26,7 @@ public class User implements Parcelable {
     boolean gender;
     String securityQuestion;
     String answer;
-    private byte[] profilePicture;
+    private String profilePicture;
     List<Boolean> achievements;
     private Map<Integer, Workout> plan;
     private Map<Integer, Workout> workoutHistory;
@@ -35,7 +35,7 @@ public class User implements Parcelable {
 
     public User(Long id, String fullName, Long phoneNum, String emailAddress, String password, LocalDate birthday,
                 double height, double weight, boolean gender, String securityQuestion, String answer,
-                byte[] profilePicture, List<Boolean> achievements, Map<Integer, Workout> plan,
+                String profilePicture, List<Boolean> achievements, Map<Integer, Workout> plan,
                 Map<Integer, Workout> workoutHistory, Map<LocalDate, Integer> stepsHistory,
                 Map<LocalDate, Integer> waterHistory) {
         this.id = id;
@@ -76,7 +76,7 @@ public class User implements Parcelable {
         gender = in.readByte() != 0;
         securityQuestion = in.readString();
         answer = in.readString();
-        profilePicture = in.createByteArray();
+        profilePicture = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -118,7 +118,7 @@ public class User implements Parcelable {
         dest.writeByte((byte) (gender ? 1 : 0));
         dest.writeString(securityQuestion);
         dest.writeString(answer);
-        dest.writeByteArray(profilePicture);
+        dest.writeString(profilePicture);
     }
 
     public Long getId() {
@@ -209,11 +209,11 @@ public class User implements Parcelable {
         this.answer = answer;
     }
 
-    public byte[] getProfilePicture() {
+    public String getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(byte[] profilePicture) {
+    public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
     }
 

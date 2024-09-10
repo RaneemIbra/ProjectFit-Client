@@ -20,6 +20,7 @@ public class GsonProvider {
                             new JsonPrimitive(src.toString()))
                     .create();
         }
-        return null;
+        return new Gson();
     }
 }
+

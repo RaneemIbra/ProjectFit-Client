@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -81,16 +82,24 @@ public class Converters {
         return gson.fromJson(json, type);
     }
 
+    private static final Gson gson = new Gson();
+
     @TypeConverter
-    public String fromLocalDateMap(Map<LocalDate, Integer> map) {
-        Gson gson = new Gson();
+    public static String fromLocalDateMap(Map<LocalDate, Integer> map) {
         return gson.toJson(map);
     }
 
     @TypeConverter
-    public Map<LocalDate, Integer> toLocalDateMap(String json) {
-        Gson gson = new Gson();
-        Type type = new TypeToken<Map<LocalDate, Integer>>() {}.getType();
-        return gson.fromJson(json, type);
+    public static Map<LocalDate, Integer> toLocalDateMap(String json) {
+        Type type = new TypeToken<Map<String, Integer>>() {}.getType();
+        Map<String, Integer> stringMap = gson.fromJson(json, type);
+        Map<LocalDate, Integer> localDateMap = new HashMap<>();
+
+        for (Map.Entry<String, Integer> entry : stringMap.entrySet()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                localDateMap.put(LocalDate.parse(entry.getKey()), entry.getValue());
+            }
+        }
+        return localDateMap;
     }
 }

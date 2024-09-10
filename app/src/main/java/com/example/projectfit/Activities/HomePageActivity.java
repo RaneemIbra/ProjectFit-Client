@@ -133,20 +133,19 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
                 Type userType = new TypeToken<User>() {}.getType();
                 User sharedPreferencesUser = gson.fromJson(userJson, userType);
 
-                // Fetch the user from Room database asynchronously
                 User roomUser = userRoomRepository.getUserByEmail(sharedPreferencesUser.getEmailAddress());
 
                 if (roomUser != null) {
-                    user = roomUser; // Update the global user object
+                    user = roomUser;
                 } else {
-                    user = sharedPreferencesUser; // Fallback to SharedPreferences if not found in Room
+                    user = sharedPreferencesUser;
                 }
 
                 runOnUiThread(() -> {
                     setupSensors();
                     predictMaxStepsForUser();
                     predictMaxWaterForUser();
-                    setProgressForStepsAndWater();  // Updated
+                    setProgressForStepsAndWater();
                     setupCharts();
                 });
             }
@@ -281,7 +280,6 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
             circularProgressBar.setProgress(todaySteps);
             stepCountTextView.setText("Steps: " + todaySteps + " out of " + maxSteps);
 
-            // Set water intake progress
             int todayWaterIntake = 0;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 todayWaterIntake = user.getWaterHistory().getOrDefault(today, 0);
@@ -360,7 +358,6 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         }
         user.getWaterHistory().put(today, totalWater);
 
-        // Save updated water history to Room database
         userRoomRepository.updateWaterHistory(user);
 
         setupWaterChart();
@@ -416,7 +413,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
             initialStepCount = stepCount;
             lastDate = currentDate;
             saveStepDataAsync();
-            userRoomRepository.updateStepsHistory(user); // Persist the previous day's step data in Room
+            userRoomRepository.updateStepsHistory(user);
         }
     }
 
@@ -429,7 +426,6 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
             }
             user.getStepsHistory().put(today, stepCount);
 
-            // Save updated steps history to Room database
             userRoomRepository.updateStepsHistory(user);
 
             runOnUiThread(() -> {
@@ -471,7 +467,6 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         sensorManager.unregisterListener(this);
         executorService.shutdown();
 
-        // Save user data in SharedPreferences
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = GsonProvider.getGson();
         String userJson = gson.toJson(user);

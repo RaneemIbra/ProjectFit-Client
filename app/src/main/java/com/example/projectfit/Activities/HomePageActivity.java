@@ -11,7 +11,6 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +26,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.projectfit.Models.User;
 import com.example.projectfit.R;
+import com.example.projectfit.Room.Repositories.UserRoomRepository;
 import com.example.projectfit.Utils.AnimationUtils;
 import com.example.projectfit.Utils.DialogUtils;
 import com.example.projectfit.Utils.GsonProvider;
@@ -46,6 +46,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -73,6 +74,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     private int maxWaterIntake = 0;
     private LoadModel loadModelSteps, loadModelWater;
     private ExecutorService executorService;
+    private UserRoomRepository userRoomRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,8 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
             return insets;
         });
 
+        userRoomRepository = new UserRoomRepository(this);
+
         executorService = Executors.newCachedThreadPool();
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
 
@@ -95,16 +99,10 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         } catch (IOException e) {
             e.printStackTrace();
         }
-        user = getUserFromSharedPreferences();
-        System.out.println(user);
-        if (user != null) {
-            System.out.println("User name: " + user.getFullName() + " User birthday: " + user.getBirthday());
-        }
+
+        getUserFromSharedPreferencesAsync();
         initViews();
-        setupCharts();
         setupSensors();
-        predictMaxStepsForUser();
-        predictMaxWaterForUser();
         loadStepDataAsync();
         initClickListeners();
     }
@@ -125,35 +123,105 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         bottomBar.setSelectedItemId(R.id.home_BottomIcon);
     }
 
-    private User getUserFromSharedPreferences() {
-        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
-        String userJson = sharedPreferences.getString("logged_in_user", null);
+    private void getUserFromSharedPreferencesAsync() {
+        executorService.submit(() -> {
+            SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+            String userJson = sharedPreferences.getString("logged_in_user", null);
 
-        if (userJson != null) {
-            Gson gson = GsonProvider.getGson();
-            Type userType = new TypeToken<User>() {}.getType();
-            return gson.fromJson(userJson, userType);
+            if (userJson != null) {
+                Gson gson = GsonProvider.getGson();
+                Type userType = new TypeToken<User>() {}.getType();
+                User sharedPreferencesUser = gson.fromJson(userJson, userType);
+
+                // Fetch the user from Room database asynchronously
+                User roomUser = userRoomRepository.getUserByEmail(sharedPreferencesUser.getEmailAddress());
+
+                if (roomUser != null) {
+                    user = roomUser; // Update the global user object
+                } else {
+                    user = sharedPreferencesUser; // Fallback to SharedPreferences if not found in Room
+                }
+
+                runOnUiThread(() -> {
+                    setupSensors();
+                    predictMaxStepsForUser();
+                    predictMaxWaterForUser();
+                    setProgressForStepsAndWater();  // Updated
+                    setupCharts();
+                });
+            }
+        });
+    }
+
+    private int calculateAge(LocalDate birthDate) {
+        if (birthDate == null) {
+            return 0;
         }
-
-        return null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return Period.between(birthDate, LocalDate.now()).getYears();
+        }
+        return 0;
     }
 
     private void setupCharts() {
-        executorService.submit(() -> {
-            List<BarEntry> entries = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
-                entries.add(new BarEntry(i, i + 1));
-            }
-            BarDataSet dataSet = new BarDataSet(entries, "Sample Data");
-            BarData barData = new BarData(dataSet);
+        setupStepChart();
+        setupWaterChart();
+    }
 
-            runOnUiThread(() -> {
-                stepChart.setData(barData);
-                waterChart.setData(barData);
-                stepChart.invalidate();
-                waterChart.invalidate();
-            });
-        });
+    private void setupStepChart() {
+        if (user != null && user.getStepsHistory() != null) {
+            List<BarEntry> stepEntries = new ArrayList<>();
+            Map<LocalDate, Integer> stepsHistory = user.getStepsHistory();
+
+            LocalDate today = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                today = LocalDate.now();
+            }
+            for (int i = 0; i < 7; i++) {
+                LocalDate date = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    date = today.minusDays(i);
+                }
+                int steps = 0;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    steps = stepsHistory.getOrDefault(date, 0);
+                }
+                stepEntries.add(new BarEntry(i, steps));
+            }
+
+            BarDataSet stepDataSet = new BarDataSet(stepEntries, "Steps in Last Week");
+            BarData stepBarData = new BarData(stepDataSet);
+            stepChart.setData(stepBarData);
+            stepChart.invalidate();
+        }
+    }
+
+    private void setupWaterChart() {
+        if (user != null && user.getWaterHistory() != null) {
+            List<BarEntry> waterEntries = new ArrayList<>();
+            Map<LocalDate, Integer> waterHistory = user.getWaterHistory();
+
+            LocalDate today = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                today = LocalDate.now();
+            }
+            for (int i = 0; i < 7; i++) {
+                LocalDate date = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    date = today.minusDays(i);
+                }
+                int waterIntake = 0;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    waterIntake = waterHistory.getOrDefault(date, 0);
+                }
+                waterEntries.add(new BarEntry(i, waterIntake));
+            }
+
+            BarDataSet waterDataSet = new BarDataSet(waterEntries, "Water Intake in Last Week (ml)");
+            BarData waterBarData = new BarData(waterDataSet);
+            waterChart.setData(waterBarData);
+            waterChart.invalidate();
+        }
     }
 
     private void setupSensors() {
@@ -161,19 +229,6 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         if (stepCounterSensor != null) {
             sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-    }
-
-    private int calculateAge(LocalDate birthday) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            LocalDate currentDate = LocalDate.now();
-            if ((birthday != null) && (currentDate != null)) {
-                return Period.between(birthday, currentDate).getYears();
-            } else {
-                return 0;
-            }
-        } else {
-            return 0;
         }
     }
 
@@ -206,9 +261,34 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
                 runOnUiThread(() -> {
                     waterCupProgress.setMax(maxWaterIntake);
                     waterProgressTextView.setText("Max Water: " + maxWaterIntake + " ml");
-                    System.out.println("water intake" + maxWaterIntake);
                 });
             });
+        }
+    }
+
+    private void setProgressForStepsAndWater() {
+        if (user != null) {
+            LocalDate today = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                today = LocalDate.now();
+            }
+            // Set step count progress
+            int todaySteps = 0;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                todaySteps = user.getStepsHistory().getOrDefault(today, 0);
+            }
+            circularProgressBar.setMax(maxSteps);
+            circularProgressBar.setProgress(todaySteps);
+            stepCountTextView.setText("Steps: " + todaySteps + " out of " + maxSteps);
+
+            // Set water intake progress
+            int todayWaterIntake = 0;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                todayWaterIntake = user.getWaterHistory().getOrDefault(today, 0);
+            }
+            waterCupProgress.setMax(maxWaterIntake);
+            waterCupProgress.setProgress(todayWaterIntake);
+            waterProgressTextView.setText("Water: " + todayWaterIntake + " ml out of " + maxWaterIntake + " ml");
         }
     }
 
@@ -220,7 +300,6 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
 
         bottomBar.setOnNavigationItemSelectedListener(item -> {
             int id_item = item.getItemId();
-
             if (id_item == R.id.home_BottomIcon) {
                 return true;
             } else if (id_item == R.id.plan_BottomIcon) {
@@ -270,6 +349,21 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         int currentProgress = waterCupProgress.getProgress();
         int newProgress = currentProgress + cupSize;
         waterCupProgress.setProgress(Math.min(newProgress, waterCupProgress.getMax()));
+
+        LocalDate today = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            today = LocalDate.now();
+        }
+        int totalWater = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            totalWater = user.getWaterHistory().getOrDefault(today, 0) + cupSize;
+        }
+        user.getWaterHistory().put(today, totalWater);
+
+        // Save updated water history to Room database
+        userRoomRepository.updateWaterHistory(user);
+
+        setupWaterChart();
     }
 
     private void addCupSizeLayout(int cupSize) {
@@ -280,7 +374,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
             params.setMargins(10, 0, 10, 0);
             circleLayout.setLayoutParams(params);
-            circleLayout.setGravity(Gravity.CENTER);
+            circleLayout.setGravity(android.view.Gravity.CENTER);
             circleLayout.setOrientation(LinearLayout.VERTICAL);
             circleLayout.setPadding(20, 20, 20, 20);
 
@@ -293,7 +387,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
             cupSizeText.setText(Integer.toString(cupSize));
             cupSizeText.setTextColor(getResources().getColor(android.R.color.white));
             cupSizeText.setTextSize(12);
-            cupSizeText.setGravity(Gravity.CENTER);
+            cupSizeText.setGravity(android.view.Gravity.CENTER);
 
             circleLayout.addView(cupSizeText);
 
@@ -314,22 +408,35 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     }
 
     private void checkForDayReset() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            LocalDate currentDate = LocalDate.now();
-            if (!currentDate.equals(lastDate)) {
-                initialStepCount = stepCount;
-                lastDate = currentDate;
-                saveStepDataAsync();
-            }
+        LocalDate currentDate = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            currentDate = LocalDate.now();
+        }
+        if (!currentDate.equals(lastDate)) {
+            initialStepCount = stepCount;
+            lastDate = currentDate;
+            saveStepDataAsync();
+            userRoomRepository.updateStepsHistory(user); // Persist the previous day's step data in Room
         }
     }
 
     private void updateStepCountAsync(int totalSteps) {
         executorService.submit(() -> {
             stepCount = totalSteps - initialStepCount;
+            LocalDate today = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                today = LocalDate.now();
+            }
+            user.getStepsHistory().put(today, stepCount);
+
+            // Save updated steps history to Room database
+            userRoomRepository.updateStepsHistory(user);
+
             runOnUiThread(() -> {
                 circularProgressBar.setProgress(stepCount);
                 stepCountTextView.setText("Steps: " + stepCount + " out of: " + maxSteps);
+
+                setupStepChart();
             });
         });
     }
@@ -340,6 +447,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 lastDate = LocalDate.parse(sharedPreferences.getString(KEY_LAST_DATE, LocalDate.now().toString()));
             }
+
             runOnUiThread(() -> stepCountTextView.setText("Steps: " + (stepCount - initialStepCount) + " out of: " + maxSteps));
         });
     }
@@ -362,6 +470,13 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         super.onPause();
         sensorManager.unregisterListener(this);
         executorService.shutdown();
+
+        // Save user data in SharedPreferences
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = GsonProvider.getGson();
+        String userJson = gson.toJson(user);
+        editor.putString("logged_in_user", userJson);
+        editor.apply();
     }
 
     @Override

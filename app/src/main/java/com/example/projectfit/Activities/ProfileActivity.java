@@ -55,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Button UpdateProfileButton, editDetailsButton, logoutButton;
     private TextView userNameTextView, userMailTextView, userAgeTextView, userHeightTextView,
             userWeightTextView, userBirthdateTextView, userPhoneTextView;
-    private boolean isEditing = false; // To track whether we are in edit mode
+    private boolean isEditing = false;
     private ImageView profileImageView;
     BottomNavigationView bottomBar;
     private ImageButton selectFromGalleryButton;

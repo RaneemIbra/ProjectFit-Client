@@ -271,7 +271,6 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 today = LocalDate.now();
             }
-            // Set step count progress
             int todaySteps = 0;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 todaySteps = user.getStepsHistory().getOrDefault(today, 0);

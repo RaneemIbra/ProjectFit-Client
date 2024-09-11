@@ -32,6 +32,10 @@ public class User implements Parcelable {
     private Map<LocalDate, Integer> stepsHistory;
     private Map<LocalDate, Integer> waterHistory;
 
+    public User(){
+
+    }
+
     public User(Long id, String fullName, Long phoneNum, String emailAddress, String password, LocalDate birthday,
                 double height, double weight, boolean gender, String securityQuestion, String answer,
                 byte [] profilePicture, List<Boolean> achievements, Map<Integer, Workout> plan,

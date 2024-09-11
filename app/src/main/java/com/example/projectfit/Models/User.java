@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +25,7 @@ public class User implements Parcelable {
     boolean gender;
     String securityQuestion;
     String answer;
-    private String profilePicture;
+    private byte[] profilePicture;
     List<Boolean> achievements;
     private Map<Integer, Workout> plan;
     private Map<Integer, Workout> workoutHistory;
@@ -32,7 +34,7 @@ public class User implements Parcelable {
 
     public User(Long id, String fullName, Long phoneNum, String emailAddress, String password, LocalDate birthday,
                 double height, double weight, boolean gender, String securityQuestion, String answer,
-                String profilePicture, List<Boolean> achievements, Map<Integer, Workout> plan,
+                byte [] profilePicture, List<Boolean> achievements, Map<Integer, Workout> plan,
                 Map<Integer, Workout> workoutHistory, Map<LocalDate, Integer> stepsHistory,
                 Map<LocalDate, Integer> waterHistory) {
         this.id = id;
@@ -47,11 +49,11 @@ public class User implements Parcelable {
         this.securityQuestion = securityQuestion;
         this.answer = answer;
         this.profilePicture = profilePicture;
-        this.achievements = achievements;
-        this.plan = plan;
-        this.workoutHistory = workoutHistory;
-        this.stepsHistory = stepsHistory;
-        this.waterHistory = waterHistory;
+        this.achievements = achievements != null ? achievements : new ArrayList<>();
+        this.plan = plan != null ? plan : new HashMap<>();
+        this.workoutHistory = workoutHistory != null ? workoutHistory : new HashMap<>();
+        this.stepsHistory = stepsHistory != null ? stepsHistory : new HashMap<>();
+        this.waterHistory = waterHistory != null ? waterHistory : new HashMap<>();
     }
 
     protected User(Parcel in) {
@@ -73,7 +75,7 @@ public class User implements Parcelable {
         gender = in.readByte() != 0;
         securityQuestion = in.readString();
         answer = in.readString();
-        profilePicture = in.readString();
+        profilePicture = in.createByteArray();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -115,7 +117,7 @@ public class User implements Parcelable {
         dest.writeByte((byte) (gender ? 1 : 0));
         dest.writeString(securityQuestion);
         dest.writeString(answer);
-        dest.writeString(profilePicture);
+        dest.writeByteArray(profilePicture);
     }
 
     public Long getId() {
@@ -206,11 +208,11 @@ public class User implements Parcelable {
         this.answer = answer;
     }
 
-    public String getProfilePicture() {
+    public byte[] getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(String profilePicture) {
+    public void setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
     }
 

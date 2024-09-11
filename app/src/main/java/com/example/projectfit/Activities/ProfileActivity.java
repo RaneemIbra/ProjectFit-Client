@@ -93,8 +93,6 @@ public class ProfileActivity extends AppCompatActivity {
         System.out.println("user birthday: " + user.getBirthday());
         System.out.println("user in profile");
 
-
-
         initViews();
         userServerRepository = new UserServerRepository();
         userRoomRepository = new UserRoomRepository(this);

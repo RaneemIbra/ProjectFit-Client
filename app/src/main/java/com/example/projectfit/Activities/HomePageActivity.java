@@ -27,6 +27,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.projectfit.Models.User;
 import com.example.projectfit.R;
 import com.example.projectfit.Room.Repositories.UserRoomRepository;
+import com.example.projectfit.Server.Repositories.UserServerRepository;
 import com.example.projectfit.Utils.AnimationUtils;
 import com.example.projectfit.Utils.DialogUtils;
 import com.example.projectfit.Utils.GsonProvider;
@@ -75,6 +76,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     private LoadModel loadModelSteps, loadModelWater;
     private ExecutorService executorService;
     private UserRoomRepository userRoomRepository;
+    private UserServerRepository userServerRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         });
 
         userRoomRepository = new UserRoomRepository(this);
+        userServerRepository = new UserServerRepository();
 
         executorService = Executors.newCachedThreadPool();
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);

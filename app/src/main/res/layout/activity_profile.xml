@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipChildren="false"
+            android:gravity="center"
             android:clipToPadding="false"
             android:orientation="vertical">
 
@@ -110,8 +111,8 @@
                                     android:layout_height="13dp"
                                     android:layout_marginBottom="10dp"
                                     android:layout_marginEnd="26dp"
-                                    android:layout_marginStart="1dp"
-                                    android:layout_marginTop="-30dp"
+                                    android:layout_marginStart="130dp"
+                                    android:layout_marginTop="-21dp"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     android:contentDescription="SelectfromGallery"
                                     android:padding="16dp"
@@ -209,13 +210,6 @@
                             android:textColor="#FFFFFF"
                             android:textSize="15sp" />
 
-                        <TextView
-                            android:id="@+id/rw5wd9n1nvwh"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Weight"
-                            android:textColor="#FFFFFF"
-                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <!-- Middle Section -->
@@ -233,14 +227,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="4dp"
                             android:text="28"
-                            android:textColor="#FFFFFF"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:id="@+id/regx28w89hse"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Years old"
                             android:textColor="#FFFFFF"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -261,15 +247,6 @@
                             android:text="1.65 cm"
                             android:textColor="#FFFFFF"
                             android:textSize="15sp" />
-
-                        <TextView
-                            android:id="@+id/r7cbbrqhmnpx"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="3dp"
-                            android:text="height"
-                            android:textColor="#FFFFFF"
-                            android:textSize="15sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -281,7 +258,6 @@
                 android:layout_width="125dp"
                 android:layout_height="39dp"
                 android:layout_marginBottom="3dp"
-                android:layout_marginStart="35dp"
                 android:layout_marginTop="-50dp"
                 android:background="@drawable/cr100lr2707de5fb0c6173"
                 android:text="Edit Details"
@@ -293,7 +269,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="-35dp"
                 android:text="Full name"
                 android:textColor="#000000"
@@ -324,7 +299,6 @@
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:layout_marginBottom="3dp"
-                android:layout_marginStart="32dp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Mobile Number"
@@ -354,7 +328,6 @@
                 android:id="@+id/dateTextView"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                android:layout_marginStart="32dp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Date of birth"
@@ -374,8 +347,8 @@
                 android:textColor="#391713"
                 android:textSize="20sp"
                 android:focusable="false"
-                 android:clickable="true"
-                 android:inputType="none"
+                android:clickable="true"
+                android:inputType="none"
                 android:visibility="gone"
             />
 
@@ -385,7 +358,6 @@
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:layout_marginBottom="7dp"
-                android:layout_marginStart="32dp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Weight"
@@ -416,7 +388,6 @@
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginStart="34dp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Height"
@@ -464,7 +435,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:layout_marginStart="135dp"
                 android:text="Achievments"
                 android:textColor="#000000"
                 android:textSize="24sp" />

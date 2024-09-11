@@ -38,7 +38,7 @@ public class User implements Parcelable {
 
     public User(Long id, String fullName, Long phoneNum, String emailAddress, String password, LocalDate birthday,
                 double height, double weight, boolean gender, String securityQuestion, String answer,
-                byte[] profilePicture, List<Boolean> achievements, Map<Integer, Workout> plan,
+                byte [] profilePicture, List<Boolean> achievements, Map<Integer, Workout> plan,
                 Map<Integer, Workout> workoutHistory, Map<LocalDate, Integer> stepsHistory,
                 Map<LocalDate, Integer> waterHistory) {
         this.id = id;

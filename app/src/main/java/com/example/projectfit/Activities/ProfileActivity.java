@@ -1,5 +1,6 @@
 package com.example.projectfit.Activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -47,16 +48,21 @@ import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executors;
 
 public class ProfileActivity extends AppCompatActivity {
-    private EditText emailEditText, phoneEditText, heightEditText, weightEditText, dateEditText, nameEditText;
+    private EditText phoneEditText, heightEditText, weightEditText, dateEditText, nameEditText;
     private Button UpdateProfileButton, editDetailsButton, logoutButton;
     private TextView userNameTextView, userMailTextView, userAgeTextView, userHeightTextView,
             userWeightTextView, userBirthdateTextView, userPhoneTextView;
-    private boolean isEditing = false;
-    private ImageView profileImageView;
+
+    private TextView fullNameTextView , weightTextView, heightTextView, PhoneTextView, dateTextView;
+    private boolean isEditing = false; // To track whether we are in edit mode
+    private ImageView profileImageView , goldCaloriesMedal, silverCaloriesMedal, bronzeCaloriesMedal,
+            diamondCaloriesMedal,goldRunningMedal,silverRunningMedal,bronzeRunningMedal,diamondRunningMedal;
     BottomNavigationView bottomBar;
     private ImageButton selectFromGalleryButton;
     private Bitmap profilePhoto;
@@ -64,6 +70,8 @@ public class ProfileActivity extends AppCompatActivity {
     private UserServerRepository userServerRepository;
     private UserRoomRepository userRoomRepository;
     User user;
+    private  List<Boolean> achievements;
+    //testing
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +86,14 @@ public class ProfileActivity extends AppCompatActivity {
             return insets;
         });
         user = getUserFromSharedPreferences();
+        System.out.println("user name: " + user.getFullName());
+        System.out.println("user email: " + user.getEmailAddress());
+        System.out.println("user phone: " + user.getPhoneNum());
+        System.out.println("user height: " + user.getHeight());
+        System.out.println("user weight: " + user.getWeight());
+        System.out.println("user birthday: " + user.getBirthday());
+        System.out.println("user in profile");
+
         initViews();
         userServerRepository = new UserServerRepository();
         userRoomRepository = new UserRoomRepository(this);
@@ -89,6 +105,7 @@ public class ProfileActivity extends AppCompatActivity {
         setupButtonListeners();
         editDetailsButton.setOnClickListener(v -> {
             setEditTextsVisibility(View.VISIBLE);
+            setViewTextsVisibility(View.VISIBLE);
             UpdateProfileButton.setVisibility(View.VISIBLE);
             editDetailsButton.setVisibility(View.GONE);
         });
@@ -97,14 +114,18 @@ public class ProfileActivity extends AppCompatActivity {
             if (isEditing) {
                 saveProfileChanges();
                 setEditTextsVisibility(View.GONE);
+                setViewTextsVisibility(View.GONE);
+
                 UpdateProfileButton.setText("Update Profile");
                 isEditing = false;
             } else {
                 setEditTextsVisibility(View.VISIBLE);
+                setViewTextsVisibility(View.VISIBLE);
                 UpdateProfileButton.setText("Save");
                 isEditing = true;
             }
         });
+
 
         logoutButton.setOnClickListener(v -> {
             SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -126,7 +147,7 @@ public class ProfileActivity extends AppCompatActivity {
         weightEditText = findViewById(R.id.weightEditText);
         phoneEditText = findViewById(R.id.phoneEditText);
         dateEditText = findViewById(R.id.dateEditText);
-        emailEditText = findViewById(R.id.emailEditText);
+
         nameEditText = findViewById(R.id.nameEditText);
         editDetailsButton = findViewById(R.id.editDetailsButton);
         UpdateProfileButton = findViewById(R.id.UpdateProfileButton);
@@ -139,6 +160,44 @@ public class ProfileActivity extends AppCompatActivity {
         userWeightTextView = findViewById(R.id.ritmf488dqb);
         userAgeTextView = findViewById(R.id.r9ox48lkbrn);
         userPhoneTextView = findViewById(R.id.userPhoneTextView);
+
+
+        fullNameTextView= findViewById(R.id.fullNameTextView);
+        weightTextView=findViewById(R.id.weightTextView);
+        heightTextView=findViewById(R.id.heightTextView);
+        PhoneTextView=findViewById(R.id.PhoneTextView);
+        dateTextView=findViewById(R.id.dateTextView);
+
+
+
+        // Initialize medals
+        goldCaloriesMedal = findViewById(R.id.gold2);
+        silverCaloriesMedal = findViewById(R.id.silver2);
+        bronzeCaloriesMedal = findViewById(R.id.medal2);
+        diamondCaloriesMedal = findViewById(R.id.diamond2);
+
+        goldRunningMedal = findViewById(R.id.gold);
+         silverRunningMedal = findViewById(R.id.silver);
+         bronzeRunningMedal = findViewById(R.id.medal);
+         diamondRunningMedal = findViewById(R.id.diamond);
+
+        // Initialize achievements to size 8, all set to false (not earned)
+        achievements = new ArrayList<>(Collections.nCopies(8, false));
+        user.setAchievements(achievements);
+        achievements.set(0, true); // first medal for Running earned
+        // Show or hide medals based on achievements list
+        // Achievements for Calories Burned
+        goldCaloriesMedal.setVisibility(achievements.get(6) ? View.VISIBLE : View.GONE);
+        silverCaloriesMedal.setVisibility(achievements.get(5) ? View.VISIBLE : View.GONE);
+        bronzeCaloriesMedal.setVisibility(achievements.get(4) ? View.VISIBLE : View.GONE);
+        diamondCaloriesMedal.setVisibility(achievements.get(7) ? View.VISIBLE : View.GONE);
+
+        // Achievements for Running
+        goldRunningMedal.setVisibility(achievements.get(2) ? View.VISIBLE : View.GONE);
+        silverRunningMedal.setVisibility(achievements.get(1) ? View.VISIBLE : View.GONE);
+        bronzeRunningMedal.setVisibility(achievements.get(0) ? View.VISIBLE : View.GONE);
+        diamondRunningMedal.setVisibility(achievements.get(3) ? View.VISIBLE : View.GONE);
+
 
         // Set values from the user object
         if (user != null) {
@@ -196,7 +255,11 @@ public class ProfileActivity extends AppCompatActivity {
                 return false;
             }
         });
+        dateEditText.setOnClickListener(v -> {
+            showDatePickerDialog();
+        });
     }
+
 
     private void navigateTo(Class<?> targetActivity) {
         startActivity(new Intent(ProfileActivity.this, targetActivity));
@@ -238,18 +301,22 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void saveProfileChanges() {
+        Log.d("ProfileActivity", "saveProfileChanges called"); // Log for debugging
+
+        // Get updated values from EditText fields
         String updatedName = nameEditText.getText().toString();
-        String updatedEmail = emailEditText.getText().toString();
         String updatedPhone = phoneEditText.getText().toString();
         String updatedHeight = heightEditText.getText().toString();
         String updatedWeight = weightEditText.getText().toString();
         String updatedDate = dateEditText.getText().toString();
 
-        if (updatedHeight.isEmpty() || updatedWeight.isEmpty() || updatedPhone.isEmpty()) {
+        // Validation: Ensure no fields are empty
+        if (updatedHeight.isEmpty() || updatedWeight.isEmpty() || updatedPhone.isEmpty() || updatedDate.isEmpty() || updatedName.isEmpty()) {
             Toast.makeText(this, "All fields must be filled out", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Convert date using the Converters class
         Converters converters = new Converters();
         LocalDate updatedLocalDate = converters.toLocalDate(updatedDate);
         if (updatedLocalDate == null) {
@@ -257,8 +324,8 @@ public class ProfileActivity extends AppCompatActivity {
             return;
         }
 
+        // Update user object with the new data
         user.setFullName(updatedName);
-        user.setEmailAddress(updatedEmail);
         user.setBirthday(updatedLocalDate);
 
         try {
@@ -274,12 +341,19 @@ public class ProfileActivity extends AppCompatActivity {
             return;
         }
 
-        // Update the UI and local database
-        updateUserOnServer(user, "Profile updated successfully!");
+        // Save updated user data in SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = GsonProvider.getGson();
+        String userJson = gson.toJson(user);
+        editor.putString("logged_in_user", userJson);
+        editor.apply(); // Apply changes to SharedPreferences
+
+        // Update the local Room database (save on a background thread)
         Executors.newSingleThreadExecutor().execute(() -> userRoomRepository.updateUserLocally(user));
 
+        // Update the UI with the new values
         userNameTextView.setText(updatedName);
-        userMailTextView.setText(updatedEmail);
         userPhoneTextView.setText("Phone: " + updatedPhone);
         userHeightTextView.setText("Height: " + updatedHeight);
         userWeightTextView.setText("Weight: " + updatedWeight);
@@ -290,6 +364,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Profile updated successfully!", Toast.LENGTH_SHORT).show();
     }
+
+
+
 
     private void updateUserOnServer(User user, String successMessage) {
         new Thread(() -> userServerRepository.updateUser(user, new UserServerRepository.OnUserUpdateCallback() {
@@ -326,7 +403,35 @@ public class ProfileActivity extends AppCompatActivity {
         weightEditText.setVisibility(visibility);
         phoneEditText.setVisibility(visibility);
         dateEditText.setVisibility(visibility);
-        emailEditText.setVisibility(visibility);
         nameEditText.setVisibility(visibility);
     }
+    private void setViewTextsVisibility(int visibility) {
+        fullNameTextView.setVisibility(visibility);
+        weightTextView.setVisibility(visibility);
+        heightTextView.setVisibility(visibility);
+        PhoneTextView.setVisibility(visibility);
+        dateTextView.setVisibility(visibility);
+
+    }
+    // Method to display DatePickerDialog
+    private void showDatePickerDialog() {
+        // Get the current date as default values
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // Create a DatePickerDialog and set the listener
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                (view, selectedYear, selectedMonth, selectedDay) -> {
+                    // Update EditText with the selected date (increment month by 1, as it starts from 0)
+                    String selectedDate = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear);
+                    dateEditText.setText(selectedDate);
+                },
+                year, month, day);
+
+        // Show the DatePickerDialog
+        datePickerDialog.show();
+    }
+
 }

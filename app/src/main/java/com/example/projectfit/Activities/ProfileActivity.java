@@ -60,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
             userWeightTextView, userBirthdateTextView, userPhoneTextView;
 
     private TextView fullNameTextView , weightTextView, heightTextView, PhoneTextView, dateTextView;
-    private boolean isEditing = false; // To track whether we are in edit mode
+    private boolean isEditing = false;
     private ImageView profileImageView , goldCaloriesMedal, silverCaloriesMedal, bronzeCaloriesMedal,
             diamondCaloriesMedal,goldRunningMedal,silverRunningMedal,bronzeRunningMedal,diamondRunningMedal;
     BottomNavigationView bottomBar;
@@ -71,7 +71,6 @@ public class ProfileActivity extends AppCompatActivity {
     private UserRoomRepository userRoomRepository;
     User user;
     private  List<Boolean> achievements;
-    //testing
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +97,6 @@ public class ProfileActivity extends AppCompatActivity {
         userServerRepository = new UserServerRepository();
         userRoomRepository = new UserRoomRepository(this);
 
-        // Initialize other elements (medals, gallery button, etc.)
         selectFromGalleryButton = findViewById(R.id.selectFromGalleryButton);
         selectFromGalleryButton.setOnClickListener(v -> openGallery());
 
@@ -113,6 +111,7 @@ public class ProfileActivity extends AppCompatActivity {
         UpdateProfileButton.setOnClickListener(v -> {
             if (isEditing) {
                 saveProfileChanges();
+                System.out.println("from update");
                 setEditTextsVisibility(View.GONE);
                 setViewTextsVisibility(View.GONE);
 
@@ -301,22 +300,19 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void saveProfileChanges() {
-        Log.d("ProfileActivity", "saveProfileChanges called"); // Log for debugging
+        Log.d("ProfileActivity", "saveProfileChanges called");
 
-        // Get updated values from EditText fields
         String updatedName = nameEditText.getText().toString();
         String updatedPhone = phoneEditText.getText().toString();
         String updatedHeight = heightEditText.getText().toString();
         String updatedWeight = weightEditText.getText().toString();
         String updatedDate = dateEditText.getText().toString();
 
-        // Validation: Ensure no fields are empty
         if (updatedHeight.isEmpty() || updatedWeight.isEmpty() || updatedPhone.isEmpty() || updatedDate.isEmpty() || updatedName.isEmpty()) {
             Toast.makeText(this, "All fields must be filled out", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Convert date using the Converters class
         Converters converters = new Converters();
         LocalDate updatedLocalDate = converters.toLocalDate(updatedDate);
         if (updatedLocalDate == null) {
@@ -324,7 +320,6 @@ public class ProfileActivity extends AppCompatActivity {
             return;
         }
 
-        // Update user object with the new data
         user.setFullName(updatedName);
         user.setBirthday(updatedLocalDate);
 
@@ -347,7 +342,9 @@ public class ProfileActivity extends AppCompatActivity {
         Gson gson = GsonProvider.getGson();
         String userJson = gson.toJson(user);
         editor.putString("logged_in_user", userJson);
-        editor.apply(); // Apply changes to SharedPreferences
+        editor.apply();
+
+        System.out.println("user name :" +user.getFullName());// Apply changes to SharedPreferences
 
         // Update the local Room database (save on a background thread)
         Executors.newSingleThreadExecutor().execute(() -> userRoomRepository.updateUserLocally(user));
@@ -413,24 +410,19 @@ public class ProfileActivity extends AppCompatActivity {
         dateTextView.setVisibility(visibility);
 
     }
-    // Method to display DatePickerDialog
+
     private void showDatePickerDialog() {
-        // Get the current date as default values
         final Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        // Create a DatePickerDialog and set the listener
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view, selectedYear, selectedMonth, selectedDay) -> {
-                    // Update EditText with the selected date (increment month by 1, as it starts from 0)
-                    String selectedDate = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear);
+                    String selectedDate = String.format("%04d-%02d-%02d", selectedYear, selectedMonth + 1, selectedDay);
                     dateEditText.setText(selectedDate);
                 },
                 year, month, day);
-
-        // Show the DatePickerDialog
         datePickerDialog.show();
     }
 

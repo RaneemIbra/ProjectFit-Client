@@ -256,14 +256,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupNavigation() {
-        setupButtonNavigation(R.id.HomePageBTN, HomePageActivity.class);
-        setupButtonNavigation(R.id.MyPlanBTN, MyPlanActivity.class);
+        setupButtonNavigation(R.id.HomePageBTN, BottomNavigate.class);
+     //   setupButtonNavigation(R.id.MyPlanBTN, MyPlanActivity.class);
         setupButtonNavigation(R.id.PlanQuestionsBTN, PlanQuestionsActivity.class);
-        setupButtonNavigation(R.id.WorkoutBTN, WorkoutActivity.class);
-        setupButtonNavigation(R.id.WorkoutFilterBTN, WorkoutsFilterActivity.class);
-        setupButtonNavigation(R.id.ListBTN, WorkoutsListActivity.class);
+      //  setupButtonNavigation(R.id.WorkoutBTN, WorkoutActivity.class);
+       // setupButtonNavigation(R.id.WorkoutFilterBTN, WorkoutsFilterActivity.class);
+       // setupButtonNavigation(R.id.ListBTN, WorkoutsListActivity.class);
         setupButtonNavigation(R.id.resetPasswordPageBTN, ResetPasswordActivity.class);
-        setupButtonNavigation(R.id.ProfilePageBTN, ProfileActivity.class);
+        //setupButtonNavigation(R.id.ProfilePageBTN, ProfileActivity.class);
         setupButtonNavigation(R.id.LoginPageBTN, LoginActivity.class);
         setupButtonNavigation(R.id.RegisterPageBTN, RegisterActivity.class);
         setupButtonNavigation(R.id.LoadingScreenBTN, LoadingScreenActivity.class);

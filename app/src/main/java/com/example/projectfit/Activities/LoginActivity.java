@@ -178,7 +178,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void navigateToHomePage(User user) {
-        Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+        Intent intent = new Intent(LoginActivity.this, BottomNavigate.class);
         intent.putExtra("user", user);
         startActivity(intent);
         finish();

@@ -70,6 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
     private UserRoomRepository userRoomRepository;
     User user;
     private  List<Boolean> achievements;
+    //testing
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

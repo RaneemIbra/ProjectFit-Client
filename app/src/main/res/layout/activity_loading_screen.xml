@@ -19,6 +19,38 @@
             android:scaleType="centerCrop"
             android:contentDescription="Loading GIF" />
 
-    </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/buttonContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp">
 
+            <Button
+                android:id="@+id/LoginButtonLoadingScreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:layout_marginBottom="90dp"
+                android:padding="16dp"
+                android:background="@drawable/transparent_button_background"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+            <Button
+                android:id="@+id/registerButtonLoadingScreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:padding="16dp"
+                android:background="@drawable/transparent_button_background"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

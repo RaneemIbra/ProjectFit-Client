@@ -47,4 +47,9 @@ public class WorkoutRoomRepository {
     public LiveData<List<Workout>> getWorkoutsByDurationRange(int minDuration, int maxDuration) {
         return workoutDatabase.workoutDAO().getWorkoutsByDurationRange(minDuration, maxDuration);
     }
+    public void updateWorkout(Workout workout) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            workoutDatabase.workoutDAO().updateWorkout(workout);
+        });
+    }
 }

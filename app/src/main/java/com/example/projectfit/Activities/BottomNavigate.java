@@ -30,7 +30,7 @@ public class BottomNavigate extends AppCompatActivity {
         // set home page as a default page
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new HomeFragment())
+                    .replace(R.id.fragment_container, new HomePageFragment())
                     .commit();
         }
 
@@ -39,7 +39,7 @@ public class BottomNavigate extends AppCompatActivity {
             Fragment selectedFragment = null;
             int id= item.getItemId();
             if( id == R.id.home_BottomIcon) {
-                selectedFragment = new HomeFragment();}
+                selectedFragment = new HomePageFragment();}
             if( id == R.id.profile_BottomIcon) {
                 selectedFragment = new ProfileFragment();
             }

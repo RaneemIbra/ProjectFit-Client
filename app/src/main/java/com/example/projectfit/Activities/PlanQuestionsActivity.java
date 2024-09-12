@@ -160,8 +160,8 @@ public class PlanQuestionsActivity extends AppCompatActivity {
             loadQuestion(currentQuestionIndex);
         } else {
             saveQuestionsToDatabases();
-            Intent intent = new Intent(PlanQuestionsActivity.this, MyPlanActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(PlanQuestionsActivity.this, MyPlanActivity.class);
+//            startActivity(intent);
         }
     }
 

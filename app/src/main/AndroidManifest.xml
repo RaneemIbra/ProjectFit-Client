@@ -26,12 +26,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectFit"
         tools:targetApi="31">
+        <activity android:name=".Activities.BottomNavigate" />
 
         <activity
             android:name=".Activities.LoadingScreenActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.LoginActivity"
@@ -44,21 +42,6 @@
             android:exported="false" />
         <activity
             android:name=".Activities.PlanQuestionsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.MyPlanActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.HomePageActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.WorkoutsFilterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.WorkoutActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.WorkoutsListActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"

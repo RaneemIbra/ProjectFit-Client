@@ -1,7 +1,6 @@
 package com.example.projectfit.Activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.hardware.Sensor;
@@ -11,18 +10,21 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 
 import com.example.projectfit.Models.User;
 import com.example.projectfit.R;
@@ -37,7 +39,6 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -51,7 +52,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class HomePageActivity extends AppCompatActivity implements SensorEventListener {
+public class HomePageFragment extends Fragment implements SensorEventListener {
     private BarChart stepChart, waterChart;
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
@@ -64,7 +65,6 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     private CircleProgress waterCupProgress;
     private RelativeLayout progressBarLayout;
     public User user;
-    private BottomNavigationView bottomBar;
     private SharedPreferences sharedPreferences;
     private LocalDate lastDate;
     private static final String PREFS_NAME = "StepCounterPrefs";
@@ -79,56 +79,60 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     private UserServerRepository userServerRepository;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home_page);
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-        userRoomRepository = new UserRoomRepository(this);
+        userRoomRepository = new UserRoomRepository(getContext());
         userServerRepository = new UserServerRepository();
-
         executorService = Executors.newCachedThreadPool();
-        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+        sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
         try {
-            loadModelSteps = new LoadModel(getAssets(), "step_prediction_model.tflite");
-            loadModelWater = new LoadModel(getAssets(), "water_prediction_model.tflite");
+            loadModelSteps = new LoadModel(requireActivity().getAssets(), "step_prediction_model.tflite");
+            loadModelWater = new LoadModel(requireActivity().getAssets(), "water_prediction_model.tflite");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         getUserFromSharedPreferencesAsync();
-        initViews();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        initViews(view);
         setupSensors();
         loadStepDataAsync();
         initClickListeners();
+
+        return view;
     }
 
-    private void initViews() {
-        circularProgressBar = findViewById(R.id.circularProgressBar);
-        stepCountTextView = findViewById(R.id.step_count_text_view);
-        runningImageView = findViewById(R.id.running_image);
-        progressBarContainer = findViewById(R.id.progressBarContainer);
-        addCupSizeButton = findViewById(R.id.addCupSizeButton);
-        waterCupProgress = findViewById(R.id.waterCupProgress);
-        waterProgressTextView = findViewById(R.id.water_progress_text_view);
-        circularContainer = findViewById(R.id.circularContainer);
-        stepChart = findViewById(R.id.stepChart);
-        waterChart = findViewById(R.id.WaterChart);
-        progressBarLayout = findViewById(R.id.progressBarLayout);
-        bottomBar = findViewById(R.id.bottom_navigation);
-        bottomBar.setSelectedItemId(R.id.home_BottomIcon);
+    private void initViews(View view) {
+        circularProgressBar = view.findViewById(R.id.circularProgressBar);
+        stepCountTextView = view.findViewById(R.id.step_count_text_view);
+        runningImageView = view.findViewById(R.id.running_image);
+        progressBarContainer = view.findViewById(R.id.progressBarContainer);
+        addCupSizeButton = view.findViewById(R.id.addCupSizeButton);
+        waterCupProgress = view.findViewById(R.id.waterCupProgress);
+        waterProgressTextView = view.findViewById(R.id.water_progress_text_view);
+        circularContainer = view.findViewById(R.id.circularContainer);
+        stepChart = view.findViewById(R.id.stepChart);
+        waterChart = view.findViewById(R.id.WaterChart);
+        progressBarLayout = view.findViewById(R.id.progressBarLayout);
     }
 
     private void getUserFromSharedPreferencesAsync() {
         executorService.submit(() -> {
-            SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+            SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
             String userJson = sharedPreferences.getString("logged_in_user", null);
 
             if (userJson != null) {
@@ -144,7 +148,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
                     user = sharedPreferencesUser;
                 }
 
-                runOnUiThread(() -> {
+                requireActivity().runOnUiThread(() -> {
                     setupSensors();
                     predictMaxStepsForUser();
                     predictMaxWaterForUser();
@@ -227,7 +231,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     }
 
     private void setupSensors() {
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensorManager = (SensorManager) requireActivity().getSystemService(Context.SENSOR_SERVICE);
         stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         if (stepCounterSensor != null) {
             sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
@@ -243,7 +247,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
 
             executorService.submit(() -> {
                 maxSteps = (int) loadModelSteps.predictMaxSteps(gender, height, weight, age);
-                runOnUiThread(() -> {
+                requireActivity().runOnUiThread(() -> {
                     circularProgressBar.setMax(maxSteps);
                     stepCountTextView.setText("Steps: " + stepCount + " out of " + maxSteps);
                 });
@@ -260,7 +264,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
 
             executorService.submit(() -> {
                 maxWaterIntake = (int) loadModelWater.predictMaxWater(gender, height, weight, age);
-                runOnUiThread(() -> {
+                requireActivity().runOnUiThread(() -> {
                     waterCupProgress.setMax(maxWaterIntake);
                     waterProgressTextView.setText("Max Water: " + maxWaterIntake + " ml");
                 });
@@ -297,28 +301,6 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         waterCupProgress.setOnClickListener(v -> animatedProgressBarWaterTracker());
         addCupSizeButton.setOnClickListener(v -> showAddCupSizeDialog());
         progressBarLayout.setOnClickListener(v -> increaseWaterCupProgress(0));
-
-        bottomBar.setOnNavigationItemSelectedListener(item -> {
-            int id_item = item.getItemId();
-            if (id_item == R.id.home_BottomIcon) {
-                return true;
-            } else if (id_item == R.id.plan_BottomIcon) {
-                navigateTo(MyPlanActivity.class);
-                return true;
-            } else if (id_item == R.id.workouts_BottomIcon) {
-                navigateTo(WorkoutsFilterActivity.class);
-                return true;
-            } else if (id_item == R.id.profile_BottomIcon) {
-                navigateTo(ProfileActivity.class);
-                return true;
-            } else {
-                return false;
-            }
-        });
-    }
-
-    private void navigateTo(Class<?> targetActivity) {
-        startActivity(new Intent(HomePageActivity.this, targetActivity));
     }
 
     private void animatedProgressBarStepCount() {
@@ -342,7 +324,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     }
 
     private void showAddCupSizeDialog() {
-        DialogUtils.showAddCupSizeDialog(this, this::addCupSizeLayout);
+        DialogUtils.showAddCupSizeDialog(requireContext(), this::addCupSizeLayout);
     }
 
     private void increaseWaterCupProgress(int cupSize) {
@@ -369,7 +351,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
         executorService.submit(() -> {
             int size = 100;
 
-            LinearLayout circleLayout = new LinearLayout(this);
+            LinearLayout circleLayout = new LinearLayout(requireContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
             params.setMargins(10, 0, 10, 0);
             circleLayout.setLayoutParams(params);
@@ -382,7 +364,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
             circleDrawable.setColor(getResources().getColor(android.R.color.holo_blue_light));
             circleLayout.setBackground(circleDrawable);
 
-            TextView cupSizeText = new TextView(this);
+            TextView cupSizeText = new TextView(requireContext());
             cupSizeText.setText(Integer.toString(cupSize));
             cupSizeText.setTextColor(getResources().getColor(android.R.color.white));
             cupSizeText.setTextSize(12);
@@ -390,7 +372,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
 
             circleLayout.addView(cupSizeText);
 
-            runOnUiThread(() -> {
+            requireActivity().runOnUiThread(() -> {
                 circleLayout.setOnClickListener(view -> increaseWaterCupProgress(cupSize));
                 circularContainer.addView(circleLayout);
             });
@@ -430,7 +412,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
 
             userRoomRepository.updateStepsHistory(user);
 
-            runOnUiThread(() -> {
+            requireActivity().runOnUiThread(() -> {
                 circularProgressBar.setProgress(stepCount);
                 stepCountTextView.setText("Steps: " + stepCount + " out of: " + maxSteps);
 
@@ -446,7 +428,7 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
                 lastDate = LocalDate.parse(sharedPreferences.getString(KEY_LAST_DATE, LocalDate.now().toString()));
             }
 
-            runOnUiThread(() -> stepCountTextView.setText("Steps: " + (stepCount - initialStepCount) + " out of: " + maxSteps));
+            requireActivity().runOnUiThread(() -> stepCountTextView.setText("Steps: " + (stepCount - initialStepCount) + " out of: " + maxSteps));
         });
     }
 
@@ -460,28 +442,24 @@ public class HomePageActivity extends AppCompatActivity implements SensorEventLi
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    }
-
-    @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         sensorManager.unregisterListener(this);
+        saveStepDataAsync();
         executorService.shutdown();
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = GsonProvider.getGson();
-        String userJson = gson.toJson(user);
-        editor.putString("logged_in_user", userJson);
-        editor.apply();
     }
 
+
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         if (stepCounterSensor != null) {
             sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
         executorService = Executors.newCachedThreadPool();
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 }

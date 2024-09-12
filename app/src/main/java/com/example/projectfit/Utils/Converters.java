@@ -23,7 +23,7 @@ public class Converters {
     }
 
     @TypeConverter
-    public LocalDate toLocalDate(String dateString) {
+    public static LocalDate toLocalDate(String dateString) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return dateString != null ? LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE) : null;
         }

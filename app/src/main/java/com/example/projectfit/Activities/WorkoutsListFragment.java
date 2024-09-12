@@ -69,9 +69,22 @@ public class WorkoutsListFragment extends Fragment {
     }
 
     private void observeFilteredWorkouts() {
+        Bundle bundleArguments = getArguments();
+
+        if (bundleArguments == null) {
+            workoutRoomRepository.getAllWorkoutsLocally().observe(getViewLifecycleOwner(), workouts -> {
+                if (workouts != null && !workouts.isEmpty()) {
+                    workoutAdapter.setWorkouts(workouts);
+                } else {
+                    Toast.makeText(getContext(), "No workouts available", Toast.LENGTH_SHORT).show();
+                }
+            });
+            return;
+        }
+
         String workoutCategory = bundleArguments.getString("workout_category", null);
         int difficultyLevel = bundleArguments.getInt("difficulty_level", -1);
-        String muscle = bundleArguments.getString("muscle",null);
+        String muscle = bundleArguments.getString("muscle", null);
         int minDuration = bundleArguments.getInt("min_duration", -1);
         int maxDuration = bundleArguments.getInt("max_duration", -1);
 
@@ -105,14 +118,6 @@ public class WorkoutsListFragment extends Fragment {
                     workoutAdapter.setWorkouts(workouts);
                 } else {
                     Toast.makeText(getContext(), "No workouts available for the selected duration", Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            workoutRoomRepository.getAllWorkoutsLocally().observe(getViewLifecycleOwner(), workouts -> {
-                if (workouts != null && !workouts.isEmpty()) {
-                    workoutAdapter.setWorkouts(workouts);
-                } else {
-                    Toast.makeText(getContext(), "No workouts available", Toast.LENGTH_SHORT).show();
                 }
             });
         }

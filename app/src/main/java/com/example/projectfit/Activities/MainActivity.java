@@ -206,43 +206,43 @@ public class MainActivity extends AppCompatActivity {
                             "A combination of yoga and strength exercises to improve flexibility, endurance, and muscle strength",
                             Arrays.asList("Full Body", "Legs", "Core"), 800, R.drawable.yogastrengthimage, Arrays.asList(6, 12), 2, R.drawable.full_body_yoga_and_strength_thumbnail,R.drawable.yogastrengthgif)
             );
-            Map<LocalDate, Integer> stepsHistory = new HashMap<>();
-            Map<LocalDate, Integer> waterHistory = new HashMap<>();
-
-            LocalDate today = null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                today = LocalDate.now();
-            }
-            for (int i = 0; i < 7; i++) {
-                LocalDate date = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    date = today.minusDays(i);
-                }
-                stepsHistory.put(date, (int) (Math.random() * 10000));
-                waterHistory.put(date, (int) (Math.random() * 3000));
-            }
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                User user = new User(
-                        null,
-                        "John Doe",
-                        1234567890L,
-                        "john.doe@example.com",
-                        "password123",
-                        LocalDate.of(1990, 1, 1),
-                        180.0,
-                        75.0,
-                        true,
-                        "What is your pet's name?",
-                        "Fluffy",
-                        null,
-                        null,
-                        null,
-                        null,
-                        stepsHistory,
-                        waterHistory
-                );
-                userRoomRepository.addUserLocally(user);
-            }
+//            Map<LocalDate, Integer> stepsHistory = new HashMap<>();
+//            Map<LocalDate, Integer> waterHistory = new HashMap<>();
+//
+//            LocalDate today = null;
+//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//                today = LocalDate.now();
+//            }
+//            for (int i = 0; i < 7; i++) {
+//                LocalDate date = null;
+//                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//                    date = today.minusDays(i);
+//                }
+//                stepsHistory.put(date, (int) (Math.random() * 10000));
+//                waterHistory.put(date, (int) (Math.random() * 3000));
+//            }
+//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//                User user = new User(
+//                        null,
+//                        "John Doe",
+//                        1234567890L,
+//                        "john.doe@example.com",
+//                        "password123",
+//                        LocalDate.of(1990, 1, 1),
+//                        180.0,
+//                        75.0,
+//                        true,
+//                        "What is your pet's name?",
+//                        "Fluffy",
+//                        null,
+//                        null,
+//                        null,
+//                        null,
+//                        stepsHistory,
+//                        waterHistory
+//                );
+//                userRoomRepository.addUserLocally(user);
+//            }
 
 
             for (Workout workout : workouts) {

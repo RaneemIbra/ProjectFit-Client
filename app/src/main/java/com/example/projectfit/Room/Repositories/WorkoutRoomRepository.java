@@ -36,8 +36,7 @@ public class WorkoutRoomRepository {
         Executors.newSingleThreadExecutor().execute(() -> {
             workoutDatabase.workoutDAO().updateWorkout(workout);
         });
-
-
+    }
     public LiveData<List<Workout>> getWorkoutsByDifficulty(int difficulty) {
         return workoutDatabase.workoutDAO().getWorkoutsByDifficulty(difficulty);
     }

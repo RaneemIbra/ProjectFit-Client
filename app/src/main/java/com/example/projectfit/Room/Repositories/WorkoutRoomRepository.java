@@ -31,9 +31,27 @@ public class WorkoutRoomRepository {
     public Workout getWorkoutByName(String workoutName) {
         return workoutDatabase.workoutDAO().getWorkoutByName(workoutName);
     }
+
     public void updateWorkout(Workout workout) {
         Executors.newSingleThreadExecutor().execute(() -> {
             workoutDatabase.workoutDAO().updateWorkout(workout);
         });
+
+
+    public LiveData<List<Workout>> getWorkoutsByDifficulty(int difficulty) {
+        return workoutDatabase.workoutDAO().getWorkoutsByDifficulty(difficulty);
+    }
+
+    public LiveData<List<Workout>> getWorkoutsByType(String type) {
+        return workoutDatabase.workoutDAO().getWorkoutsByType(type);
+    }
+
+    public LiveData<List<Workout>> getWorkoutsByMuscle(String muscle) {
+        return workoutDatabase.workoutDAO().getWorkoutsByMuscle(muscle);
+    }
+
+    public LiveData<List<Workout>> getWorkoutsByDurationRange(int minDuration, int maxDuration) {
+        return workoutDatabase.workoutDAO().getWorkoutsByDurationRange(minDuration, maxDuration);
+
     }
 }

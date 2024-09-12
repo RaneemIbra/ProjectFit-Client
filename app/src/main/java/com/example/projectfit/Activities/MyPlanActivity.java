@@ -133,8 +133,14 @@ public class MyPlanActivity extends AppCompatActivity {
             setsCompletedTextViews[i].setText(completedSets + "/10");
         }
 
+
         // Set up Cancel button click listener
         cancelButton.setOnClickListener(v -> toggleWorkoutListVisibility(false));
+
+        bottomBar=findViewById(R.id.bottom_navigation);
+        bottomBar.setSelectedItemId(R.id.plan_BottomIcon);
+
+
     }
 
     private void setupTrainingLayouts() {

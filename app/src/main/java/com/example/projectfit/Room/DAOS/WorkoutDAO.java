@@ -33,4 +33,11 @@ public interface WorkoutDAO {
 
     @Query("SELECT * FROM workouts WHERE difficulty = :difficulty")
     LiveData<List<Workout>> getWorkoutsByDifficulty(int difficulty);
+
+    @Query("SELECT * FROM workouts WHERE muscles LIKE '%' || :muscle || '%'")
+    LiveData<List<Workout>> getWorkoutsByMuscle(String muscle);
+
+    @Query("SELECT * FROM workouts WHERE durationInMinutes BETWEEN :minDuration AND :maxDuration")
+    LiveData<List<Workout>> getWorkoutsByDurationRange(int minDuration, int maxDuration);
+
 }

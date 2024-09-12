@@ -69,7 +69,7 @@
 
                         <!-- Body Building Option -->
                         <LinearLayout
-                            android:id="@+id/r7kmbxwvlz6o"
+                            android:id="@+id/BodyBuildingLayout"
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/s000000sw1cr20"
@@ -101,7 +101,7 @@
 
                         <!-- Mobility Option -->
                         <LinearLayout
-                            android:id="@+id/rcdhqfptnugj"
+                            android:id="@+id/MobilityLayout"
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/s000000sw1cr20"
@@ -133,7 +133,7 @@
 
                         <!-- Calisthenics Option -->
                         <LinearLayout
-                            android:id="@+id/r17jd3ea8ta1"
+                            android:id="@+id/CalisthenicsLayout"
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/s000000sw1cr20"
@@ -184,7 +184,7 @@
 
                         <!-- 30 Minutes Option -->
                         <LinearLayout
-                            android:id="@+id/rvg9e9e3fjjq"
+                            android:id="@+id/minutes15layout"
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/s000000sw1cr20"
@@ -216,7 +216,7 @@
 
                         <!-- 60 Minutes Option -->
                         <LinearLayout
-                            android:id="@+id/ro2x0y9luguo"
+                            android:id="@+id/minute30layout"
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/s000000sw1cr20"
@@ -248,7 +248,7 @@
 
                         <!-- 90 Minutes Option -->
                         <LinearLayout
-                            android:id="@+id/rzxm2hmf0u7"
+                            android:id="@+id/minute60layout"
                             android:layout_width="110dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/s000000sw1cr20"

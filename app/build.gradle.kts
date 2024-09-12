@@ -48,6 +48,8 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation ("org.tensorflow:tensorflow-lite:2.9.0")
+    implementation ("org.tensorflow:tensorflow-lite-support:0.3.1")
     implementation ("com.github.lzyzsd:circleprogress:1.2.1")
     api("com.google.android.material:material:1.12.0-alpha01")
     implementation(libs.navigation.fragment)
@@ -62,4 +64,19 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    // Add this line for Mockito
+    testImplementation ("org.mockito:mockito-core:5.3.1")
+    // For Android-specific Mockito features, you can also include this:
+    androidTestImplementation ("org.mockito:mockito-android:5.3.1")
+    // You can also include Espresso for UI testing (optional)
+    //may delete this
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+
+    androidTestImplementation ("androidx.test.espresso:espresso-intents:3.5.1")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+
+    // Add the AndroidX Test dependencies
+
+    androidTestImplementation ("androidx.test:core:1.4.0")
+    androidTestImplementation ("androidx.test:core-ktx:1.4.0")
 }

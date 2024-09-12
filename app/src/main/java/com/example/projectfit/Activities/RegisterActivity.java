@@ -132,20 +132,28 @@ public class RegisterActivity extends AppCompatActivity {
         String answerText = getTextFromInput(answerLayout);
 
         if (isValidInput(fullNameText, emailText, passwordText, heightText, weightText, answerText)) {
-            User newUser = new User(null, fullNameText, null, emailText, passwordText, selectedBirthDate,
-                    Double.parseDouble(heightText), Double.parseDouble(weightText), true, selectedQuestion, answerText, null, null, null, null, null, null);
-
             executorService.execute(() -> {
-                userRoomRepository.addUserLocally(newUser);
-                userServerRepository.addUserInServer(newUser);
+                User existingUser = userRoomRepository.getUserByEmail(emailText);
 
                 runOnUiThread(() -> {
-                    Toast.makeText(RegisterActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
-                    navigateToActivity(LoginActivity.class);
+                    if (existingUser != null) {
+                        emailLayout.setError("This email is already registered.");
+                        Toast.makeText(RegisterActivity.this, "User already exists with this email.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        User newUser = new User(null, fullNameText, null, emailText, passwordText, selectedBirthDate,
+                                Double.parseDouble(heightText), Double.parseDouble(weightText), true, selectedQuestion, answerText, null, null, null, null, null, null);
+
+                        userRoomRepository.addUserLocally(newUser);
+                        userServerRepository.addUserInServer(newUser);
+
+                        Toast.makeText(RegisterActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
+                        navigateToActivity(LoginActivity.class);
+                    }
                 });
             });
         }
     }
+
 
     private boolean isValidInput(String fullNameText, String emailText, String passwordText, String heightText, String weightText, String answerText) {
         boolean isFullNameValid = validation.ValidateText(fullNameText, fullNameLayout);

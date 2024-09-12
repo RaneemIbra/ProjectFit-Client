@@ -5,10 +5,9 @@ import android.os.Parcelable;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-//import com.example.projectfit.Models.Workout;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,9 +32,13 @@ public class User implements Parcelable {
     private Map<LocalDate, Integer> stepsHistory;
     private Map<LocalDate, Integer> waterHistory;
 
+    public User(){
+
+    }
+
     public User(Long id, String fullName, Long phoneNum, String emailAddress, String password, LocalDate birthday,
                 double height, double weight, boolean gender, String securityQuestion, String answer,
-                byte[] profilePicture, List<Boolean> achievements, Map<Integer, Workout> plan,
+                byte [] profilePicture, List<Boolean> achievements, Map<Integer, Workout> plan,
                 Map<Integer, Workout> workoutHistory, Map<LocalDate, Integer> stepsHistory,
                 Map<LocalDate, Integer> waterHistory) {
         this.id = id;
@@ -50,11 +53,11 @@ public class User implements Parcelable {
         this.securityQuestion = securityQuestion;
         this.answer = answer;
         this.profilePicture = profilePicture;
-        this.achievements = achievements;
-        this.plan = plan;
-        this.workoutHistory = workoutHistory;
-        this.stepsHistory = stepsHistory;
-        this.waterHistory = waterHistory;
+        this.achievements = achievements != null ? achievements : new ArrayList<>();
+        this.plan = plan != null ? plan : new HashMap<>();
+        this.workoutHistory = workoutHistory != null ? workoutHistory : new HashMap<>();
+        this.stepsHistory = stepsHistory != null ? stepsHistory : new HashMap<>();
+        this.waterHistory = waterHistory != null ? waterHistory : new HashMap<>();
     }
 
     protected User(Parcel in) {

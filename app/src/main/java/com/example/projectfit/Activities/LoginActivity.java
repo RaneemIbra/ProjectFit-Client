@@ -3,6 +3,7 @@ package com.example.projectfit.Activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -19,8 +20,10 @@ import com.example.projectfit.Models.User;
 import com.example.projectfit.R;
 import com.example.projectfit.Room.Repositories.UserRoomRepository;
 import com.example.projectfit.Server.Repositories.UserServerRepository;
+import com.example.projectfit.Utils.GsonProvider;
 import com.example.projectfit.Utils.Validation;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -113,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                 userRoomRepository.validateUserLocal(email, password, new UserRoomRepository.OnUserValidationCallback() {
                     @Override
                     public void onSuccess(User user) {
+                        saveUserToSharedPreferences(user);
                         runOnUiThread(() -> handleLocalLoginSuccess(email, password, user));
                     }
 
@@ -174,7 +178,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void navigateToHomePage(User user) {
-        Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+        Intent intent = new Intent(LoginActivity.this, BottomNavigate.class);
         intent.putExtra("user", user);
         startActivity(intent);
         finish();
@@ -190,4 +194,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onDestroy();
         executorService.shutdown();
     }
+
+
+    private void saveUserToSharedPreferences(User user) {
+        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        Gson gson = GsonProvider.getGson();
+        String userJson = gson.toJson(user);
+        editor.putString("logged_in_user", userJson);
+
+        editor.apply();
+    }
+
 }

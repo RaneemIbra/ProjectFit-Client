@@ -23,6 +23,18 @@ public class UserRoomRepository {
         });
     }
 
+    public void updateStepsHistory(User user) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            userDatabase.userDAO().updateUser(user);
+        });
+    }
+
+    public void updateWaterHistory(User user) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            userDatabase.userDAO().updateUser(user);
+        });
+    }
+
     public List<User> getAllUsersLocally() {
         return userDatabase.userDAO().getAllUsers();
     }

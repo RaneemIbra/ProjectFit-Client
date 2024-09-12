@@ -2,6 +2,9 @@ package com.example.projectfit.Models;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.example.projectfit.Utils.Converters;
 
 import java.util.List;
 
@@ -13,10 +16,12 @@ public class Workout {
     int durationInMinutes;
     String workoutType;
     String workoutDescription;
-    List<String> muscles;
+    @TypeConverters(Converters.class)
+    private List<String> muscles;
     int calories;
     int workoutImageResId;
     int workoutLogoResId;
+    int workoutGifResId;
     List<Integer> sets_reps;
     int difficulty;
 
@@ -26,7 +31,7 @@ public class Workout {
 
     public Workout(String workoutName, int durationInMinutes, String workoutType, String workoutDescription,
                    List<String> muscles, int calories, int workoutImageResId,
-                    List<Integer> sets_reps, int difficulty, int workoutLogoResId) {
+                    List<Integer> sets_reps, int difficulty, int workoutLogoResId, int workoutGifResId) {
         this.workoutName = workoutName;
         this.durationInMinutes = durationInMinutes;
         this.workoutType = workoutType;
@@ -37,6 +42,7 @@ public class Workout {
         this.sets_reps = sets_reps;
         this.difficulty = difficulty;
         this.workoutLogoResId = workoutLogoResId;
+        this.workoutGifResId = workoutGifResId;
     }
 
     public Long getId() {
@@ -61,6 +67,14 @@ public class Workout {
 
     public void setDurationInMinutes(int durationInMinutes) {
         this.durationInMinutes = durationInMinutes;
+    }
+
+    public int getWorkoutGifResId() {
+        return workoutGifResId;
+    }
+
+    public void setWorkoutGifResId(int workoutGifResId) {
+        this.workoutGifResId = workoutGifResId;
     }
 
     public String getWorkoutType() {

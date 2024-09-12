@@ -5,637 +5,751 @@
     android:layout_height="match_parent"
     tools:context=".Activities.PlanFragment">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#FFFFFF">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
 
-        <ScrollView
-            android:id="@+id/ry6bufhvzu4r"
+        <!-- Container for main_content and workout_details_layout -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@drawable/sffffffsw1cr20bd9d9d9"
-            android:paddingTop="18dp"
-            android:paddingBottom="40dp"
-            android:clipToPadding="false">
+            android:orientation="horizontal">
+
+            <!-- Main Content with ScrollView -->
+            <ScrollView
+                android:id="@+id/main_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/sffffffsw1cr20bd9d9d9"
+                android:clipToPadding="false"
+                android:paddingTop="18dp"
+                android:paddingBottom="40dp">
+
+                <LinearLayout
+                    android:id="@+id/main_content2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/day_buttons_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginBottom="29dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/sunday"
+                            android:layout_width="39dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                            android:gravity="center_horizontal"
+                            android:paddingVertical="10dp"
+                            android:text="SUN"
+                            android:textColor="@drawable/button_text"
+                            android:textSize="12sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:id="@+id/monday"
+                            android:layout_width="38dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                            android:gravity="center_horizontal"
+                            android:paddingVertical="10dp"
+                            android:text="MON"
+                            android:textColor="@drawable/button_text"
+                            android:textSize="12sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:id="@+id/tuesday"
+                            android:layout_width="39dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                            android:gravity="center_horizontal"
+                            android:paddingVertical="10dp"
+                            android:text="TUS"
+                            android:textColor="@drawable/button_text"
+                            android:textSize="12sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:id="@+id/wednesday"
+                            android:layout_width="39dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                            android:gravity="center_horizontal"
+                            android:paddingVertical="11dp"
+                            android:text="WED"
+                            android:textColor="@drawable/button_text"
+                            android:textSize="12sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:id="@+id/thursday"
+                            android:layout_width="39dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                            android:gravity="center_horizontal"
+                            android:paddingVertical="11dp"
+                            android:text="THU"
+                            android:textColor="@drawable/button_text"
+                            android:textSize="12sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:id="@+id/friday"
+                            android:layout_width="38dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                            android:gravity="center_horizontal"
+                            android:paddingVertical="11dp"
+                            android:text="FRI"
+                            android:textColor="@drawable/button_text"
+                            android:textSize="12sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:id="@+id/saturday"
+                            android:layout_width="39dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                            android:gravity="center_horizontal"
+                            android:paddingVertical="10dp"
+                            android:text="SAT"
+                            android:textColor="@drawable/button_text"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/rzacy26dzg1h"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="9dp"
+                        android:layout_marginBottom="22dp"
+                        android:background="@drawable/sffffff4fsw1cr20b131313"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:paddingVertical="21dp">
+
+                        <!-- "Today's Training" header -->
+                        <TextView
+                            android:id="@+id/todaysTrainingHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:text="Today’s Training"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp" />
+
+                        <!-- Container to add workout views dynamically -->
+                        <LinearLayout
+                            android:id="@+id/workoutsContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <!-- Training Details -->
+                            <LinearLayout
+                                android:id="@+id/Layout1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/cr18bffffff"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:orientation="vertical"
+                                android:paddingVertical="9dp"
+                                tools:targetApi="o">
+
+                                <LinearLayout
+                                    android:id="@+id/rv4ymb3kdafe"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="8dp"
+                                    android:layout_marginBottom="19dp"
+                                    android:orientation="vertical"
+                                    android:padding="8dp">
+
+                                    <!-- Workout Image and Details -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
+
+                                        <!-- Workout Image -->
+                                        <com.google.android.material.imageview.ShapeableImageView
+                                            android:id="@+id/rlaob0eufl3"
+                                            android:layout_width="80dp"
+                                            android:layout_height="80dp"
+                                            android:layout_marginEnd="8dp"
+                                            android:scaleType="fitXY"
+                                            android:src="@drawable/building" />
+
+                                        <!-- Workout Name and Calories Info -->
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:orientation="vertical">
+
+                                            <!-- Workout Name -->
+                                            <TextView
+                                                android:id="@+id/r58ginjerv5o"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginBottom="4dp"
+                                                android:text="Upper Body Workout"
+                                                android:textColor="#131313"
+                                                android:textSize="16sp"
+                                                android:textStyle="bold" />
+
+                                            <!-- Calories Image and Amount -->
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:gravity="center_vertical"
+                                                android:orientation="horizontal">
+
+                                                <com.google.android.material.imageview.ShapeableImageView
+                                                    android:id="@+id/rhh070fllio8"
+                                                    android:layout_width="20dp"
+                                                    android:layout_height="20dp"
+                                                    android:scaleType="fitXY"
+                                                    android:src="@drawable/calories" />
+
+                                                <TextView
+                                                    android:id="@+id/rqd9c60hxzf"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginStart="8dp"
+                                                    android:text="121 Kcal"
+                                                    android:textColor="#212020"
+                                                    android:textSize="12sp" />
+                                            </LinearLayout>
+
+                                            <!-- Next Set Info -->
+                                            <TextView
+                                                android:id="@+id/rg5slbkteo9w"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="4dp"
+                                                android:text="The next set is 4 reps!"
+                                                android:textColor="#FF9A01"
+                                                android:textSize="12sp" />
+                                        </LinearLayout>
+
+                                        <!-- Timer Image and Duration -->
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center_horizontal"
+                                            android:orientation="vertical">
+
+                                            <com.google.android.material.imageview.ShapeableImageView
+                                                android:id="@+id/rb39xm020i8"
+                                                android:layout_width="40dp"
+                                                android:layout_height="40dp"
+                                                android:scaleType="fitXY"
+                                                android:src="@drawable/timer" />
+
+                                            <TextView
+                                                android:id="@+id/rc5h6rvwtrkr"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="4dp"
+                                                android:text="25 Mins"
+                                                android:textColor="#007AFF"
+                                                android:textSize="15sp" />
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                    <!-- Set Completion Info -->
+                                    <TextView
+                                        android:id="@+id/ra3jfriwglt"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginTop="8dp"
+                                        android:text="When a set is completed, tap on the progress bar"
+                                        android:textColor="#007AFF"
+                                        android:textSize="13sp" />
+
+                                    <!-- Progress Bar -->
+                                    <ProgressBar
+                                        android:id="@+id/training_progress_bar1"
+                                        style="?android:attr/progressBarStyleHorizontal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="16dp"
+                                        android:layout_marginHorizontal="16dp"
+                                        android:layout_marginTop="10dp"
+                                        android:indeterminate="false"
+                                        android:max="100"
+                                        android:progress="0"
+                                        android:progressDrawable="@drawable/progress_bar_custom" />
+
+                                    <Space
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="20dp" />
+
+                                    <TextView
+                                        android:id="@+id/setsCompleted1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="end"
+                                        android:layout_marginTop="-20dp"
+                                        android:layout_marginEnd="18dp"
+                                        android:text="0/10"
+                                        android:textColor="#131313" />
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <!-- Second Training Section -->
+                            <LinearLayout
+                                android:id="@+id/Layout2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/cr18bffffff"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:orientation="vertical"
+                                android:paddingVertical="9dp"
+                                tools:targetApi="o">
+
+                                <LinearLayout
+                                    android:id="@+id/rv4ymb3kdafea"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="8dp"
+                                    android:layout_marginBottom="19dp"
+                                    android:orientation="vertical"
+                                    android:padding="8dp">
+
+                                    <!-- Workout Image and Details -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
+
+                                        <!-- Workout Image -->
+                                        <com.google.android.material.imageview.ShapeableImageView
+                                            android:id="@+id/rlaob0eufl3a"
+                                            android:layout_width="80dp"
+                                            android:layout_height="80dp"
+                                            android:layout_marginEnd="8dp"
+                                            android:scaleType="fitXY"
+                                            android:src="@drawable/building" />
+
+                                        <!-- Workout Name and Calories Info -->
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:orientation="vertical">
+
+                                            <!-- Workout Name -->
+                                            <TextView
+                                                android:id="@+id/r58ginjerv5oa"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginBottom="4dp"
+                                                android:text="Upper Body Workout"
+                                                android:textColor="#131313"
+                                                android:textSize="16sp"
+                                                android:textStyle="bold" />
+
+                                            <!-- Calories Image and Amount -->
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:gravity="center_vertical"
+                                                android:orientation="horizontal">
+
+                                                <com.google.android.material.imageview.ShapeableImageView
+                                                    android:id="@+id/rhh070fllio8a"
+                                                    android:layout_width="20dp"
+                                                    android:layout_height="20dp"
+                                                    android:scaleType="fitXY"
+                                                    android:src="@drawable/calories" />
+
+                                                <TextView
+                                                    android:id="@+id/rqd9c60hxzfa"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginStart="8dp"
+                                                    android:text="122 Kcal"
+                                                    android:textColor="#212020"
+                                                    android:textSize="12sp" />
+                                            </LinearLayout>
+
+                                            <!-- Next Set Info -->
+                                            <TextView
+                                                android:id="@+id/rg5slbkteo9wa"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="4dp"
+                                                android:text="The next set is 4 reps!"
+                                                android:textColor="#FF9A01"
+                                                android:textSize="12sp" />
+                                        </LinearLayout>
+
+                                        <!-- Timer Image and Duration -->
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center_horizontal"
+                                            android:orientation="vertical">
+
+                                            <com.google.android.material.imageview.ShapeableImageView
+                                                android:id="@+id/rb39xm020i8a"
+                                                android:layout_width="40dp"
+                                                android:layout_height="40dp"
+                                                android:scaleType="fitXY"
+                                                android:src="@drawable/timer" />
+
+                                            <TextView
+                                                android:id="@+id/rc5h6rvwtrkra"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="4dp"
+                                                android:text="25 Mins"
+                                                android:textColor="#007AFF"
+                                                android:textSize="15sp" />
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                    <!-- Set Completion Info -->
+                                    <TextView
+                                        android:id="@+id/ra3jfriwglta"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginTop="8dp"
+                                        android:text="When a set is completed, tap on the progress bar"
+                                        android:textColor="#007AFF"
+                                        android:textSize="13sp" />
+
+                                    <!-- Progress Bar -->
+                                    <ProgressBar
+                                        android:id="@+id/training_progress_bar2"
+                                        style="?android:attr/progressBarStyleHorizontal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="16dp"
+                                        android:layout_marginHorizontal="16dp"
+                                        android:layout_marginTop="10dp"
+                                        android:indeterminate="false"
+                                        android:max="100"
+                                        android:progress="0"
+                                        android:progressDrawable="@drawable/progress_bar_custom" />
+
+                                    <Space
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="20dp" />
+
+                                    <TextView
+                                        android:id="@+id/setsCompleted2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="end"
+                                        android:layout_marginTop="-20dp"
+                                        android:layout_marginEnd="18dp"
+                                        android:text="0/10"
+                                        android:textColor="#131313" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <!-- Third Training Section -->
+                            <LinearLayout
+                                android:id="@+id/Layout3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/cr18bffffff"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:orientation="vertical"
+                                android:paddingVertical="9dp"
+                                tools:targetApi="o">
+
+                                <LinearLayout
+                                    android:id="@+id/rv4ymb3kdafes"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="8dp"
+                                    android:layout_marginBottom="19dp"
+                                    android:orientation="vertical"
+                                    android:padding="8dp">
+
+                                    <!-- Workout Image and Details -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
+
+                                        <!-- Workout Image -->
+                                        <com.google.android.material.imageview.ShapeableImageView
+                                            android:id="@+id/rlaob0eufl3s"
+                                            android:layout_width="80dp"
+                                            android:layout_height="80dp"
+                                            android:layout_marginEnd="8dp"
+                                            android:scaleType="fitXY"
+                                            android:src="@drawable/building" />
+
+                                        <!-- Workout Name and Calories Info -->
+
+                                        <!-- Timer Image and Duration -->
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:orientation="vertical">
+
+                                            <!-- Workout Name -->
+                                            <TextView
+                                                android:id="@+id/r58ginjerv5os"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginBottom="4dp"
+                                                android:text="Upper Body Workout"
+                                                android:textColor="#131313"
+                                                android:textSize="16sp"
+                                                android:textStyle="bold" />
+
+                                            <!-- Calories Image and Amount -->
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:gravity="center_vertical"
+                                                android:orientation="horizontal">
+
+                                                <com.google.android.material.imageview.ShapeableImageView
+                                                    android:id="@+id/rhh070fllio8s"
+                                                    android:layout_width="20dp"
+                                                    android:layout_height="20dp"
+                                                    android:scaleType="fitXY"
+                                                    android:src="@drawable/calories" />
+
+                                                <TextView
+                                                    android:id="@+id/rqd9c60hxzfs"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginStart="8dp"
+                                                    android:text="123 Kcal"
+                                                    android:textColor="#212020"
+                                                    android:textSize="12sp" />
+                                            </LinearLayout>
+
+                                            <!-- Next Set Info -->
+                                            <TextView
+                                                android:id="@+id/rg5slbkteo9ws"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="4dp"
+                                                android:text="The next set is 4 reps!"
+                                                android:textColor="#FF9A01"
+                                                android:textSize="12sp" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center_horizontal"
+                                            android:orientation="vertical">
+
+                                            <com.google.android.material.imageview.ShapeableImageView
+                                                android:id="@+id/rb39xm020i8s"
+                                                android:layout_width="40dp"
+                                                android:layout_height="40dp"
+                                                android:scaleType="fitXY"
+                                                android:src="@drawable/timer" />
+
+                                            <TextView
+                                                android:id="@+id/rc5h6rvwtrkrs"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="4dp"
+                                                android:text="25 Mins"
+                                                android:textColor="#007AFF"
+                                                android:textSize="15sp" />
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                    <!-- Set Completion Info -->
+                                    <TextView
+                                        android:id="@+id/ra3jfriwglts"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginTop="8dp"
+                                        android:text="When a set is completed, tap on the progress bar"
+                                        android:textColor="#007AFF"
+                                        android:textSize="13sp" />
+
+                                    <!-- Progress Bar -->
+                                    <ProgressBar
+                                        android:id="@+id/training_progress_bar3"
+                                        style="?android:attr/progressBarStyleHorizontal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="16dp"
+                                        android:layout_marginHorizontal="16dp"
+                                        android:layout_marginTop="10dp"
+                                        android:indeterminate="false"
+                                        android:max="100"
+                                        android:progress="0"
+                                        android:progressDrawable="@drawable/progress_bar_custom" />
+
+                                    <Space
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="20dp" />
+
+                                    <TextView
+                                        android:id="@+id/setsCompleted3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="end"
+                                        android:layout_marginTop="-20dp"
+                                        android:layout_marginEnd="18dp"
+                                        android:text="0/10"
+                                        android:textColor="#131313" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ryd3katlt2w"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="119dp"
+                        android:layout_marginBottom="-10dp"
+                        android:background="@drawable/cr38bffffff"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:paddingVertical="7dp">
+
+                        <TextView
+                            android:id="@+id/r1q5rejf6pyw"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Edit Plan"
+                            android:textColor="#131313"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="82dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="-50dp"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <!-- Trash Icon -->
+                        <ImageView
+                            android:id="@+id/trash_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="bin"
+                            android:padding="8dp"
+                            android:src="@drawable/bin"
+                            android:visibility="gone" />
+
+                        <!-- Add Workout Button -->
+                        <Space
+                            android:layout_width="475dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageButton
+                            android:id="@+id/add_workout_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="add"
+                            android:padding="8dp"
+                            android:src="@drawable/add"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/workout_details_layout"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-
-
-
+                android:layout_weight="1"
+                android:background="@drawable/sffffffsw1cr20bd9d9d9"
                 android:orientation="vertical"
-                android:layout_marginTop="25dp">
+                android:padding="8dp"
+                android:visibility="gone">
 
-
-                <!-- My Plan, Workouts Buttons -->
-
-
-                <!-- Day Buttons -->
-                <LinearLayout
-                    android:id="@+id/rm34nsidea5m"
+                <!-- Workout ListView -->
+                <ListView
+                    android:id="@+id/workout_list_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="23dp"
-                    android:layout_marginBottom="29dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/sunday"
-                        android:layout_width="39dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
-                        android:gravity="center_horizontal"
-                        android:paddingVertical="10dp"
-                        android:text="SUN"
-                        android:textColor="@drawable/button_text"
-                        android:textSize="12sp" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <Button
-                        android:id="@+id/monday"
-                        android:layout_width="38dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
-                        android:gravity="center_horizontal"
-                        android:paddingVertical="10dp"
-                        android:text="MON"
-                        android:textColor="@drawable/button_text"
-                        android:textSize="12sp" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <Button
-                        android:id="@+id/tuesday"
-                        android:layout_width="39dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
-                        android:gravity="center_horizontal"
-                        android:paddingVertical="10dp"
-                        android:text="TUS"
-                        android:textColor="@drawable/button_text"
-                        android:textSize="12sp" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <Button
-                        android:id="@+id/wednesday"
-                        android:layout_width="39dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
-                        android:gravity="center_horizontal"
-                        android:paddingVertical="11dp"
-                        android:text="WED"
-                        android:textColor="@drawable/button_text"
-                        android:textSize="12sp" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <Button
-                        android:id="@+id/thursday"
-                        android:layout_width="39dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
-                        android:gravity="center_horizontal"
-                        android:paddingVertical="11dp"
-                        android:text="THU"
-                        android:textColor="@drawable/button_text"
-                        android:textSize="12sp" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <Button
-                        android:id="@+id/friday"
-                        android:layout_width="38dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
-                        android:gravity="center_horizontal"
-                        android:paddingVertical="11dp"
-                        android:text="FRI"
-                        android:textColor="@drawable/button_text"
-                        android:textSize="12sp" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <Button
-                        android:id="@+id/saturday"
-                        android:layout_width="39dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
-                        android:gravity="center_horizontal"
-                        android:paddingVertical="10dp"
-                        android:text="SAT"
-                        android:textColor="@drawable/button_text"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <!-- Today's Training Section -->
-                <LinearLayout
-                    android:id="@+id/rzacy26dzg1h"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="9dp"
-                    android:layout_marginBottom="22dp"
-                    android:background="@drawable/sffffff4fsw1cr20b131313"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:paddingVertical="21dp">
-
-                    <TextView
-                        android:id="@+id/rh5iakhrluej"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
-                        android:text="Today’s Training"
-                        android:textColor="#FFFFFF"
-                        android:textSize="20sp" />
-
-                    <!-- Training Details -->
-                    <LinearLayout
-                        android:id="@+id/Layout1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/cr18bffffff"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:orientation="vertical"
-                        android:paddingVertical="9dp"
-                        tools:targetApi="o">
-
-                        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rv4ymb3kdafe"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="8dp"
-                            android:layout_marginBottom="19dp"
-                            android:orientation="vertical"
-                            android:padding="8dp">
-
-                            <!-- Workout Image and Details -->
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                <!-- Workout Image -->
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rlaob0eufl3"
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:scaleType="fitXY"
-                                    android:src="@drawable/building" />
-
-                                <!-- Workout Name and Calories Info -->
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:orientation="vertical">
-
-                                    <!-- Workout Name -->
-                                    <TextView
-                                        android:id="@+id/r58ginjerv5o"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="4dp"
-                                        android:text="Upper Body Workout"
-                                        android:textColor="#131313"
-                                        android:textSize="16sp"
-                                        android:textStyle="bold" />
-
-                                    <!-- Calories Image and Amount -->
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_vertical"
-                                        android:orientation="horizontal">
-
-                                        <com.google.android.material.imageview.ShapeableImageView
-                                            android:id="@+id/rhh070fllio8"
-                                            android:layout_width="20dp"
-                                            android:layout_height="20dp"
-                                            android:scaleType="fitXY"
-                                            android:src="@drawable/calories" />
-
-                                        <TextView
-                                            android:id="@+id/rqd9c60hxzf"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginStart="8dp"
-                                            android:text="121 Kcal"
-                                            android:textColor="#212020"
-                                            android:textSize="12sp" />
-                                    </LinearLayout>
-
-                                    <!-- Next Set Info -->
-                                    <TextView
-                                        android:id="@+id/rg5slbkteo9w"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="4dp"
-                                        android:text="The next set is 4 reps!"
-                                        android:textColor="#FF9A01"
-                                        android:textSize="12sp" />
-                                </LinearLayout>
-
-                                <!-- Timer Image and Duration -->
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <com.google.android.material.imageview.ShapeableImageView
-                                        android:id="@+id/rb39xm020i8"
-                                        android:layout_width="40dp"
-                                        android:layout_height="40dp"
-                                        android:scaleType="fitXY"
-                                        android:src="@drawable/timer" />
-
-                                    <TextView
-                                        android:id="@+id/rc5h6rvwtrkr"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="4dp"
-                                        android:text="25 Mins"
-                                        android:textColor="#007AFF"
-                                        android:textSize="15sp" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <!-- Set Completion Info -->
-                            <TextView
-                                android:id="@+id/ra3jfriwglt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="8dp"
-                                android:text="When a set is completed, tap on the progress bar"
-                                android:textColor="#007AFF"
-                                android:textSize="13sp" />
-
-                            <!-- Progress Bar -->
-                            <ProgressBar
-                                android:id="@+id/training_progress_bar1"
-                                style="?android:attr/progressBarStyleHorizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="16dp"
-                                android:layout_marginHorizontal="16dp"
-                                android:layout_marginTop="10dp"
-                                android:indeterminate="false"
-                                android:max="100"
-                                android:progress="0"
-                                android:progressDrawable="@drawable/progress_bar_custom" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <!-- Second Training Section -->
-                    <LinearLayout
-                        android:id="@+id/Layout2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/cr18bffffff"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:orientation="vertical"
-                        android:paddingVertical="9dp"
-                        tools:targetApi="o">
-
-                        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rv4ymb3kdafea"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="8dp"
-                            android:layout_marginBottom="19dp"
-                            android:orientation="vertical"
-                            android:padding="8dp">
-
-                            <!-- Workout Image and Details -->
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                <!-- Workout Image -->
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rlaob0eufl3a"
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:scaleType="fitXY"
-                                    android:src="@drawable/building" />
-
-                                <!-- Workout Name and Calories Info -->
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:orientation="vertical">
-
-                                    <!-- Workout Name -->
-                                    <TextView
-                                        android:id="@+id/r58ginjerv5oa"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="4dp"
-                                        android:text="Upper Body Workout"
-                                        android:textColor="#131313"
-                                        android:textSize="16sp"
-                                        android:textStyle="bold" />
-
-                                    <!-- Calories Image and Amount -->
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_vertical"
-                                        android:orientation="horizontal">
-
-                                        <com.google.android.material.imageview.ShapeableImageView
-                                            android:id="@+id/rhh070fllio8a"
-                                            android:layout_width="20dp"
-                                            android:layout_height="20dp"
-                                            android:scaleType="fitXY"
-                                            android:src="@drawable/calories" />
-
-                                        <TextView
-                                            android:id="@+id/rqd9c60hxzfa"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginStart="8dp"
-                                            android:text="122 Kcal"
-                                            android:textColor="#212020"
-                                            android:textSize="12sp" />
-                                    </LinearLayout>
-
-                                    <!-- Next Set Info -->
-                                    <TextView
-                                        android:id="@+id/rg5slbkteo9wa"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="4dp"
-                                        android:text="The next set is 4 reps!"
-                                        android:textColor="#FF9A01"
-                                        android:textSize="12sp" />
-                                </LinearLayout>
-
-                                <!-- Timer Image and Duration -->
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <com.google.android.material.imageview.ShapeableImageView
-                                        android:id="@+id/rb39xm020i8a"
-                                        android:layout_width="40dp"
-                                        android:layout_height="40dp"
-                                        android:scaleType="fitXY"
-                                        android:src="@drawable/timer" />
-
-                                    <TextView
-                                        android:id="@+id/rc5h6rvwtrkra"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="4dp"
-                                        android:text="25 Mins"
-                                        android:textColor="#007AFF"
-                                        android:textSize="15sp" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <!-- Set Completion Info -->
-                            <TextView
-                                android:id="@+id/ra3jfriwglta"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="8dp"
-                                android:text="When a set is completed, tap on the progress bar"
-                                android:textColor="#007AFF"
-                                android:textSize="13sp" />
-
-                            <!-- Progress Bar -->
-                            <ProgressBar
-                                android:id="@+id/training_progress_bar2"
-                                style="?android:attr/progressBarStyleHorizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="16dp"
-                                android:layout_marginHorizontal="16dp"
-                                android:layout_marginTop="10dp"
-                                android:indeterminate="false"
-                                android:max="100"
-                                android:progress="0"
-                                android:progressDrawable="@drawable/progress_bar_custom" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <!-- Third Training Section -->
-                    <LinearLayout
-                        android:id="@+id/Layout3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/cr18bffffff"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:orientation="vertical"
-                        android:paddingVertical="9dp"
-                        tools:targetApi="o">
-
-                        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/rv4ymb3kdafes"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="8dp"
-                            android:layout_marginBottom="19dp"
-                            android:orientation="vertical"
-                            android:padding="8dp">
-
-                            <!-- Workout Image and Details -->
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                <!-- Workout Image -->
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/rlaob0eufl3s"
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:scaleType="fitXY"
-                                    android:src="@drawable/building" />
-
-                                <!-- Workout Name and Calories Info -->
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:orientation="vertical">
-
-                                    <!-- Workout Name -->
-                                    <TextView
-                                        android:id="@+id/r58ginjerv5os"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="4dp"
-                                        android:text="Upper Body Workout"
-                                        android:textColor="#131313"
-                                        android:textSize="16sp"
-                                        android:textStyle="bold" />
-
-                                    <!-- Calories Image and Amount -->
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_vertical"
-                                        android:orientation="horizontal">
-
-                                        <com.google.android.material.imageview.ShapeableImageView
-                                            android:id="@+id/rhh070fllio8s"
-                                            android:layout_width="20dp"
-                                            android:layout_height="20dp"
-                                            android:scaleType="fitXY"
-                                            android:src="@drawable/calories" />
-
-                                        <TextView
-                                            android:id="@+id/rqd9c60hxzfs"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginStart="8dp"
-                                            android:text="123 Kcal"
-                                            android:textColor="#212020"
-                                            android:textSize="12sp" />
-                                    </LinearLayout>
-
-                                    <!-- Next Set Info -->
-                                    <TextView
-                                        android:id="@+id/rg5slbkteo9ws"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="4dp"
-                                        android:text="The next set is 4 reps!"
-                                        android:textColor="#FF9A01"
-                                        android:textSize="12sp" />
-                                </LinearLayout>
-
-                                <!-- Timer Image and Duration -->
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <com.google.android.material.imageview.ShapeableImageView
-                                        android:id="@+id/rb39xm020i8s"
-                                        android:layout_width="40dp"
-                                        android:layout_height="40dp"
-                                        android:scaleType="fitXY"
-                                        android:src="@drawable/timer" />
-
-                                    <TextView
-                                        android:id="@+id/rc5h6rvwtrkrs"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="4dp"
-                                        android:text="25 Mins"
-                                        android:textColor="#007AFF"
-                                        android:textSize="15sp" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <!-- Set Completion Info -->
-                            <TextView
-                                android:id="@+id/ra3jfriwglts"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="8dp"
-                                android:text="When a set is completed, tap on the progress bar"
-                                android:textColor="#007AFF"
-                                android:textSize="13sp" />
-
-                            <!-- Progress Bar -->
-                            <ProgressBar
-                                android:id="@+id/training_progress_bar3"
-                                style="?android:attr/progressBarStyleHorizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="16dp"
-                                android:layout_marginHorizontal="16dp"
-                                android:layout_marginTop="10dp"
-                                android:indeterminate="false"
-                                android:max="100"
-                                android:progress="0"
-                                android:progressDrawable="@drawable/progress_bar_custom" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <!-- Edit Plan Button -->
-                <LinearLayout
-                    android:id="@+id/ryd3katlt2w"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="119dp"
-                    android:background="@drawable/cr38bffffff"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:paddingVertical="7dp">
-
-                    <TextView
-                        android:id="@+id/r1q5rejf6pyw"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Edit Plan"
-                        android:textColor="#131313"
-                        android:textSize="17sp" />
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/trash_icon"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="-50dp"
-                    android:contentDescription="bin"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:clipToPadding="false"
+                    android:dividerHeight="8dp"
                     android:padding="8dp"
-                    android:src="@drawable/bin"
+                    android:scrollbars="vertical"
                     android:visibility="gone" />
 
+                <!-- Cancel Button -->
+                <Button
+                    android:id="@+id/cancel_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Cancel"
+                    android:visibility="gone" />
             </LinearLayout>
-        </ScrollView>
+        </LinearLayout>
+
     </LinearLayout>
 </FrameLayout>

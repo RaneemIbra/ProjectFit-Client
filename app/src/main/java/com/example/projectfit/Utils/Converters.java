@@ -91,8 +91,17 @@ public class Converters {
 
     @TypeConverter
     public static Map<LocalDate, Integer> toLocalDateMap(String json) {
+        if (json == null) {
+            return new HashMap<>();
+        }
+
         Type type = new TypeToken<Map<String, Integer>>() {}.getType();
         Map<String, Integer> stringMap = gson.fromJson(json, type);
+
+        if (stringMap == null) {
+            return new HashMap<>();
+        }
+
         Map<LocalDate, Integer> localDateMap = new HashMap<>();
 
         for (Map.Entry<String, Integer> entry : stringMap.entrySet()) {

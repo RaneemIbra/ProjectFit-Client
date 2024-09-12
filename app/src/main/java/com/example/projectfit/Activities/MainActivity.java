@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
 //                        stepsHistory,
 //                        waterHistory
 //                );
-//                userRoomRepository.addUserLocally(user);
+//                userRoomRepository.addUserLocally(user); testing the branch
 //            }
 
 

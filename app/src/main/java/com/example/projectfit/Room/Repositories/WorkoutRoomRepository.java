@@ -31,4 +31,9 @@ public class WorkoutRoomRepository {
     public Workout getWorkoutByName(String workoutName) {
         return workoutDatabase.workoutDAO().getWorkoutByName(workoutName);
     }
+    public void updateWorkout(Workout workout) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            workoutDatabase.workoutDAO().updateWorkout(workout);
+        });
+    }
 }

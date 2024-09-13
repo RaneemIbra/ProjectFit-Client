@@ -11,7 +11,7 @@ import com.example.projectfit.Room.DAOS.UserDAO;
 import com.example.projectfit.Models.User;
 import com.example.projectfit.Utils.Converters;
 
-@Database(entities = {User.class}, version = 1)
+@Database(entities = {User.class}, version = 2)
 @TypeConverters({Converters.class})
 public abstract class UserDatabase extends RoomDatabase {
     private static UserDatabase instance;

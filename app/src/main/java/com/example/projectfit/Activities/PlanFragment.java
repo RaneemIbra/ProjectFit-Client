@@ -2,7 +2,9 @@ package com.example.projectfit.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,13 +35,18 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.projectfit.Models.User;
 import com.example.projectfit.Models.Workout;
 import com.example.projectfit.R;
 import com.example.projectfit.Room.Repositories.WorkoutRoomRepository;
+import com.example.projectfit.Utils.GsonProvider;
 import com.example.projectfit.Utils.WorkoutAdapterForMyplan;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -67,18 +74,24 @@ public class PlanFragment extends Fragment {
     private WorkoutAdapterForMyplan workoutAdapter;
     private Boolean isWorkoutDeleted = false;
     private BottomNavigationView bottomBar;
+    private User user;
+    private SharedPreferences sharedPreferences;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_plan, container, false);
+        View view = inflater.inflate(R.layout.fragment_plan, container, false);
+
+        sharedPreferences = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        user = getUserFromSharedPreferences();
+
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Enable edge-to-edge insets
         ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -106,6 +119,24 @@ public class PlanFragment extends Fragment {
                 break;
             }
         }
+    }
+
+    private User getUserFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String userJson = sharedPreferences.getString("logged_in_user", null);
+
+        if (userJson != null) {
+            Gson gson = GsonProvider.getGson();
+            Type userType = new TypeToken<User>() {}.getType();
+            return gson.fromJson(userJson, userType);
+        }
+        return null;
+    }
+
+    private void navigateToPlanQuestionsActivity() {
+        Intent intent = new Intent(getContext(), PlanQuestionsActivity.class);
+        startActivity(intent);
+        requireActivity().finish();
     }
 
     private String getDayOfWeek(Date today) {

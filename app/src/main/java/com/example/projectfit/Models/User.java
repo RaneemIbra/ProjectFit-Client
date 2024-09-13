@@ -27,6 +27,7 @@ public class User implements Parcelable {
     String answer;
     private byte[] profilePicture;
     List<Boolean> achievements;
+    boolean buildPlan;
     private Map<Integer, Workout> plan;
     private Map<Integer, Workout> workoutHistory;
     private Map<LocalDate, Integer> stepsHistory;
@@ -58,6 +59,7 @@ public class User implements Parcelable {
         this.workoutHistory = workoutHistory != null ? workoutHistory : new HashMap<>();
         this.stepsHistory = stepsHistory != null ? stepsHistory : new HashMap<>();
         this.waterHistory = waterHistory != null ? waterHistory : new HashMap<>();
+        this.buildPlan = true;
     }
 
     protected User(Parcel in) {
@@ -122,6 +124,14 @@ public class User implements Parcelable {
         dest.writeString(securityQuestion);
         dest.writeString(answer);
         dest.writeByteArray(profilePicture);
+    }
+
+    public boolean isBuildPlan() {
+        return buildPlan;
+    }
+
+    public void setBuildPlan(boolean buildPlan) {
+        this.buildPlan = buildPlan;
     }
 
     public Long getId() {

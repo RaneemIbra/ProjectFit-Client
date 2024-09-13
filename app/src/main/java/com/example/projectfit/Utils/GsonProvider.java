@@ -11,16 +11,16 @@ import com.google.gson.JsonSerializer;
 import java.time.LocalDate;
 
 public class GsonProvider {
+
     public static Gson getGson() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return new GsonBuilder()
-                    .registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, type, context) ->
+                    .registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, type, jsonDeserializationContext) ->
                             LocalDate.parse(json.getAsString()))
                     .registerTypeAdapter(LocalDate.class, (JsonSerializer<LocalDate>) (src, typeOfSrc, context) ->
                             new JsonPrimitive(src.toString()))
                     .create();
         }
-        return new Gson();
+        return null;
     }
 }
-

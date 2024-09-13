@@ -1,6 +1,8 @@
 package com.example.projectfit.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,10 +18,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.projectfit.Models.Question;
+import com.example.projectfit.Models.User;
 import com.example.projectfit.R;
 import com.example.projectfit.Room.Repositories.QuestionRoomRepository;
 import com.example.projectfit.Server.Repositories.QuestionServerRepository;
+import com.example.projectfit.Utils.GsonProvider;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,12 +38,13 @@ public class PlanQuestionsActivity extends AppCompatActivity {
     private LinearLayout answer1, answer2, answer3, answer4;
     private int currentQuestionIndex = 0;
     private final int progressStep = 14;
-    private final int totalQuestions = 7;
+    private final int totalQuestions = 8;
     private List<Question> questions;
     private int selectedAnswerIndex = 0;
-
     private QuestionRoomRepository questionRoomRepository;
     private QuestionServerRepository questionServerRepository;
+    private SharedPreferences sharedPreferences;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +57,10 @@ public class PlanQuestionsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        user = getUserFromSharedPreferences(); // Load the user
+
         initializeViews();
         initializeRepositories();
         setupQuestions();
@@ -56,6 +68,20 @@ public class PlanQuestionsActivity extends AppCompatActivity {
         setAnswerClickListeners();
         continueButton.setEnabled(false);
     }
+
+    private User getUserFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String userJson = sharedPreferences.getString("logged_in_user", null);
+
+        if (userJson != null) {
+            Gson gson = GsonProvider.getGson();
+            Type userType = new TypeToken<User>() {}.getType();
+            return gson.fromJson(userJson, userType);
+        }
+        return null;
+    }
+
+
 
     private void initializeViews() {
         progressBar = findViewById(R.id.progressBar);
@@ -81,7 +107,8 @@ public class PlanQuestionsActivity extends AppCompatActivity {
 
     private void setupQuestions() {
         questions = new ArrayList<>();
-
+        questions.add(new Question("Do you want to build the plan manually or automatically?",
+                "Manually", "Automatically", null, null, 0));
         questions.add(new Question("What is your goal?", "Build muscle", "Lose weight", "Improve endurance", "Increase flexibility", 0));
         questions.add(new Question("What is your current fitness level?", "Beginner (0-6 months of regular exercise)", "Intermediate (6-24 months of regular exercise)", "Advanced (More than 24 months of regular exercise)", null, 0));
         questions.add(new Question("How many days per week can you commit to working out?", "1-2 days", "3-4 days", "5-6 days", "7 days", 0));
@@ -154,22 +181,41 @@ public class PlanQuestionsActivity extends AppCompatActivity {
     }
 
     public void onContinueClicked(View view) {
-        if (currentQuestionIndex < totalQuestions - 1) {
+        if (currentQuestionIndex == 0) {
+            if (selectedAnswerIndex == 1) {
+                user.setBuildPlan(false);
+                saveUserToSharedPreferences();
+                navigateToPlanFragment();
+            } else {
+                currentQuestionIndex++;
+                progressBar.setProgress(currentQuestionIndex * progressStep);
+                loadQuestion(currentQuestionIndex);
+            }
+        } else if (currentQuestionIndex < totalQuestions - 1) {
             currentQuestionIndex++;
             progressBar.setProgress(currentQuestionIndex * progressStep);
             loadQuestion(currentQuestionIndex);
         } else {
-            saveQuestionsToDatabases();
-//            Intent intent = new Intent(PlanQuestionsActivity.this, MyPlanActivity.class);
-//            startActivity(intent);
+            user.setBuildPlan(false);
+            saveUserToSharedPreferences();
+            navigateToPlanFragment();
         }
     }
 
-    private void saveQuestionsToDatabases() {
-        for (Question question : questions) {
-            questionRoomRepository.addQuestionLocally(question);
-            questionServerRepository.addQuestionInServer(question);
-        }
+    private void navigateToPlanFragment() {
+        Intent intent = new Intent(PlanQuestionsActivity.this, BottomNavigate.class);
+        intent.putExtra("navigateTo", "plan");
+        startActivity(intent);
+        finish();
+    }
+
+
+    private void saveUserToSharedPreferences() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = GsonProvider.getGson();
+        String userJson = gson.toJson(user);
+        editor.putString("logged_in_user", userJson);
+        editor.apply();
     }
 
     public void onBackClicked(View view) {

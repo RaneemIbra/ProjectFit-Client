@@ -93,8 +93,6 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        getUserFromSharedPreferencesAsync();
     }
 
     @Nullable
@@ -109,6 +107,7 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
         });
 
         initViews(view);
+        getUserFromSharedPreferencesAsync();
         setupSensors();
         loadStepDataAsync();
         initClickListeners();
@@ -149,7 +148,6 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
                 }
 
                 requireActivity().runOnUiThread(() -> {
-                    setupSensors();
                     predictMaxStepsForUser();
                     predictMaxWaterForUser();
                     setProgressForStepsAndWater();
@@ -158,6 +156,7 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
             }
         });
     }
+
 
     private int calculateAge(LocalDate birthDate) {
         if (birthDate == null) {
@@ -278,13 +277,6 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 today = LocalDate.now();
             }
-            int todaySteps = 0;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                todaySteps = user.getStepsHistory().getOrDefault(today, 0);
-            }
-            circularProgressBar.setMax(maxSteps);
-            circularProgressBar.setProgress(todaySteps);
-            stepCountTextView.setText("Steps: " + todaySteps + " out of " + maxSteps);
 
             int todayWaterIntake = 0;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -293,8 +285,19 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
             waterCupProgress.setMax(maxWaterIntake);
             waterCupProgress.setProgress(todayWaterIntake);
             waterProgressTextView.setText("Water: " + todayWaterIntake + " ml out of " + maxWaterIntake + " ml");
+
+            int todaySteps = 0;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                todaySteps = user.getStepsHistory().getOrDefault(today, 0);
+            }
+            circularProgressBar.setMax(maxSteps);
+            circularProgressBar.setProgress(todaySteps);
+            stepCountTextView.setText("Steps: " + todaySteps + " out of " + maxSteps);
         }
     }
+
+
+
 
     private void initClickListeners() {
         progressBarContainer.setOnClickListener(v -> animatedProgressBarStepCount());

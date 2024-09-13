@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -12,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.projectfit.Models.Workout;
 import com.example.projectfit.Room.Repositories.UserRoomRepository;
 import com.example.projectfit.R;
@@ -35,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private UserRoomRepository userRoomRepository;
     private WorkoutRoomRepository workoutRoomRepository;
     private WorkoutServerRepository workoutServerRepository;
+    private ImageView gifImageView;
+    Button registerBTN, loginBTN;
+    private static final int DELAY_MILLIS = 5000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +58,31 @@ public class MainActivity extends AppCompatActivity {
         initializeRepositories();
         addAllWorkouts();
         transferUserDataToServer();
-        setupNavigation();
+        //setupNavigation();
+        initViews();
+        setUpClickListeners();
+        String gifUrl = "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExODFocThmamZ0cGJ5Zm82aXJvYmQ0cWR2cXR1enJzOGM2YXZ4MnVwMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0BtrpaGo15NgvitihA/giphy.gif";
+        Glide.with(this)
+                .asGif()
+                .load(gifUrl)
+                .into(gifImageView);
+
+    }
+
+    private void initViews(){
+        gifImageView = findViewById(R.id.gifImageView);
+        registerBTN = findViewById(R.id.registerButtonLoadingScreen);
+        loginBTN = findViewById(R.id.LoginButtonLoadingScreen);
+    }
+    private void setUpClickListeners(){
+        registerBTN.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
+        loginBTN.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void initializeRepositories() {
@@ -255,26 +286,26 @@ public class MainActivity extends AppCompatActivity {
         executor.shutdown();
     }
 
-    private void setupNavigation() {
-        setupButtonNavigation(R.id.HomePageBTN, BottomNavigate.class);
-     //   setupButtonNavigation(R.id.MyPlanBTN, MyPlanActivity.class);
-        setupButtonNavigation(R.id.PlanQuestionsBTN, PlanQuestionsActivity.class);
-      //  setupButtonNavigation(R.id.WorkoutBTN, WorkoutActivity.class);
-       // setupButtonNavigation(R.id.WorkoutFilterBTN, WorkoutsFilterActivity.class);
-       // setupButtonNavigation(R.id.ListBTN, WorkoutsListActivity.class);
-        setupButtonNavigation(R.id.resetPasswordPageBTN, ResetPasswordActivity.class);
-        //setupButtonNavigation(R.id.ProfilePageBTN, ProfileActivity.class);
-        setupButtonNavigation(R.id.LoginPageBTN, LoginActivity.class);
-        setupButtonNavigation(R.id.RegisterPageBTN, RegisterActivity.class);
-        setupButtonNavigation(R.id.LoadingScreenBTN, LoadingScreenActivity.class);
-    }
-
-    private void setupButtonNavigation(int buttonId, Class<?> activityClass) {
-        findViewById(buttonId).setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, activityClass);
-            startActivity(intent);
-        });
-    }
+//    private void setupNavigation() {
+//        setupButtonNavigation(R.id.HomePageBTN, BottomNavigate.class);
+//     //   setupButtonNavigation(R.id.MyPlanBTN, MyPlanActivity.class);
+//        setupButtonNavigation(R.id.PlanQuestionsBTN, PlanQuestionsActivity.class);
+//      //  setupButtonNavigation(R.id.WorkoutBTN, WorkoutActivity.class);
+//       // setupButtonNavigation(R.id.WorkoutFilterBTN, WorkoutsFilterActivity.class);
+//       // setupButtonNavigation(R.id.ListBTN, WorkoutsListActivity.class);
+//        setupButtonNavigation(R.id.resetPasswordPageBTN, ResetPasswordActivity.class);
+//        //setupButtonNavigation(R.id.ProfilePageBTN, ProfileActivity.class);
+//        setupButtonNavigation(R.id.LoginPageBTN, LoginActivity.class);
+//        setupButtonNavigation(R.id.RegisterPageBTN, RegisterActivity.class);
+//        setupButtonNavigation(R.id.LoadingScreenBTN, LoadingScreenActivity.class);
+//    }
+//
+//    private void setupButtonNavigation(int buttonId, Class<?> activityClass) {
+//        findViewById(buttonId).setOnClickListener(view -> {
+//            Intent intent = new Intent(MainActivity.this, activityClass);
+//            startActivity(intent);
+//        });
+//    }
 
     private boolean isConnectedToServer() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);

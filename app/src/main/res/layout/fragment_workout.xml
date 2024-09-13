@@ -30,13 +30,12 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/back_button"
+                    android:id="@+id/back_button_workout"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="16dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:contentDescription="Back"
-                    android:onClick="onBackClicked"
                     android:src="@drawable/back_button" />
 
                 <com.google.android.material.imageview.ShapeableImageView

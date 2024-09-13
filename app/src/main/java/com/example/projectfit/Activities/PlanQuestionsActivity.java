@@ -3,6 +3,7 @@ package com.example.projectfit.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,15 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import org.tensorflow.lite.Interpreter;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.io.FileInputStream;
+import android.content.res.AssetFileDescriptor;
+import java.io.IOException;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,12 +31,15 @@ import com.example.projectfit.Models.Question;
 import com.example.projectfit.Models.User;
 import com.example.projectfit.R;
 import com.example.projectfit.Room.Repositories.QuestionRoomRepository;
+import com.example.projectfit.Room.Repositories.UserRoomRepository;
 import com.example.projectfit.Server.Repositories.QuestionServerRepository;
 import com.example.projectfit.Utils.GsonProvider;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +56,11 @@ public class PlanQuestionsActivity extends AppCompatActivity {
     private int selectedAnswerIndex = 0;
     private QuestionRoomRepository questionRoomRepository;
     private QuestionServerRepository questionServerRepository;
+    private UserRoomRepository userRoomRepository;
     private SharedPreferences sharedPreferences;
     private User user;
+    private Interpreter tflite;
+    private int[] userAnswers = new int[totalQuestions-1];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +75,11 @@ public class PlanQuestionsActivity extends AppCompatActivity {
         });
 
         sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
-        user = getUserFromSharedPreferences(); // Load the user
+        user = getUserFromSharedPreferences();
 
         initializeViews();
         initializeRepositories();
+        initializeModel();
         setupQuestions();
         loadQuestion(currentQuestionIndex);
         setAnswerClickListeners();
@@ -81,8 +98,6 @@ public class PlanQuestionsActivity extends AppCompatActivity {
         return null;
     }
 
-
-
     private void initializeViews() {
         progressBar = findViewById(R.id.progressBar);
         continueButton = findViewById(R.id.r9i96idg3y5l);
@@ -96,6 +111,7 @@ public class PlanQuestionsActivity extends AppCompatActivity {
     private void initializeRepositories() {
         questionRoomRepository = new QuestionRoomRepository(this);
         questionServerRepository = new QuestionServerRepository();
+        userRoomRepository = new UserRoomRepository(this);
     }
 
     private void setAnswerClickListeners() {
@@ -117,6 +133,79 @@ public class PlanQuestionsActivity extends AppCompatActivity {
         questions.add(new Question("Do you have any injuries or limitations that should be considered?", "No injuries or limitations", "Upper body injuries/limitations (shoulder, elbow, wrist)", "Lower body injuries/limitations (knee, ankle, hip)", "Back or neck injuries/limitations", 0));
         questions.add(new Question("How much time do you want to spend on each workout session?", "15-30 minutes", "30-45 minutes", "45-60 minutes", "More than 60 minutes", 0));
     }
+
+    private MappedByteBuffer loadModelFile() throws IOException {
+        AssetFileDescriptor fileDescriptor = this.getAssets().openFd("workout_plan_model.tflite");
+        FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
+        FileChannel fileChannel = inputStream.getChannel();
+        long startOffset = fileDescriptor.getStartOffset();
+        long declaredLength = fileDescriptor.getDeclaredLength();
+        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
+    }
+
+    private void initializeModel() {
+        try {
+            tflite = new Interpreter(loadModelFile());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void runModelAndSaveRecommendation() {
+        float[][] input = new float[1][10];
+
+        for (int i = 0; i < 7; i++) {
+            input[0][i] = userAnswers[i];
+        }
+
+        input[0][7] = calculateAge(user.getBirthday());
+        input[0][8] = (float) user.getWeight();
+        input[0][9] = (float) user.getHeight();
+
+        float[][] output = new float[1][3];
+        tflite.run(input, output);
+        int recommendedPlanIndex = argmax(output[0]);
+        String recommendedPlan = getWorkoutPlanFromIndex(recommendedPlanIndex);
+
+        saveRecommendation(recommendedPlan);
+    }
+
+
+    private int argmax(float[] array) {
+        int maxIndex = 0;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > array[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
+    }
+
+    private String getWorkoutPlanFromIndex(int index) {
+        switch (index) {
+            case 0: return "planA";
+            case 1: return "planB";
+            case 2: return "planC";
+            default: return "Unknown Plan";
+        }
+    }
+
+    private int calculateAge(LocalDate birthDate) {
+        if (birthDate == null) {
+            return 0;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return Period.between(birthDate, LocalDate.now()).getYears();
+        }
+        return 0;
+    }
+
+    private void saveRecommendation(String plan) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("recommended_plan", plan);
+        editor.apply();
+    }
+
 
     private void loadQuestion(int index) {
         if (index < totalQuestions) {
@@ -150,6 +239,9 @@ public class PlanQuestionsActivity extends AppCompatActivity {
         continueButton.setEnabled(true);
         selectedAnswerIndex = answerIndex;
         questions.get(currentQuestionIndex).setChoseAnswer(selectedAnswerIndex);
+        if (currentQuestionIndex > 0) {
+            userAnswers[currentQuestionIndex - 1] = selectedAnswerIndex;
+        }
         continueButton.setText(currentQuestionIndex == totalQuestions - 1 ? "Done" : "Continue");
     }
 
@@ -184,7 +276,7 @@ public class PlanQuestionsActivity extends AppCompatActivity {
         if (currentQuestionIndex == 0) {
             if (selectedAnswerIndex == 1) {
                 user.setBuildPlan(false);
-                saveUserToSharedPreferences();
+                updateBuildPlanInDatabase();
                 navigateToPlanFragment();
             } else {
                 currentQuestionIndex++;
@@ -197,10 +289,18 @@ public class PlanQuestionsActivity extends AppCompatActivity {
             loadQuestion(currentQuestionIndex);
         } else {
             user.setBuildPlan(false);
-            saveUserToSharedPreferences();
+            updateBuildPlanInDatabase();
+            runModelAndSaveRecommendation();
             navigateToPlanFragment();
         }
     }
+
+    private void updateBuildPlanInDatabase() {
+        user.setBuildPlan(false);
+        userRoomRepository.updateUserLocally(user);
+        saveUserToSharedPreferences();
+    }
+
 
     private void navigateToPlanFragment() {
         Intent intent = new Intent(PlanQuestionsActivity.this, BottomNavigate.class);

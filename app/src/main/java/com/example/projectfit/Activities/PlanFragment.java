@@ -47,9 +47,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class PlanFragment extends Fragment {
 
@@ -99,16 +101,44 @@ public class PlanFragment extends Fragment {
         });
 
         initViews(view);
-        //setupNavigation(view);
         setupDayButtons();
-        setupTrainingLayouts();
         setupEditPlanButton();
         setupAddWorkoutButton();
         workoutRepository = new WorkoutRoomRepository(requireContext());
         setupWorkoutListView();
         setupContainers(view);
         loadTodayWorkouts();
+        displayRecommendedWorkouts();
     }
+
+    private String getRecommendedPlan() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("recommended_plan", "default");
+    }
+
+    private List<Workout> getWorkoutsForPlan(String plan) {
+        List<Workout> workouts = new ArrayList<>();
+
+        switch (plan) {
+            case "planA":
+                workouts.add(new Workout("Incline Bench Press", 15, "Bodybuilding",
+                                "Focuses on the upper chest and shoulders",
+                                Arrays.asList("Upper Chest", "Shoulders"), 150, R.drawable.inclinebenchpressimage, Arrays.asList(4, 8), 3, R.drawable.incline_bench_press_thumbnail,R.drawable.inclinebenchpressgif));
+                break;
+            case "planB":
+                workouts.add(new Workout("HIIT Full Body", 60, "Calisthenics",
+                        "A high-intensity interval training workout targeting the full body, alternating between strength and cardio",
+                        Arrays.asList("Full Body", "Core"), 650, R.drawable.hiitimage, Arrays.asList(5, 10), 3, R.drawable.hiit_full_body_thumbnail,R.drawable.hiitgif));
+                break;
+            case "planC":
+                workouts.add(new Workout("Full Body Yoga and Strength", 90, "Mobility",
+                        "A combination of yoga and strength exercises to improve flexibility, endurance, and muscle strength",
+                        Arrays.asList("Full Body", "Legs", "Core"), 800, R.drawable.yogastrengthimage, Arrays.asList(6, 12), 2, R.drawable.full_body_yoga_and_strength_thumbnail,R.drawable.yogastrengthgif));
+                break;
+        }
+        return workouts;
+    }
+
 
     private void loadTodayWorkouts() {
         Date today = Calendar.getInstance().getTime();
@@ -160,16 +190,6 @@ public class PlanFragment extends Fragment {
         };
         selectedDayButton = dayButtons[0];
 
-        progressBars = new ProgressBar[]{
-                view.findViewById(R.id.training_progress_bar1),
-                view.findViewById(R.id.training_progress_bar2),
-                view.findViewById(R.id.training_progress_bar3)
-        };
-        trainingLayouts = new LinearLayout[]{
-                view.findViewById(R.id.Layout1),
-                view.findViewById(R.id.Layout2),
-                view.findViewById(R.id.Layout3)
-        };
         editPlanButton = view.findViewById(R.id.ryd3katlt2w);
         editPlanText = view.findViewById(R.id.r1q5rejf6pyw);
         trashIcon = view.findViewById(R.id.trash_icon);
@@ -179,19 +199,11 @@ public class PlanFragment extends Fragment {
         cancelButton = view.findViewById(R.id.cancel_button);
         mainScrollView = view.findViewById(R.id.main_content);
         dayButtonsContainer = view.findViewById(R.id.day_buttons_container);
-        setsCompletedTextViews = new TextView[]{
-                view.findViewById(R.id.setsCompleted1),
-                view.findViewById(R.id.setsCompleted2),
-                view.findViewById(R.id.setsCompleted3)
-        };
-
-        for (int i = 0; i < setsCompletedTextViews.length; i++) {
-            int completedSets = progressStatuses[i] / 10;
-            setsCompletedTextViews[i].setText(completedSets + "/10");
-        }
+        setsCompletedTextViews = new TextView[]{}; // No need for static TextViews anymore
 
         cancelButton.setOnClickListener(v -> toggleWorkoutListVisibility(false));
     }
+
 
     private void setupTrainingLayouts() {
         for (int i = 0; i < trainingLayouts.length; i++) {
@@ -316,24 +328,25 @@ public class PlanFragment extends Fragment {
         builder.create().show();
     }
 
-//    private void setupNavigation(View view) {
-//        bottomBar.setOnNavigationItemSelectedListener(item -> {
-//            int id_item = item.getItemId();
-//            if (id_item == R.id.home_BottomIcon) {
-//                navigateTo(HomePageActivity.class);
-//                return true;
-//            } else if (id_item == R.id.plan_BottomIcon) {
-//                return true;
-//            } else if (id_item == R.id.workouts_BottomIcon) {
-//                navigateTo(WorkoutsFilterActivity.class);
-//                return true;
-//            } else if (id_item == R.id.profile_BottomIcon) {
-//                navigateTo(ProfileActivity.class);
-//                return true;
-//            } else
-//                return false;
-//        });
-//    }
+    private void displayRecommendedWorkouts() {
+        String recommendedPlan = getRecommendedPlan();
+        List<Workout> workouts = getWorkoutsForPlan(recommendedPlan);
+
+        LinearLayout workoutsContainer = requireView().findViewById(R.id.workoutsContainer);
+        workoutsContainer.removeAllViews();
+
+        for (Workout workout : workouts) {
+            LinearLayout workoutTemplate = (LinearLayout) LayoutInflater.from(requireContext()).inflate(R.layout.workout_item_template, null);
+
+            populateWorkoutDetails(workoutTemplate, workout);
+
+            workoutsContainer.addView(workoutTemplate);
+
+            setupClickListenersForWorkout(workoutTemplate, workout);
+            setupDragAndDropForWorkout(workoutTemplate);
+        }
+    }
+
 
     private void navigateTo(Class<?> targetActivity) {
         Intent intent = new Intent(requireActivity(), targetActivity);
@@ -495,17 +508,37 @@ public class PlanFragment extends Fragment {
         TextView durationTextView = workoutLayout.findViewById(R.id.rc5h6rvwtrkra);
         ShapeableImageView imageView = workoutLayout.findViewById(R.id.rlaob0eufl3a);
 
-        workoutNameTextView.setText(workout.getWorkoutName());
-        caloriesTextView.setText(workout.getCalories() + " Kcal");
-        nextSetTextView.setText("Next set: " + workout.getSets_reps().get(0) + " reps");
-        setsCompletedTextView.setText("0/" + workout.getSets_reps().get(1));
-        durationTextView.setText(workout.getDurationInMinutes() + " Mins");
-        imageView.setImageResource(workout.getWorkoutLogoResId());
+        if (workoutNameTextView != null) {
+            workoutNameTextView.setText(workout.getWorkoutName());
+        }
 
-        progressBar.setMax(workout.getSets_reps().get(1) * 10);
-        progressBar.setProgress(0);
-        progressBar.setProgressDrawable(requireContext().getDrawable(R.drawable.progress_bar_custom));
+        if (caloriesTextView != null) {
+            caloriesTextView.setText(workout.getCalories() + " Kcal");
+        }
+
+        if (nextSetTextView != null) {
+            nextSetTextView.setText("Next set: " + workout.getSets_reps().get(0) + " reps");
+        }
+
+        if (setsCompletedTextView != null) {
+            setsCompletedTextView.setText("0/" + workout.getSets_reps().get(1));
+        }
+
+        if (durationTextView != null) {
+            durationTextView.setText(workout.getDurationInMinutes() + " Mins");
+        }
+
+        if (imageView != null) {
+            imageView.setImageResource(workout.getWorkoutLogoResId());
+        }
+
+        if (progressBar != null) {
+            progressBar.setMax(workout.getSets_reps().get(1) * 10);
+            progressBar.setProgress(0);
+            progressBar.setProgressDrawable(requireContext().getDrawable(R.drawable.progress_bar_custom));
+        }
     }
+
 
     private void setupClickListenersForWorkout(View workoutView, Workout workout) {
         workoutView.setOnClickListener(view -> {

@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class WorkoutFragment extends Fragment {
     Bundle bundleArg;
     ImageView workoutGifImageView,workoutImageView;
     TextView workoutDescriptionTextView,workoutNameTextView;
+    ImageButton backButton;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
@@ -49,13 +51,18 @@ public class WorkoutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
          View view = inflater.inflate(R.layout.fragment_workout, container, false);
          bundleArg = getArguments();
          workoutNameTextView = view.findViewById(R.id.WorkoutTitle);
          workoutDescriptionTextView = view.findViewById(R.id.WorkoutDescription);
          workoutImageView = view.findViewById(R.id.WorkoutImage);
          workoutGifImageView = view.findViewById(R.id.workout_gif);
+         backButton = view.findViewById(R.id.back_button_workout);
+
+         backButton.setOnClickListener(view1 -> {
+             onBackClicked(view1);
+         });
+
         loadWorkoutDetails();
         return  view;
     }
@@ -72,19 +79,7 @@ public class WorkoutFragment extends Fragment {
     }
 
     public void onBackClicked(View view) {
-        // Create an instance of the fragment you want to navigate to
-        Fragment fragment = new WorkoutsListFragment();
-        // Get the FragmentManager and begin a transaction
-        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-
-        // Replace the current fragment with the new one
-        transaction.replace(R.id.fragment_container, fragment);
-
-        // Optionally, add this transaction to the back stack so the user can navigate back
-        transaction.addToBackStack(null);
-
-        // Commit the transaction
-        transaction.commit();
+        requireActivity().getSupportFragmentManager().popBackStack();
     }
 
 }

@@ -84,7 +84,6 @@ public class ProfileFragment extends Fragment {
 
                     profileImageView.setImageBitmap(profilePhoto);
 
-                    // Update user in the local database and server
                     Executors.newSingleThreadExecutor().execute(() -> userRoomRepository.updateUserLocally(user));
                     updateUserOnServer(user, "Profile picture updated successfully!");
 
@@ -189,33 +188,57 @@ public class ProfileFragment extends Fragment {
         String updatedWeight = weightEditText.getText().toString();
         String updatedDate = dateEditText.getText().toString();
 
-        if (updatedHeight.isEmpty() || updatedWeight.isEmpty() || updatedPhone.isEmpty() || updatedDate.isEmpty() || updatedName.isEmpty()) {
-            Toast.makeText(getContext(), "All fields must be filled out", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         Converters converters = new Converters();
-        LocalDate updatedLocalDate = converters.toLocalDate(updatedDate);
-        if (updatedLocalDate == null) {
-            Toast.makeText(getContext(), "Invalid date format. Please use the correct format (YYYY-MM-DD).", Toast.LENGTH_SHORT).show();
-            return;
+
+        if (!updatedName.isEmpty()) {
+            user.setFullName(updatedName);
+            userNameTextView.setText(updatedName);
         }
 
-        // Update user data
-        user.setFullName(updatedName);
-        user.setBirthday(updatedLocalDate);
+        if (!updatedPhone.isEmpty()) {
+            try {
+                long phone = Long.parseLong(updatedPhone);
+                user.setPhoneNum(phone);
+                userPhoneTextView.setText("Phone: " + updatedPhone);
+            } catch (NumberFormatException e) {
+                Toast.makeText(getContext(), "Invalid phone number format.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
 
-        try {
-            long phone = Long.parseLong(updatedPhone);
-            double height = Double.parseDouble(updatedHeight);
-            double weight = Double.parseDouble(updatedWeight);
+        if (!updatedHeight.isEmpty()) {
+            try {
+                double height = Double.parseDouble(updatedHeight);
+                user.setHeight(height);
+                userHeightTextView.setText("Height: " + updatedHeight);
+            } catch (NumberFormatException e) {
+                Toast.makeText(getContext(), "Invalid height format.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
 
-            user.setPhoneNum(phone);
-            user.setHeight(height);
-            user.setWeight(weight);
-        } catch (NumberFormatException e) {
-            Toast.makeText(getContext(), "Invalid number format. Please enter valid data.", Toast.LENGTH_SHORT).show();
-            return;
+        if (!updatedWeight.isEmpty()) {
+            try {
+                double weight = Double.parseDouble(updatedWeight);
+                user.setWeight(weight);
+                userWeightTextView.setText("Weight: " + updatedWeight);
+            } catch (NumberFormatException e) {
+                Toast.makeText(getContext(), "Invalid weight format.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        if (!updatedDate.isEmpty()) {
+            LocalDate updatedLocalDate = converters.toLocalDate(updatedDate);
+            if (updatedLocalDate != null) {
+                user.setBirthday(updatedLocalDate);
+                userBirthdateTextView.setText("Birthday: " + updatedDate);
+                int age = calculateAge(updatedLocalDate);
+                userAgeTextView.setText("Age: " + age);
+            } else {
+                Toast.makeText(getContext(), "Invalid date format. Please use YYYY-MM-DD.", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
@@ -225,23 +248,16 @@ public class ProfileFragment extends Fragment {
         editor.putString("logged_in_user", userJson);
         editor.apply();
 
-        userNameTextView.setText(updatedName);
-        userPhoneTextView.setText("Phone: " + updatedPhone);
-        userHeightTextView.setText("Height: " + updatedHeight);
-        userWeightTextView.setText("Weight: " + updatedWeight);
-        userBirthdateTextView.setText("Birthday: " + updatedDate);
-
-        int age = calculateAge(updatedLocalDate);
-        userAgeTextView.setText("Age: " + age);
+        Executors.newSingleThreadExecutor().execute(() -> userRoomRepository.updateUserLocally(user));
 
         setEditTextsVisibility(View.GONE);
         setViewTextsVisibility(View.GONE);
-
         editDetailsButton.setVisibility(View.VISIBLE);
         UpdateProfileButton.setVisibility(View.GONE);
 
         Toast.makeText(getContext(), "Profile updated successfully!", Toast.LENGTH_SHORT).show();
     }
+
 
     private void setViewTextsVisibility(int visibility) {
         fullNameTextView.setVisibility(visibility);

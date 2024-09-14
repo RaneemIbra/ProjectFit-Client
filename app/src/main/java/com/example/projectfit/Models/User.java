@@ -26,9 +26,10 @@ public class User implements Parcelable {
     String securityQuestion;
     String answer;
     private byte[] profilePicture;
+    List<String> answers;
     List<Boolean> achievements;
     boolean buildPlan;
-    private Map<Integer, Workout> plan;
+    private String plan;
     private Map<Integer, Workout> workoutHistory;
     private Map<LocalDate, Integer> stepsHistory;
     private Map<LocalDate, Integer> waterHistory;
@@ -39,9 +40,9 @@ public class User implements Parcelable {
 
     public User(Long id, String fullName, Long phoneNum, String emailAddress, String password, LocalDate birthday,
                 double height, double weight, boolean gender, String securityQuestion, String answer,
-                byte [] profilePicture, List<Boolean> achievements, Map<Integer, Workout> plan,
+                byte [] profilePicture, List<Boolean> achievements, String plan,
                 Map<Integer, Workout> workoutHistory, Map<LocalDate, Integer> stepsHistory,
-                Map<LocalDate, Integer> waterHistory) {
+                Map<LocalDate, Integer> waterHistory, List<String> answers) {
         this.id = id;
         this.fullName = fullName;
         this.phoneNum = phoneNum;
@@ -55,11 +56,12 @@ public class User implements Parcelable {
         this.answer = answer;
         this.profilePicture = profilePicture;
         this.achievements = achievements != null ? achievements : new ArrayList<>();
-        this.plan = plan != null ? plan : new HashMap<>();
+        this.plan = plan;
         this.workoutHistory = workoutHistory != null ? workoutHistory : new HashMap<>();
         this.stepsHistory = stepsHistory != null ? stepsHistory : new HashMap<>();
         this.waterHistory = waterHistory != null ? waterHistory : new HashMap<>();
         this.buildPlan = true;
+        this.answers = answers;
     }
 
     protected User(Parcel in) {
@@ -140,6 +142,14 @@ public class User implements Parcelable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<String> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<String> answers) {
+        this.answers = answers;
     }
 
     public String getFullName() {
@@ -238,11 +248,11 @@ public class User implements Parcelable {
         this.achievements = achievements;
     }
 
-    public Map<Integer, Workout> getPlan() {
+    public String getPlan() {
         return plan;
     }
 
-    public void setPlan(Map<Integer, Workout> plan) {
+    public void setPlan(String plan) {
         this.plan = plan;
     }
 

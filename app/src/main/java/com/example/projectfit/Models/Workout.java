@@ -24,6 +24,7 @@ public class Workout {
     int workoutGifResId;
     List<Integer> sets_reps;
     int difficulty;
+    int sets;
 
     public Workout(){
 
@@ -31,7 +32,7 @@ public class Workout {
 
     public Workout(String workoutName, int durationInMinutes, String workoutType, String workoutDescription,
                    List<String> muscles, int calories, int workoutImageResId,
-                    List<Integer> sets_reps, int difficulty, int workoutLogoResId, int workoutGifResId) {
+                    List<Integer> sets_reps, int difficulty, int workoutLogoResId, int workoutGifResId, int sets) {
         this.workoutName = workoutName;
         this.durationInMinutes = durationInMinutes;
         this.workoutType = workoutType;
@@ -43,6 +44,7 @@ public class Workout {
         this.difficulty = difficulty;
         this.workoutLogoResId = workoutLogoResId;
         this.workoutGifResId = workoutGifResId;
+        this.sets = sets;
     }
 
     public Long getId() {
@@ -67,6 +69,14 @@ public class Workout {
 
     public void setDurationInMinutes(int durationInMinutes) {
         this.durationInMinutes = durationInMinutes;
+    }
+
+    public int getSets() {
+        return sets;
+    }
+
+    public void setSets(int sets) {
+        this.sets = sets;
     }
 
     public int getWorkoutGifResId() {

@@ -288,11 +288,22 @@ public class PlanQuestionsActivity extends AppCompatActivity {
             progressBar.setProgress(currentQuestionIndex * progressStep);
             loadQuestion(currentQuestionIndex);
         } else {
+            saveUserAnswers();
             user.setBuildPlan(false);
             updateBuildPlanInDatabase();
             runModelAndSaveRecommendation();
             navigateToPlanFragment();
         }
+    }
+
+    private void saveUserAnswers() {
+        List<String> answerList = new ArrayList<>();
+        for (int answer : userAnswers) {
+            answerList.add(String.valueOf(answer));
+        }
+        user.setAnswers(answerList);
+        userRoomRepository.updateUserLocally(user);
+        saveUserToSharedPreferences();
     }
 
     private void updateBuildPlanInDatabase() {

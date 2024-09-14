@@ -1,5 +1,7 @@
 package com.example.projectfit.Server.Repositories;
 
+import android.util.Log;
+
 import com.example.projectfit.Server.API.AppAPI;
 import com.example.projectfit.Server.API.UserAPI;
 import com.example.projectfit.Models.User;
@@ -17,8 +19,25 @@ public class UserServerRepository {
 
     public void getUserByEmail(String email, Callback<User> callback) {
         Call<User> call = userAPI.getUserByEmail(email);
-        call.enqueue(callback);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    Log.d("UserServerRepository", "User found: " + response.body());
+                } else {
+                    Log.d("UserServerRepository", "User not found, response code: " + response.code());
+                }
+                callback.onResponse(call, response);
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e("UserServerRepository", "Error fetching user: " + t.getMessage());
+                callback.onFailure(call, t);
+            }
+        });
     }
+
 
     public void addUserInServer(User user) {
         Call<User> call = userAPI.createUser(user);
@@ -114,6 +133,24 @@ public class UserServerRepository {
         });
     }
 
+    public void updateUserPlanInServer(Long userId, String plan, OnUserUpdateCallback callback) {
+        Call<User> call = userAPI.updatePlan(userId, plan);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess();
+                } else {
+                    callback.onFailure("Failed to update plan on server");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                callback.onFailure("Server error: " + t.getMessage());
+            }
+        });
+    }
 
     public interface OnUserValidationCallback {
         void onSuccess(User user);

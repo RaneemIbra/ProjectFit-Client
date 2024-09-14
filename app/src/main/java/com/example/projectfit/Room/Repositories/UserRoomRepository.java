@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.projectfit.Room.Databases.UserDatabase;
 import com.example.projectfit.Models.User;
+import com.example.projectfit.Utils.AppExecutors;
 
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -72,6 +73,16 @@ public class UserRoomRepository {
             userDatabase.userDAO().updateUser(user);
         });
     }
+
+    public void updatePlanForUser(User user, String recommendedPlan) {
+        user.setPlan(recommendedPlan);
+
+        AppExecutors.getInstance().diskIO().execute(() -> {
+            userDatabase.userDAO().updateUser(user);
+        });
+    }
+
+
 
     public interface OnUserValidationCallback {
         void onSuccess(User user);

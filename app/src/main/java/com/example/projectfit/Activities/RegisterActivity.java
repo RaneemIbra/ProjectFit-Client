@@ -133,21 +133,49 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (isValidInput(fullNameText, emailText, passwordText, heightText, weightText, answerText)) {
             executorService.execute(() -> {
-                User existingUser = userRoomRepository.getUserByEmail(emailText);
+                userServerRepository.getUserByEmail(emailText, new retrofit2.Callback<User>() {
+                    @Override
+                    public void onResponse(retrofit2.Call<User> call, retrofit2.Response<User> response) {
+                        runOnUiThread(() -> {
+                            if (response.isSuccessful() && response.body() != null) {
+                                emailLayout.setError("This email is already registered.");
+                                Toast.makeText(RegisterActivity.this, "User already exists with this email on the server.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                User newUser = new User(
+                                        null,
+                                        fullNameText,
+                                        null,
+                                        emailText,
+                                        passwordText,
+                                        selectedBirthDate,
+                                        Double.parseDouble(heightText),
+                                        Double.parseDouble(weightText),
+                                        true,
+                                        selectedQuestion,
+                                        answerText,
+                                        null,
+                                        null,
+                                        "",
+                                        null,
+                                        null,
+                                        null,
+                                        null
+                                );
 
-                runOnUiThread(() -> {
-                    if (existingUser != null) {
-                        emailLayout.setError("This email is already registered.");
-                        Toast.makeText(RegisterActivity.this, "User already exists with this email.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        User newUser = new User(null, fullNameText, null, emailText, passwordText, selectedBirthDate,
-                                Double.parseDouble(heightText), Double.parseDouble(weightText), true, selectedQuestion, answerText, null, null, null, null, null, null);
+                                userServerRepository.addUserInServer(newUser);
+                                userRoomRepository.addUserLocally(newUser);
 
-                        userRoomRepository.addUserLocally(newUser);
-                        userServerRepository.addUserInServer(newUser);
+                                Toast.makeText(RegisterActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
+                                navigateToActivity(LoginActivity.class);
+                            }
+                        });
+                    }
 
-                        Toast.makeText(RegisterActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
-                        navigateToActivity(LoginActivity.class);
+                    @Override
+                    public void onFailure(retrofit2.Call<User> call, Throwable t) {
+                        runOnUiThread(() -> {
+                            Toast.makeText(RegisterActivity.this, "Server error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
                     }
                 });
             });

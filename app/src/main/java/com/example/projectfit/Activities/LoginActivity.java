@@ -112,44 +112,8 @@ public class LoginActivity extends AppCompatActivity {
         String password = getTextFromInput(passwordLayout);
 
         if (validation.emailValidate(email, emailLayout) && validation.passwordValidate(password, passwordLayout)) {
-            executorService.execute(() -> {
-                userRoomRepository.validateUserLocal(email, password, new UserRoomRepository.OnUserValidationCallback() {
-                    @Override
-                    public void onSuccess(User user) {
-                        saveUserToSharedPreferences(user);
-                        runOnUiThread(() -> handleLocalLoginSuccess(email, password, user));
-                    }
-
-                    @Override
-                    public void onFailure(String errorMessage) {
-                        checkUserOnServer(email, password);
-                    }
-                });
-            });
+            checkUserOnServer(email, password);
         }
-    }
-
-    private void handleLocalLoginSuccess(String email, String password, User user) {
-        showLoginSuccessMessage("Login successful (Local)", user);
-        if (rememberMeCheckBox.isChecked()) {
-            saveCredentials(email, password);
-        }
-    }
-
-    private void saveCredentials(String email, String password) {
-        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("email", email);
-        editor.putString("password", password);
-        editor.putBoolean("rememberMe", true);
-        editor.apply();
-    }
-
-    private void clearCredentials() {
-        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
     }
 
     private void checkUserOnServer(String email, String password) {
@@ -157,12 +121,42 @@ public class LoginActivity extends AppCompatActivity {
             userServerRepository.validateUserServer(email, password, new UserServerRepository.OnUserValidationCallback() {
                 @Override
                 public void onSuccess(User user) {
-                    runOnUiThread(() -> showLoginSuccessMessage("Login successful (Server)", user));
+                    runOnUiThread(() -> {
+                        showLoginSuccessMessage("Login successful (Server)", user);
+                        saveUserToSharedPreferences(user);
+                        if (rememberMeCheckBox.isChecked()) {
+                            saveCredentials(email, password);
+                        }
+                    });
                 }
 
                 @Override
                 public void onFailure(String errorMessage) {
-                    runOnUiThread(() -> showToastMessage(errorMessage));
+                    runOnUiThread(() ->{
+                        checkUserInRoom(email, password);
+                    });
+                }
+            });
+        });
+    }
+
+
+    private void checkUserInRoom(String email, String password) {
+        executorService.execute(() -> {
+            userRoomRepository.validateUserLocal(email, password, new UserRoomRepository.OnUserValidationCallback() {
+                @Override
+                public void onSuccess(User user) {
+                    runOnUiThread(() -> {
+                        showLoginSuccessMessage("Login successful (Local)", user);
+                        if (rememberMeCheckBox.isChecked()) {
+                            saveCredentials(email, password);
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailure(String errorMessage) {
+                    runOnUiThread(() -> showToastMessage("Login failed: " + errorMessage));
                 }
             });
         });
@@ -189,12 +183,27 @@ public class LoginActivity extends AppCompatActivity {
         return editText != null ? editText.getText().toString().trim() : "";
     }
 
+    private void saveCredentials(String email, String password) {
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("email", email);
+        editor.putString("password", password);
+        editor.putBoolean("rememberMe", true);
+        editor.apply();
+    }
+
+    private void clearCredentials() {
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         executorService.shutdown();
     }
-
 
     private void saveUserToSharedPreferences(User user) {
         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
@@ -206,5 +215,4 @@ public class LoginActivity extends AppCompatActivity {
 
         editor.apply();
     }
-
 }

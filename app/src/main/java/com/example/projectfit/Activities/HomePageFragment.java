@@ -154,6 +154,9 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
                     setupCharts();
                 });
             }
+            System.out.println("user email: " + user.getEmailAddress());
+            System.out.println("user birthday " + user.getBirthday());
+            System.out.println("user build plan " + user.isBuildPlan());
         });
     }
 

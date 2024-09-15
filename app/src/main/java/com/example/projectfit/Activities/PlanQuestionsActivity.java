@@ -127,10 +127,10 @@ public class PlanQuestionsActivity extends AppCompatActivity {
     }
 
     private void resetAnswerBackgrounds() {
-        answer1.setBackgroundResource(R.drawable.cr36bffffff);
-        answer2.setBackgroundResource(R.drawable.cr36bffffff);
-        answer3.setBackgroundResource(R.drawable.cr36bffffff);
-        answer4.setBackgroundResource(R.drawable.cr36bffffff);
+        answer1.setBackgroundResource(R.drawable.edit_text_shape);
+        answer2.setBackgroundResource(R.drawable.edit_text_shape);
+        answer3.setBackgroundResource(R.drawable.edit_text_shape);
+        answer4.setBackgroundResource(R.drawable.edit_text_shape);
     }
 
     private void updateSelectedAnswerUI() {

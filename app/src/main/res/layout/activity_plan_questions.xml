@@ -10,9 +10,11 @@
 
 
     <!-- Back Button at the top of the layout -->
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="699dp"
+        android:layout_height="match_parent"
+        android:background="@color/background"
         android:orientation="vertical">
 
         <ImageButton
@@ -23,7 +25,8 @@
             android:background="?android:attr/selectableItemBackground"
             android:contentDescription="Back"
             android:onClick="onBackClicked"
-            android:src="@drawable/back_button" />
+            android:src="@drawable/back"
+            android:layout_marginBottom="20dp"/>
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -31,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="25dp"
             android:indeterminate="false"
             android:max="100"
             android:progress="0"
@@ -46,12 +49,14 @@
             android:layout_marginBottom="0dp"
             android:gravity="center"
             android:text="What Is Your Goal?"
-            android:textColor="#131313"
-            android:textSize="25sp" />
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="20dp"
+            android:layout_marginBottom="20dp"/>
 
         <LinearLayout
             android:id="@+id/answer1"
@@ -59,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="18dp"
             android:layout_marginBottom="22dp"
-            android:background="@drawable/cr36bffffff"
+            android:background="@drawable/edit_text_shape"
             android:onClick="onAnswerClicked"
             android:orientation="vertical"
             android:paddingHorizontal="31dp"
@@ -70,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lose weight"
-                android:textColor="#131313"
+                android:textColor="@color/light_gray_font"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -80,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="18dp"
             android:layout_marginBottom="22dp"
-            android:background="@drawable/cr36bffffff"
+            android:background="@drawable/edit_text_shape"
             android:onClick="onAnswerClicked"
             android:orientation="vertical"
             android:paddingHorizontal="31dp"
@@ -91,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gain weight"
-                android:textColor="#131313"
+                android:textColor="@color/light_gray_font"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -101,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="18dp"
             android:layout_marginBottom="22dp"
-            android:background="@drawable/cr36bffffff"
+            android:background="@drawable/edit_text_shape"
             android:onClick="onAnswerClicked"
             android:orientation="vertical"
             android:paddingHorizontal="31dp"
@@ -112,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Muscle Mass Gain"
-                android:textColor="#131313"
+                android:textColor="@color/light_gray_font"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -121,8 +126,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="18dp"
-
-            android:background="@drawable/cr36bffffff"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/edit_text_shape"
             android:onClick="onAnswerClicked"
             android:orientation="vertical"
             android:paddingHorizontal="31dp"
@@ -134,26 +139,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Shape body"
-                android:textColor="#131313"
+                android:textColor="@color/light_gray_font"
                 android:textSize="18sp" />
 
         </LinearLayout>
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/r9i96idg3y5l"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="91dp"
+            android:background="@drawable/button_selector"
+            android:enabled="false"
+            android:gravity="center"
+            android:hint="Continue"
+            android:onClick="onContinueClicked"
+            android:paddingVertical="13dp"
+            android:textColorHint="@color/white"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/r9i96idg3y5l"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="91dp"
-        android:background="@drawable/button_selector"
-        android:enabled="false"
-        android:gravity="center"
-        android:hint="Continue"
-        android:onClick="onContinueClicked"
-        android:paddingVertical="13dp"
-        android:textColor="#131313"
-        android:textSize="18sp" />
+    </LinearLayout>
 
     <!-- Progress Bar -->
 

@@ -1,18 +1,20 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/resetPicV2"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="25dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/rounded_corners_layout">
 
         <TextView
             android:id="@+id/title"
@@ -20,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Register"
-            android:textColor="#FF9A01"
+            android:textColor="@color/light_orange"
             android:textSize="34sp"
             android:textStyle="bold" />
 
@@ -36,8 +38,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="348dp"
+            android:layout_height="94dp"
             android:layout_marginTop="16dp"
             android:hint="Full name"
             app:counterEnabled="true"
@@ -47,7 +49,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="75dp"
                 android:inputType="text"
                 android:maxLength="20" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -63,7 +65,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="54dp"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,9 +80,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                />
+                android:layout_height="58dp"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -93,7 +94,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/birthDate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="78dp"
                 android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,7 +110,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Height"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="71dp"
                 android:inputType="number"
                 android:maxLength="3" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -127,7 +128,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Weight"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="69dp"
                 android:inputType="number"
                 android:maxLength="3" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -147,8 +148,8 @@
 
             <Spinner
                 android:id="@+id/spinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="324dp"
+                android:layout_height="63dp"
                 android:layout_weight="1"
                 android:entries="@array/spinner_items"
                 android:paddingStart="8dp"
@@ -165,7 +166,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Answer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -174,7 +175,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:backgroundTint="#FF9A01"
+            android:background="@drawable/custom_button"
             android:text="Register"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
@@ -189,4 +190,4 @@
             android:textColor="#FF9A01"
             android:textSize="14sp" />
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

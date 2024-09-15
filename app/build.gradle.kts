@@ -64,19 +64,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    // Add this line for Mockito
     testImplementation ("org.mockito:mockito-core:5.3.1")
-    // For Android-specific Mockito features, you can also include this:
     androidTestImplementation ("org.mockito:mockito-android:5.3.1")
-    // You can also include Espresso for UI testing (optional)
-    //may delete this
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
-
     androidTestImplementation ("androidx.test.espresso:espresso-intents:3.5.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
-
-    // Add the AndroidX Test dependencies
-
     androidTestImplementation ("androidx.test:core:1.4.0")
     androidTestImplementation ("androidx.test:core-ktx:1.4.0")
 }

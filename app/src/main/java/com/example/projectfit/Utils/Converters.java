@@ -111,4 +111,42 @@ public class Converters {
         }
         return localDateMap;
     }
+
+    @TypeConverter
+    public static String fromMap(Map<String, List<Workout>> map) {
+        if (map == null) {
+            return null;
+        }
+        Type type = new TypeToken<Map<String, List<Workout>>>() {}.getType();
+        return gson.toJson(map, type);
+    }
+
+    @TypeConverter
+    public static Map<String, List<Workout>> toMap(String mapString) {
+        if (mapString == null) {
+            return null;
+        }
+        Type type = new TypeToken<Map<String, List<Workout>>>() {}.getType();
+        return gson.fromJson(mapString, type);
+    }
+
+    @TypeConverter
+    public String fromWorkoutList(List<Workout> workoutList) {
+        if (workoutList == null) {
+            return null;
+        }
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<Workout>>() {}.getType();
+        return gson.toJson(workoutList, type);
+    }
+
+    @TypeConverter
+    public List<Workout> toWorkoutList(String workoutListString) {
+        if (workoutListString == null) {
+            return null;
+        }
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<Workout>>() {}.getType();
+        return gson.fromJson(workoutListString, type);
+    }
 }

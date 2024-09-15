@@ -11,7 +11,7 @@ import com.example.projectfit.Room.DAOS.WorkoutDAO;
 import com.example.projectfit.Models.Workout;
 import com.example.projectfit.Utils.Converters;
 
-@Database(entities = {Workout.class}, version = 2)
+@Database(entities = {Workout.class}, version = 1)
 @TypeConverters({Converters.class})
 public abstract class WorkoutDatabase extends RoomDatabase {
     private static WorkoutDatabase instance;

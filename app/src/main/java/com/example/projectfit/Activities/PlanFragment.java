@@ -91,7 +91,7 @@ public class PlanFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private UserServerRepository userServerRepository;
     private UserRoomRepository userRoomRepository;
-    private Interpreter tflite;
+    private List<Workout> sundayList, mondayList, tuesdayList, wednesdayList, thursdayList, fridayList, saturdayList;
 
     @Nullable
     @Override
@@ -113,12 +113,9 @@ public class PlanFragment extends Fragment {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        try {
-            tflite = new Interpreter(loadModelFile());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         initViews(view);
+        initArrays();
         setupDayButtons();
         setupEditPlanButton();
         setupAddWorkoutButton();
@@ -128,70 +125,22 @@ public class PlanFragment extends Fragment {
         setupWorkoutListView();
         setupContainers(view);
         loadTodayWorkouts();
-        runModelAndSaveRecommendation();
+    }
+
+    private void initArrays(){
+        sundayList = new ArrayList<>();
+        mondayList = new ArrayList<>();
+        tuesdayList = new ArrayList<>();
+        wednesdayList = new ArrayList<>();
+        thursdayList = new ArrayList<>();
+        fridayList = new ArrayList<>();
+        saturdayList = new ArrayList<>();
     }
 
     private String getRecommendedPlan() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         return sharedPreferences.getString("recommended_plan", "default");
     }
-
-    private MappedByteBuffer loadModelFile() throws Exception {
-        AssetFileDescriptor fileDescriptor = getContext().getAssets().openFd("workout_plan_model.tflite");
-        FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
-        FileChannel fileChannel = inputStream.getChannel();
-        long startOffset = fileDescriptor.getStartOffset();
-        long declaredLength = fileDescriptor.getDeclaredLength();
-        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
-    }
-
-    private void runModelAndSaveRecommendation() {
-        float[][] input = new float[1][10];
-        for (int i = 0; i < 7; i++) {
-            input[0][i] = 1.0f;
-        }
-        input[0][7] = calculateAge(user.getBirthday());
-        input[0][8] = (float) user.getWeight();
-        input[0][9] = (float) user.getHeight();
-
-        float[][] output = new float[1][3];
-
-        int recommendedPlanIndex = argmax(output[0]);
-        String recommendedPlan = getWorkoutPlanFromIndex(recommendedPlanIndex);
-
-        saveRecommendedPlan(recommendedPlan);
-    }
-
-    private int calculateAge(LocalDate birthday) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            return Period.between(birthday, LocalDate.now()).getYears();
-        }
-        return 0;
-    }
-
-    private int argmax(float[] array) {
-        int maxIndex = 0;
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] > array[maxIndex]) {
-                maxIndex = i;
-            }
-        }
-        return maxIndex;
-    }
-
-    private String getWorkoutPlanFromIndex(int index) {
-        switch (index) {
-            case 0:
-                return "planA";
-            case 1:
-                return "planB";
-            case 2:
-                return "planC";
-            default:
-                return "default";
-        }
-    }
-
 
     private void loadTodayWorkouts() {
         Date today = Calendar.getInstance().getTime();
@@ -565,7 +514,6 @@ public class PlanFragment extends Fragment {
         return selectedWorkouts;
     }
 
-
     private void displayRecommendedWorkoutsForDay(String dayOfWeek) {
         String recommendedPlan = getRecommendedPlan();
         Map<String, List<Workout>> workoutsForPlan = getWorkoutsForPlan(recommendedPlan);
@@ -664,26 +612,6 @@ public class PlanFragment extends Fragment {
         }
     }
 
-    private void saveRecommendedPlan(String recommendedPlan) {
-        user.setPlan(recommendedPlan);
-
-        userRoomRepository.updatePlanForUser(user, recommendedPlan);
-
-        userServerRepository.updateUserPlanInServer(user.getId(), recommendedPlan, new UserServerRepository.OnUserUpdateCallback() {
-            @Override
-            public void onSuccess() {
-                System.out.println("Plan updated on the server");
-            }
-
-            @Override
-            public void onFailure(String errorMessage) {
-                System.out.println("Error updating plan: " + errorMessage);
-            }
-        });
-    }
-
-
-
     private void enableDrag(boolean enable) {
         if (trainingLayouts != null) {
             for (int i = 0; i < trainingLayouts.length; i++) {
@@ -692,7 +620,6 @@ public class PlanFragment extends Fragment {
             }
         }
     }
-
 
     private void setupWorkoutListView() {
         workoutListView = requireView().findViewById(R.id.workout_list_view);
@@ -813,7 +740,6 @@ public class PlanFragment extends Fragment {
         }
     }
 
-
     private void setupClickListenersForWorkout(View workoutView, Workout workout) {
         workoutView.setOnClickListener(view -> {
             if (!isEditModeEnabled) {
@@ -892,47 +818,59 @@ public class PlanFragment extends Fragment {
     }
 
     private void setupDragAndDropForWorkout(View workoutView) {
-        // Enable dragging on the workout view
-        workoutView.setOnLongClickListener(view -> {
-            ClipData data = ClipData.newPlainText("", "");
-            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                view.startDragAndDrop(data, shadowBuilder, view, 0);
-            }
-            return true;
-        });
 
-        // Enable dropping for the trash icon to delete the workout
-        trashIcon.setOnDragListener((v, event) -> {
+        workoutView.setOnDragListener((view, event) -> {
+            if (!isEditModeEnabled) {
+                return false;
+            }
             switch (event.getAction()) {
+                case DragEvent.ACTION_DRAG_STARTED:
+                    return true;
                 case DragEvent.ACTION_DRAG_ENTERED:
-                    trashIcon.setColorFilter(Color.RED); // Change color on drag enter
+                    view.setBackgroundColor(Color.LTGRAY);
                     return true;
                 case DragEvent.ACTION_DRAG_EXITED:
-                    trashIcon.clearColorFilter(); // Reset color on drag exit
+                    view.setBackgroundColor(Color.WHITE);
                     return true;
                 case DragEvent.ACTION_DROP:
-                    // Get the dragged view and its parent
                     View draggedView = (View) event.getLocalState();
-                    ViewGroup parent = (ViewGroup) draggedView.getParent();
+                    ViewGroup owner = (ViewGroup) draggedView.getParent();
+                    ViewGroup targetParent = (ViewGroup) view.getParent();
 
-                    // Remove the view from its parent layout
-                    if (parent != null) {
-                        parent.removeView(draggedView);
-                        Toast.makeText(requireContext(), "Workout deleted", Toast.LENGTH_SHORT).show();
+                    if (owner instanceof AdapterView) {
+                        int position = workoutListView.getPositionForView(draggedView);
+                        Object item = workoutAdapter.getItem(position);
+                        if (item instanceof Workout) {
+                            workoutAdapter.removeItem(position);
+                            workoutAdapter.notifyDataSetChanged();
+
+                            Workout workout = (Workout) item;
+                            addWorkoutToPlan(workout);
+                        }
                     }
+                    else if (owner instanceof LinearLayout && targetParent instanceof LinearLayout) {
+                        if (view != draggedView) {
+                            int sourceIndex = owner.indexOfChild(draggedView);
+                            int targetIndex = targetParent.indexOfChild(view);
+
+                            if (sourceIndex != -1 && targetIndex != -1) {
+                                owner.removeView(draggedView);
+                                targetParent.addView(draggedView, targetIndex);
+                            }
+                        }
+                    }
+
+                    draggedView.setBackgroundResource(R.drawable.cr18bffffff);
 
                     return true;
                 case DragEvent.ACTION_DRAG_ENDED:
-                    trashIcon.clearColorFilter(); // Reset color on drag end
+                    view.setBackgroundResource(R.drawable.cr18bffffff);
                     return true;
                 default:
                     return false;
             }
         });
     }
-
-
 
     private void increaseProgressBarForDynamic(View workoutView) {
         ProgressBar progressBar = workoutView.findViewById(R.id.training_progress_bar2);
@@ -967,48 +905,109 @@ public class PlanFragment extends Fragment {
             View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
             view.startDrag(data, shadowBuilder, view, 0);
 
-            view.setBackgroundColor(Color.TRANSPARENT);  // Optional: visual cue for dragging
+            view.setBackgroundColor(Color.TRANSPARENT);
 
             return true;
         };
 
         View.OnDragListener dragListener = (view, event) -> {
+            LinearLayout layout = (LinearLayout) view;
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
                     return true;
                 case DragEvent.ACTION_DRAG_ENTERED:
-                    view.setBackgroundColor(Color.LTGRAY); // Highlight when entered
+                    view.setBackgroundColor(Color.LTGRAY);
                     return true;
                 case DragEvent.ACTION_DRAG_EXITED:
-                    view.setBackgroundColor(Color.WHITE); // Remove highlight when exited
+                    view.setBackgroundColor(Color.WHITE);
                     return true;
                 case DragEvent.ACTION_DROP:
                     View sourceView = (View) event.getLocalState();
                     ViewGroup sourceParent = (ViewGroup) sourceView.getParent();
-                    ViewGroup targetParent = (ViewGroup) view.getParent();
+                    if (sourceParent instanceof ListView) {
+                        ListView listView = (ListView) sourceParent;
+                        int position = listView.getPositionForView(sourceView);
+                        Workout workout = (Workout) workoutAdapter.getItem(position);
 
-                    // Rearranging within the same LinearLayout container
-                    if (sourceParent instanceof LinearLayout && targetParent instanceof LinearLayout) {
-                        if (view != sourceView) { // Ensure we are not dragging onto itself
-                            int sourceIndex = sourceParent.indexOfChild(sourceView);
-                            int targetIndex = targetParent.indexOfChild(view);
+                        addWorkoutToPlan(workout);
+                        return true;
+                    }
+                    LinearLayout targetLayout = (LinearLayout) view;
+                    ViewGroup targetParent = (ViewGroup) targetLayout.getParent();
 
-                            if (sourceIndex != -1 && targetIndex != -1) {
-                                sourceParent.removeView(sourceView); // Remove the dragged view from its parent
-                                targetParent.addView(sourceView, targetIndex); // Add it to the target index
-                            }
+                    int sourceIndex = sourceParent.indexOfChild(sourceView);
+                    int targetIndex = targetParent.indexOfChild(targetLayout);
+
+                    if (sourceParent == targetParent) {
+                        if (sourceIndex != targetIndex) {
+                            rearrangeWorkouts(targetParent, sourceIndex, targetIndex);
                         }
                     }
 
-                    sourceView.setBackgroundResource(R.drawable.cr18bffffff); // Reset to original background
-
+                    sourceView.setVisibility(View.VISIBLE);
+                    view.setBackgroundColor(Color.TRANSPARENT);
                     return true;
                 case DragEvent.ACTION_DRAG_ENDED:
-                    view.setBackgroundColor(Color.TRANSPARENT);
+                    layout.setBackgroundResource(R.drawable.cr18bffffff);
+                    return true;
                 default:
                     return false;
             }
         };
+        View.OnDragListener trashDragListener = new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View v, DragEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        v.setAlpha(0.5f);
+                        return true;
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        v.setAlpha(1.0f);
+                        return true;
+                    case DragEvent.ACTION_DROP:
+                        View sourceView = (View) event.getLocalState();
+                        ViewGroup sourceParent = (ViewGroup) sourceView.getParent();
+                        sourceParent.removeView(sourceView);
+                        return true;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        v.setAlpha(1.0f);
+                        return true;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        };
+        trashIcon.setOnDragListener(trashDragListener);
+        trashIcon.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View v, DragEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        trashIcon.setColorFilter(Color.RED);
+                        break;
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        trashIcon.setColorFilter(null);
+                        break;
+                    case DragEvent.ACTION_DROP:
+                        if(!isWorkoutDeleted) {
+                            View view = (View) event.getLocalState();
+                            ViewGroup owner = (ViewGroup) view.getParent();
+                            owner.removeView(view);
+                            break;
+                        }
+
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        trashIcon.setColorFilter(null);
+                        trashIcon.setVisibility(View.VISIBLE);
+                        isWorkoutDeleted=false;
+                        break;
+                }
+                return true;
+            }
+        });
 
         LinearLayout workoutsContainer = requireView().findViewById(R.id.workoutsContainer);
         for (int i = 0; i < workoutsContainer.getChildCount(); i++) {
@@ -1017,8 +1016,6 @@ public class PlanFragment extends Fragment {
             workoutView.setOnDragListener(dragListener);
         }
     }
-
-
 
     private void rearrangeWorkouts(ViewGroup parent, int sourceIndex, int targetIndex) {
         View draggedView = parent.getChildAt(sourceIndex);

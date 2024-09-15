@@ -71,6 +71,7 @@ public class UserRoomRepository {
     public void updateUserLocally(User user) {
         Executors.newSingleThreadExecutor().execute(() -> {
             userDatabase.userDAO().updateUser(user);
+            System.out.println("i am here");
         });
     }
 

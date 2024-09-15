@@ -30,6 +30,7 @@ public class User implements Parcelable {
     List<Boolean> achievements;
     boolean buildPlan;
     private String plan;
+    private List<Workout> sundayList, mondayList, tuesdayList, wednesdayList, thursdayList, fridayList, saturdayList;
     private Map<Integer, Workout> workoutHistory;
     private Map<LocalDate, Integer> stepsHistory;
     private Map<LocalDate, Integer> waterHistory;
@@ -62,6 +63,12 @@ public class User implements Parcelable {
         this.waterHistory = waterHistory != null ? waterHistory : new HashMap<>();
         this.buildPlan = true;
         this.answers = answers;
+        this.sundayList = new ArrayList<>();
+        this.mondayList = new ArrayList<>();
+        this.tuesdayList = new ArrayList<>();
+        this.wednesdayList = new ArrayList<>();
+        this.thursdayList = new ArrayList<>();
+        this.fridayList = new ArrayList<>();
     }
 
     protected User(Parcel in) {
@@ -210,6 +217,62 @@ public class User implements Parcelable {
 
     public boolean isGender() {
         return gender;
+    }
+
+    public List<Workout> getSundayList() {
+        return sundayList;
+    }
+
+    public void setSundayList(List<Workout> sundayList) {
+        this.sundayList = sundayList;
+    }
+
+    public List<Workout> getMondayList() {
+        return mondayList;
+    }
+
+    public void setMondayList(List<Workout> mondayList) {
+        this.mondayList = mondayList;
+    }
+
+    public List<Workout> getTuesdayList() {
+        return tuesdayList;
+    }
+
+    public void setTuesdayList(List<Workout> tuesdayList) {
+        this.tuesdayList = tuesdayList;
+    }
+
+    public List<Workout> getWednesdayList() {
+        return wednesdayList;
+    }
+
+    public void setWednesdayList(List<Workout> wednesdayList) {
+        this.wednesdayList = wednesdayList;
+    }
+
+    public List<Workout> getThursdayList() {
+        return thursdayList;
+    }
+
+    public void setThursdayList(List<Workout> thursdayList) {
+        this.thursdayList = thursdayList;
+    }
+
+    public List<Workout> getFridayList() {
+        return fridayList;
+    }
+
+    public void setFridayList(List<Workout> fridayList) {
+        this.fridayList = fridayList;
+    }
+
+    public List<Workout> getSaturdayList() {
+        return saturdayList;
+    }
+
+    public void setSaturdayList(List<Workout> saturdayList) {
+        this.saturdayList = saturdayList;
     }
 
     public void setGender(boolean gender) {

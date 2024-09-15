@@ -33,6 +33,7 @@ import com.example.projectfit.R;
 import com.example.projectfit.Room.Repositories.QuestionRoomRepository;
 import com.example.projectfit.Room.Repositories.UserRoomRepository;
 import com.example.projectfit.Server.Repositories.QuestionServerRepository;
+import com.example.projectfit.Server.Repositories.UserServerRepository;
 import com.example.projectfit.Utils.GsonProvider;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -57,6 +58,7 @@ public class PlanQuestionsActivity extends AppCompatActivity {
     private QuestionRoomRepository questionRoomRepository;
     private QuestionServerRepository questionServerRepository;
     private UserRoomRepository userRoomRepository;
+    private UserServerRepository userServerRepository;
     private SharedPreferences sharedPreferences;
     private User user;
     private Interpreter tflite;
@@ -112,6 +114,7 @@ public class PlanQuestionsActivity extends AppCompatActivity {
         questionRoomRepository = new QuestionRoomRepository(this);
         questionServerRepository = new QuestionServerRepository();
         userRoomRepository = new UserRoomRepository(this);
+        userServerRepository = new UserServerRepository();
     }
 
     private void setAnswerClickListeners() {
@@ -166,7 +169,8 @@ public class PlanQuestionsActivity extends AppCompatActivity {
         tflite.run(input, output);
         int recommendedPlanIndex = argmax(output[0]);
         String recommendedPlan = getWorkoutPlanFromIndex(recommendedPlanIndex);
-
+        System.out.println(recommendedPlanIndex);
+        System.out.println(recommendedPlan);
         saveRecommendation(recommendedPlan);
     }
 
@@ -204,6 +208,19 @@ public class PlanQuestionsActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("recommended_plan", plan);
         editor.apply();
+        user.setPlan(plan);
+        System.out.println(user.getPlan());
+        userRoomRepository.updatePlanForUser(user, plan);
+        userServerRepository.updateUserPlanInServer(user.getId(),plan, new UserServerRepository.OnUserUpdateCallback() {
+            @Override
+            public void onSuccess() {
+                System.out.println("User updated successfully on the server.");
+            }
+            @Override
+            public void onFailure(String errorMessage) {
+                System.out.println("Failed to update user on the server: " + errorMessage);
+            }
+        });
     }
 
 
@@ -277,7 +294,15 @@ public class PlanQuestionsActivity extends AppCompatActivity {
             if (selectedAnswerIndex == 1) {
                 user.setBuildPlan(false);
                 updateBuildPlanInDatabase();
-                navigateToPlanFragment();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("plan_type", "manual");
+                editor.apply();
+
+                Intent intent = new Intent(PlanQuestionsActivity.this, BottomNavigate.class);
+                intent.putExtra("navigateTo", "plan");
+                intent.putExtra("plan", "manual");
+                startActivity(intent);
+                finish();
             } else {
                 currentQuestionIndex++;
                 progressBar.setProgress(currentQuestionIndex * progressStep);
@@ -291,10 +316,19 @@ public class PlanQuestionsActivity extends AppCompatActivity {
             saveUserAnswers();
             user.setBuildPlan(false);
             updateBuildPlanInDatabase();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("plan_type", "Auto");
+            editor.apply();
+
             runModelAndSaveRecommendation();
-            navigateToPlanFragment();
+            Intent intent = new Intent(PlanQuestionsActivity.this, BottomNavigate.class);
+            intent.putExtra("navigateTo", "plan");
+            intent.putExtra("plan", "Auto");
+            startActivity(intent);
+            finish();
         }
     }
+
 
     private void saveUserAnswers() {
         List<String> answerList = new ArrayList<>();
@@ -310,14 +344,6 @@ public class PlanQuestionsActivity extends AppCompatActivity {
         user.setBuildPlan(false);
         userRoomRepository.updateUserLocally(user);
         saveUserToSharedPreferences();
-    }
-
-
-    private void navigateToPlanFragment() {
-        Intent intent = new Intent(PlanQuestionsActivity.this, BottomNavigate.class);
-        intent.putExtra("navigateTo", "plan");
-        startActivity(intent);
-        finish();
     }
 
 

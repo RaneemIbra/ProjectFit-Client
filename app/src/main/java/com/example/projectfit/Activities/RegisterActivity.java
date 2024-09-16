@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,11 +34,13 @@ import java.util.concurrent.Executors;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private TextInputLayout fullNameLayout, emailLayout, passwordLayout, birthDateLayout, heightLayout, weightLayout, answerLayout;
-    private TextInputEditText birthDateEditText;
+    private TextInputLayout fullNameLayout, emailLayout, passwordLayout, birthDateLayout, heightLayout, weightLayout, answerLayout, phoneNumberLayout;
+    private TextInputEditText birthDateEditText, phoneNumberEditText;
     private Button registerButton;
     private Validation validation;
     private String selectedQuestion;
+    private boolean gender;
+    private RadioGroup genderRadioGroup;
     private TextView signInText;
     private Spinner securityQuestionSpinner;
     private UserRoomRepository userRoomRepository;
@@ -74,6 +78,8 @@ public class RegisterActivity extends AppCompatActivity {
         heightLayout = findViewById(R.id.HeightLayout);
         weightLayout = findViewById(R.id.WeightLayout);
         answerLayout = findViewById(R.id.AnswerLayout);
+        phoneNumberLayout = findViewById(R.id.phoneNumber);
+        genderRadioGroup = findViewById(R.id.genderRadioGroup);
         securityQuestionSpinner = findViewById(R.id.spinner);
         birthDateLayout = findViewById(R.id.birthDateLayout);
         birthDateEditText = findViewById(R.id.birthDate);
@@ -130,8 +136,10 @@ public class RegisterActivity extends AppCompatActivity {
         String heightText = getTextFromInput(heightLayout);
         String weightText = getTextFromInput(weightLayout);
         String answerText = getTextFromInput(answerLayout);
+        String phoneNumberText = getTextFromInput(phoneNumberLayout);
 
         if (isValidInput(fullNameText, emailText, passwordText, heightText, weightText, answerText)) {
+            gender = getSelectedGender();
             executorService.execute(() -> {
                 userServerRepository.getUserByEmail(emailText, new retrofit2.Callback<User>() {
                     @Override
@@ -144,13 +152,13 @@ public class RegisterActivity extends AppCompatActivity {
                                 User newUser = new User(
                                         null,
                                         fullNameText,
-                                        null,
+                                        Long.parseLong(phoneNumberText),
                                         emailText,
                                         passwordText,
                                         selectedBirthDate,
                                         Double.parseDouble(heightText),
                                         Double.parseDouble(weightText),
-                                        true,
+                                        gender,
                                         selectedQuestion,
                                         answerText,
                                         null,
@@ -182,6 +190,18 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    private boolean getSelectedGender() {
+        int selectedId = genderRadioGroup.getCheckedRadioButtonId();
+        if (selectedId != -1) {
+            RadioButton selectedRadioButton = findViewById(selectedId);
+            if(selectedRadioButton.getText().toString().equals("Male")){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
 
     private boolean isValidInput(String fullNameText, String emailText, String passwordText, String heightText, String weightText, String answerText) {
         boolean isFullNameValid = validation.isNameValid(fullNameText, fullNameLayout);

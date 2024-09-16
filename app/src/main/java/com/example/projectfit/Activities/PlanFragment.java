@@ -63,6 +63,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.Executors;
 
 public class PlanFragment extends Fragment {
 
@@ -88,10 +89,10 @@ public class PlanFragment extends Fragment {
     private Boolean isWorkoutDeleted = false;
     private BottomNavigationView bottomBar;
     private User user;
+    private boolean ranodomSuggestion = false;
     private SharedPreferences sharedPreferences;
     private UserServerRepository userServerRepository;
     private UserRoomRepository userRoomRepository;
-    private List<Workout> sundayList, mondayList, tuesdayList, wednesdayList, thursdayList, fridayList, saturdayList;
 
     @Nullable
     @Override
@@ -115,7 +116,6 @@ public class PlanFragment extends Fragment {
         });
 
         initViews(view);
-        initArrays();
         setupDayButtons();
         setupEditPlanButton();
         setupAddWorkoutButton();
@@ -125,16 +125,6 @@ public class PlanFragment extends Fragment {
         setupWorkoutListView();
         setupContainers(view);
         loadTodayWorkouts();
-    }
-
-    private void initArrays(){
-        sundayList = new ArrayList<>();
-        mondayList = new ArrayList<>();
-        tuesdayList = new ArrayList<>();
-        wednesdayList = new ArrayList<>();
-        thursdayList = new ArrayList<>();
-        fridayList = new ArrayList<>();
-        saturdayList = new ArrayList<>();
     }
 
     private String getRecommendedPlan() {
@@ -163,6 +153,14 @@ public class PlanFragment extends Fragment {
             return gson.fromJson(userJson, userType);
         }
         return null;
+    }
+
+    private void saveUserToSharedPreferences() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = GsonProvider.getGson();
+        String userJson = gson.toJson(user);
+        editor.putString("logged_in_user", userJson);
+        editor.apply();
     }
 
     private String getDayOfWeek(Date today) {
@@ -468,36 +466,59 @@ public class PlanFragment extends Fragment {
                         Arrays.asList("Full Body", "Legs", "Core"), 800, R.drawable.yogastrengthimage, Arrays.asList(6, 12), 2, R.drawable.full_body_yoga_and_strength_thumbnail,R.drawable.yogastrengthgif,0)
         );
 
-        int workoutsPerDay = 3;
+        Random random = new Random();
+        int workoutsPerDay = random.nextInt(3) + 3;
 
         Map<String, List<Workout>> workoutsPerDayMap = new HashMap<>();
 
-        switch (plan) {
-            case "planA":
-                workoutsPerDayMap.put("SUN", getRandomWorkouts(workouts, workoutsPerDay));
-                workoutsPerDayMap.put("TUE", getRandomWorkouts(workouts, workoutsPerDay));
-                workoutsPerDayMap.put("THU", getRandomWorkouts(workouts, workoutsPerDay));
-                workoutsPerDayMap.put("SAT", getRandomWorkouts(workouts, workoutsPerDay));
-                break;
+        if(!ranodomSuggestion){
+            switch (plan) {
+                case "planA":
+                    user.setSundayList(getRandomWorkouts(workouts, workoutsPerDay));
+                    user.setTuesdayList(getRandomWorkouts(workouts, workoutsPerDay));
+                    user.setThursdayList(getRandomWorkouts(workouts, workoutsPerDay));
+                    user.setSaturdayList(getRandomWorkouts(workouts, workoutsPerDay));
+                    break;
 
-            case "planB":
-                workoutsPerDayMap.put("MON", getRandomWorkouts(workouts, workoutsPerDay));
-                workoutsPerDayMap.put("WED", getRandomWorkouts(workouts, workoutsPerDay));
-                workoutsPerDayMap.put("FRI", getRandomWorkouts(workouts, workoutsPerDay));
-                workoutsPerDayMap.put("SUN", getRandomWorkouts(workouts, workoutsPerDay));
-                break;
+                case "planB":
+                    user.setMondayList(getRandomWorkouts(workouts, workoutsPerDay));
+                    user.setWednesdayList(getRandomWorkouts(workouts, workoutsPerDay));
+                    user.setFridayList(getRandomWorkouts(workouts, workoutsPerDay));
+                    user.setSundayList(getRandomWorkouts(workouts, workoutsPerDay));
+                    break;
 
-            case "planC":
-                workoutsPerDayMap.put("TUE", getRandomWorkouts(workouts, workoutsPerDay));
-                workoutsPerDayMap.put("THU", getRandomWorkouts(workouts, workoutsPerDay));
-                workoutsPerDayMap.put("SAT", getRandomWorkouts(workouts, workoutsPerDay));
-                workoutsPerDayMap.put("MON", getRandomWorkouts(workouts, workoutsPerDay));
-                break;
+                case "planC":
+                    user.setTuesdayList(getRandomWorkouts(workouts, workoutsPerDay));
+                    user.setThursdayList(getRandomWorkouts(workouts, workoutsPerDay));
+                    user.setSaturdayList(getRandomWorkouts(workouts, workoutsPerDay));
+                    user.setMondayList(getRandomWorkouts(workouts, workoutsPerDay));
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
 
+        ranodomSuggestion = true;
+        Executors.newSingleThreadExecutor().execute(() -> userRoomRepository.updateUserLocally(user));
+        new Thread(() -> userServerRepository.updateUser(user, new UserServerRepository.OnUserUpdateCallback() {
+            @Override
+            public void onSuccess() {
+                getActivity().runOnUiThread(() -> System.out.println("successfully updated"));
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                System.out.println("failed to update");
+            }
+        })).start();
+        workoutsPerDayMap.put("SUN", user.getSundayList());
+        workoutsPerDayMap.put("MON", user.getMondayList());
+        workoutsPerDayMap.put("TUE", user.getTuesdayList());
+        workoutsPerDayMap.put("WED", user.getWednesdayList());
+        workoutsPerDayMap.put("THU", user.getThursdayList());
+        workoutsPerDayMap.put("FRI", user.getFridayList());
+        workoutsPerDayMap.put("SAT", user.getSaturdayList());
         return workoutsPerDayMap;
     }
 
@@ -697,8 +718,171 @@ public class PlanFragment extends Fragment {
 
         setupClickListenersForWorkout(workoutTemplate, workout);
         setupDragAndDropForWorkout(workoutTemplate);
+        System.out.println("workout name: " + workout.getWorkoutName());
+        addWorkoutToUserForDay(workout);
     }
 
+    private void addWorkoutToUserForDay(Workout workout) {
+        String dayOfWeek = selectedDayButton.getText().toString();
+
+        switch (dayOfWeek) {
+            case "SUN":
+                if (user.getSundayList() == null) {
+                    user.setSundayList(new ArrayList<>());
+                }
+                user.getSundayList().add(workout);
+                break;
+            case "MON":
+                if (user.getMondayList() == null) {
+                    user.setMondayList(new ArrayList<>());
+                }
+                user.getMondayList().add(workout);
+                break;
+            case "TUE":
+                if (user.getTuesdayList() == null) {
+                    user.setTuesdayList(new ArrayList<>());
+                }
+                user.getTuesdayList().add(workout);
+                break;
+            case "WED":
+                if (user.getWednesdayList() == null) {
+                    user.setWednesdayList(new ArrayList<>());
+                }
+                user.getWednesdayList().add(workout);
+                break;
+            case "THU":
+                if (user.getThursdayList() == null) {
+                    user.setThursdayList(new ArrayList<>());
+                }
+                user.getThursdayList().add(workout);
+                break;
+            case "FRI":
+                if (user.getFridayList() == null) {
+                    user.setFridayList(new ArrayList<>());
+                }
+                user.getFridayList().add(workout);
+                break;
+            case "SAT":
+                if (user.getSaturdayList() == null) {
+                    user.setSaturdayList(new ArrayList<>());
+                }
+                user.getSaturdayList().add(workout);
+                break;
+        }
+
+        updateUserInDatabase();
+        saveUserToSharedPreferences();
+    }
+
+    private void deleteWorkoutFromPlan(Workout workout) {
+        String dayOfWeek = selectedDayButton.getText().toString();
+
+        switch (dayOfWeek) {
+            case "SUN":
+                if (user.getSundayList() == null) {
+                    user.setSundayList(new ArrayList<>());
+                }
+                user.getSundayList().remove(workout);
+                break;
+            case "MON":
+                if (user.getMondayList() == null) {
+                    user.setMondayList(new ArrayList<>());
+                }
+                user.getMondayList().remove(workout);
+                break;
+            case "TUE":
+                if (user.getTuesdayList() == null) {
+                    user.setTuesdayList(new ArrayList<>());
+                }
+                user.getTuesdayList().remove(workout);
+                break;
+            case "WED":
+                if (user.getWednesdayList() == null) {
+                    user.setWednesdayList(new ArrayList<>());
+                }
+                user.getWednesdayList().remove(workout);
+                break;
+            case "THU":
+                if (user.getThursdayList() == null) {
+                    user.setThursdayList(new ArrayList<>());
+                }
+                user.getThursdayList().remove(workout);
+                break;
+            case "FRI":
+                if (user.getFridayList() == null) {
+                    user.setFridayList(new ArrayList<>());
+                }
+                user.getFridayList().remove(workout);
+                break;
+            case "SAT":
+                if (user.getSaturdayList() == null) {
+                    user.setSaturdayList(new ArrayList<>());
+                }
+                user.getSaturdayList().remove(workout);
+                break;
+        }
+
+        updateUserInDatabase();
+        saveUserToSharedPreferences();
+    }
+
+    private Workout findWorkoutFromView(View workoutView) {
+        TextView workoutNameTextView = workoutView.findViewById(R.id.r58ginjerv5oa);
+        String workoutName = workoutNameTextView.getText().toString();
+
+        String dayOfWeek = selectedDayButton.getText().toString();
+        List<Workout> dayWorkouts = null;
+
+        switch (dayOfWeek) {
+            case "SUN":
+                dayWorkouts = user.getSundayList();
+                break;
+            case "MON":
+                dayWorkouts = user.getMondayList();
+                break;
+            case "TUE":
+                dayWorkouts = user.getTuesdayList();
+                break;
+            case "WED":
+                dayWorkouts = user.getWednesdayList();
+                break;
+            case "THU":
+                dayWorkouts = user.getThursdayList();
+                break;
+            case "FRI":
+                dayWorkouts = user.getFridayList();
+                break;
+            case "SAT":
+                dayWorkouts = user.getSaturdayList();
+                break;
+        }
+
+        if (dayWorkouts != null) {
+            for (Workout workout : dayWorkouts) {
+                if (workout.getWorkoutName().equals(workoutName)) {
+                    return workout;
+                }
+            }
+        }
+
+        return null;
+    }
+
+
+    private void updateUserInDatabase() {
+        Executors.newSingleThreadExecutor().execute(() -> userRoomRepository.updateUserLocally(user));
+        new Thread(() -> userServerRepository.updateUser(user, new UserServerRepository.OnUserUpdateCallback() {
+            @Override
+            public void onSuccess() {
+                getActivity().runOnUiThread(() -> System.out.println("Successfully updated user on server"));
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                System.out.println("Failed to update user on server: " + errorMessage);
+            }
+        })).start();
+    }
 
     private void populateWorkoutDetails(LinearLayout workoutLayout, Workout workout) {
         TextView workoutNameTextView = workoutLayout.findViewById(R.id.r58ginjerv5oa);
@@ -995,6 +1179,10 @@ public class PlanFragment extends Fragment {
                         if(!isWorkoutDeleted) {
                             View view = (View) event.getLocalState();
                             ViewGroup owner = (ViewGroup) view.getParent();
+                            Workout workoutToRemove = findWorkoutFromView(view);
+                            if (workoutToRemove != null) {
+                                deleteWorkoutFromPlan(workoutToRemove);
+                            }
                             owner.removeView(view);
                             break;
                         }

@@ -137,28 +137,19 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
             if (userJson != null) {
                 Gson gson = GsonProvider.getGson();
                 Type userType = new TypeToken<User>() {}.getType();
-                User sharedPreferencesUser = gson.fromJson(userJson, userType);
-
-                User roomUser = userRoomRepository.getUserByEmail(sharedPreferencesUser.getEmailAddress());
-
-                if (roomUser != null) {
-                    user = roomUser;
-                } else {
-                    user = sharedPreferencesUser;
-                }
+                user = gson.fromJson(userJson, userType);
 
                 requireActivity().runOnUiThread(() -> {
-                    predictMaxStepsForUser();
-                    predictMaxWaterForUser();
-                    setProgressForStepsAndWater();
+                    predictMaxStepsForUser(() -> {
+                        predictMaxWaterForUser(this::setProgressForStepsAndWater);
+                    });
+
                     setupCharts();
                 });
             }
-            System.out.println("user email: " + user.getEmailAddress());
-            System.out.println("user birthday " + user.getBirthday());
-            System.out.println("user build plan " + user.isBuildPlan());
         });
     }
+
 
 
     private int calculateAge(LocalDate birthDate) {
@@ -240,7 +231,7 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
         }
     }
 
-    private void predictMaxStepsForUser() {
+    private void predictMaxStepsForUser(Runnable onMaxCalculated) {
         if (user != null) {
             int gender = user.isGender() ? 1 : 0;
             float height = (float) user.getHeight();
@@ -249,16 +240,22 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
 
             executorService.submit(() -> {
                 maxSteps = (int) loadModelSteps.predictMaxSteps(gender, height, weight, age);
-                maxSteps *=3;
+                maxSteps *= 3;
+
                 requireActivity().runOnUiThread(() -> {
                     circularProgressBar.setMax(maxSteps);
-                    stepCountTextView.setText("Steps: " + stepCount + "\nout of " + maxSteps);
+                    System.out.println("Max steps AI: " + circularProgressBar.getMax());
+
+                    if (onMaxCalculated != null) {
+                        onMaxCalculated.run();
+                    }
                 });
             });
         }
     }
 
-    private void predictMaxWaterForUser() {
+
+    private void predictMaxWaterForUser(Runnable onMaxCalculated) {
         if (user != null) {
             int gender = user.isGender() ? 1 : 0;
             float height = (float) user.getHeight();
@@ -268,13 +265,19 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
             executorService.submit(() -> {
                 maxWaterIntake = (int) loadModelWater.predictMaxWater(gender, height, weight, age);
                 maxWaterIntake *= 1.8;
+
                 requireActivity().runOnUiThread(() -> {
                     waterCupProgress.setMax(maxWaterIntake);
-                    waterProgressTextView.setText("Max Water: " + maxWaterIntake + " ml");
+                    System.out.println("Max water intake AI: " + waterCupProgress.getMax());
+
+                    if (onMaxCalculated != null) {
+                        onMaxCalculated.run();
+                    }
                 });
             });
         }
     }
+
 
     private void setProgressForStepsAndWater() {
         if (user != null) {
@@ -287,7 +290,6 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 todayWaterIntake = user.getWaterHistory().getOrDefault(today, 0);
             }
-            waterCupProgress.setMax(maxWaterIntake);
             waterCupProgress.setProgress(todayWaterIntake);
             waterProgressTextView.setText("Water: " + todayWaterIntake + " ml out of " + maxWaterIntake + " ml");
 
@@ -295,12 +297,10 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 todaySteps = user.getStepsHistory().getOrDefault(today, 0);
             }
-            circularProgressBar.setMax(maxSteps);
             circularProgressBar.setProgress(todaySteps);
             stepCountTextView.setText("Steps: " + todaySteps + " out of " + maxSteps);
         }
     }
-
 
 
 
@@ -344,6 +344,7 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             today = LocalDate.now();
         }
+
         int totalWater = 0;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             totalWater = user.getWaterHistory().getOrDefault(today, 0) + cupSize;
@@ -352,7 +353,18 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
 
         userRoomRepository.updateWaterHistory(user);
 
+        saveUserToSharedPreferences();
+
         setupWaterChart();
+    }
+
+    private void saveUserToSharedPreferences() {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = GsonProvider.getGson();
+        String userJson = gson.toJson(user);
+        editor.putString("logged_in_user", userJson);
+        editor.apply();
     }
 
     private void addCupSizeLayout(int cupSize) {
@@ -419,6 +431,7 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
             user.getStepsHistory().put(today, stepCount);
 
             userRoomRepository.updateStepsHistory(user);
+            saveUserToSharedPreferences();
 
             requireActivity().runOnUiThread(() -> {
                 circularProgressBar.setProgress(stepCount);

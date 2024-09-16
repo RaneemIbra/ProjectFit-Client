@@ -30,7 +30,13 @@ public class User implements Parcelable {
     List<Boolean> achievements;
     boolean buildPlan;
     private String plan;
-    private List<Workout> sundayList, mondayList, tuesdayList, wednesdayList, thursdayList, fridayList, saturdayList;
+    private List<Workout> sundayList = new ArrayList<>();
+    private List<Workout> mondayList = new ArrayList<>();
+    private List<Workout> tuesdayList = new ArrayList<>();
+    private List<Workout> wednesdayList = new ArrayList<>();
+    private List<Workout> thursdayList = new ArrayList<>();
+    private List<Workout> fridayList = new ArrayList<>();
+    private List<Workout> saturdayList = new ArrayList<>();
     private Map<Integer, Workout> workoutHistory;
     private Map<LocalDate, Integer> stepsHistory;
     private Map<LocalDate, Integer> waterHistory;
@@ -63,12 +69,6 @@ public class User implements Parcelable {
         this.waterHistory = waterHistory != null ? waterHistory : new HashMap<>();
         this.buildPlan = true;
         this.answers = answers;
-        this.sundayList = new ArrayList<>();
-        this.mondayList = new ArrayList<>();
-        this.tuesdayList = new ArrayList<>();
-        this.wednesdayList = new ArrayList<>();
-        this.thursdayList = new ArrayList<>();
-        this.fridayList = new ArrayList<>();
     }
 
     protected User(Parcel in) {

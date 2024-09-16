@@ -249,9 +249,10 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
 
             executorService.submit(() -> {
                 maxSteps = (int) loadModelSteps.predictMaxSteps(gender, height, weight, age);
+                maxSteps *=3;
                 requireActivity().runOnUiThread(() -> {
                     circularProgressBar.setMax(maxSteps);
-                    stepCountTextView.setText("Steps: " + stepCount + " out of " + maxSteps);
+                    stepCountTextView.setText("Steps: " + stepCount + "\nout of " + maxSteps);
                 });
             });
         }
@@ -266,6 +267,7 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
 
             executorService.submit(() -> {
                 maxWaterIntake = (int) loadModelWater.predictMaxWater(gender, height, weight, age);
+                maxWaterIntake *= 1.8;
                 requireActivity().runOnUiThread(() -> {
                     waterCupProgress.setMax(maxWaterIntake);
                     waterProgressTextView.setText("Max Water: " + maxWaterIntake + " ml");

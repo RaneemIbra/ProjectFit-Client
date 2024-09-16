@@ -3,14 +3,14 @@
     <item android:id="@android:id/background">
         <shape>
             <corners android:radius="5dp" />
-            <solid android:color="#d68a00" /> <!-- Darker Orange -->
+            <solid android:color="@color/light_orange" /> <!-- Darker Orange -->
         </shape>
     </item>
     <item android:id="@android:id/progress">
         <clip>
             <shape>
                 <corners android:radius="5dp" />
-                <solid android:color="#FF9A01" /> <!-- Brighter Orange -->
+                <solid android:color="@color/light_yellow" /> <!-- Brighter Orange -->
             </shape>
         </clip>
     </item>

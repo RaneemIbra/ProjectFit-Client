@@ -148,6 +148,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onSuccess(User user) {
                     runOnUiThread(() -> {
                         showLoginSuccessMessage("Login successful (Local)", user);
+                        saveUserToSharedPreferences(user);
                         if (rememberMeCheckBox.isChecked()) {
                             saveCredentials(email, password);
                         }

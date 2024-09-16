@@ -3,6 +3,7 @@ package com.example.projectfit.Utils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -62,7 +63,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
 
     static class WorkoutViewHolder extends RecyclerView.ViewHolder {
         TextView workoutName, workoutDuration, workoutCalories;
-        ShapeableImageView workoutLogo;
+        ImageView workoutLogo;
 
         WorkoutViewHolder(@NonNull View itemView) {
             super(itemView);

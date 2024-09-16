@@ -20,7 +20,7 @@ public class WorkoutFragment extends Fragment {
     Bundle bundleArg;
     ImageView workoutGifImageView,workoutImageView;
     TextView workoutDescriptionTextView,workoutNameTextView;
-    ImageButton backButton;
+    ImageView backButton;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;

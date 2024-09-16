@@ -167,7 +167,7 @@ public class PlanFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(today);
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        String[] days = {"SUN", "MON", "TUS", "WED", "THU", "FRI", "SAT"};
+        String[] days = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
         return days[dayOfWeek - 1];
     }
 
@@ -196,15 +196,6 @@ public class PlanFragment extends Fragment {
         setsCompletedTextViews = new TextView[]{}; // No need for static TextViews anymore
         trainingLayouts = new LinearLayout[0];
         cancelButton.setOnClickListener(v -> toggleWorkoutListVisibility(false));
-    }
-
-
-    private void setupTrainingLayouts() {
-        for (int i = 0; i < trainingLayouts.length; i++) {
-            final int index = i;
-            trainingLayouts[i].setOnClickListener(view -> handleClick(index));
-            trainingLayouts[i].setOnLongClickListener(view -> handleLongClick(view, index));
-        }
     }
 
     private void setupAddWorkoutButton() {
@@ -724,7 +715,7 @@ public class PlanFragment extends Fragment {
 
     private void addWorkoutToUserForDay(Workout workout) {
         String dayOfWeek = selectedDayButton.getText().toString();
-
+        System.out.println("entered the add");
         switch (dayOfWeek) {
             case "SUN":
                 if (user.getSundayList() == null) {
@@ -741,8 +732,11 @@ public class PlanFragment extends Fragment {
             case "TUE":
                 if (user.getTuesdayList() == null) {
                     user.setTuesdayList(new ArrayList<>());
+                    System.out.println("hello from the inside");
                 }
                 user.getTuesdayList().add(workout);
+                System.out.println("hello after");
+                System.out.println(user.getTuesdayList());
                 break;
             case "WED":
                 if (user.getWednesdayList() == null) {
@@ -767,6 +761,9 @@ public class PlanFragment extends Fragment {
                     user.setSaturdayList(new ArrayList<>());
                 }
                 user.getSaturdayList().add(workout);
+                break;
+            default:
+                System.out.println("it is here");
                 break;
         }
 
@@ -906,7 +903,7 @@ public class PlanFragment extends Fragment {
         }
 
         if (setsCompletedTextView != null) {
-            setsCompletedTextView.setText("0/" + workout.getSets_reps().get(1));
+            setsCompletedTextView.setText(workout.getSets()+ " / " + workout.getSets_reps().get(1));
         }
 
         if (durationTextView != null) {
@@ -918,8 +915,8 @@ public class PlanFragment extends Fragment {
         }
 
         if (progressBar != null) {
-            progressBar.setMax(workout.getSets_reps().get(1) * 10);
-            progressBar.setProgress(0);
+            progressBar.setMax(workout.getSets_reps().get(1));
+            progressBar.setProgress(workout.getSets());
             progressBar.setProgressDrawable(requireContext().getDrawable(R.drawable.progress_bar_custom));
         }
     }
@@ -927,7 +924,7 @@ public class PlanFragment extends Fragment {
     private void setupClickListenersForWorkout(View workoutView, Workout workout) {
         workoutView.setOnClickListener(view -> {
             if (!isEditModeEnabled) {
-                increaseProgressBarForDynamic(workoutView);
+                increaseProgressBarForDynamic(workoutView, workout);
             } else {
                 showEditDialogForDynamic(workoutView, workout);
             }
@@ -937,7 +934,7 @@ public class PlanFragment extends Fragment {
             if (isEditModeEnabled) {
                 startDrag(view);
             } else {
-                undoProgressForDynamic(workoutView);
+                undoProgressForDynamic(workoutView, workout);
             }
             return true;
         });
@@ -1056,32 +1053,45 @@ public class PlanFragment extends Fragment {
         });
     }
 
-    private void increaseProgressBarForDynamic(View workoutView) {
+    private void increaseProgressBarForDynamic(View workoutView, Workout workout) {
         ProgressBar progressBar = workoutView.findViewById(R.id.training_progress_bar2);
         TextView setsCompletedTextView = workoutView.findViewById(R.id.setsCompleted2);
-        String setAndRestOfTheString = setsCompletedTextView.getText().toString().split("/")[1];
-        int sets = Integer.parseInt(setAndRestOfTheString);
-        int progress = progressBar.getProgress();
-        if (progress < sets * 10) {
-            progress += 10;
+
+        int maxSets = workout.getSets_reps().get(1);
+
+        int progress = workout.getSets();
+
+        if (progress < maxSets) {
+            progress++;
+            workout.setSets(progress);
+
             progressBar.setProgress(progress);
-            int completedSets = progress / 10;
-            setsCompletedTextView.setText(completedSets + "/" + setAndRestOfTheString);
+            setsCompletedTextView.setText(progress + "/" + maxSets);
+
+            updateUserInDatabase();
+            saveUserToSharedPreferences();
         }
     }
 
-    private void undoProgressForDynamic(View workoutView) {
+    private void undoProgressForDynamic(View workoutView, Workout workout) {
         ProgressBar progressBar = workoutView.findViewById(R.id.training_progress_bar2);
         TextView setsCompletedTextView = workoutView.findViewById(R.id.setsCompleted2);
-        String setAndRestOfTheString = setsCompletedTextView.getText().toString().split("/")[1];
-        int progress = progressBar.getProgress();
+
+        int progress = workout.getSets();
+        int maxSets = workout.getSets_reps().get(1);
+
         if (progress > 0) {
-            progress -= 10;
+            progress--;
+            workout.setSets(progress);
+
             progressBar.setProgress(progress);
-            int completedSets = progress / 10;
-            setsCompletedTextView.setText(completedSets + "/" + setAndRestOfTheString);
+            setsCompletedTextView.setText(progress + "/" + maxSets);
+
+            updateUserInDatabase();
+            saveUserToSharedPreferences();
         }
     }
+
 
     private void setupDragAndDrop() {
         View.OnLongClickListener longClickListener = view -> {

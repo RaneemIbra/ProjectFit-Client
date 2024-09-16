@@ -184,11 +184,11 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private boolean isValidInput(String fullNameText, String emailText, String passwordText, String heightText, String weightText, String answerText) {
-        boolean isFullNameValid = validation.ValidateText(fullNameText, fullNameLayout);
+        boolean isFullNameValid = validation.isNameValid(fullNameText, fullNameLayout);
         boolean isEmailValid = validation.emailValidate(emailText, emailLayout);
         boolean isPasswordValid = validation.passwordValidate(passwordText, passwordLayout);
-        boolean isHeightValid = validation.Height_Weight_Validate(heightText, heightLayout);
-        boolean isWeightValid = validation.Height_Weight_Validate(weightText, weightLayout);
+        boolean isHeightValid = validation.heightValidate(heightText, heightLayout);
+        boolean isWeightValid = validation.weightValidate(weightText, weightLayout);
         boolean isAnswerValid = validation.ValidateText(answerText, answerLayout);
         boolean isQuestionSelected = validateSpinnerSelection();
         boolean isBirthDateValid = selectedBirthDate != null;
@@ -198,6 +198,7 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             birthDateLayout.setErrorEnabled(false);
         }
+        isBirthDateValid = validation.isAgeValid(selectedBirthDate, birthDateLayout);
 
         return isFullNameValid && isEmailValid && isPasswordValid && isHeightValid && isWeightValid && isAnswerValid && isQuestionSelected && isBirthDateValid;
     }

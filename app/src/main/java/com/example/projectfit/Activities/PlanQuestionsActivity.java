@@ -274,16 +274,16 @@ public class PlanQuestionsActivity extends AppCompatActivity {
         if (selectedAnswerIndex != 0) {
             switch (selectedAnswerIndex) {
                 case 1:
-                    answer1.setBackgroundResource(R.drawable.cr36bff9a01);
+                    answer1.setBackgroundResource(R.drawable.edit_text_shape);
                     break;
                 case 2:
-                    answer2.setBackgroundResource(R.drawable.cr36bff9a01);
+                    answer2.setBackgroundResource(R.drawable.edit_text_shape);
                     break;
                 case 3:
-                    answer3.setBackgroundResource(R.drawable.cr36bff9a01);
+                    answer3.setBackgroundResource(R.drawable.edit_text_shape);
                     break;
                 case 4:
-                    answer4.setBackgroundResource(R.drawable.cr36bff9a01);
+                    answer4.setBackgroundResource(R.drawable.edit_text_shape);
                     break;
             }
         }

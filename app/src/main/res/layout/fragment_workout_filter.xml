@@ -467,17 +467,19 @@
                             <LinearLayout
                                 android:id="@+id/body_part_abs"
                                 android:layout_width="110dp"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/s000000sw1cr20"
+                                android:layout_height="110dp"
+                                android:background="@drawable/border_layout"
                                 android:orientation="vertical">
 
                                 <com.google.android.material.imageview.ShapeableImageView
                                     android:id="@+id/abs_image"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="70dp"
                                     android:layout_height="70dp"
                                     android:layout_marginTop="3dp"
                                     android:scaleType="fitXY"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/abs"
+                                    android:tint="@color/light_orange"
+                                    android:layout_gravity="center"
                                     app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
                                 <TextView
@@ -499,17 +501,19 @@
                             <LinearLayout
                                 android:id="@+id/body_part_core"
                                 android:layout_width="110dp"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/s000000sw1cr20"
+                                android:layout_height="110dp"
+                                android:background="@drawable/border_layout"
                                 android:orientation="vertical">
 
                                 <com.google.android.material.imageview.ShapeableImageView
                                     android:id="@+id/core_image"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="70dp"
                                     android:layout_height="70dp"
+                                    android:layout_gravity="center"
                                     android:layout_marginTop="3dp"
                                     android:scaleType="fitXY"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/core"
+                                    android:tint="@color/light_orange"
                                     app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
                                 <TextView
@@ -531,17 +535,19 @@
                             <LinearLayout
                                 android:id="@+id/body_part_biceps"
                                 android:layout_width="110dp"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/s000000sw1cr20"
+                                android:layout_height="110dp"
+                                android:background="@drawable/border_layout"
                                 android:orientation="vertical">
 
                                 <com.google.android.material.imageview.ShapeableImageView
                                     android:id="@+id/biceps_image"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="70dp"
                                     android:layout_height="70dp"
                                     android:layout_marginTop="3dp"
                                     android:scaleType="fitXY"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/biceps"
+                                    android:tint="@color/light_orange"
+                                    android:layout_gravity="center"
                                     app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
                                 <TextView
@@ -563,17 +569,19 @@
                             <LinearLayout
                                 android:id="@+id/body_part_shoulders"
                                 android:layout_width="110dp"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/s000000sw1cr20"
+                                android:layout_height="110dp"
+                                android:background="@drawable/border_layout"
                                 android:orientation="vertical">
 
                                 <com.google.android.material.imageview.ShapeableImageView
                                     android:id="@+id/shoulders_image"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="70dp"
                                     android:layout_height="70dp"
                                     android:layout_marginTop="3dp"
                                     android:scaleType="fitXY"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/gym1"
+                                    android:tint="@color/light_orange"
+                                    android:layout_gravity="center"
                                     app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
                                 <TextView
@@ -595,17 +603,20 @@
                             <LinearLayout
                                 android:id="@+id/body_part_triceps"
                                 android:layout_width="110dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="110dp"
                                 android:background="@drawable/s000000sw1cr20"
                                 android:orientation="vertical">
 
                                 <com.google.android.material.imageview.ShapeableImageView
                                     android:id="@+id/triceps_image"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="70dp"
+
                                     android:layout_height="70dp"
+                                    android:layout_gravity="center"
+                                    android:tint="@color/light_orange"
                                     android:layout_marginTop="3dp"
                                     android:scaleType="fitXY"
-                                    android:src="@mipmap/ic_launcher"
+                                    android:src="@drawable/triceps"
                                     app:shapeAppearanceOverlay="@style/RoundedImageStyle" />
 
                                 <TextView

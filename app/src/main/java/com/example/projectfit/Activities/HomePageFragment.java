@@ -1,13 +1,11 @@
 package com.example.projectfit.Activities;
 
-import android.Manifest;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.GradientDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -29,18 +27,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-import androidx.work.Constraints;
-import androidx.work.ExistingPeriodicWorkPolicy;
-import androidx.work.NetworkType;
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkManager;
-import androidx.work.WorkRequest;
 
 import com.example.projectfit.Models.User;
 import com.example.projectfit.R;
@@ -51,7 +41,6 @@ import com.example.projectfit.Utils.DialogUtils;
 import com.example.projectfit.Utils.GsonProvider;
 import com.example.projectfit.Utils.LoadModel;
 import com.example.projectfit.Utils.NotificationReceiver;
-import com.example.projectfit.Utils.NotificationWorker;
 import com.github.lzyzsd.circleprogress.CircleProgress;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -69,7 +58,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class HomePageFragment extends Fragment implements SensorEventListener {
     private BarChart stepChart, waterChart;
@@ -77,7 +65,7 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
     private Sensor stepCounterSensor;
     private LinearLayout addCupSizeButton, circularContainer;
     private ProgressBar circularProgressBar;
-    private TextView stepCountTextView, waterProgressTextView;
+    private TextView stepCountTextView, waterProgressTextView, nameTextView;
     private ImageView runningImageView;
     private RelativeLayout progressBarContainer;
     private int stepCount = 0;
@@ -157,6 +145,7 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
         stepChart = view.findViewById(R.id.stepChart);
         waterChart = view.findViewById(R.id.WaterChart);
         progressBarLayout = view.findViewById(R.id.progressBarLayout);
+        nameTextView = view.findViewById(R.id.NameTextView);
     }
 
     private void getUserFromSharedPreferencesAsync() {
@@ -176,6 +165,7 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
 
                     setupCharts();
                 });
+                nameTextView.setText(user.getFullName());
             }
         });
     }
@@ -332,7 +322,7 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
 
             int displayedSteps = Math.min(todaySteps, maxSteps);
             circularProgressBar.setProgress(displayedSteps);
-            stepCountTextView.setText("Steps: " + displayedSteps + " out of " + maxSteps);
+            stepCountTextView.setText("Steps: " + displayedSteps + "\nout of " + maxSteps);
         }
     }
 
@@ -469,7 +459,7 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
 
             requireActivity().runOnUiThread(() -> {
                 circularProgressBar.setProgress(stepCount);
-                stepCountTextView.setText("Steps: " + stepCount + " out of: " + maxSteps);
+                stepCountTextView.setText("Steps: " + stepCount + "\nout of: " + maxSteps);
 
                 setupStepChart();
             });
@@ -564,7 +554,9 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (alarmManager != null) {
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTimeMillis, pendingIntent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTimeMillis, pendingIntent);
+            }
         }
     }
     private void requestExactAlarmPermission() {

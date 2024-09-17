@@ -20,7 +20,7 @@
                 android:shape="ring"
                 android:thicknessRatio="9"
                 android:useLevel="true">
-                <solid android:color="#FF9A01" /> <!-- Replace with your desired completed color -->
+                <solid android:color="@color/light_orange" /> <!-- Replace with your desired completed color -->
             </shape>
         </rotate>
     </item>

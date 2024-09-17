@@ -57,6 +57,8 @@ dependencies {
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     implementation("androidx.room:room-runtime:2.5.2")
     annotationProcessor("androidx.room:room-compiler:2.5.2")
+    implementation ("androidx.core:core:1.10.1")
+    implementation ("androidx.work:work-runtime:2.7.1")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

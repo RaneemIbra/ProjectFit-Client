@@ -7,4 +7,7 @@
     <color name="gray">#383938</color>
     <color name="light_orange">#FD511E</color>
     <color name="light_yellow">#FFE330</color>
+    <color name="mainColor">#101322</color>
+    <color name="orange">#fd511e</color>
+    <color name="darkBlue">#1c213c</color>
 </resources>

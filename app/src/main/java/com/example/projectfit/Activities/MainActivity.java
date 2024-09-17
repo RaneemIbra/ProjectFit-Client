@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -52,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
     private UserRoomRepository userRoomRepository;
     private WorkoutRoomRepository workoutRoomRepository;
     private WorkoutServerRepository workoutServerRepository;
-    private ImageView gifImageView;
-    Button registerBTN, loginBTN;
-    private boolean isAllowed = false;
+    private TextView loginText;
+    Button registerBTN;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,19 +74,12 @@ public class MainActivity extends AppCompatActivity {
         transferUserDataToServer();
         initViews();
         setUpClickListeners();
-
-        String gifUrl = "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExODFocThmamZ0cGJ5Zm82aXJvYmQ0cWR2cXR1enJzOGM2YXZ4MnVwMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0BtrpaGo15NgvitihA/giphy.gif";
-        Glide.with(this)
-                .asGif()
-                .load(gifUrl)
-                .into(gifImageView);
-
     }
 
-    private void initViews() {
-        gifImageView = findViewById(R.id.gifImageView);
-        registerBTN = findViewById(R.id.registerButtonLoadingScreen);
-        loginBTN = findViewById(R.id.LoginButtonLoadingScreen);
+    private void initViews(){
+        registerBTN = findViewById(R.id.startBtn);
+        loginText = findViewById(R.id.signin);
+
     }
 
 
@@ -94,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
-        loginBTN.setOnClickListener(v -> {
+        loginText.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
         });

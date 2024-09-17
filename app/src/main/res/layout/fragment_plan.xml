@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".Activities.PlanFragment">
 
     <LinearLayout
         android:id="@+id/main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="@color/background"
         android:orientation="vertical">
 
         <!-- Container for main_content and workout_details_layout -->
@@ -18,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:background="@color/background"
             android:orientation="horizontal">
 
             <!-- Main Content with ScrollView -->
@@ -26,7 +28,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/sffffffsw1cr20bd9d9d9"
+                android:background="@color/background"
                 android:clipToPadding="false"
                 android:paddingTop="18dp"
                 android:paddingBottom="40dp">
@@ -51,11 +53,11 @@
                             android:id="@+id/sunday"
                             android:layout_width="39dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                            android:background="@drawable/s000000sw1cr18bffffff"
                             android:gravity="center_horizontal"
                             android:paddingVertical="10dp"
                             android:text="SUN"
-                            android:textColor="@drawable/button_text"
+                            android:textColor="#131313"
                             android:textSize="12sp" />
 
                         <View
@@ -67,11 +69,11 @@
                             android:id="@+id/monday"
                             android:layout_width="38dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                            android:background="@drawable/s000000sw1cr18bffffff"
                             android:gravity="center_horizontal"
                             android:paddingVertical="10dp"
                             android:text="MON"
-                            android:textColor="@drawable/button_text"
+                            android:textColor="#131313"
                             android:textSize="12sp" />
 
                         <View
@@ -83,11 +85,11 @@
                             android:id="@+id/tuesday"
                             android:layout_width="39dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                            android:background="@drawable/s000000sw1cr18bffffff"
                             android:gravity="center_horizontal"
                             android:paddingVertical="10dp"
                             android:text="TUE"
-                            android:textColor="@drawable/button_text"
+                            android:textColor="#131313"
                             android:textSize="12sp" />
 
                         <View
@@ -99,11 +101,11 @@
                             android:id="@+id/wednesday"
                             android:layout_width="39dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                            android:background="@drawable/s000000sw1cr18bffffff"
                             android:gravity="center_horizontal"
                             android:paddingVertical="11dp"
                             android:text="WED"
-                            android:textColor="@drawable/button_text"
+                            android:textColor="#131313"
                             android:textSize="12sp" />
 
                         <View
@@ -115,11 +117,11 @@
                             android:id="@+id/thursday"
                             android:layout_width="39dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                            android:background="@drawable/s000000sw1cr18bffffff"
                             android:gravity="center_horizontal"
                             android:paddingVertical="11dp"
                             android:text="THU"
-                            android:textColor="@drawable/button_text"
+                            android:textColor="#131313"
                             android:textSize="12sp" />
 
                         <View
@@ -131,11 +133,11 @@
                             android:id="@+id/friday"
                             android:layout_width="38dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                            android:background="@drawable/s000000sw1cr18bffffff"
                             android:gravity="center_horizontal"
                             android:paddingVertical="11dp"
                             android:text="FRI"
-                            android:textColor="@drawable/button_text"
+                            android:textColor="#131313"
                             android:textSize="12sp" />
 
                         <View
@@ -147,11 +149,11 @@
                             android:id="@+id/saturday"
                             android:layout_width="39dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/s000000sw1cr18lr27017b7d9cc0c6073cc"
+                            android:background="@drawable/s000000sw1cr18bffffff"
                             android:gravity="center_horizontal"
                             android:paddingVertical="10dp"
                             android:text="SAT"
-                            android:textColor="@drawable/button_text"
+                            android:textColor="#131313"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -181,7 +183,7 @@
                             android:id="@+id/workoutsContainer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"/>
+                            android:orientation="vertical" />
 
 
                     </LinearLayout>
@@ -192,7 +194,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="119dp"
                         android:layout_marginBottom="-10dp"
-                        android:background="@drawable/cr38bffffff"
+                        android:background="@drawable/gradient_for_workout"
                         android:gravity="center_horizontal"
                         android:orientation="horizontal"
                         android:paddingVertical="7dp">
@@ -273,6 +275,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:background="@drawable/custom_button"
                     android:text="Cancel"
                     android:visibility="gone" />
             </LinearLayout>

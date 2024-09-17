@@ -320,19 +320,21 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 todayWaterIntake = user.getWaterHistory().getOrDefault(today, 0);
             }
-            waterCupProgress.setProgress(todayWaterIntake);
-            waterProgressTextView.setText("Water: " + todayWaterIntake + " ml out of " + maxWaterIntake + " ml");
+
+            int displayedWaterIntake = Math.min(todayWaterIntake, maxWaterIntake);
+            waterCupProgress.setProgress(displayedWaterIntake);
+            waterProgressTextView.setText("Water: " + displayedWaterIntake + " ml out of " + maxWaterIntake + " ml");
 
             int todaySteps = 0;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 todaySteps = user.getStepsHistory().getOrDefault(today, 0);
             }
-            circularProgressBar.setProgress(todaySteps);
-            stepCountTextView.setText("Steps: " + todaySteps + " out of " + maxSteps);
+
+            int displayedSteps = Math.min(todaySteps, maxSteps);
+            circularProgressBar.setProgress(displayedSteps);
+            stepCountTextView.setText("Steps: " + displayedSteps + " out of " + maxSteps);
         }
     }
-
-
 
     private void initClickListeners() {
         progressBarContainer.setOnClickListener(v -> animatedProgressBarStepCount());
@@ -368,7 +370,9 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
     private void increaseWaterCupProgress(int cupSize) {
         int currentProgress = waterCupProgress.getProgress();
         int newProgress = currentProgress + cupSize;
-        waterCupProgress.setProgress(Math.min(newProgress, waterCupProgress.getMax()));
+
+        int finalProgress = Math.min(newProgress, maxWaterIntake);
+        waterCupProgress.setProgress(finalProgress);
 
         LocalDate today = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -379,14 +383,14 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             totalWater = user.getWaterHistory().getOrDefault(today, 0) + cupSize;
         }
-        user.getWaterHistory().put(today, totalWater);
 
+        user.getWaterHistory().put(today, totalWater);
         userRoomRepository.updateWaterHistory(user);
 
         saveUserToSharedPreferences();
-
         setupWaterChart();
     }
+
 
     private void saveUserToSharedPreferences() {
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
@@ -479,7 +483,7 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
                 lastDate = LocalDate.parse(sharedPreferences.getString(KEY_LAST_DATE, LocalDate.now().toString()));
             }
 
-            requireActivity().runOnUiThread(() -> stepCountTextView.setText("Steps: " + (stepCount - initialStepCount) + " out of: " + maxSteps));
+            requireActivity().runOnUiThread(() -> stepCountTextView.setText("Steps: " + (stepCount - initialStepCount) + "\nout of: " + maxSteps));
         });
     }
 

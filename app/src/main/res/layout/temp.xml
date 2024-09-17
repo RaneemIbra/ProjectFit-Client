@@ -759,7 +759,7 @@
                     android:layout_height="39dp"
                     android:textAlignment="center"
                     android:gravity="center"
-                    android:background="@drawable/orange_bg"
+                    android:background="@drawable/cr100lr2707de5fb0c6173"
                     android:text="Log Out"
                     android:textColor="#000000"
                     android:textSize="17sp" />

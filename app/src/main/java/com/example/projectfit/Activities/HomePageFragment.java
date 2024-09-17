@@ -1,15 +1,23 @@
 package com.example.projectfit.Activities;
 
+import android.Manifest;
+import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.GradientDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +29,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.work.Constraints;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.NetworkType;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 import com.example.projectfit.Models.User;
 import com.example.projectfit.R;
@@ -34,6 +50,8 @@ import com.example.projectfit.Utils.AnimationUtils;
 import com.example.projectfit.Utils.DialogUtils;
 import com.example.projectfit.Utils.GsonProvider;
 import com.example.projectfit.Utils.LoadModel;
+import com.example.projectfit.Utils.NotificationReceiver;
+import com.example.projectfit.Utils.NotificationWorker;
 import com.github.lzyzsd.circleprogress.CircleProgress;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -51,6 +69,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class HomePageFragment extends Fragment implements SensorEventListener {
     private BarChart stepChart, waterChart;
@@ -77,6 +96,11 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
     private ExecutorService executorService;
     private UserRoomRepository userRoomRepository;
     private UserServerRepository userServerRepository;
+    private boolean isFirstTime=true;
+
+    private static final String KEY_IS_NOTIFICATION_SCHEDULED = "isNotificationScheduled";
+    private static final int NOTIFICATION_INTERVAL_HOURS = 3;  // Interval in hours
+    private static final int TOTAL_NOTIFICATIONS = 8;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,7 +117,13 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        requestExactAlarmPermission();
+        checkAndScheduleNotification();  // Check and schedule notifications
     }
+
+
+
+
 
     @Nullable
     @Override
@@ -478,9 +508,79 @@ public class HomePageFragment extends Fragment implements SensorEventListener {
             sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
         executorService = Executors.newCachedThreadPool();
+
+        // Handle increase water intent
+        Intent intent = requireActivity().getIntent();
+        if (intent != null && intent.hasExtra("ACTION_INCREASE_WATER")) {
+            int amount = intent.getIntExtra("ACTION_INCREASE_WATER", 0);
+            increaseWaterCupProgress(amount);
+            requireActivity().getIntent().removeExtra("ACTION_INCREASE_WATER"); // Clear the intent to avoid duplication
+        }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
+
+
+
+    private void checkAndScheduleNotification() {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        boolean isNotificationScheduled = sharedPreferences.getBoolean(KEY_IS_NOTIFICATION_SCHEDULED, false);
+
+        if (!isNotificationScheduled) {
+            // Schedule notifications for the first time
+            scheduleNotifications();
+
+            // Update SharedPreferences to mark that notifications have been scheduled
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(KEY_IS_NOTIFICATION_SCHEDULED, true);
+            editor.apply();
+        }
+    }
+
+    private void scheduleNotifications() {
+        long currentTimeMillis = System.currentTimeMillis();
+        Context context = requireContext();
+
+        // Schedule notifications at intervals of 3 hours for a total of 8 times
+        for (int i = 0; i < TOTAL_NOTIFICATIONS; i++) {
+            long triggerTimeMillis = currentTimeMillis + (i * NOTIFICATION_INTERVAL_HOURS * 60 * 60 * 1000L);
+            scheduleNotificationAt(context, triggerTimeMillis, i);
+        }
+    }
+    private void scheduleNotificationAt(Context context, long triggerTimeMillis, int requestCode) {
+        Intent intent = new Intent(context, NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context,
+                requestCode,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+        );
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager != null) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTimeMillis, pendingIntent);
+        }
+    }
+    private void requestExactAlarmPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {  // Android 12 (API level 31) and higher
+            AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
+            if (!alarmManager.canScheduleExactAlarms()) {
+                // Show a dialog to explain to the user why this permission is needed
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Exact Alarm Permission Needed")
+                        .setMessage("This app needs permission to schedule exact alarms for important reminders.")
+                        .setPositiveButton("Go to Settings", (dialog, which) -> {
+                            // Open the app's settings page to request exact alarm permission
+                            Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                            intent.setData(Uri.parse("package:" + requireContext().getPackageName()));
+                            startActivity(intent);
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+            }
+        }
+    }
 }
+

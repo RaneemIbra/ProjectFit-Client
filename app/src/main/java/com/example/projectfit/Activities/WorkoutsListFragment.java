@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projectfit.Models.Workout;
@@ -27,6 +29,7 @@ public class WorkoutsListFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
+    ImageView backButton;
 
     public WorkoutsListFragment() {
         // Required empty public constructor
@@ -52,14 +55,26 @@ public class WorkoutsListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_workouts_list, container, false);
+
+        TextView titleTextView = view.findViewById(R.id.title_text_view);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            String title = bundle.getString("workout_category", "Workouts");
+            titleTextView.setText(title);
+        }
         workoutRecyclerView = view.findViewById(R.id.workoutRecyclerView);
         workoutRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         workoutAdapter = new WorkoutAdapter(this::onWorkoutSelected);
         workoutRecyclerView.setAdapter(workoutAdapter);
         initRepositories();
         observeFilteredWorkouts();
+        backButton = view.findViewById(R.id.back_button_workout);
+
+        backButton.setOnClickListener(view1 -> {
+            onBackClicked(view1);
+        });
         return view;
 
     }
@@ -125,10 +140,8 @@ public class WorkoutsListFragment extends Fragment {
 
     private void onWorkoutSelected(Workout workout) {
 
-        // Create an instance of the target fragment
         Fragment workoutFragment = new WorkoutFragment();
 
-        // Create a bundle to pass data
         Bundle bundle = new Bundle();
         bundle.putString("workout_name", workout.getWorkoutName());
         bundle.putInt("workout_duration", workout.getDurationInMinutes());
@@ -137,13 +150,20 @@ public class WorkoutsListFragment extends Fragment {
         bundle.putInt("workout_image_res_id", workout.getWorkoutImageResId());
         bundle.putInt("workout_gif_res_id", workout.getWorkoutGifResId());
 
-        // Set the bundle as arguments for the new fragment
         workoutFragment.setArguments(bundle);
 
-        // Perform the fragment transaction
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, workoutFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    public void onBackClicked(View view) {
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        WorkoutFilterFragment filterFragment = new WorkoutFilterFragment();
+        transaction.replace(R.id.fragment_container, filterFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 }

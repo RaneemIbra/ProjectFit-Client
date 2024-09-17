@@ -122,7 +122,7 @@ public class ProfileFragment extends Fragment {
                 System.out.println("totalSetsCompleted: " + totalSetsCompleted);
 
                 loadAchievements(totalSteps, totalCalories, totalWaterDrank, totalSetsCompleted);
-                setupMedalClickListeners();
+                setupMedalClickListeners(workouts);
             }
         });
 
@@ -268,7 +268,7 @@ public class ProfileFragment extends Fragment {
             removeGrayScaleFilter(diamond4);
     }
     // Function to set up click listeners for medals and show a message based on completion status
-    private void setupMedalClickListeners() {
+    private void setupMedalClickListeners(List<Workout> workouts) {
         // Set click listener for medal1
         medal1.setOnClickListener(v -> showMedalAchievementMessage("steps", 10000, calulateTotalSteps(user)));
 
@@ -306,16 +306,16 @@ public class ProfileFragment extends Fragment {
         diamond3.setOnClickListener(v -> showMedalAchievementMessage("water", 320000, calculateTotalWaterDrank(user)));
 
         // Set click listener for medal4
-        medal4.setOnClickListener(v -> showMedalAchievementMessage("sets", 18, calculateSetsCompleted((List<Workout>) workoutRepository.getAllWorkoutsLocally())));
+        medal4.setOnClickListener(v -> showMedalAchievementMessage("sets", 18, calculateSetsCompleted(workouts)));
 
         // Set click listener for silver4
-        silver4.setOnClickListener(v -> showMedalAchievementMessage("sets", 90, calculateSetsCompleted((List<Workout>) workoutRepository.getAllWorkoutsLocally())));
+        silver4.setOnClickListener(v -> showMedalAchievementMessage("sets", 90, calculateSetsCompleted(workouts)));
 
         // Set click listener for gold4
-        gold4.setOnClickListener(v -> showMedalAchievementMessage("sets", 180, calculateSetsCompleted((List<Workout>) workoutRepository.getAllWorkoutsLocally())));
+        gold4.setOnClickListener(v -> showMedalAchievementMessage("sets", 180, calculateSetsCompleted(workouts)));
 
         // Set click listener for diamond4
-        diamond4.setOnClickListener(v -> showMedalAchievementMessage("sets", 1800, calculateSetsCompleted((List<Workout>) workoutRepository.getAllWorkoutsLocally())));
+        diamond4.setOnClickListener(v -> showMedalAchievementMessage("sets", 1800, calculateSetsCompleted(workouts)));
     }
 
     // Function to show achievement message based on completion status

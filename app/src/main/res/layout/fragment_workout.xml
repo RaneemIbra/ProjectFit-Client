@@ -1,93 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.WorkoutFragment">
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="#FFFFFF"
-        android:id="@+id/main"
-        android:orientation="vertical"
+    android:background="@color/background">
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
-            android:clipToPadding="false"
-            android:id="@+id/rhe1iuv1uvi"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/sffffffsw1cr20bd9d9d9"
-            android:paddingTop="23dp"
-            android:paddingBottom="-52dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/back_button_workout"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="16dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:contentDescription="Back"
-                    android:src="@drawable/back_button" />
+                android:layout_height="match_parent">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/WorkoutImage"
-                    app:shapeAppearanceOverlay="@style/cr20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="375dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+                <ImageView
+                    android:id="@+id/back_button_workout"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/back" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="127dp"
+                    android:background="@drawable/gradient_bg"
+                    app:layout_constraintBottom_toBottomOf="@+id/WorkoutImage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/WorkoutTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textColor="@color/light_orange"
+                android:textStyle="bold"
+                android:textSize="40dp"/>
+
+            <TextView
+                android:id="@+id/WorkoutDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <LinearLayout
+                android:id="@+id/roundedLayout"
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/cr20bffffff"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/workout_gif"
                     android:layout_width="match_parent"
-                    android:layout_height="407dp"
-                    android:layout_marginBottom="24dp"
-                    android:layout_marginHorizontal="1dp"
-                    android:src="@drawable/benchpress"
-                    android:scaleType="fitXY"/>
-
-                <TextView
-                    android:id="@+id/WorkoutTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="28dp"
-                    android:layout_marginBottom="17dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Bench Press"
-                    android:textColor="#000000"
-                    android:textSize="30sp" />
-
-                <LinearLayout
-                    android:id="@+id/r492qk93xeya"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/s000000sw1cr20bff9a01"
-                    android:paddingTop="33dp"
-                    android:paddingBottom="66dp"
-                    android:paddingHorizontal="4dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/WorkoutDescription"
-                        android:textColor="#000000"
-                        android:textSize="24sp"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="Bench press workouts are a staple in many strength training routines..."/>
-
-                    <ImageView
-                        android:id="@+id/workout_gif"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginBottom="20dp" />
-
-                </LinearLayout>
+                    android:layout_height="match_parent" />
             </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
-</FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

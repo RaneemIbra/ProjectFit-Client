@@ -17,6 +17,6 @@ public class HistoryPage extends AppCompatActivity {
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rsqipg9otztk));
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.rkk5s8ifc6b));
         Glide.with(this).load("https://i.imgur.com/1tMFzp8.png").into((ShapeableImageView)findViewById(R.id.r9uoqvl07g3r));
-
+        // test pipeline
     }
 }
